@@ -407,6 +407,86 @@
       ],
       "suspicion_delta": 0,
       "comfort": "night_walk"
+    },
+    {
+      "id": "an_f07_gaze",
+      "field": "F07",
+      "trigger": "on_condition",
+      "day_range": [
+        15,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [
+        {
+          "flag": "obon_done"
+        }
+      ],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f07_gaze"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.8
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f07_lamps",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "kannon_lattice",
+      "day_range": [
+        16,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [],
+      "mode": "escalate",
+      "once_per_day": true,
+      "stages": [
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f07_lamps_1"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.4
+            }
+          ]
+        },
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f07_lamps_2"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.7
+            }
+          ]
+        }
+      ],
+      "suspicion_delta": 1,
+      "comfort": ""
     }
   ]
 }
