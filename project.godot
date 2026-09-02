@@ -12,7 +12,7 @@ config_version=5
 
 config/name="磐戸町奇譚"
 config/description="2Dドット絵・見下ろし型ホラーアドベンチャー。架空の町「神代市 磐戸町」の16フィールドを探索する。"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/ui/title.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [autoload]
@@ -22,6 +22,7 @@ GameState="*res://scripts/autoload/game_state.gd"
 FieldRegistry="*res://scripts/autoload/field_registry.gd"
 Calendar="*res://scripts/autoload/calendar.gd"
 SceneRouter="*res://scripts/autoload/scene_router.gd"
+SaveManager="*res://scripts/autoload/save_manager.gd"
 SteamBridge="*res://scripts/autoload/steam_bridge.gd"
 
 [debug]
