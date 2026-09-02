@@ -75,7 +75,7 @@
 | `entity_speak` | AttachedEntity | `id`（ナツの台詞。二層は messages.json の truth_id） |
 | `entity_comfort` | AttachedEntity | `context`（after_anomaly / after_stalker / night_walk / yakushi_gate / heroine_near） |
 | `entity_pulse` | AttachedEntity | `strength`（環境の微細な変化の通知） |
-| `start_stalker` | Stalker（タスク10） | `active`, `spawn_tile?` |
+| `start_stalker` | EventActions → FieldBase | `active`, `spawn_tile?`, `retreat_to?`（現在フィールドに追跡者を出す／消す。出したら `stalker_met`） |
 | `choice` | Dialogue（タスク4） | `options` |
 
 ## 二層テキスト

@@ -1054,6 +1054,16 @@
       "id": "msg_natsu_comfort_heroine_near_t",
       "speaker": "natsu",
       "text": "あの子、今日はよく悠を見てるね。気づかれる前に、決めないと。"
+    },
+    {
+      "id": "msg_stalker_pushback",
+      "speaker": "",
+      "text": "気がつくと、明るい場所まで戻っていた。\n何に追われていたのか、もう思い出せない。"
+    },
+    {
+      "id": "msg_stalker_heroine_caught",
+      "speaker": "",
+      "text": "澪が足を止めた。振り返ると、彼女は俺のすぐ後ろにいた。\n「……何でもない。行こう」"
     }
   ]
 }

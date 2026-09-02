@@ -124,6 +124,14 @@ func request_transition(exit: ExitData) -> void:
 	_transition_to(exit.to_id, exit.from_id)
 
 
+## 捕獲などで指定フィールドへ押し戻す。開放外なら自宅へ。遷移中は無視
+func push_back_to(field_id: String) -> void:
+	if is_transitioning:
+		return
+	var target: String = field_id if FieldRegistry.has_field(field_id) and Calendar.is_field_available(field_id) else GameState.HOME_FIELD_ID
+	_transition_to(target, current_field_id)
+
+
 ## 任意のフィールドへ直接移動する（デバッグ・イベント用）
 func go_to(field_id: String, from_id: String = "") -> void:
 	if is_transitioning:

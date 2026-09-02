@@ -138,6 +138,34 @@ func get_tile_type_at(layer: TileMapLayer, tile: Vector2i) -> String:
 	return TileGenerator.get_tile_type(layer.get_cell_tile_data(tile))
 
 
+## 追跡者を Actors 配下に出す（start_stalker アクション）。既にいれば位置だけ移す
+func spawn_stalker(tile: Vector2i, retreat_field_id: String) -> Node2D:
+	var existing: Node2D = get_stalker()
+	if existing != null:
+		existing.global_position = GameConstants.tile_to_world(tile)
+		existing.set("home_position", existing.global_position)
+		return existing
+	var packed: PackedScene = load("res://scenes/actors/stalker.tscn") as PackedScene
+	var stalker: Node2D = packed.instantiate() as Node2D
+	stalker.position = GameConstants.tile_to_world(tile)
+	stalker.set("retreat_field_id", retreat_field_id)
+	actors.add_child(stalker)
+	return stalker
+
+
+func remove_stalker() -> void:
+	var existing: Node2D = get_stalker()
+	if existing != null:
+		existing.queue_free()
+
+
+func get_stalker() -> Node2D:
+	for node: Node in actors.get_children():
+		if node.is_in_group("stalker"):
+			return node as Node2D
+	return null
+
+
 ## 調べ物を Triggers 配下に置き、interaction_started に中継する
 func add_interactable(node: Interactable) -> void:
 	triggers.add_child(node)

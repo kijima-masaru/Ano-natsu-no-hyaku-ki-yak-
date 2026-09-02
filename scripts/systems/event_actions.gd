@@ -28,6 +28,7 @@ static func register_all(es: Node) -> void:
 	es.register_action("choice", func(a: Dictionary, c: Dictionary) -> void: await _choice(es, a, c))
 	es.register_action("autosave", func(_a: Dictionary, _c: Dictionary) -> void: SaveManager.autosave())
 	es.register_action("set_companion", func(a: Dictionary, _c: Dictionary) -> void: SceneRouter.set_companion(bool(a.get("on", true))))
+	es.register_action("start_stalker", func(a: Dictionary, c: Dictionary) -> void: _start_stalker(es, a, c))
 
 
 static func _unlock_field(es: Node, a: Dictionary, c: Dictionary) -> void:
@@ -74,6 +75,23 @@ static func _choice(es: Node, a: Dictionary, c: Dictionary) -> void:
 		GameState.raise_flag(str(chosen["set_flag"]))
 	if chosen.has("run_event"):
 		es.run_event(str(chosen["run_event"]))
+
+
+## start_stalker: {active, spawn_tile?, retreat_to?}。現在フィールドに追跡者を出す／消す
+static func _start_stalker(es: Node, a: Dictionary, c: Dictionary) -> void:
+	var field: FieldBase = SceneRouter.current_field
+	if field == null:
+		es.emit_action_failed(str(c["event_id"]), a, "フィールド未読込")
+		return
+	if not bool(a.get("active", true)):
+		field.remove_stalker()
+		return
+	var tile_value: Variant = a.get("spawn_tile", null)
+	var tile: Vector2i = field.get_size_tiles() / 2
+	if tile_value is Array and (tile_value as Array).size() == 2:
+		tile = Vector2i(int((tile_value as Array)[0]), int((tile_value as Array)[1]))
+	field.spawn_stalker(tile, str(a.get("retreat_to", "F01")))
+	GameState.raise_flag("stalker_met")
 
 
 ## end_game: {ending}。クリア記録を残しタイトルへ（本実装はステップ5）
