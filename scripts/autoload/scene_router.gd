@@ -247,6 +247,12 @@ func _ensure_player() -> void:
 	player_spawned.emit(player)
 
 
+## 階の切替などで寸法が変わったときに呼ぶ
+func refresh_camera_limits() -> void:
+	if current_field != null and camera != null:
+		_apply_camera_limits(current_field)
+
+
 ## カメラをフィールドの外へ出さない
 func _apply_camera_limits(scene: FieldBase) -> void:
 	var bounds: Rect2i = scene.get_bounds_px()

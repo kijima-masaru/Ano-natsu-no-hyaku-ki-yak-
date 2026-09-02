@@ -9,6 +9,8 @@ extends Node2D
 
 signal exit_reached(exit: ExitData)
 signal interaction_started(interactable: Interactable)
+## 屋内の階を切り替えた（FieldFloors）。Main はこれを受けて on_enter を再発火する
+signal floor_changed(floor_id: String)
 
 const LAYER_GROUND: String = "Ground"
 const LAYER_OBJECTS: String = "Objects"
@@ -21,6 +23,9 @@ const FALLBACK_SIZE_TILES: Vector2i = Vector2i(24, 14)
 
 var field_def: FieldData = null
 var field_id: String = ""
+## 現在の階。屋外は "outside"（FieldFloors.OUTSIDE）
+var current_floor: String = "outside"
+var _floor_size: Vector2i = Vector2i.ZERO
 ## 出口以外から入ったときの出現位置。負なら中央
 @export var default_spawn_tile: Vector2i = Vector2i(-1, -1)
 
@@ -79,6 +84,8 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	if current_floor != FieldFloors.OUTSIDE:
+		Lighting.set_darkness_override(-1.0)
 	if Calendar.time_of_day_changed.is_connected(_on_calendar_time_changed):
 		Calendar.time_of_day_changed.disconnect(_on_calendar_time_changed)
 	if Calendar.day_advanced.is_connected(_on_calendar_day_advanced):
@@ -93,8 +100,21 @@ func _on_calendar_day_advanced(day: int, _previous: int) -> void:
 	_apply_day(day)
 
 
+## 寸法（タイル数）。屋内の階では階の地図の寸法
 func get_size_tiles() -> Vector2i:
+	if _floor_size != Vector2i.ZERO:
+		return _floor_size
 	return field_def.size_tiles if field_def != null else FALLBACK_SIZE_TILES
+
+
+## FieldFloors が屋内の階の寸法を設定する（ZERO で屋外に戻る）
+func set_floor_size(size: Vector2i) -> void:
+	_floor_size = size
+
+
+## 屋内の階へ移る／屋外へ戻る（switch_floor アクション）。FLOORS 定数に階を定義しておく
+func switch_floor(floor_id: String, spawn_tile: Vector2i, facing: Vector2i = Vector2i.DOWN) -> bool:
+	return FieldFloors.switch(self, floor_id, spawn_tile, facing)
 
 
 func get_bounds_px() -> Rect2i:

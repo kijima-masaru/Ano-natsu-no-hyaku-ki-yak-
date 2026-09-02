@@ -35,6 +35,8 @@ const LIT_THRESHOLD: float = 0.35
 
 var darkness: float = 0.0
 var flashlight_on: bool = false
+## 屋内などで時間帯と独立に暗さを固定する（負なら無効）
+var darkness_override: float = -1.0
 
 var _modulate: CanvasModulate = null
 var _moon: DirectionalLight2D = null
@@ -54,10 +56,10 @@ func _ready() -> void:
 ## 現在の暗さと色調を再計算して適用する
 func refresh() -> void:
 	var previous: float = darkness
-	darkness = float(DARKNESS_BY_TIME.get(Calendar.time_of_day, 0.0))
+	darkness = darkness_override if darkness_override >= 0.0 else float(DARKNESS_BY_TIME.get(Calendar.time_of_day, 0.0))
 	_ensure_world_nodes()
 	if _modulate != null:
-		_modulate.color = tint_for(Calendar.time_of_day)
+		_modulate.color = tint_for(Calendar.time_of_day) if darkness_override < 0.0 else tint_for_darkness(darkness_override)
 	if _moon != null:
 		_moon.energy = MOON_ENERGY_MAX * darkness
 	_lights = _lights.filter(func(l: PointLight2D) -> bool: return is_instance_valid(l))
@@ -76,6 +78,21 @@ func tint_for(time_of_day: String) -> Color:
 	var brightness: float = float(SaveManager.get_setting("brightness"))
 	tint = tint.lerp(Color.WHITE, (brightness - BRIGHTNESS_DEFAULT) * BRIGHTNESS_LIFT_MAX + BRIGHTNESS_LIFT_MAX * 0.5)
 	return Color(maxf(tint.r, MIN_CHANNEL), maxf(tint.g, MIN_CHANNEL), maxf(tint.b, MIN_CHANNEL), 1.0)
+
+
+## 暗さの値から直接色調を作る（屋内用。夜の色調と白の補間）
+func tint_for_darkness(value: float) -> Color:
+	var night: Color = Color.WHITE.lerp(Palette.get_color(int(TINT_BY_TIME["night"]["color"])), float(TINT_BY_TIME["night"]["mix"]))
+	var tint: Color = Color.WHITE.lerp(night, clampf(value, 0.0, 1.0))
+	var brightness: float = float(SaveManager.get_setting("brightness"))
+	tint = tint.lerp(Color.WHITE, (brightness - BRIGHTNESS_DEFAULT) * BRIGHTNESS_LIFT_MAX + BRIGHTNESS_LIFT_MAX * 0.5)
+	return Color(maxf(tint.r, MIN_CHANNEL), maxf(tint.g, MIN_CHANNEL), maxf(tint.b, MIN_CHANNEL), 1.0)
+
+
+## 屋内の暗さを固定する。負で解除。FieldFloors が階の切替で呼ぶ
+func set_darkness_override(value: float) -> void:
+	darkness_override = value
+	refresh()
 
 
 # ── タイル光源 ──
