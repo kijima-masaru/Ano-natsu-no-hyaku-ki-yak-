@@ -1013,6 +1013,70 @@
       ],
       "suspicion_delta": 0,
       "comfort": "night_walk"
+    },
+    {
+      "id": "an_f16_nothing",
+      "field": "F16",
+      "trigger": "on_condition",
+      "day_range": [
+        29,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "entered_yakushi"
+        }
+      ],
+      "mode": "repeat",
+      "once_per_day": true,
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 4.0
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f16_nothing"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.3
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": ""
+    },
+    {
+      "id": "an_f16_count",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "inner_gate",
+      "day_range": [
+        29,
+        31
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 1.5
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f16_count"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 1.0
+        }
+      ],
+      "suspicion_delta": 2,
+      "comfort": "yakushi_gate"
     }
   ]
 }

@@ -5498,6 +5498,220 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_f16_enter",
+      "field": "F16",
+      "trigger": "on_enter",
+      "day_range": [
+        29,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_gate"
+        },
+        {
+          "type": "stop_bgm"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_silence"
+        },
+        {
+          "type": "set_flag",
+          "flag": "entered_yakushi"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.9
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_zushi",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "zushi",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_temple_front"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_zushi_again",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "zushi",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_zushi_again"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f16_masks",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "masks",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_masks"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_masks_again",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "masks",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_masks"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f16_spring",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "spring",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_spring"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f16_rockfall",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "rockfall",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_rockfall"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f16_salt_conceal",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "salt_spot",
+      "day_range": [
+        29,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "salt_bag"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_salt_after",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "salt_spot",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "salt_bag"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f16_inner_gate",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "inner_gate",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_inner_gate"
+        },
+        {
+          "type": "entity_comfort",
+          "context": "yakushi_gate"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_inner_gate_again",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "inner_gate",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_inner_gate_again"
+        },
+        {
+          "type": "entity_comfort",
+          "context": "yakushi_gate"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }

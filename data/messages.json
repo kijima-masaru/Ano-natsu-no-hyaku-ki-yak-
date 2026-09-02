@@ -203,11 +203,6 @@
       "text": "8月28日。調査 13 日目。\n（この日のイベントは後のタスクで実装）"
     },
     {
-      "id": "msg_d29_open",
-      "speaker": "system",
-      "text": "8月29日。薬師谷へ。\n（この日のイベントは後のタスクで実装）"
-    },
-    {
       "id": "msg_d30_open",
       "speaker": "system",
       "text": "8月30日。封印。\n（この日のイベントは後のタスクで実装）"
@@ -3126,6 +3121,90 @@
       "id": "msg_an_f11_upstairs",
       "speaker": "yu",
       "text": "二階から、机を引きずる音。\n一つ。間を置いて、もう一つ。"
+    },
+    {
+      "id": "msg_d29_open",
+      "speaker": "yu",
+      "text": "8月29日。\n落石の脇に、道ができている。澪は朝、シゲさんの家へ寄ってから来ると言った。"
+    },
+    {
+      "id": "msg_f16_gate",
+      "speaker": "yu",
+      "text": "薬師谷。林道の終わり。\n初めて来た場所のはずなのに、道が分かる気がする。",
+      "truth_id": "msg_f16_gate_t"
+    },
+    {
+      "id": "msg_f16_gate_t",
+      "speaker": "yu",
+      "text": "薬師谷。\n二度目だ。三度目か。夜と昼で、こんなに違う。"
+    },
+    {
+      "id": "msg_f16_silence",
+      "speaker": "yu",
+      "text": "音が、無い。蝉も、風も、自分の足音も。\n耳が詰まったのではない。ここには、音が無い。"
+    },
+    {
+      "id": "msg_f16_temple_front",
+      "speaker": "yu",
+      "text": "廃寺の前。何もない。\n何もないことが、こんなに重い。",
+      "truth_id": "msg_f16_temple_front_t"
+    },
+    {
+      "id": "msg_f16_temple_front_t",
+      "speaker": "yu",
+      "text": "廃寺の前。ここで頷いた。\nそれ以上は、言わない。"
+    },
+    {
+      "id": "msg_f16_masks",
+      "speaker": "yu",
+      "text": "積まれた面。どれも古い。\n一枚だけ、他より古い。",
+      "truth_id": "msg_f16_masks_t"
+    },
+    {
+      "id": "msg_f16_masks_t",
+      "speaker": "yu",
+      "text": "積まれた面。\n一枚だけ、無い。それは俺の隣にいる。"
+    },
+    {
+      "id": "msg_f16_spring",
+      "speaker": "yu",
+      "text": "湧水。音がしない。水面は動いているのに。\n手を入れると、思ったより温かい。"
+    },
+    {
+      "id": "msg_f16_rockfall",
+      "speaker": "yu",
+      "text": "落石の跡。七月の上旬に落ちたと聞いた。\n俺のせいではない。……それだけは、本当だ。"
+    },
+    {
+      "id": "msg_f16_inner_gate",
+      "speaker": "yu",
+      "text": "堂の裏。裂け目へ続く道は、落石で塞がれている。\n岩の隙間から、霧が流れてくる。向こうに、何かが積まれている。",
+      "truth_id": "msg_f16_inner_gate_t"
+    },
+    {
+      "id": "msg_f16_inner_gate_t",
+      "speaker": "yu",
+      "text": "堂の裏。塞がれている。\n六月の夜、ここは開いていた。俺は通った。"
+    },
+    {
+      "id": "msg_f16_inner_gate_again",
+      "speaker": "yu",
+      "text": "落石。今日は、どうにもならない。\n岩の向こうから、何かが数えるような気配。"
+    },
+    {
+      "id": "msg_f16_zushi_again",
+      "speaker": "yu",
+      "text": "厨子。扉は開いたまま。中は空。"
+    },
+    {
+      "id": "msg_an_f16_nothing",
+      "speaker": "yu",
+      "text": "何も起こらない。\nそれが、続いている。"
+    },
+    {
+      "id": "msg_an_f16_count",
+      "speaker": "yu",
+      "text": "霧の向こうで、何かが数えている。\n一つ、二つ。——三つ、で止まった。"
     }
   ]
 }
