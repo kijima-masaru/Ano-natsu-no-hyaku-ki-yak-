@@ -18,6 +18,9 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 [autoload]
 
 Palette="*res://scripts/autoload/palette.gd"
+GameState="*res://scripts/autoload/game_state.gd"
+FieldRegistry="*res://scripts/autoload/field_registry.gd"
+SteamBridge="*res://scripts/autoload/steam_bridge.gd"
 
 [debug]
 
