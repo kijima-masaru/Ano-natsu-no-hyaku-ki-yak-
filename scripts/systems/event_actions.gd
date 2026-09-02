@@ -29,6 +29,9 @@ static func register_all(es: Node) -> void:
 	es.register_action("autosave", func(_a: Dictionary, _c: Dictionary) -> void: SaveManager.autosave())
 	es.register_action("set_companion", func(a: Dictionary, _c: Dictionary) -> void: SceneRouter.set_companion(bool(a.get("on", true))))
 	es.register_action("start_stalker", func(a: Dictionary, c: Dictionary) -> void: _start_stalker(es, a, c))
+	es.register_action("sleep", func(_a: Dictionary, _c: Dictionary) -> void: await _sleep(es))
+	ConditionEvaluator.register("can_sleep", func(cond: Dictionary) -> bool:
+		return Calendar.can_sleep(SceneRouter.current_field_id) == bool(cond.get("can_sleep", true)))
 
 
 static func _unlock_field(es: Node, a: Dictionary, c: Dictionary) -> void:
@@ -101,3 +104,15 @@ static func _end_game(es: Node, a: Dictionary) -> void:
 		SaveManager.record_cleared_ending(ending)
 		GameState.raise_flag("ending_reached")
 	es.get_tree().change_scene_to_file("res://scenes/ui/title.tscn")
+
+
+## sleep: 自宅で就寝して翌日へ。眠れないときは msg_bed_not_yet を表示する。
+## 日送りはイベント終了後（event_finished の遅延接続）に行い、翌日の開始メッセージと現在のイベントの表示が重ならないようにする
+static func _sleep(es: Node) -> void:
+	var field_id: String = SceneRouter.current_field_id
+	if not Calendar.can_sleep(field_id):
+		await es.show_entry(MessageResolver.resolve("msg_bed_not_yet"))
+		return
+	GameState.raise_flag("slept_at_home")
+	await es.show_entry(MessageResolver.resolve("msg_bed_sleep"))
+	es.event_finished.connect(func(_id: String) -> void: Calendar.try_sleep(field_id), Object.CONNECT_ONE_SHOT | Object.CONNECT_DEFERRED)

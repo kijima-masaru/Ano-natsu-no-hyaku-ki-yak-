@@ -41,6 +41,7 @@
 | `{"time_of_day": "night"}` / `["evening","night"]` | 時間帯 |
 | `{"not": {…}}` / `{"any": […]}` / `{"all": […]}` | 論理 |
 | `{"suspicion": {"min": 25, "max": 74}}` / `{"suspicion": {"stage": "doubt"}}` | 接近度（Suspicion が登録。stage は unaware / unease / doubt / certainty） |
+| `{"can_sleep": true}` | 現在地が自宅で、その日の進行条件を満たしている（EventActions が登録。`false` で「まだ眠れない」分岐） |
 
 ## アクション（Action）
 
@@ -77,6 +78,7 @@
 | `entity_pulse` | AttachedEntity | `strength`（環境の微細な変化の通知） |
 | `start_stalker` | EventActions → FieldBase | `active`, `spawn_tile?`, `retreat_to?`（現在フィールドに追跡者を出す／消す。出したら `stalker_met`） |
 | `choice` | Dialogue（タスク4） | `options` |
+| `sleep` | EventActions → Calendar | なし（自宅で就寝して翌日へ。眠れなければ `msg_bed_not_yet`。日送りはイベント終了後に行う） |
 
 ## 二層テキスト
 
