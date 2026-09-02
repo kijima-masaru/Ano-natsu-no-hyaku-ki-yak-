@@ -1,0 +1,216 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "note": "docs/ANOMALY_SCHEMA.md 参照。once の消化は an_done_<id> フラグ、発生回数と最後の日は SaveManager の anomalies セクション"
+  },
+  "anomalies": [
+    {
+      "id": "an_f01_silence",
+      "field": "F01",
+      "trigger": "on_enter",
+      "day_range": [
+        15,
+        29
+      ],
+      "time_of_day": [
+        "night"
+      ],
+      "conditions": [],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "stop_bgm"
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f01_silence_1"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.5
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f01_silence_2"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.8
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f02_laundry",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "laundry",
+      "day_range": [
+        3,
+        29
+      ],
+      "time_of_day": [
+        "morning",
+        "noon"
+      ],
+      "conditions": [],
+      "mode": "escalate",
+      "stages": [
+        {
+          "day_range": [
+            3,
+            7
+          ],
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f02_laundry_wet"
+            }
+          ]
+        },
+        {
+          "day_range": [
+            8,
+            20
+          ],
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f02_laundry_more"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.3
+            }
+          ]
+        },
+        {
+          "day_range": [
+            21,
+            29
+          ],
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f02_laundry_gone"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.6
+            }
+          ]
+        }
+      ],
+      "suspicion_delta": 1,
+      "comfort": ""
+    },
+    {
+      "id": "an_f05_fresh_goods",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "toki_shop",
+      "day_range": [
+        5,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "heard_testimony_direct"
+        }
+      ],
+      "mode": "repeat",
+      "once_per_day": true,
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_an_f05_fresh_goods"
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": ""
+    },
+    {
+      "id": "an_f06_board_night",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "bulletin",
+      "day_range": [
+        5,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [],
+      "mode": "escalate",
+      "stages": [
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f06_board_night_1"
+            }
+          ]
+        },
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f06_board_night_2"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.4
+            }
+          ]
+        },
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f06_board_night_3"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.9
+            }
+          ]
+        }
+      ],
+      "suspicion_delta": 2,
+      "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f12_stairwell_blink",
+      "field": "F12",
+      "trigger": "on_condition",
+      "day_range": [
+        8,
+        29
+      ],
+      "time_of_day": [
+        "night"
+      ],
+      "conditions": [],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 0.8
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f12_stairwell_blink"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.7
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": "night_walk"
+    }
+  ]
+}
