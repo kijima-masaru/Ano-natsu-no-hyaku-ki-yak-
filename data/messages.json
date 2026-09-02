@@ -807,6 +807,36 @@
       "id": "ui_reveal_hint",
       "speaker": "system",
       "text": "Z/次へ"
+    },
+    {
+      "id": "ui_map_world",
+      "speaker": "system",
+      "text": "磐戸町 全体図"
+    },
+    {
+      "id": "ui_map_local",
+      "speaker": "system",
+      "text": "現在地"
+    },
+    {
+      "id": "ui_map_hint",
+      "speaker": "system",
+      "text": "←→/切替　X/閉じる"
+    },
+    {
+      "id": "ui_map_legend_visited",
+      "speaker": "system",
+      "text": "訪れた場所"
+    },
+    {
+      "id": "ui_map_legend_closed",
+      "speaker": "system",
+      "text": "今日は入れない"
+    },
+    {
+      "id": "msg_map_not_unlocked",
+      "speaker": "system",
+      "text": "町の全体図はまだ頭に入っていない。"
     }
   ]
 }

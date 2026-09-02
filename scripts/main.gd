@@ -7,6 +7,7 @@ const DATE_HUD_SCENE: PackedScene = preload("res://scenes/ui/date_hud.tscn")
 const SLOT_MENU_SCENE: PackedScene = preload("res://scenes/ui/slot_menu.tscn")
 const TITLE_SCENE: String = "res://scenes/ui/title.tscn"
 const NOTEBOOK_SCENE: PackedScene = preload("res://scenes/ui/notebook.tscn")
+const MINIMAP_SCENE: PackedScene = preload("res://scenes/ui/minimap.tscn")
 const DEBUG_OVERLAY_SCENE: PackedScene = preload("res://scenes/debug/debug_overlay.tscn")
 
 @onready var world: Node2D = $World
@@ -79,11 +80,24 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("open_notebook"):
 		get_viewport().set_input_as_handled()
 		_open_notebook()
+	elif event.is_action_pressed("open_map"):
+		get_viewport().set_input_as_handled()
+		_open_overlay(MINIMAP_SCENE)
 	elif event.is_action_pressed("cancel"):
 		# 暫定：ポーズメニューは未実装。Esc でオートセーブしてタイトルへ
 		get_viewport().set_input_as_handled()
 		SaveManager.autosave()
 		get_tree().change_scene_to_file(TITLE_SCENE)
+
+
+## 全画面オーバーレイ（ミニマップ等）。closed で閉じてプレイヤー入力を戻す
+func _open_overlay(scene: PackedScene) -> void:
+	SceneRouter.player.input_enabled = false
+	var overlay: Control = scene.instantiate() as Control
+	ui.add_child(overlay)
+	overlay.closed.connect(func() -> void:
+		overlay.queue_free()
+		_on_message_closed())
 
 
 func _open_notebook() -> void:

@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/minimap.gd" id="1_minimap"]
+
+[node name="Minimap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1_minimap")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 376.0
+offset_bottom = 208.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 200.0
+offset_bottom = 24.0
+
+[node name="Caption" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 190.0
+offset_right = 300.0
+offset_bottom = 204.0
+
+[node name="Hint" type="Label" parent="."]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 10.0
+offset_right = 370.0
+offset_bottom = 24.0
