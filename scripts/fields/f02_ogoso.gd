@@ -44,6 +44,8 @@ const INTERACTABLES: Array = [
 	{"id": "kairanban", "name": "回覧板", "tile": Vector2i(12, 17), "kind": "sign"},
 	{"id": "slope", "name": "高速の法面", "tile": Vector2i(39, 3), "kind": "object"},
 ]
+## 物体タイルの下地
+const DEFAULT_GROUND: String = "生活道路アスファルト（細）"
 const MAP_ROWS: PackedStringArray = [
 	"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 	"w========rrr=======================---a~~~~~~~~w",
@@ -79,24 +81,6 @@ const MAP_ROWS: PackedStringArray = [
 	"wwwwwwwwwwrwwwwwwwwwwwwwwwwwwwwwwwww-wwwwwwwwwww",
 ]
 
-
-func _build(def: FieldData) -> void:
-	if def != null and def.size_tiles != Vector2i(MAP_ROWS[0].length(), MAP_ROWS.size()):
-		push_error("F02: MAP_ROWS の寸法が fields.json と一致しません")
-	for y: int in MAP_ROWS.size():
-		var row: String = MAP_ROWS[y]
-		for x: int in row.length():
-			var ch: String = row[x]
-			var tile: Vector2i = Vector2i(x, y)
-			if GROUND_LEGEND.has(ch):
-				set_tile(ground, tile, GROUND_LEGEND[ch])
-			elif OBJECT_LEGEND.has(ch):
-				set_tile(ground, tile, GROUND_LEGEND["r"])
-				set_tile(objects, tile, OBJECT_LEGEND[ch])
-			else:
-				push_error("F02: 凡例に無い文字 '%s'（%s）" % [ch, tile])
-	for data: Dictionary in INTERACTABLES:
-		add_interactable(Interactable.create(str(data["id"]), str(data["name"]), "", data["tile"], Vector2i.ONE, str(data["kind"])))
 
 
 ## 夜、蓮の部屋の窓だけが点く。初七日（8/8）を過ぎると点かなくなる
