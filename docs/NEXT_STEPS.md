@@ -1,70 +1,75 @@
-# ステップ3への申し送り（v0.1.0 時点）
+# ステップ4への申し送り（v0.2.0 時点）
 
-ステップ2「Godot プロジェクト基盤とコアシステム」の完了時点でのまとめ。
-ステップ3は残り 15 フィールドの実装。着手順は `docs/field_build_order.md` に従う。
+ステップ3「探索コアループの完成とプロローグの実装」の完了時点でのまとめ（PR #9〜#24）。
+ステップ4は残り 11 フィールド、光源、怪異演出、第一幕・第二幕の日程、v0.3.0。**タスク 0（`chore/field-pipeline`）は設計を提示して確認を得てから実装する**（ステップ4の指示）。
 
 ## 現状（何が動くか）
 
 | 領域 | 状態 |
 |---|---|
-| プロジェクト設定 | 384×216 / canvas_items / keep / integer / Nearest / GL Compatibility。入力アクション 7 種（KB＋パッド） |
-| パレット | `Palette` autoload に 16 色。`palette_preview.tscn` で確認 |
-| タイル | `TileGenerator` が `fields.json` の 163 種別すべてを生成。`TileSetProvider` で生成／`.tres` 読込を切替。`tile_preview.tscn` で一覧 |
-| データ | `FieldRegistry` が `fields.json` を検証付きで読込。`GameState` がフラグ・所持品・現在地を保持 |
-| プレイヤー | 4 方向・加減速・忍び足・足音シグナル・前方の調べ判定。16×24 の生成スプライト |
-| 遷移 | `SceneRouter` が出口タイルで暗転遷移、鍵判定、未実装フィールドはプレースホルダ |
-| フィールド | **F06 のみ実装**。他 15 は `field_placeholder.tscn` |
-| UI | `MessageWindow`（固定幅、逐次表示、代替フォント対応） |
-| Steam | `SteamBridge` は空実装 |
+| 日程 | `Calendar` ＋ `data/schedule.json`（8/1〜8/31、固定／自由／圧縮）。自由日は 3 P で就寝可、P で時間帯が進む。自宅 F12 |
+| セーブ | `SaveManager`（セクション登録方式、`user://saves/slot_NN.json`、0 はオート、`system.json` に設定）。`SaveMigrator` schema 2 |
+| イベント | `EventSystem` ＋ `data/events.json`（99 件）。トリガ 4 種、条件（flag/has_item/field_visited/day/day_range/time_of_day/not/any/all/suspicion/can_sleep）、アクション 27 種。`EventValidator` が起動時に参照を検証 |
+| テキスト | `MessageResolver` ＋ `data/messages.json`（320 件、二層 38 対）。分岐は `resolve()` の中だけ。`DialogueWindow`（話者色・速度・選択肢） |
+| 証拠・接近度 | `EvidenceRegistry`（13 件、隠蔽 9・証拠 4）、`Suspicion`（0〜100、4 段階、目撃 +20）。ノート UI（N）、8/30 の提示画面 |
+| 音 | `AudioManager` ＋ `SoundSynth`（合成 WAV）＋ `data/audio.json`。フィールドごとの環境音、夜変奏、蝉の減衰 |
+| アクター | `Player`、`Heroine`（追従・段階で距離と視線）、`Stalker`（FSM・聴覚・視野・捕獲→押し戻し）、`AttachedEntity`（ナツ、声と気配だけ） |
+| フィールド | **F01・F02・F05・F06・F12 実装**（序盤の環状ルート完成）。残り 11 はプレースホルダ |
+| UI | タイトル、スロット、設定、コンテンツ警告、日付 HUD、ミニマップ（M / Tab / Y）、デバッグオーバーレイ |
+| 進行 | タイトル → 8/1 → 8/4（第一幕の入口）まで机上で通る（`docs/PLAYTEST_LOG.md`） |
 
-## 未検証事項（最優先で確認すること）
+## 未検証事項（最優先）
 
-この環境には Godot 4.7 の実行ファイルが無く、**全コードは目視レビューのみで実機起動していない**。
-ステップ3の最初に、以下を Godot エディタで確認し、出た問題は `fix/` ブランチで直す。
+この環境には Godot 4.7 の実行ファイルが無く、**ステップ2・3 の全コードは目視レビューのみ**。ステップ4の最初に Godot エディタで以下を確認し、問題は `fix/` ブランチで直す。
 
-1. プロジェクトが開き、autoload 5 つとインポートが通る（`.godot/` が生成される。コミットしない）
-2. `scenes/debug/palette_preview.tscn`、`tile_preview.tscn` が動く。`const COLORS: PackedColorArray = [Color("#…")]` の定数畳み込み
-3. `tile_preview` の起動ログに「required_tiles 163 件はすべて対応表にあります」。フォールバック（赤枠）が無い
-4. F5 で F06 が表示され、5 出口の遷移・施錠メッセージ・調べ物が動く（PR #7 の手順）
-5. `project.godot` の `[input]` 直書き書式がエディタの入力マップに正しく表示される
-6. `[debug]` の `untyped_declaration=2` により型注釈漏れがエラーになっていないか（出たら直す）
-7. `Camera2D` の current 化とフィールド境界の limit
-8. `Dictionary[String, bool]`（GameState.flags）、`match facing: Vector2i.DOWN:` の記法
+1. プロジェクトが開き、autoload 13 個・`EventValidator`・`FieldSchemaValidator` の起動時検証が通る
+2. `docs/PLAYTEST_LOG.md`「実機で確認すること」の 7 項目
+3. `sleep` アクションの `event_finished` 遅延接続：就寝 → 翌日の開始メッセージ → `opening_event` の順に表示され、入力ロックが戻る
+4. `Heroine` の追従と `EvidenceRegistry.set_witness_check`（64px）の実距離感
+5. `Stalker` は呼び出すイベントがまだ無い。`scenes/actors/stalker.tscn` を任意のフィールドに置いて FSM を単体確認する
+6. `SoundSynth` の生成音量（`AudioManager` の各バス既定値）と `PixelMplus12` 不在時の代替フォント
+7. `untyped_declaration=2` での型注釈エラー、`Object.CONNECT_ONE_SHOT | Object.CONNECT_DEFERRED` の記法
 
 ## 既知の設計判断（変えるなら早めに）
 
-- **フィールドの組み立て方**：F06 は ASCII 地図（`MAP_ROWS`）から `_build()` で組む。エディタで描くなら `TileSetProvider.save_generated()` で `.tres` を作り `iwato/tileset/source="resource"` にしてから TileMapLayer を直接編集し、`_build()` を空にする。混在させないこと
-- **初期フィールド**：`GameState.INITIAL_FIELD_ID = "F06"`。F01 実装後に `"F01"` へ変更（TODO 記載済み）
-- **鍵の入手場所**：`key_tunnel_fence` は F06 遺失物箱、`key_old_school` は F11 職員室（未実装）、`flag_yakushi_open` は終盤イベント（未実装）
-- **autoload 依存方向**：`Palette ← GameState ← FieldRegistry ← SceneRouter`。`SteamBridge` は独立
-- **200 行超のファイル**：`tile_painters_ground.gd`(257) `tile_painters_objects.gd`(229) `tile_painters_built.gd`(211) `tile_catalog.gd`(215) `scene_router.gd`(210)。理由は各 PR に記載。ペインタ追加時はさらに分割を検討
+- **フィールドは ASCII 地図 ＋ `data/events.json`**。手順は `docs/FIELD_IMPLEMENTATION_GUIDE.md`、地図の机上検証は `docs/tools/check_field_map.py`。ステップ4 タスク 0 はこれを `field_scaffold`（地図と .gd/.tscn の生成）と `validate_data`（JSON 参照検証の一括実行）に置き換える。
+- **調査 P**：P を与えるイベントは `once: true`。自由日は「その日に初めて開く供給源が 3 つ以上」を保証する（8/3・8/4 は確認済み）。初訪問 +1 P は `Main` に直書き → `GameConstants` へ。
+- **就寝**：`can_sleep` 条件 ＋ `sleep` アクション。プレースホルダの仮寝床は旧方式（`Calendar.try_sleep` 直呼び）のまま残っている。
+- **隠蔽イベントの形**：`conceal_evidence` ＋ `add_points` の `once` イベントと、再表示用 `_after` イベントの 2 本。
+- **F01 の 8/1 用 `mio_npc`** は 8/3 以降の夕方にも立つ。`companion_on` のとき出さない修正を F01 側で（ステップ4）。
+- **支所の週末**：8/1・8/2 だけ「閉庁」文。曜日条件（`weekday`）を `ConditionEvaluator` に足すと 8/8・8/9 以降も揃う。
+- **200 行超**：`stalker.gd`(297) `scene_router.gd`(283) `audio_manager.gd`(282) `tile_painters_ground.gd`(257) `event_system.gd`(254) `calendar.gd`(248) `field_base.gd`(240) `tile_painters_objects.gd`(229) `save_manager.gd`(219) `tile_catalog.gd`(215) `tile_painters_built.gd`(211) `game_state.gd`(211)。理由は各 PR。`tile_catalog.gd` はステップ4で種別が増えるため分割候補。
 
-## ステップ3で作るもの
+## フラグの棚卸し
 
-### フィールド（`docs/field_build_order.md` の順）
-F01 → F05 → F02 → F12（序盤の環状ルート完成）→ F07 → F11 → F13 → F10 → F15 → F03 → F08 → F14 → F04 → F09 → F16
+`docs/FLAGS.md` に定義済みで **まだどのイベントも立てていない** もの（ステップ4で立てる）：
+`saw_first_missing`（8/5 F06 掲示板）、`stalker_met`（8/12 F03）、`baba_told_seal` `baba_rage`（8/14 F14 シゲ）、`obon_done`、`learned_seal`、`entered_yakushi`、`flag_yakushi_open`（8/28 schedule の `set_flags_on_end` で立つ）、`seal_restored`、`truth_revealed`（8/30）、`truth_partial_walk` `truth_partial_entity`、`ending_reached` `ending_a`、`entity_intro_done`、`luck_<n>`、`key_old_school`（F11）、`old_school_opened`、`bridge_steps`。
+`companion_on` `notebook_unlocked` は schedule の `set_flags_on_start` で立つ。`slept_at_home` は `sleep` アクション、`hid_*` `hid_fail_*` `ev_*` は `EvidenceRegistry`、`seen_*` は `MessageResolver`。
 
-各フィールドの雛形：
-1. `scripts/fields/fXX_<slug>.gd`（`extends FieldBase`）と `scenes/fields/fXX_<slug>.tscn`（ルート Node2D、子に Ground / Objects / Actors / Overhead / Triggers）
-2. `MAP_ROWS` を `fields.json` の `size_tiles` と一致させ、`exits[].tile` を通行可にし、外周は出口以外を閉じる
-3. `interactables` を `Interactable.create()` で置き、フラグ操作は `interacted` に接続
-4. `fields.json` の `required_tiles` に無い種別を使ったら JSON にも追加する
-5. `default_spawn_tile` を設定（出口以外からの出現位置）
+## 二層テキストの棚卸し（38 対）
 
-### システム
-- **NPC と会話**：F05 駄菓子屋の店主。`Interactable` の `kind="npc"` と会話データの形式
-- **室内**：F06 図書室、F11 旧校舎など。同一フィールド内のサブシーン切替か別フィールド扱いかを決める
-- **光源**：`PointLight2D`＋パレット光源 4 色。GL Compatibility での 2D ライトの挙動確認
-- **聴覚**：`Player.noise_emitted(radius)` を受ける敵／気配システム
-- **セーブ**：`GameState.save_game/load_game` の I/O（`user://saves/slot_XX.json`）と `SteamBridge.cloud_save`
-- **ミニマップ UI**：`flag_minimap_unlocked` で解放。`docs/tools/world_minimap.html` の配置を流用
-- **フォント**：`resources/fonts/PixelMplus12-Regular.ttf` を配置（README 参照）
+ナツ 17（`msg_natsu_001`〜`012`、`comfort_*` 5）、回想 3（`msg_recall_0731_a/b/c`）、F01 3（`msg_f01_vending` `msg_f01_trash` `msg_f01_bridge`）、F02 6（`msg_f02_door` `msg_f02_smell` `msg_f02_room_desk` `msg_f02_mother` `msg_f02_laundry` `msg_mio_001`）、F05 3（`msg_f05_storefront` `msg_f05_toki_testimony_3` `msg_f05_signpost`）、F06 1（`msg_f06_board`）、F12 4（`msg_f12_home` `msg_f12_shoes` `msg_f12_slide` `msg_f12_bike`）、その他 1（`msg_d01_mio_4`）。
+`docs/DECEPTION_MAP.md` の 37 対のうち未実装：`msg_mio_002`〜`005`、`msg_f04_journal`、`msg_natsu_010`〜`012` を流すイベント（台詞自体は定義済み）。
 
-### 素材差し替えの準備
-- `TileSetProvider.save_generated()` で `common.tres` を作り、`docs/TILESET_PIPELINE.md` の手順で PNG に差し替える
-- アクタースプライトは `ActorSpriteGenerator.get_texture` の返却先を `SpriteFrames` に置き換える
+## ステップ4で作るもの（指示の要約）
+
+0. `chore/field-pipeline`：`field_scaffold`・`validate_data`・ガイドの整備。**設計提示 → 確認 → 実装**
+1. フィールド 11：F07 → F11 → F13 → F10 → F15 → F03 → F08 → F14 → F04 → F09 → F16（`docs/field_build_order.md`）。各 1 PR、`FIELD_IMPLEMENTATION_GUIDE.md` に従う
+2. `feat/lighting`：`PointLight2D` ＋ パレット光源 4 色。GL Compatibility での挙動確認
+3. `feat/anomalies`：フィールド固有の怪異（尋ね人の増加、階段室の灯、田に映る月、追跡者の出現）。正体は説明しない
+4. `feat/schedule-act1` `feat/schedule-act2`：8/5〜8/31 のイベント、中盤の老婆（F14 シゲ）の激昂、8/30 の提示画面と `truth_revealed`、終幕の澪操作
+5. `chore/act2-playtest`：通しの机上／実機確認、v0.3.0
+
+## 手作業が必要な項目（環境の制約で未実施）
+
+- タグ `v0.1.0` `v0.2.0` のプッシュ：`git push origin v0.1.0 v0.2.0`（この環境からは HTTP 403）
+- GitHub の既定ブランチを `main` に切り替える（現在は `claude/iwato-field-design-vfrev4`）
+- マージ済みリモートブランチの削除（`git push origin --delete <branch>`。PR #1〜#24 の各ブランチ）
 
 ## 運用
+
 - main 直接コミット禁止、`feat/` `fix/` `chore/` `docs/` ブランチ → PR → squash マージ
-- コミットは Conventional Commits。`.godot/` は絶対にコミットしない
+- コミットは Conventional Commits（本文は日本語）。`.godot/` は絶対にコミットしない
 - 200 行超は分割を検討し、理由を PR に書く
+- 日本語テキストは `data/messages.json`、ゲーム内容は `data/events.json`、GDScript はシステムだけ
+- 自死の方法・手段・場所・状態は書かない。死は常に事後。`docs/CONTENT_NOTICE.md`
