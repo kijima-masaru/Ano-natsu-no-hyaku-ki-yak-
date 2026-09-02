@@ -8,6 +8,8 @@ signal transition_started(from_id: String, to_id: String)
 signal field_entered(field_id: String, from_id: String)
 signal transition_finished(field_id: String)
 signal passage_blocked(exit: ExitData)
+## その日は入れないフィールドへの出口に触れた（Calendar の available_fields 外）
+signal passage_closed_today(exit: ExitData)
 signal field_load_failed(field_id: String, reason: String)
 
 const PLAYER_SCENE_PATH: String = "res://scenes/actors/player.tscn"
@@ -65,6 +67,10 @@ func request_transition(exit: ExitData) -> void:
 		_push_back_from_exit(exit)
 		passage_blocked.emit(exit)
 		return
+	if not Calendar.is_field_available(exit.to_id):
+		_push_back_from_exit(exit)
+		passage_closed_today.emit(exit)
+		return
 	_transition_to(exit.to_id, exit.from_id)
 
 
@@ -75,6 +81,8 @@ func go_to(field_id: String, from_id: String = "") -> void:
 	if not FieldRegistry.has_field(field_id):
 		push_error("SceneRouter: go_to('%s') 存在しないフィールドです" % field_id)
 		return
+	if not Calendar.is_field_available(field_id):
+		push_warning("SceneRouter: go_to('%s') は day %d の開放外です（デバッグ移動として続行）" % [field_id, Calendar.day])
 	_transition_to(field_id, from_id)
 
 

@@ -10,9 +10,10 @@ signal item_removed(item_id: String)
 signal current_field_changed(field_id: String, previous_id: String)
 signal state_reset()
 
-## 起動時に読み込むフィールド。
-## TODO(step-3): プロローグ（F01）実装後に "F01" へ変更する。現在は最初の実装フィールド F06
-const INITIAL_FIELD_ID: String = "F06"
+## 自宅（就寝できる唯一の場所）。schedule.json の meta.home_field と一致させる
+const HOME_FIELD_ID: String = "F12"
+## 起動時に読み込むフィールド。8/1 は自宅で目覚める（SCENARIO.md §5）
+const INITIAL_FIELD_ID: String = HOME_FIELD_ID
 const SAVE_VERSION: int = 1
 const SAVE_DIR: String = "user://saves"
 
