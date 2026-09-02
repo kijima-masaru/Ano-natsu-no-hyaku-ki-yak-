@@ -44,13 +44,16 @@ func _on_field_entered(field_id: String, from_id: String) -> void:
 			if node.is_in_group("stalker") and not node.captured.is_connected(_on_stalker_captured):
 				node.captured.connect(_on_stalker_captured))
 	EventSystem.fire(EventSystem.TRIGGER_ENTER, field_id)
+	AnomalySystem.fire(AnomalySystem.TRIGGER_ENTER, field_id)
 
 
 func _on_interaction_started(target: Interactable) -> void:
 	if target.kind == "save_point":
 		_open_save_menu()
 		return
-	if EventSystem.fire(EventSystem.TRIGGER_INTERACT, SceneRouter.current_field_id, target.interaction_id):
+	var handled: bool = EventSystem.fire(EventSystem.TRIGGER_INTERACT, SceneRouter.current_field_id, target.interaction_id)
+	# 怪異はイベントの後に同じ待ち行列で起きる
+	if AnomalySystem.fire(AnomalySystem.TRIGGER_INTERACT, SceneRouter.current_field_id, target.interaction_id) or handled:
 		return
 	# イベント未定義の対象：Interactable 自身のテキストか「特に何もない」
 	var text: String = target.message if not target.message.is_empty() else MessageResolver.text("msg_nothing_here")

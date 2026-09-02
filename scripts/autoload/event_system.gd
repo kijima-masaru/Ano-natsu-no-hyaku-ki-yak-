@@ -26,7 +26,8 @@ var _by_trigger: Dictionary = {}
 var _handlers: Dictionary = {}
 var _item_ids: PackedStringArray = PackedStringArray()
 var _message_window: Node = null
-var _queue: Array[String] = []
+## 待ち行列。要素はイベント ID（String）か、任意のアクション列 {label, actions}（Dictionary。AnomalySystem 等が使う）
+var _queue: Array = []
 
 
 func _ready() -> void:
@@ -170,30 +171,47 @@ func run_event(id: String) -> void:
 		_drain()
 
 
+## events.json に無い任意のアクション列を、イベントと同じ語彙・同じ待ち行列で実行する（怪異など）。
+## label は event_started / event_finished とエラー表示に使う
+func run_actions(label: String, actions: Array[Dictionary]) -> void:
+	if actions.is_empty():
+		return
+	_queue.append({"label": label, "actions": actions})
+	if not is_running:
+		_drain()
+
+
 func _drain() -> void:
 	is_running = true
 	_set_player_input(false)
 	while not _queue.is_empty():
-		var id: String = _queue.pop_front()
-		var e: EventData = _events[id]
-		event_started.emit(id)
-		for action: Dictionary in e.actions:
-			await _run_action(e, action)
-		if e.once:
-			GameState.raise_flag(e.done_flag())
-		event_finished.emit(id)
+		var entry: Variant = _queue.pop_front()
+		if entry is String:
+			var e: EventData = _events[entry]
+			event_started.emit(e.id)
+			for action: Dictionary in e.actions:
+				await _run_action(e.id, action)
+			if e.once:
+				GameState.raise_flag(e.done_flag())
+			event_finished.emit(e.id)
+		else:
+			var label: String = str((entry as Dictionary).get("label", ""))
+			event_started.emit(label)
+			for action: Dictionary in (entry as Dictionary).get("actions", []):
+				await _run_action(label, action)
+			event_finished.emit(label)
 	is_running = false
 	_set_player_input(true)
 
 
-func _run_action(e: EventData, action: Dictionary) -> void:
+func _run_action(label: String, action: Dictionary) -> void:
 	var type: String = str(action.get("type", ""))
 	if not _handlers.has(type):
-		push_error("EventSystem: %s のアクション '%s' は未登録です" % [e.id, type])
-		action_failed.emit(e.id, action, "unknown action")
+		push_error("EventSystem: %s のアクション '%s' は未登録です" % [label, type])
+		action_failed.emit(label, action, "unknown action")
 		return
 	var handler: Callable = _handlers[type]
-	await handler.call(action, {"event_id": e.id, "field_id": SceneRouter.current_field_id})
+	await handler.call(action, {"event_id": label, "field_id": SceneRouter.current_field_id})
 
 
 func _set_player_input(enabled: bool) -> void:

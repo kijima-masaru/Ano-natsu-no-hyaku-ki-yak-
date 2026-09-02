@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	_label.text = "\n".join([
 		"day %d %s | field %s | pts %d" % [Calendar.day, Calendar.time_of_day, SceneRouter.current_field_id, Calendar.investigation_points],
 		"suspicion %d (%s) | truth %s" % [Suspicion.value, Suspicion.stage_key(), str(GameState.has_flag("truth_revealed"))],
-		"darkness %.2f | flashlight %s" % [Lighting.darkness, "on" if Lighting.flashlight_on else "off"],
+		"darkness %.2f | flashlight %s | anomaly %s" % [Lighting.darkness, "on" if Lighting.flashlight_on else "off", AnomalySystem.last_triggered_id],
 		"concealed: %s" % ", ".join(GameState.concealed_evidence),
 		"witnessed: %s" % ", ".join(GameState.witnessed_concealments),
 		"evidence: %s" % ", ".join(GameState.evidence),
