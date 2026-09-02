@@ -42,6 +42,7 @@
 | `{"not": {…}}` / `{"any": […]}` / `{"all": […]}` | 論理 |
 | `{"suspicion": {"min": 25, "max": 74}}` / `{"suspicion": {"stage": "doubt"}}` | 接近度（Suspicion が登録。stage は unaware / unease / doubt / certainty） |
 | `{"can_sleep": true}` | 現在地が自宅で、その日の進行条件を満たしている（EventActions が登録。`false` で「まだ眠れない」分岐） |
+| `{"floor": "1f"}` | 現在のフィールドの階（`FieldFloors`。屋外は `outside`。EventActions が登録） |
 
 ## アクション（Action）
 
@@ -79,6 +80,7 @@
 | `start_stalker` | EventActions → FieldBase | `active`, `spawn_tile?`, `retreat_to?`（現在フィールドに追跡者を出す／消す。出したら `stalker_met`） |
 | `choice` | Dialogue（タスク4） | `options` |
 | `sleep` | EventActions → Calendar | なし（自宅で就寝して翌日へ。眠れなければ `msg_bed_not_yet`。日送りはイベント終了後に行う） |
+| `switch_floor` | EventActions → FieldBase | `floor`, `tile`, `facing?`（屋内の階へ移る／`outside` で屋外へ。階は各フィールドの `FLOORS` 定数。切替後に `on_enter` が再発火する） |
 
 ## 二層テキスト
 
