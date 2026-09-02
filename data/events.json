@@ -202,8 +202,8 @@
           "amount": 1
         }
       ],
-      "once": false,
-      "priority": 0
+      "once": true,
+      "priority": 10
     },
     {
       "id": "ev_f06_lost_found_take",
@@ -664,6 +664,10 @@
         {
           "type": "set_flag",
           "flag": "heard_testimony_direct"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": true,
@@ -736,10 +740,14 @@
         {
           "type": "conceal_evidence",
           "evidence": "storefront_note"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
-      "once": false,
-      "priority": 0
+      "once": true,
+      "priority": 5
     },
     {
       "id": "ev_f05_gate",
@@ -1762,10 +1770,159 @@
         {
           "type": "conceal_evidence",
           "evidence": "timetable_pass"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 5
+    },
+    {
+      "id": "ev_f06_library_again",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "library",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_library_again"
         }
       ],
       "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_calendar_after",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "calendar",
+      "day_range": [
+        3,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "storefront_note"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f06_slope_notice_after",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "slope_notice",
+      "day_range": [
+        4,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "timetable_pass"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_door_revisit",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "ren_door",
+      "day_range": [
+        3,
+        7
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_door_locked"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
       "priority": 5
+    },
+    {
+      "id": "ev_f12_office_d4",
+      "field": "F12",
+      "trigger": "on_interact",
+      "target": "office_desk",
+      "day_range": [
+        4,
+        4
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f12_office_d4"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 15
+    },
+    {
+      "id": "ev_f12_mailbox_d4",
+      "field": "F12",
+      "trigger": "on_interact",
+      "target": "mailbox",
+      "day_range": [
+        4,
+        4
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f12_post_d4"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 15
+    },
+    {
+      "id": "ev_f01_bulletin_d4",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "bulletin",
+      "day_range": [
+        4,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_bulletin_d4"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
     }
   ]
 }
