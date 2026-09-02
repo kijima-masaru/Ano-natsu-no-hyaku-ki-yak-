@@ -187,6 +187,28 @@
       "shown_id": "evd_water_bottle_shown",
       "action_id": "evd_water_bottle_action",
       "suspicion_on_witness": 20
+    },
+    {
+      "id": "oni_masks",
+      "kind": "evidence",
+      "field": "F08",
+      "day_min": 16,
+      "title_id": "evd_oni_masks_title",
+      "surface_id": "evd_oni_masks_surface",
+      "truth_id": "evd_oni_masks_truth",
+      "suspicion_on_gain": 4
+    },
+    {
+      "id": "ema_wish",
+      "kind": "concealable",
+      "field": "F08",
+      "day_min": 16,
+      "title_id": "evd_ema_wish_title",
+      "surface_id": "evd_ema_wish_surface",
+      "truth_id": "evd_ema_wish_truth",
+      "shown_id": "evd_ema_wish_shown",
+      "action_id": "evd_ema_wish_action",
+      "suspicion_on_witness": 20
     }
   ]
 }
