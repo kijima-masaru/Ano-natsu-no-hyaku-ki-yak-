@@ -36,6 +36,7 @@ godot --headless --path . -s scripts/tools/field_scaffold.gd -- F03
   - 建物は「屋根／ベランダ 1 行 ＋ 壁 2〜3 行」。戸・窓・階段室は壁の **通り側**。
   - 調べ物は通行不可タイルの上に置き、通行可タイルに隣接させる。
 - [ ] Overhead（プレイヤーより手前）に描くものは `OVERHEAD_TILES: Array = [[Vector2i, 種別名], …]`。
+- [ ] **光源は自動**。`LightCatalog` に載っている種別（街灯・自販機・蛍光灯・点灯した窓や扉・階段室・赤色灯）を Objects / Overhead に置くと `PointLight2D` が付く。消灯タイルへ差し替えれば消える。新しい光る種別は `scripts/tools/light_catalog.gd` に登録する。
 - [ ] `INTERACTABLES` の `tile` と `name` を埋める。`kind` は `object` / `sign` / `save_point` / `npc`。テキストは書かない。
 - [ ] 時間帯・日付で出し入れする NPC は `set_npc_present(id, present, tile, sprite_kind, facing)`（F01 澪、F05 トキ）。
 - [ ] `_apply_time_of_day(tod)`：灯り（`階段室（点灯・消灯）` ↔ `階段室（消灯）`、`ガラス扉（点灯）` ↔ `窓（消灯・点灯）`）、門、NPC。`Calendar.TIME_*` で比較。
@@ -75,7 +76,7 @@ godot --headless --path . -s scripts/tools/field_scaffold.gd -- F03
 | 定数 `MAP_ROWS` `GROUND_LEGEND` `OBJECT_LEGEND` `DEFAULT_GROUND` `OVERHEAD_TILES` `INTERACTABLES` | `FieldMapBuilder` が `_build()` で読む。`_build` を書かない |
 | `_ground_under(x, y) -> String` | 物体タイルの下地を場所で変える |
 | `_apply_time_of_day(tod)` / `_apply_day(day)` | ツリー投入直後と `Calendar` のシグナルで呼ばれる |
-| `set_tile(layer, tile, 種別名)` / `fill_rect` / `get_tile_type_at` | タイル操作 |
+| `set_tile(layer, tile, 種別名)` / `fill_rect` / `get_tile_type_at` | タイル操作。Objects / Overhead への配置は `LightCatalog` に従って光源も同期する |
 | `add_interactable` / `get_interactable(id)` / `set_npc_present(...)` | 調べ物・NPC |
 | `spawn_stalker` / `remove_stalker` / `get_stalker` | `start_stalker` アクションから使われる |
 | `get_spawn_tile(from_id)` / `get_spawn_facing(from_id)` | 出口の内側への出現 |
