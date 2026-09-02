@@ -114,8 +114,8 @@
     },
     {
       "id": "msg_d02_open",
-      "speaker": "system",
-      "text": "8月2日。通夜。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月2日。喪服は無い。制服で行った。\n於御所の坂は、いつもより長かった。"
     },
     {
       "id": "msg_d03_open",
@@ -134,8 +134,8 @@
     },
     {
       "id": "msg_d08_open",
-      "speaker": "system",
-      "text": "8月8日。初七日。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月8日。初七日。\n蓮の母から、部屋を見てもいいと言われた。"
     },
     {
       "id": "msg_d09_open",
@@ -1349,6 +1349,187 @@
       "id": "msg_f05_wooden_door",
       "speaker": "",
       "text": "薬屋。木の戸の隙間から、薬草の匂いだけが残っている。"
+    },
+    {
+      "id": "msg_f02_door",
+      "speaker": "yu",
+      "text": "玄関に靴が並んでいる。蓮のスニーカーは無い。\nあの夜、履いて出たままだ。",
+      "truth_id": "msg_f02_door_t"
+    },
+    {
+      "id": "msg_f02_door_t",
+      "speaker": "yu",
+      "text": "玄関に靴が並んでいる。蓮のスニーカーは無い。\n俺が見た最後の靴だ。"
+    },
+    {
+      "id": "msg_f02_smell",
+      "speaker": "yu",
+      "text": "廊下に夕飯の匂いが残っている。\n誰も食べなかった夕飯の。",
+      "truth_id": "msg_f02_smell_t"
+    },
+    {
+      "id": "msg_f02_smell_t",
+      "speaker": "yu",
+      "text": "廊下に夕飯の匂いが残っている。\n蓮は「飯食ったら行く」と言った。食ってから来た。"
+    },
+    {
+      "id": "msg_f02_wake_mother",
+      "speaker": "yu",
+      "text": "蓮の母は、俺の名前を呼んで、それきり黙った。\n何も言わないほうがいいことを、二人とも知っていた。"
+    },
+    {
+      "id": "msg_f02_wake_mio_1",
+      "speaker": "yu",
+      "text": "帰り際、澪が門の外で待っていた。"
+    },
+    {
+      "id": "msg_f02_wake_mio_2",
+      "speaker": "mio",
+      "text": "「たちばな屋のトキさんが言ってた。\n三十一日の夕方、蓮が誰かと並んで歩いてたって」"
+    },
+    {
+      "id": "msg_f02_wake_mio_3",
+      "speaker": "mio",
+      "text": "「警察は来なかった。誰も聞きに来なかった。\n……一緒に調べてほしい」"
+    },
+    {
+      "id": "msg_mio_001",
+      "speaker": "yu",
+      "text": "「一緒に調べてほしい」。俺を頼ってくれている。",
+      "truth_id": "msg_mio_001_t"
+    },
+    {
+      "id": "msg_mio_001_t",
+      "speaker": "yu",
+      "text": "「一緒に調べてほしい」。"
+    },
+    {
+      "id": "msg_f02_wake_mio_4",
+      "speaker": "yu",
+      "text": "明日の朝、団地の下で。澪はそう言って、坂を下りていった。"
+    },
+    {
+      "id": "msg_f02_door_locked",
+      "speaker": "",
+      "text": "蓮の家。今日は、呼び鈴を押す用事がない。"
+    },
+    {
+      "id": "msg_f02_door_pre",
+      "speaker": "",
+      "text": "蓮の家。カーテンが閉まっている。"
+    },
+    {
+      "id": "msg_f02_room_enter",
+      "speaker": "yu",
+      "text": "蓮の部屋。片づいている。蓮はいつもそうだった。"
+    },
+    {
+      "id": "msg_f02_room_choice_prompt",
+      "speaker": "yu",
+      "text": "何を見る。"
+    },
+    {
+      "id": "ui_choice_desk",
+      "speaker": "system",
+      "text": "机を見る"
+    },
+    {
+      "id": "ui_choice_phone",
+      "speaker": "system",
+      "text": "端末のこと"
+    },
+    {
+      "id": "ui_choice_leave",
+      "speaker": "system",
+      "text": "部屋を出る"
+    },
+    {
+      "id": "msg_f02_room_desk",
+      "speaker": "yu",
+      "text": "机の上は片づいている。蓮はいつもそうだった。",
+      "truth_id": "msg_f02_room_desk_t"
+    },
+    {
+      "id": "msg_f02_room_desk_t",
+      "speaker": "yu",
+      "text": "机の上は片づいている。引き出しのメモだけ、俺が抜いた。"
+    },
+    {
+      "id": "msg_f02_mother",
+      "speaker": "yu",
+      "text": "蓮の母が「あの子、最近誰かと話してた？」と聞く。\n知らない、と答えた。",
+      "truth_id": "msg_f02_mother_t"
+    },
+    {
+      "id": "msg_f02_mother_t",
+      "speaker": "yu",
+      "text": "蓮の母が「あの子、最近誰かと話してた？」と聞く。\n俺だ、と答えなかった。"
+    },
+    {
+      "id": "msg_f02_room_leave",
+      "speaker": "yu",
+      "text": "部屋を出た。ドアは、開けたままにしておいた。"
+    },
+    {
+      "id": "msg_f02_laundry",
+      "speaker": "yu",
+      "text": "物干しの洗濯物が、一晩たっても乾いていない。",
+      "truth_id": "msg_f02_laundry_t"
+    },
+    {
+      "id": "msg_f02_laundry_t",
+      "speaker": "yu",
+      "text": "物干しの洗濯物が、一晩たっても乾いていない。\n蓮の T シャツだ。7/31 の昼に着ていた。"
+    },
+    {
+      "id": "msg_f02_window",
+      "speaker": "",
+      "text": "二階の窓。蓮の部屋。夜になると、明かりが点く。\n誰もいないはずの部屋に。"
+    },
+    {
+      "id": "msg_f02_window_after",
+      "speaker": "",
+      "text": "二階の窓。もう明かりは点かない。"
+    },
+    {
+      "id": "msg_f02_mailbox_ren",
+      "speaker": "",
+      "text": "郵便受け。新聞が三日分、そのままになっている。"
+    },
+    {
+      "id": "msg_f02_nameplate",
+      "speaker": "",
+      "text": "表札の名前が消えている。削られたのではなく、日に焼けて。\n何年も前から、誰も住んでいないのかもしれない。"
+    },
+    {
+      "id": "msg_f02_mailbox_a",
+      "speaker": "",
+      "text": "郵便受けに、宛名の無い封筒が一通。取り出す気にはなれない。"
+    },
+    {
+      "id": "msg_f02_hermitage",
+      "speaker": "",
+      "text": "浄土宗の庵。戸は閉まっている。\n賽銭箱の上に、誰かが置いた飴が一つ。"
+    },
+    {
+      "id": "msg_f02_park",
+      "speaker": "",
+      "text": "ブランコが揺れている。風は無い。"
+    },
+    {
+      "id": "msg_f02_trash_net",
+      "speaker": "",
+      "text": "ゴミ集積所。収集日ではないのに、袋が一つ置かれている。"
+    },
+    {
+      "id": "msg_f02_kairanban",
+      "speaker": "",
+      "text": "回覧板。「夜間の外出は控えるように」。\n日付は 7 月 28 日。蓮のことより前だ。"
+    },
+    {
+      "id": "msg_f02_slope",
+      "speaker": "",
+      "text": "高速の法面。上を車が通る音だけが、途切れずに降ってくる。"
     }
   ]
 }
