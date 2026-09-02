@@ -1064,6 +1064,193 @@
       "id": "msg_stalker_heroine_caught",
       "speaker": "",
       "text": "澪が足を止めた。振り返ると、彼女は俺のすぐ後ろにいた。\n「……何でもない。行こう」"
+    },
+    {
+      "id": "msg_recall_0731_a",
+      "speaker": "yu",
+      "text": "蓮と肝試しの約束をしていた。\n城址の空堀まで行こうと言ったのは蓮だった。",
+      "truth_id": "msg_recall_0731_a_t"
+    },
+    {
+      "id": "msg_recall_0731_a_t",
+      "speaker": "yu",
+      "text": "蓮と肝試しに行った。\n薬師谷まで行こうと言ったのは俺だった。"
+    },
+    {
+      "id": "msg_recall_0731_b",
+      "speaker": "yu",
+      "text": "俺は寝過ごした。目が覚めたら朝で、通知は 23 通あった。\n全部、蓮からだった。",
+      "truth_id": "msg_recall_0731_b_t"
+    },
+    {
+      "id": "msg_recall_0731_b_t",
+      "speaker": "yu",
+      "text": "俺は先に帰った。帰り道は一人だった。通知は 23 通あった。\n全部、翌朝、俺が蓮の端末から自分へ送った。"
+    },
+    {
+      "id": "msg_recall_0731_c",
+      "speaker": "yu",
+      "text": "行けなくてごめん、とだけ返した。既読は付かなかった。",
+      "truth_id": "msg_recall_0731_c_t"
+    },
+    {
+      "id": "msg_recall_0731_c_t",
+      "speaker": "yu",
+      "text": "行けなくてごめん、と自分の端末から送った。\n既読を付けたのも俺だ。"
+    },
+    {
+      "id": "msg_d01_wake",
+      "speaker": "yu",
+      "text": "8月1日。目が覚めたら、もう明るかった。"
+    },
+    {
+      "id": "msg_d01_mother_1",
+      "speaker": "yu_mother",
+      "text": "「悠。……蓮くんのお母さんから、電話があって」"
+    },
+    {
+      "id": "msg_d01_mother_2",
+      "speaker": "yu",
+      "text": "母はそれ以上、続けなかった。\n続けなくても、分かった。"
+    },
+    {
+      "id": "msg_d01_mother_3",
+      "speaker": "yu_mother",
+      "text": "「今日は、バイト……行けるの？」"
+    },
+    {
+      "id": "msg_d01_go_work",
+      "speaker": "yu",
+      "text": "行く、と答えた。行かない理由を、うまく作れなかった。"
+    },
+    {
+      "id": "msg_f01_store_shift",
+      "speaker": "yu",
+      "text": "レジに立った。誰も蓮の話をしない。\nそれが、いちばん堪えた。"
+    },
+    {
+      "id": "msg_f01_store_shift_done",
+      "speaker": "yu",
+      "text": "シフトは終わった。外はもう暗い。"
+    },
+    {
+      "id": "msg_f01_store_closed",
+      "speaker": "",
+      "text": "コンビニ。今は入る用事がない。"
+    },
+    {
+      "id": "msg_f01_vending",
+      "speaker": "yu",
+      "text": "自販機の光。ここだけは、いつも明るい。",
+      "truth_id": "msg_f01_vending_t"
+    },
+    {
+      "id": "msg_f01_vending_t",
+      "speaker": "yu",
+      "text": "自販機の光。ここだけは、いつも明るい。\n7/31 の夜も、帰り道にここで水を買った。"
+    },
+    {
+      "id": "msg_f01_bulletin",
+      "speaker": "",
+      "text": "夏祭りの張り紙と、迷い猫のチラシ。\n尋ね人の紙は、まだ一枚も無い。"
+    },
+    {
+      "id": "msg_f01_trash",
+      "speaker": "yu",
+      "text": "店先のゴミ箱。いつも通り、満杯に近い。",
+      "truth_id": "msg_f01_trash_t"
+    },
+    {
+      "id": "msg_f01_trash_t",
+      "speaker": "yu",
+      "text": "店先のゴミ箱。8/8 に、蓮のメモをここに捨てる。"
+    },
+    {
+      "id": "msg_f01_car_lot",
+      "speaker": "",
+      "text": "駐車場の車。エンジンをかけたまま、誰も乗っていない。"
+    },
+    {
+      "id": "msg_f01_cart",
+      "speaker": "",
+      "text": "カートが一台、少し離れた場所に置かれている。誰も戻さない。"
+    },
+    {
+      "id": "msg_f01_bridge",
+      "speaker": "yu",
+      "text": "歩道橋。落書きの上から、また落書きがある。",
+      "truth_id": "msg_f01_bridge_t"
+    },
+    {
+      "id": "msg_f01_bridge_t",
+      "speaker": "yu",
+      "text": "歩道橋。7/31 の 21 時、ここで蓮と待ち合わせた。\n落書きは、あの夜も同じだった。"
+    },
+    {
+      "id": "msg_f01_super",
+      "speaker": "",
+      "text": "スーパー。閉店の音楽が流れている。"
+    },
+    {
+      "id": "msg_f01_sushi",
+      "speaker": "",
+      "text": "回転寿司。窓の向こうで、レーンだけが回っている。"
+    },
+    {
+      "id": "msg_f01_drug",
+      "speaker": "",
+      "text": "ドラッグストア。夜はシャッターが下りる。"
+    },
+    {
+      "id": "evd_store_receipt_title",
+      "speaker": "",
+      "text": "レシートの控え"
+    },
+    {
+      "id": "evd_store_receipt_surface",
+      "speaker": "",
+      "text": "レジ横の控え。7 月分はまだ整理していない。"
+    },
+    {
+      "id": "evd_store_receipt_truth",
+      "speaker": "",
+      "text": "レジ横の控え。7/31 21:12、水 2 本。俺が買った。\n一本は蓮のぶんだった。"
+    },
+    {
+      "id": "evd_store_receipt_shown",
+      "speaker": "",
+      "text": "レシートの控えを整理した。"
+    },
+    {
+      "id": "evd_store_receipt_action",
+      "speaker": "",
+      "text": "7 月 31 日 21 時 12 分、水二本の控えを抜いた。一本は蓮のぶんだった。"
+    },
+    {
+      "id": "msg_d01_mio_1",
+      "speaker": "yu",
+      "text": "店の前に、見ない顔の女の子が立っていた。\n俺を見て、少し迷ってから、口を開いた。"
+    },
+    {
+      "id": "msg_d01_mio_2",
+      "speaker": "mio",
+      "text": "「篝くん、ですか。蓮の……従妹の、桂澪です」"
+    },
+    {
+      "id": "msg_d01_mio_3",
+      "speaker": "mio",
+      "text": "「明日、来てもらえますか。蓮の家に。\n話したいことが、あります」"
+    },
+    {
+      "id": "msg_d01_mio_4",
+      "speaker": "yu",
+      "text": "話したいこと。\n何を知っているのか、まだ分からなかった。",
+      "truth_id": "msg_d01_mio_4_t"
+    },
+    {
+      "id": "msg_d01_mio_4_t",
+      "speaker": "yu",
+      "text": "話したいこと。\n何を知っているのか、確かめる必要があった。"
     }
   ]
 }
