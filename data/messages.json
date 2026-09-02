@@ -867,6 +867,193 @@
       "id": "heroine_remark_timetable_pass",
       "speaker": "mio",
       "text": "「定期券。……蓮の？」"
+    },
+    {
+      "id": "msg_natsu_001",
+      "speaker": "natsu",
+      "text": "大丈夫。悠は悪くないよ。",
+      "truth_id": "msg_natsu_001_t"
+    },
+    {
+      "id": "msg_natsu_001_t",
+      "speaker": "natsu",
+      "text": "大丈夫。悠は悪くないよ。私が頼んだんだから。"
+    },
+    {
+      "id": "msg_natsu_002",
+      "speaker": "natsu",
+      "text": "眠れなかったんでしょ。私がいるから、寝ていいよ。",
+      "truth_id": "msg_natsu_002_t"
+    },
+    {
+      "id": "msg_natsu_002_t",
+      "speaker": "natsu",
+      "text": "眠れなかったんでしょ。私がいるから、寝ていいよ。あの夜も、そう言ったね。"
+    },
+    {
+      "id": "msg_natsu_003",
+      "speaker": "natsu",
+      "text": "あの子、いい子だね。仲良くしてあげて。",
+      "truth_id": "msg_natsu_003_t"
+    },
+    {
+      "id": "msg_natsu_003_t",
+      "speaker": "natsu",
+      "text": "あの子、いい子だね。仲良くしてあげて。"
+    },
+    {
+      "id": "msg_natsu_004",
+      "speaker": "natsu",
+      "text": "暗いところは私が先に見ておくから。悠は後ろにいて。",
+      "truth_id": "msg_natsu_004_t"
+    },
+    {
+      "id": "msg_natsu_004_t",
+      "speaker": "natsu",
+      "text": "暗いところは私が先に見ておくから。悠は後ろにいて。蓮くんのときみたいに。"
+    },
+    {
+      "id": "msg_natsu_005",
+      "speaker": "natsu",
+      "text": "ひとりのほうが、楽だね。",
+      "truth_id": "msg_natsu_005_t"
+    },
+    {
+      "id": "msg_natsu_005_t",
+      "speaker": "natsu",
+      "text": "ひとりのほうが、楽だね。連れてくるのは、一人ずつでいいよ。"
+    },
+    {
+      "id": "msg_natsu_006",
+      "speaker": "natsu",
+      "text": "怖くないよ。あれは悠を見てない。",
+      "truth_id": "msg_natsu_006_t"
+    },
+    {
+      "id": "msg_natsu_006_t",
+      "speaker": "natsu",
+      "text": "怖くないよ。あれは悠を見てない。私を見てるから。"
+    },
+    {
+      "id": "msg_natsu_007",
+      "speaker": "natsu",
+      "text": "行こう。一緒に。",
+      "truth_id": "msg_natsu_007_t"
+    },
+    {
+      "id": "msg_natsu_007_t",
+      "speaker": "natsu",
+      "text": "行こう。一緒に。"
+    },
+    {
+      "id": "msg_natsu_008",
+      "speaker": "natsu",
+      "text": "いいよ。私はここにいるから。",
+      "truth_id": "msg_natsu_008_t"
+    },
+    {
+      "id": "msg_natsu_008_t",
+      "speaker": "natsu",
+      "text": "いいよ。私はここにいるから。石の外に、最初から。"
+    },
+    {
+      "id": "msg_natsu_009",
+      "speaker": "natsu",
+      "text": "大丈夫。私は悠の味方だよ。",
+      "truth_id": "msg_natsu_009_t"
+    },
+    {
+      "id": "msg_natsu_009_t",
+      "speaker": "natsu",
+      "text": "大丈夫。私は悠の味方だよ。"
+    },
+    {
+      "id": "msg_natsu_010",
+      "speaker": "natsu",
+      "text": "ずっと友達だよ。",
+      "truth_id": "msg_natsu_010_t"
+    },
+    {
+      "id": "msg_natsu_010_t",
+      "speaker": "natsu",
+      "text": "ずっと友達だよ。次の子も、連れてきてね。"
+    },
+    {
+      "id": "msg_natsu_011",
+      "speaker": "natsu",
+      "text": "寂しいな。",
+      "truth_id": "msg_natsu_011_t"
+    },
+    {
+      "id": "msg_natsu_011_t",
+      "speaker": "natsu",
+      "text": "寂しいな。"
+    },
+    {
+      "id": "msg_natsu_012",
+      "speaker": "natsu",
+      "text": "悠だけは、私が守るから。",
+      "truth_id": "msg_natsu_012_t"
+    },
+    {
+      "id": "msg_natsu_012_t",
+      "speaker": "natsu",
+      "text": "悠だけは、私が守るから。他の子は、知らない。"
+    },
+    {
+      "id": "msg_natsu_comfort_after_anomaly",
+      "speaker": "natsu",
+      "text": "もう行ったよ。悠のことは、見てなかった。",
+      "truth_id": "msg_natsu_comfort_after_anomaly_t"
+    },
+    {
+      "id": "msg_natsu_comfort_after_anomaly_t",
+      "speaker": "natsu",
+      "text": "もう行ったよ。悠のことは、見てなかった。私がいるから。"
+    },
+    {
+      "id": "msg_natsu_comfort_after_stalker",
+      "speaker": "natsu",
+      "text": "大丈夫、追ってこない。悠は速いね。",
+      "truth_id": "msg_natsu_comfort_after_stalker_t"
+    },
+    {
+      "id": "msg_natsu_comfort_after_stalker_t",
+      "speaker": "natsu",
+      "text": "大丈夫、追ってこない。悠には、来ないよ。"
+    },
+    {
+      "id": "msg_natsu_comfort_night_walk",
+      "speaker": "natsu",
+      "text": "夜は私のほうがよく見える。前を歩くよ。",
+      "truth_id": "msg_natsu_comfort_night_walk_t"
+    },
+    {
+      "id": "msg_natsu_comfort_night_walk_t",
+      "speaker": "natsu",
+      "text": "夜は私のほうがよく見える。前を歩くよ。あの夜と同じ道だね。"
+    },
+    {
+      "id": "msg_natsu_comfort_yakushi_gate",
+      "speaker": "natsu",
+      "text": "まだ早いよ。今日は帰ろう。",
+      "truth_id": "msg_natsu_comfort_yakushi_gate_t"
+    },
+    {
+      "id": "msg_natsu_comfort_yakushi_gate_t",
+      "speaker": "natsu",
+      "text": "まだ早いよ。今日は帰ろう。ここには、まだ一人しかいない。"
+    },
+    {
+      "id": "msg_natsu_comfort_heroine_near",
+      "speaker": "natsu",
+      "text": "あの子、今日はよく悠を見てるね。",
+      "truth_id": "msg_natsu_comfort_heroine_near_t"
+    },
+    {
+      "id": "msg_natsu_comfort_heroine_near_t",
+      "speaker": "natsu",
+      "text": "あの子、今日はよく悠を見てるね。気づかれる前に、決めないと。"
     }
   ]
 }
