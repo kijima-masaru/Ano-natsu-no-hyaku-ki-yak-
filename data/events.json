@@ -1,0 +1,343 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "note": "docs/EVENT_SCHEMA.md 参照。once=true のイベントは ev_done_<id> フラグで消化を管理"
+  },
+  "events": [
+    {
+      "id": "ev_d01_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d01_open"
+        },
+        {
+          "type": "set_flag",
+          "flag": "prologue_done"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d02_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d02_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d03_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d03_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d05_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d05_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d08_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d08_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d12_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d12_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d14_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d14_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d15_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d15_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d19_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d19_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d23_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d23_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d26_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d26_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d29_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d29_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d30_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d30_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_d31_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_open"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f06_library",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "library",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_library"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f06_lost_found_take",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "lost_and_found",
+      "conditions": [
+        {
+          "has_item": "key_tunnel_fence",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_lost_found_take"
+        },
+        {
+          "type": "give_item",
+          "item": "key_tunnel_fence"
+        },
+        {
+          "type": "set_flag",
+          "flag": "key_tunnel_fence"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f06_lost_found_after",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "lost_and_found",
+      "conditions": [
+        {
+          "has_item": "key_tunnel_fence",
+          "is": true
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_lost_found_after"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f06_police",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "police_log",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_police"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f06_bulletin",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "bulletin",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_board"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f06_map",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "map_sign",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_map"
+        },
+        {
+          "type": "set_flag",
+          "flag": "flag_minimap_unlocked"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f06_clock",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "clock",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_clock"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    }
+  ]
+}
