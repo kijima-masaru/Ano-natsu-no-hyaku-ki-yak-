@@ -3,7 +3,7 @@ extends RefCounted
 ## events.json の参照整合性を検証する。存在しないフラグ・アイテム・フィールド・メッセージ・イベント・アクション種別を全件列挙する。
 ## フラグは「どこかで立てられる名前」か「動的に生成される接頭辞」を既知とみなす。
 
-const DYNAMIC_FLAG_PREFIXES: PackedStringArray = ["visited_", "ev_", "hid_", "hid_fail_", "seen_", "day_", "ev_done_", "luck_"]
+const DYNAMIC_FLAG_PREFIXES: PackedStringArray = ["visited_", "ev_", "hid_", "hid_fail_", "seen_", "day_", "ev_done_", "luck_", "an_done_"]
 ## コードや他システムが立てる、データに現れないフラグ
 const CODE_FLAGS: PackedStringArray = ["truth_revealed", "ending_reached", "ending_a", "ending_b", "ending_c",
 	"truth_partial_walk", "truth_partial_entity", "companion_on", "notebook_unlocked", "flag_minimap_unlocked",

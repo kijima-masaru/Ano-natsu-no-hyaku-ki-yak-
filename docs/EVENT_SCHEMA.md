@@ -107,5 +107,6 @@
 ## 実行の規則
 
 - 実行中はプレイヤー入力を止め、終了後に戻す。イベント中に `run_event` されたものは待ち行列で順に実行
+- `EventSystem.run_actions(label, actions)` で events.json に無いアクション列も同じ待ち行列で実行できる（`AnomalySystem` が使う。`docs/ANOMALY_SCHEMA.md`）
 - アクションが未登録・参照先不在のときは `push_error` と `action_failed` を出し、そのアクションを飛ばして続行する
 - 日本語テキストの表示は `EventSystem.show_entry(entry)` に一本化（他 autoload も使う）

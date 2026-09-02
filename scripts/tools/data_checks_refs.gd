@@ -14,8 +14,11 @@ const KNOWN_CONDITIONS: PackedStringArray = [
 	"flag", "has_item", "field_visited", "day", "day_range", "time_of_day", "not", "any", "all", "suspicion", "can_sleep",
 ]
 ## コードが規約的に立てるフラグの接頭辞
-const FLAG_PREFIXES: PackedStringArray = ["hid_", "hid_fail_", "ev_", "ev_done_", "day_", "seen_", "visited_", "luck_"]
+const FLAG_PREFIXES: PackedStringArray = ["hid_", "hid_fail_", "ev_", "ev_done_", "day_", "seen_", "visited_", "luck_", "an_done_"]
 const FLAGS_DOC: String = "res://docs/FLAGS.md"
+const ANOMALY_TRIGGERS: PackedStringArray = ["on_enter", "on_interact", "on_condition"]
+const ANOMALY_MODES: PackedStringArray = ["once", "repeat", "escalate"]
+const COMFORT_CONTEXTS: PackedStringArray = ["after_anomaly", "after_stalker", "night_walk", "yakushi_gate", "heroine_near"]
 
 
 ## ドキュメント・イベント・日程で定義されているフラグの集合
@@ -191,3 +194,37 @@ static func check_evidence(report: DataReport, evidence: Array, ctx: Dictionary)
 		for key: String in ["title_id", "surface_id", "truth_id", "shown_id", "action_id"]:
 			if e.has(key) and not ctx["messages"].has(str(e[key])):
 				report.error("evidence", "%s: %s '%s' は messages.json にありません" % [id, key, str(e[key])])
+
+
+## anomalies.json：field・trigger・mode・comfort と、events と同じアクション／条件の参照
+static func check_anomalies(report: DataReport, anomalies: Array, ctx: Dictionary, event_ids: Dictionary, targets: Dictionary) -> void:
+	for a: Dictionary in anomalies:
+		var id: String = str(a.get("id", ""))
+		var field: String = str(a.get("field", ""))
+		if not ctx["fields"].has(field):
+			report.error("anomalies", "%s: field '%s' は存在しません" % [id, field])
+		var trigger: String = str(a.get("trigger", "on_enter"))
+		if not ANOMALY_TRIGGERS.has(trigger):
+			report.error("anomalies", "%s: trigger '%s' は %s のいずれか" % [id, trigger, ", ".join(ANOMALY_TRIGGERS)])
+		if trigger == "on_interact" and targets.has(field) and not (targets[field] as Dictionary).has(str(a.get("target", ""))):
+			report.error("anomalies", "%s: target '%s' は %s の調べ物にありません" % [id, str(a.get("target", "")), field])
+		var mode: String = str(a.get("mode", "once"))
+		if not ANOMALY_MODES.has(mode):
+			report.error("anomalies", "%s: mode '%s' は %s のいずれか" % [id, mode, ", ".join(ANOMALY_MODES)])
+		var comfort: String = str(a.get("comfort", ""))
+		if not comfort.is_empty() and not COMFORT_CONTEXTS.has(comfort):
+			report.error("anomalies", "%s: comfort '%s' は未定義です" % [id, comfort])
+		for c: Variant in a.get("conditions", []):
+			_check_condition(report, id, c, ctx)
+		var lists: Array = [a.get("actions", [])]
+		if mode == "escalate":
+			lists = []
+			if (a.get("stages", []) as Array).is_empty():
+				report.error("anomalies", "%s: escalate には stages が必要です" % id)
+			for st: Dictionary in a.get("stages", []):
+				lists.append(st.get("actions", []))
+		for acts: Array in lists:
+			if acts.is_empty():
+				report.error("anomalies", "%s: actions が空です" % id)
+			for act: Dictionary in acts:
+				_check_action(report, id, act, ctx, event_ids)

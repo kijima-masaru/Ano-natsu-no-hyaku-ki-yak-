@@ -49,7 +49,7 @@ godot --headless --path . -s scripts/tools/field_scaffold.gd -- F03
 - [ ] **調査 P**：`add_points` を持つイベントは必ず `once: true`。再訪用に表示だけの `priority: 0` イベントを分ける。自由日は「その日に初めて開く供給源が 3 つ以上」。
 - [ ] **隠蔽**：`conceal_evidence` ＋ `add_points` の `once` イベントと、再表示用 `_after` イベント（`priority: 0`）。`data/evidence.json` に定義、`docs/CONCEALMENT_LIST.md` に行を追加。
 - [ ] **二層テキスト**：`truth_id` を付け、`docs/DECEPTION_MAP.md` に行を追加。GDScript で `truth_revealed` を見ない。**最低 2 箇所**。
-- [ ] **怪異**：`data/anomalies.json` にそのフィールド固有のものを最低 1 つ（Step 4 タスク 2 以降）。
+- [ ] **怪異**：`data/anomalies.json` にそのフィールド固有のものを最低 1 つ（`docs/ANOMALY_SCHEMA.md`。once / repeat / escalate）。
 - [ ] 新しいフラグは `docs/FLAGS.md` に行を足す（検証ツールは FLAGS.md に無いフラグへの条件参照をエラーにする）。
 - [ ] 環境音：`fields.json` の `ambience_track` が `data/audio.json` にあること。無ければ追加し `docs/ASSETS_NEEDED.md` に発注行を足す。
 - [ ] 描写の原則：自死の方法・手段・場所・状態に触れない、死は常に事後、実在の固有名詞なし（`docs/CONTENT_NOTICE.md`）。

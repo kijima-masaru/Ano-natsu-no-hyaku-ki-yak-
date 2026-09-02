@@ -1689,6 +1689,68 @@
       "id": "msg_f01_bulletin_d4",
       "speaker": "yu",
       "text": "夏祭りの張り紙が剥がされている。\n『中止』と書いた紙が、その上に貼られていた。"
+    },
+    {
+      "id": "msg_an_f01_silence_1",
+      "speaker": "yu",
+      "text": "国道の音が、消えた。\n車は走っているのに、音だけが無い。"
+    },
+    {
+      "id": "msg_an_f01_silence_2",
+      "speaker": "yu",
+      "text": "自販機の光だけが残っている。\nこの場所を、初めて安全だと思えなかった。",
+      "truth_id": "msg_an_f01_silence_2_t"
+    },
+    {
+      "id": "msg_an_f01_silence_2_t",
+      "speaker": "yu",
+      "text": "自販機の光だけが残っている。\n7/31 の夜も、ここだけは明るかった。俺は水を二本買った。"
+    },
+    {
+      "id": "msg_an_f02_laundry_wet",
+      "speaker": "yu",
+      "text": "洗濯物が、まだ乾いていない。\n風は吹いているのに。"
+    },
+    {
+      "id": "msg_an_f02_laundry_more",
+      "speaker": "yu",
+      "text": "乾かない洗濯物が、一枚増えている。\n誰が干したのか、聞ける相手がいない。"
+    },
+    {
+      "id": "msg_an_f02_laundry_gone",
+      "speaker": "yu",
+      "text": "物干しが空になっている。\n取り込んだのではない。竿だけが、まだ揺れている。"
+    },
+    {
+      "id": "msg_an_f05_fresh_goods",
+      "speaker": "yu",
+      "text": "棚の駄菓子が、昨日より新しい。\n仕入れの車を、この通りで見たことがない。"
+    },
+    {
+      "id": "msg_an_f06_board_night_1",
+      "speaker": "yu",
+      "text": "夜の掲示板。尋ね人の紙が、昼より一枚多い気がする。\n数えなおす気にはなれなかった。"
+    },
+    {
+      "id": "msg_an_f06_board_night_2",
+      "speaker": "yu",
+      "text": "尋ね人の紙が、また増えている。\n顔写真の白い部分が、街灯の下で並んでいる。"
+    },
+    {
+      "id": "msg_an_f06_board_night_3",
+      "speaker": "yu",
+      "text": "最後に貼られた一枚。顔は白く飛んでいるが、\n輪郭が、誰かに似ている。",
+      "truth_id": "msg_an_f06_board_night_3_t"
+    },
+    {
+      "id": "msg_an_f06_board_night_3_t",
+      "speaker": "yu",
+      "text": "最後に貼られた一枚。顔は白く飛んでいるが、\n輪郭が、誰かに似ている。\n似ているのではない。"
+    },
+    {
+      "id": "msg_an_f12_stairwell_blink",
+      "speaker": "yu",
+      "text": "四棟の階段室の灯りが、同時に消えた。\n数秒おいて、三階だけが点く。\n上の階から、誰かが降りてくる足音——は、しなかった。"
     }
   ]
 }
