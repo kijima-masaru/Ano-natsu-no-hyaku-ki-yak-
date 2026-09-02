@@ -5,18 +5,18 @@ extends Control
 signal closed()
 
 const FONT_SIZE: int = 12
-## id / 表示名 / 種別（"slider" 0〜1 を 10 段階、"toggle"）
+## id / 種別（"slider" 0〜1 を 10 段階、"toggle"、"action"）。表示名は messages.json の ui_setting_<id>
 const ITEMS: Array[Dictionary] = [
-	{"id": "master_volume", "text": "全体の音量", "kind": "slider"},
-	{"id": "bgm_volume", "text": "音楽", "kind": "slider"},
-	{"id": "se_volume", "text": "効果音", "kind": "slider"},
-	{"id": "ambience_volume", "text": "環境音", "kind": "slider"},
-	{"id": "text_speed", "text": "文字送りの速さ", "kind": "slider"},
-	{"id": "instant_text", "text": "文字を一括表示", "kind": "toggle"},
-	{"id": "brightness", "text": "明るさ", "kind": "slider"},
-	{"id": "debug_overlay", "text": "デバッグ表示", "kind": "toggle"},
-	{"id": "content_notice", "text": "コンテンツに関するお知らせを見る", "kind": "action"},
-	{"id": "back", "text": "もどる", "kind": "action"},
+	{"id": "master_volume", "kind": "slider"},
+	{"id": "bgm_volume", "kind": "slider"},
+	{"id": "se_volume", "kind": "slider"},
+	{"id": "ambience_volume", "kind": "slider"},
+	{"id": "text_speed", "kind": "slider"},
+	{"id": "instant_text", "kind": "toggle"},
+	{"id": "brightness", "kind": "slider"},
+	{"id": "debug_overlay", "kind": "toggle"},
+	{"id": "content_notice", "kind": "action"},
+	{"id": "back", "kind": "action"},
 ]
 const SLIDER_STEP: float = 0.1
 
@@ -31,7 +31,7 @@ func _ready() -> void:
 	_panel.color = Palette.with_alpha(Palette.UI_PANEL, 0.95)
 	_title.add_theme_font_size_override("font_size", FONT_SIZE)
 	_title.add_theme_color_override("font_color", Palette.get_color(Palette.UI_ACCENT))
-	_title.text = "設定"
+	_title.text = MessageResolver.text("ui_settings_title")
 	_list.activated.connect(_on_activated)
 	_list.cancelled.connect(func() -> void: closed.emit())
 	_rebuild()
@@ -46,14 +46,15 @@ func _rebuild() -> void:
 
 func _format(item: Dictionary) -> String:
 	var id: String = str(item["id"])
+	var label: String = MessageResolver.text("ui_setting_%s" % id)
 	match str(item["kind"]):
 		"slider":
 			var v: float = float(SaveManager.get_setting(id))
 			var filled: int = roundi(v / SLIDER_STEP)
-			return "%s　%s%s" % [item["text"], "■".repeat(filled), "□".repeat(10 - filled)]
+			return "%s　%s%s" % [label, "■".repeat(filled), "□".repeat(10 - filled)]
 		"toggle":
-			return "%s　%s" % [item["text"], "オン" if bool(SaveManager.get_setting(id)) else "オフ"]
-	return str(item["text"])
+			return "%s　%s" % [label, MessageResolver.text("ui_on" if bool(SaveManager.get_setting(id)) else "ui_off")]
+	return label
 
 
 func _unhandled_input(event: InputEvent) -> void:

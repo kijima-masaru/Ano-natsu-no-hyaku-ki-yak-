@@ -2,7 +2,7 @@ extends Node
 ## エントリポイント。ワールドのルートを SceneRouter に登録し、GameState の現在フィールドを開く。
 ## メッセージウィンドウを UI 層に載せ、フィールドの調べ物と施錠通知を表示する。
 
-const MESSAGE_WINDOW_SCENE: PackedScene = preload("res://scenes/ui/message_window.tscn")
+const MESSAGE_WINDOW_SCENE: PackedScene = preload("res://scenes/ui/dialogue_window.tscn")
 const DATE_HUD_SCENE: PackedScene = preload("res://scenes/ui/date_hud.tscn")
 const SLOT_MENU_SCENE: PackedScene = preload("res://scenes/ui/slot_menu.tscn")
 const TITLE_SCENE: String = "res://scenes/ui/title.tscn"

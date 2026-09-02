@@ -27,8 +27,8 @@ func _ready() -> void:
 
 func open(new_mode: String) -> void:
 	mode = new_mode
-	_title.text = "どこに記録する？" if mode == "save" else "どこから続ける？"
-	_hint.text = "Z/決定　X/戻る"
+	_title.text = MessageResolver.text("ui_slot_save_title" if mode == "save" else "ui_slot_load_title")
+	_hint.text = MessageResolver.text("ui_hint_confirm_back")
 	var items: Array[Dictionary] = []
 	for slot: int in SavePaths.SLOT_COUNT:
 		if mode == "save" and slot == SavePaths.AUTOSAVE_SLOT:
@@ -38,21 +38,22 @@ func open(new_mode: String) -> void:
 
 
 func _describe(slot: int) -> String:
-	var label: String = SavePaths.slot_label(slot)
+	var label: String = MessageResolver.text("ui_slot_autosave") if slot == SavePaths.AUTOSAVE_SLOT \
+		else MessageResolver.text("ui_slot_n", [str(slot)])
 	if not SaveManager.has_save(slot):
-		return "%s　――" % label
+		return MessageResolver.text("ui_slot_empty", [label])
 	var info: Dictionary = SaveManager.peek(slot)
 	if info.is_empty():
-		return "%s　（読めません）" % label
-	return "%s　%s %s　%s" % [label, Calendar.format_date(int(info["day"])),
-		Calendar.time_label(str(info["time_of_day"])), str(info["field_id"])]
+		return MessageResolver.text("ui_slot_corrupt", [label])
+	return MessageResolver.text("ui_slot_entry", [label, Calendar.format_date(int(info["day"])),
+		Calendar.time_label(str(info["time_of_day"])), str(info["field_id"])])
 
 
 func _on_activated(_index: int, id: String) -> void:
 	var slot: int = int(id)
 	var err: Error = SaveManager.save_game(slot) if mode == "save" else SaveManager.load_game(slot)
 	if err != OK:
-		_hint.text = "記録できませんでした。" if mode == "save" else "このデータは読めません。"
+		_hint.text = MessageResolver.text("ui_slot_save_failed" if mode == "save" else "ui_slot_load_failed")
 		_hint.add_theme_color_override("font_color", Palette.get_color(Palette.UI_ALERT))
 		_list.set_item_text(id, _describe(slot))
 		return
