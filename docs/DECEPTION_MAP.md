@@ -97,6 +97,11 @@
 | `msg_f08_lookout` | 谷の方に、無いはずの光。 | `msg_f08_lookout_t` | あれは俺が置いた懐中電灯だ。まだ点いている。 | F08 展望所 |
 | `msg_f08_ema` | 一枚だけ、裏返しに掛かっている。 | `msg_f08_ema_t` | 俺の字だ。六月の。 | 隠蔽 C-13 と対 |
 | `evd_oni_masks_surface` | 鬼の面は七枚。台帳には八枚。一枚足りない。 | `evd_oni_masks_truth` | 八枚目は谷から出たものの顔で、今は俺の隣にいる。 | 証拠 oni_masks（ノート） |
+| `msg_f09_map_board` | 縄張図。曲輪の外に八つの印。 | `msg_f09_map_board_t` | 印の一つに鉛筆で丸。俺が付けた。六月に。 | F09 8/13〜 |
+| `msg_f09_keep` | 石の間に塩が撒かれた跡。白い。新しい。 | `msg_f09_keep_t` | 塩は俺が撒いた。ここから谷を見下ろして道を決めた。 | F09 |
+| `msg_f09_moat_item` | 空堀の底に懐中電灯の電池。誰かが夜に来た。 | `msg_f09_moat_item_t` | 俺が落とした。六月の夜。拾わずに急いでいた。 | F09 |
+| `msg_an_f09_bridge` | 入ったはずの土橋が無い。 | `msg_an_f09_bridge_t` | 六月の夜と同じだ。帰り道は別の道だった。 | 怪異 an_f09_bridge_gone |
+| `evd_castle_map_surface` | 八つの印。谷への道を塞ぐ形。 | `evd_castle_map_truth` | 八本の柱と一つの石で押さえていた。石は俺がずらした。 | 証拠 castle_map |
 
 ## 集計と実装要件
 

@@ -3435,6 +3435,211 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_f09_enter",
+      "field": "F09",
+      "trigger": "on_enter",
+      "day_range": [
+        12,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f09_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f09_map_board",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "map_board",
+      "day_range": [
+        13,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f09_map_board"
+        },
+        {
+          "type": "give_evidence",
+          "evidence": "castle_map"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f09_map_board_again",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "map_board",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f09_map_board_again"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f09_keep",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "keep_stones",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f09_keep"
+        },
+        {
+          "type": "set_flag",
+          "flag": "f09_reached_keep"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f09_keep_again",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "keep_stones",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f09_keep_again"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f09_moat_item",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "moat_item",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f09_moat_item"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f09_moat_item_again",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "moat_item",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f09_moat_item_again"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f09_marker_conceal",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "bridge_marker",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "path_marker"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f09_marker_after",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "bridge_marker",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "path_marker"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f09_hidden_closed",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "hidden_exit",
+      "conditions": [
+        {
+          "flag": "f09_bridge_gone",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f09_hidden_closed"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f09_hidden_open",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "hidden_exit",
+      "conditions": [
+        {
+          "flag": "f09_bridge_gone"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f09_hidden_open"
+        }
+      ],
+      "once": false,
+      "priority": 5
     }
   ]
 }

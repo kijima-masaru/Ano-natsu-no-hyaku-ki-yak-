@@ -2359,6 +2359,135 @@
       "id": "msg_an_f08_lights_2",
       "speaker": "yu",
       "text": "無いはずの光が、三つ。\n三つ目は、この山の麓。今、俺が登ってきた道の途中だ。"
+    },
+    {
+      "id": "msg_f09_enter",
+      "speaker": "yu",
+      "text": "城址。高速に切り離された山の上。\n土塁と空堀だけが、何を守っていたのかも言わずに残っている。"
+    },
+    {
+      "id": "msg_f09_map_board",
+      "speaker": "yu",
+      "text": "崩れた案内板の縄張図。曲輪の外に、八つの印。『八柱』。\n谷への道を塞ぐ形に並んでいる。",
+      "truth_id": "msg_f09_map_board_t"
+    },
+    {
+      "id": "msg_f09_map_board_t",
+      "speaker": "yu",
+      "text": "縄張図。八つの印のうち一つに、鉛筆で丸。\n俺が付けた。六月に、道を調べたとき。"
+    },
+    {
+      "id": "msg_f09_map_board_again",
+      "speaker": "yu",
+      "text": "縄張図。見るたびに、曲輪の形が実際と少しずれている気がする。"
+    },
+    {
+      "id": "msg_f09_keep",
+      "speaker": "yu",
+      "text": "主郭の礎石。何が建っていたのか、もう誰も知らない。\n石の間に、塩が撒かれた跡。白い。新しい。",
+      "truth_id": "msg_f09_keep_t"
+    },
+    {
+      "id": "msg_f09_keep_t",
+      "speaker": "yu",
+      "text": "主郭の礎石。石の間の塩は、俺が撒いた。\n六月の夜、ここから谷を見下ろして、道を決めた。"
+    },
+    {
+      "id": "msg_f09_keep_again",
+      "speaker": "yu",
+      "text": "主郭。風だけが通る。"
+    },
+    {
+      "id": "msg_f09_moat_item",
+      "speaker": "yu",
+      "text": "空堀の底に、懐中電灯の電池。新しい型だ。\n誰かが、夜にここへ来た。",
+      "truth_id": "msg_f09_moat_item_t"
+    },
+    {
+      "id": "msg_f09_moat_item_t",
+      "speaker": "yu",
+      "text": "空堀の底の電池。俺が落としたものだ。\n六月の夜。拾わずに、急いでいた。"
+    },
+    {
+      "id": "msg_f09_moat_item_again",
+      "speaker": "yu",
+      "text": "空堀の底。電池は、まだそこにある。"
+    },
+    {
+      "id": "msg_f09_hidden_closed",
+      "speaker": "yu",
+      "text": "主郭の南端。樹林が濃い。\n茂みの向こうに、道がある気がする。今は通れない。"
+    },
+    {
+      "id": "msg_f09_hidden_open",
+      "speaker": "yu",
+      "text": "茂みが割れて、獣道が下へ続いている。\n空堀の底を通って、外へ。誰かが最近、通った跡。"
+    },
+    {
+      "id": "evd_path_marker_title",
+      "speaker": "",
+      "text": "土橋の目印の布"
+    },
+    {
+      "id": "evd_path_marker_surface",
+      "speaker": "",
+      "text": "土橋の脇の石柱に、色の褪せた布が結ばれている。"
+    },
+    {
+      "id": "evd_path_marker_truth",
+      "speaker": "",
+      "text": "俺が結んだ布。六月の夜、帰り道を間違えないように。"
+    },
+    {
+      "id": "evd_path_marker_shown",
+      "speaker": "",
+      "text": "目印の布を見た。"
+    },
+    {
+      "id": "evd_path_marker_action",
+      "speaker": "",
+      "text": "自分が結んだ布を外して、ポケットに入れた。"
+    },
+    {
+      "id": "heroine_remark_path_marker",
+      "speaker": "mio",
+      "text": "「その布……取っちゃうの？」"
+    },
+    {
+      "id": "evd_castle_map_title",
+      "speaker": "",
+      "text": "城址の縄張図"
+    },
+    {
+      "id": "evd_castle_map_surface",
+      "speaker": "",
+      "text": "縄張図の曲輪の外に八つの印。『八柱』。谷への道を塞ぐ形に並んでいる。"
+    },
+    {
+      "id": "evd_castle_map_truth",
+      "speaker": "",
+      "text": "八つの印。町は谷のものを、八本の柱と一つの石で押さえていた。石は、俺がずらした。"
+    },
+    {
+      "id": "msg_an_f09_bridge",
+      "speaker": "yu",
+      "text": "曲輪を一周して、戻ってきた。\n入ったはずの土橋が、無い。空堀が、そこだけ深い。",
+      "truth_id": "msg_an_f09_bridge_t"
+    },
+    {
+      "id": "msg_an_f09_bridge_t",
+      "speaker": "yu",
+      "text": "土橋が、無い。\n六月の夜と同じだ。あの夜も、帰り道は別の道だった。"
+    },
+    {
+      "id": "msg_an_f09_map_1",
+      "speaker": "yu",
+      "text": "縄張図の曲輪が、一つ多い。\n昨日まで、こんな曲輪は描かれていなかった。"
+    },
+    {
+      "id": "msg_an_f09_map_2",
+      "speaker": "yu",
+      "text": "縄張図に描かれた曲輪の数が、また増えている。\n実際の地形の方が、図に合わせて増えているのかもしれない。"
     }
   ]
 }

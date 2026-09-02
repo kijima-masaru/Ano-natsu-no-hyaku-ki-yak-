@@ -567,6 +567,90 @@
       ],
       "suspicion_delta": 1,
       "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f09_bridge_gone",
+      "field": "F09",
+      "trigger": "on_condition",
+      "day_range": [
+        12,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "f09_reached_keep"
+        },
+        {
+          "flag": "f09_bridge_gone",
+          "is": false
+        }
+      ],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 0.8
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f09_bridge"
+        },
+        {
+          "type": "set_flag",
+          "flag": "f09_bridge_gone"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.8
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": "night_walk"
+    },
+    {
+      "id": "an_f09_map_drift",
+      "field": "F09",
+      "trigger": "on_interact",
+      "target": "map_board",
+      "day_range": [
+        14,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "ev_done_ev_f09_map_board"
+        }
+      ],
+      "mode": "escalate",
+      "once_per_day": true,
+      "stages": [
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f09_map_1"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.4
+            }
+          ]
+        },
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f09_map_2"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.6
+            }
+          ]
+        }
+      ],
+      "suspicion_delta": 1,
+      "comfort": ""
     }
   ]
 }

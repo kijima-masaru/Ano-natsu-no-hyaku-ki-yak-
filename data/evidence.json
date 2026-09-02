@@ -209,6 +209,28 @@
       "shown_id": "evd_ema_wish_shown",
       "action_id": "evd_ema_wish_action",
       "suspicion_on_witness": 20
+    },
+    {
+      "id": "path_marker",
+      "kind": "concealable",
+      "field": "F09",
+      "day_min": 12,
+      "title_id": "evd_path_marker_title",
+      "surface_id": "evd_path_marker_surface",
+      "truth_id": "evd_path_marker_truth",
+      "shown_id": "evd_path_marker_shown",
+      "action_id": "evd_path_marker_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "castle_map",
+      "kind": "evidence",
+      "field": "F09",
+      "day_min": 13,
+      "title_id": "evd_castle_map_title",
+      "surface_id": "evd_castle_map_surface",
+      "truth_id": "evd_castle_map_truth",
+      "suspicion_on_gain": 4
     }
   ]
 }
