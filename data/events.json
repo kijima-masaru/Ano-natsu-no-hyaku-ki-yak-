@@ -2840,6 +2840,336 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_f07_enter",
+      "field": "F07",
+      "trigger": "on_enter",
+      "day_range": [
+        15,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f07_history",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "history_board",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_history"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f07_history_again",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "history_board",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_history"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f07_foundation",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "foundation",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_foundation"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f07_foundation_again",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "foundation",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_foundation"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f07_basin",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "basin",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_basin"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f07_ginkgo_early",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "ginkgo",
+      "day_range": [
+        1,
+        14
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_ginkgo_early"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f07_ginkgo",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "ginkgo",
+      "day_range": [
+        15,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_ginkgo"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f07_ginkgo_again",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "ginkgo",
+      "day_range": [
+        15,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_ginkgo"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f07_kannon_early",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "kannon_lattice",
+      "day_range": [
+        1,
+        14
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_kannon_early"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f07_kannon_obon",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "kannon_lattice",
+      "day_range": [
+        15,
+        15
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_obon_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f07_obon_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_f07_obon_3"
+        },
+        {
+          "type": "set_flag",
+          "flag": "obon_done"
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_005"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 20
+    },
+    {
+      "id": "ev_f07_kannon",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "kannon_lattice",
+      "day_range": [
+        15,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_kannon"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f07_kannon_again",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "kannon_lattice",
+      "day_range": [
+        15,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_kannon"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f07_muen_early",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "muen_grave",
+      "day_range": [
+        1,
+        14
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_muen"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f07_muen_conceal",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "muen_grave",
+      "day_range": [
+        15,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f07_muen"
+        },
+        {
+          "type": "conceal_evidence",
+          "evidence": "water_bottle"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f07_muen_after",
+      "field": "F07",
+      "trigger": "on_interact",
+      "target": "muen_grave",
+      "day_range": [
+        15,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "water_bottle"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }

@@ -163,11 +163,6 @@
       "text": "8月14日。朝和の老婆。\n（この日のイベントは後のタスクで実装）"
     },
     {
-      "id": "msg_d15_open",
-      "speaker": "system",
-      "text": "8月15日。盆。\n（この日のイベントは後のタスクで実装）"
-    },
-    {
       "id": "msg_d16_open",
       "speaker": "system",
       "text": "8月16日。調査 7 日目。\n（この日のイベントは後のタスクで実装）"
@@ -2091,6 +2086,140 @@
       "id": "msg_an_f10_light",
       "speaker": "yu",
       "text": "照明塔が、一灯だけ点いた。\nブレーカーは落ちている。光の下に、誰も立っていない。"
+    },
+    {
+      "id": "msg_f07_enter",
+      "speaker": "yu",
+      "text": "光明院。山門をくぐると、砂利の音だけになる。\n本堂は無い。礎石だけが、四角く残っている。"
+    },
+    {
+      "id": "msg_f07_history",
+      "speaker": "yu",
+      "text": "由来書き。『室町期創建。戦国の兵火に本堂を焼かれ、観音堂一棟のみ焼け残る』。\n一棟だけ残った理由は、書かれていない。",
+      "truth_id": "msg_f07_history_t"
+    },
+    {
+      "id": "msg_f07_history_t",
+      "speaker": "yu",
+      "text": "由来書き。『観音堂一棟のみ焼け残る』。\n残ったものには、残った理由がある。俺は、その理由を知っている側だ。"
+    },
+    {
+      "id": "msg_f07_foundation",
+      "speaker": "yu",
+      "text": "本堂の礎石。四角く並んでいる。\n由来書きの絵図と、一つだけ位置が合わない。"
+    },
+    {
+      "id": "msg_f07_basin",
+      "speaker": "yu",
+      "text": "手水鉢。水が澱んで、底に落ち葉。\n柄杓は一本だけ。伏せてある。"
+    },
+    {
+      "id": "msg_f07_ginkgo_early",
+      "speaker": "yu",
+      "text": "焼け跡の大イチョウ。幹の半分が黒い。\nそれでも、葉は青い。"
+    },
+    {
+      "id": "msg_f07_ginkgo",
+      "speaker": "yu",
+      "text": "大イチョウの幹の焼け跡。戦国の火で焼け、それでも生きている。\n焼け残った一棟と、焼け残った一本。",
+      "truth_id": "msg_f07_ginkgo_t"
+    },
+    {
+      "id": "msg_f07_ginkgo_t",
+      "speaker": "yu",
+      "text": "大イチョウの幹の焼け跡。\n焼け残ったものは、生き残ったのではない。残されたのだ。俺のように。"
+    },
+    {
+      "id": "msg_f07_kannon_early",
+      "speaker": "yu",
+      "text": "観音堂の格子。内側は暗い。\n奥に、何かが座っている輪郭。仏像だ。たぶん。"
+    },
+    {
+      "id": "msg_f07_kannon",
+      "speaker": "yu",
+      "text": "格子の内側は暗い。奥に、灯明の火が一つ。\n誰が点けたのか。寺に人はいない。",
+      "truth_id": "msg_f07_kannon_t"
+    },
+    {
+      "id": "msg_f07_kannon_t",
+      "speaker": "yu",
+      "text": "格子の内側から、外を覗いている。\n俺を見ていない。俺の隣を見ている。"
+    },
+    {
+      "id": "msg_f07_muen",
+      "speaker": "yu",
+      "text": "無縁墓。文字はほとんど読めない。\n誰かが水を供えている。ペットボトルのまま。"
+    },
+    {
+      "id": "msg_d15_open",
+      "speaker": "yu",
+      "text": "8月15日。盆。\n澪から、今日は一人で回ると連絡があった。理由は書いていなかった。"
+    },
+    {
+      "id": "msg_f07_obon_1",
+      "speaker": "yu",
+      "text": "光明院に人影はない。盆なのに、線香の匂いもしない。\n観音堂の格子の奥だけが、明るい。"
+    },
+    {
+      "id": "msg_f07_obon_2",
+      "speaker": "yu",
+      "text": "灯明が、点いている。\n誰が点けたのか。境内には、俺しかいない。"
+    },
+    {
+      "id": "msg_f07_obon_3",
+      "speaker": "yu",
+      "text": "火は、風もないのに一度だけ揺れた。\n格子に手をかけて、やめた。",
+      "truth_id": "msg_f07_obon_3_t"
+    },
+    {
+      "id": "msg_f07_obon_3_t",
+      "speaker": "yu",
+      "text": "火は、風もないのに一度だけ揺れた。\n中にいるものは、俺を知っている。俺も、それを知っている。"
+    },
+    {
+      "id": "evd_water_bottle_title",
+      "speaker": "",
+      "text": "無縁墓の供え水"
+    },
+    {
+      "id": "evd_water_bottle_surface",
+      "speaker": "",
+      "text": "無縁墓に供えられた、未開封の水。"
+    },
+    {
+      "id": "evd_water_bottle_truth",
+      "speaker": "",
+      "text": "俺が供えた水だ。8/1 の朝、バイトに行く前に。二本のうちの、蓮のぶん。"
+    },
+    {
+      "id": "evd_water_bottle_shown",
+      "speaker": "",
+      "text": "無縁墓を見た。誰かが水を供えている。"
+    },
+    {
+      "id": "evd_water_bottle_action",
+      "speaker": "",
+      "text": "ペットボトルを回収して、鞄に入れた。ラベルはコンビニのものだった。"
+    },
+    {
+      "id": "heroine_remark_water_bottle",
+      "speaker": "mio",
+      "text": "「お水……持って帰るの？」"
+    },
+    {
+      "id": "msg_an_f07_gaze",
+      "speaker": "yu",
+      "text": "格子の内側で、何かが動いた。\n覗き返しているのは、こちらの方だと思っていた。"
+    },
+    {
+      "id": "msg_an_f07_lamps_1",
+      "speaker": "yu",
+      "text": "灯明が、二つになっている。\n昨日は一つだった。"
+    },
+    {
+      "id": "msg_an_f07_lamps_2",
+      "speaker": "yu",
+      "text": "灯明が、三つ。\n数えるのをやめた。増えるものは、数えないほうがいい。"
     }
   ]
 }

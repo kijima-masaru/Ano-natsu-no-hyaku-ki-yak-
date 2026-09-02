@@ -175,6 +175,18 @@
       "shown_id": "evd_dugout_note_shown",
       "action_id": "evd_dugout_note_action",
       "suspicion_on_witness": 20
+    },
+    {
+      "id": "water_bottle",
+      "kind": "concealable",
+      "field": "F07",
+      "day_min": 15,
+      "title_id": "evd_water_bottle_title",
+      "surface_id": "evd_water_bottle_surface",
+      "truth_id": "evd_water_bottle_truth",
+      "shown_id": "evd_water_bottle_shown",
+      "action_id": "evd_water_bottle_action",
+      "suspicion_on_witness": 20
     }
   ]
 }
