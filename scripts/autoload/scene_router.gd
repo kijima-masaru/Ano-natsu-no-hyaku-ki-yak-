@@ -170,8 +170,9 @@ func _ensure_player() -> void:
 	camera.name = "Camera"
 	camera.position_smoothing_enabled = false
 	camera.position = Vector2(0, -GameConstants.TILE_SIZE * 0.5)
+	# enabled=true のカメラはツリーに入った時点で current になる（ツリー外で make_current は呼べない）
+	camera.enabled = true
 	player.add_child(camera)
-	camera.make_current()
 
 
 ## カメラをフィールドの外へ出さない
