@@ -869,6 +869,409 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_f02_wake",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "ren_door",
+      "day_range": [
+        2,
+        2
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_door"
+        },
+        {
+          "type": "message",
+          "id": "msg_f02_smell"
+        },
+        {
+          "type": "message",
+          "id": "msg_f02_wake_mother"
+        },
+        {
+          "type": "set_time",
+          "time_of_day": "evening"
+        },
+        {
+          "type": "message",
+          "id": "msg_f02_wake_mio_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f02_wake_mio_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_f02_wake_mio_3"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_001"
+        },
+        {
+          "type": "message",
+          "id": "msg_f02_wake_mio_4"
+        },
+        {
+          "type": "set_flag",
+          "flag": "heard_testimony"
+        },
+        {
+          "type": "add_points",
+          "amount": 2
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f02_room",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "ren_door",
+      "day_range": [
+        8,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "entered_ren_room",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_room_enter"
+        },
+        {
+          "type": "set_flag",
+          "flag": "entered_ren_room"
+        },
+        {
+          "type": "run_event",
+          "id": "ev_f02_room_menu"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f02_room_again",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "ren_door",
+      "day_range": [
+        8,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "entered_ren_room"
+        }
+      ],
+      "actions": [
+        {
+          "type": "run_event",
+          "id": "ev_f02_room_menu"
+        }
+      ],
+      "once": false,
+      "priority": 5
+    },
+    {
+      "id": "ev_f02_room_menu",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "choice",
+          "prompt_id": "msg_f02_room_choice_prompt",
+          "options": [
+            {
+              "text_id": "ui_choice_desk",
+              "run_event": "ev_f02_room_desk"
+            },
+            {
+              "text_id": "ui_choice_phone",
+              "run_event": "ev_f02_room_phone"
+            },
+            {
+              "text_id": "ui_choice_leave",
+              "run_event": "ev_f02_room_leave"
+            }
+          ]
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_room_desk",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_room_desk"
+        },
+        {
+          "type": "conceal_evidence",
+          "evidence": "ren_memo"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_room_phone",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_mother"
+        },
+        {
+          "type": "conceal_evidence",
+          "evidence": "phone_reply"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_room_leave",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_room_leave"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_door_pre",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "ren_door",
+      "day_range": [
+        1,
+        1
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_door_pre"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_door_other",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "ren_door",
+      "day_range": [
+        3,
+        7
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_door_locked"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_window",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "ren_window",
+      "day_range": [
+        1,
+        7
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_window"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_window_after",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "ren_window",
+      "day_range": [
+        8,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_window_after"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_laundry",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "laundry",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_laundry"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_mailbox_ren",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "mailbox_ren",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_mailbox_ren"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_nameplate",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "nameplate",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_nameplate"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_mailbox_a",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "mailbox_a",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_mailbox_a"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_hermitage",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "hermitage",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_hermitage"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_park_swing",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "park_swing",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_park"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_trash_net",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "trash_net",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_trash_net"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_kairanban",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "kairanban",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_kairanban"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f02_slope",
+      "field": "F02",
+      "trigger": "on_interact",
+      "target": "slope",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f02_slope"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }
