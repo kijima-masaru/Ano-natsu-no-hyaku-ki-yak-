@@ -57,8 +57,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		_move(-1)
 	elif event.is_action_pressed("interact") or event.is_action_pressed("ui_accept"):
 		if not _disabled.has(get_selected_id()):
+			AudioManager.play_se("se_menu_ok")
 			activated.emit(_index, get_selected_id())
 	elif event.is_action_pressed("cancel") or event.is_action_pressed("ui_cancel"):
+		AudioManager.play_se("se_menu_cancel")
 		cancelled.emit()
 	else:
 		return
@@ -66,6 +68,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _move(delta: int) -> void:
+	AudioManager.play_se("se_menu_move")
 	_index = wrapi(_index + delta, 0, _ids.size())
 	_skip_disabled(delta)
 	_refresh()
