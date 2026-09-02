@@ -29,6 +29,8 @@
 | `key_tunnel_fence` | 隧道フェンスの鍵（既存） | F06 遺失物箱 | F03→F09 出口 lock |
 | `stalker_met` | 追跡者と初遭遇 | 8/12 F03 | day 12 進行、`start_stalker` 以降の出現許可 |
 | `saw_notifications` | 支所の受付台で届出用紙の減りを見た | 8/3 以降 F12 支所 | 「不在の連鎖」導線、調査 P +1 |
+| `found_odd_house` | F13 で一軒だけ違う家を見つけた | 8/20 以降 F13 瓦屋根の家 | 調査 P、Act 2 の澪の台詞 |
+| `f13_extra_house` | F13 の袋小路に一軒増えた | 怪異 `an_f13_house_count` 2 回目 | F13 の配置（増えた家と空欄の表札） |
 | `d01_told` | 8/1 朝の報せ（回想と母の言葉）を見た | `ev_d01_open` 終端 | 進行検証 |
 | `d01_shift_done` | 8/1 のシフトを終えた（夕方になる） | F01 店の戸 | 8/1 の店の戸の分岐 |
 | `heard_testimony_direct` | トキから直接「並んで歩いていた」証言を聞いた | 8/3 以降 F05 トキ | 証拠 `testimony_walking`、トキの再訪台詞 |
