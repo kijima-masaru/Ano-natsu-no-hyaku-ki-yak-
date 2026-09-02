@@ -22,6 +22,7 @@ func _draw() -> void:
 
 	for index: int in Palette.SIZE:
 		var col: int = index % COLUMNS
+		@warning_ignore("integer_division")
 		var row: int = index / COLUMNS
 		var x: int = ORIGIN.x + col * (SWATCH + GAP)
 		var y: int = ORIGIN.y + row * (SWATCH + GAP + 14)
