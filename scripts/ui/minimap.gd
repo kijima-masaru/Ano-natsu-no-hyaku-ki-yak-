@@ -88,13 +88,16 @@ func _draw_world() -> void:
 
 
 func _hatch(r: Rect2, color: Color) -> void:
-	var step: float = 6.0
-	var x: float = -r.size.y
-	while x < r.size.x:
-		var a: Vector2 = r.position + Vector2(maxf(x, 0.0), maxf(-x, 0.0))
-		var b: Vector2 = r.position + Vector2(minf(x + r.size.y, r.size.x), minf(r.size.y, r.size.y - (x + r.size.y - r.size.x) if x + r.size.y > r.size.x else r.size.y))
+	# 斜線 x + y = k を矩形内で切り出す
+	var step: int = 6
+	var w: float = r.size.x
+	var h: float = r.size.y
+	var k: float = 0.0
+	while k < w + h:
+		var a: Vector2 = r.position + Vector2(maxf(0.0, k - h), minf(k, h))
+		var b: Vector2 = r.position + Vector2(minf(k, w), maxf(0.0, k - w))
 		draw_line(a, b, color, 1.0)
-		x += step
+		k += step
 
 
 func _draw_legend() -> void:
