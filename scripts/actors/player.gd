@@ -1,7 +1,8 @@
 extends CharacterBody2D
 ## プレイヤー。4 方向移動（斜め不可）、歩行／忍び足の 2 速度、前方の調べ判定。
 ## 緊張感のために立ち上がりと停止に僅かな加減速を持たせ、キビキビ動きすぎないようにする。
-## 足音は noise_emitted(radius) として周期的に通知するだけで、聴覚 AI は後のステップ。
+## 足音は noise_emitted(radius) として周期的に通知し、追跡者の聴覚が拾う。
+## 懐中電灯（Lighting.attach_flashlight）は前方の扇形。電池の概念は無い。点けると暗所でも見えるが、追跡者に見つかりやすい。
 
 signal noise_emitted(radius: float)
 signal interaction_requested(target: Node)
@@ -19,6 +20,8 @@ const ANIM_FRAME_TIME: float = 0.17
 ## 前方判定の中心を体の原点からどれだけ離すか（px）
 const PROBE_DISTANCE: float = 10.0
 const MOVING_THRESHOLD: float = 4.0
+## 懐中電灯の光源位置（足元より少し上、胸の高さ）
+const FLASHLIGHT_HEIGHT_OFFSET: float = -8.0
 
 ## 遷移中などに入力を止める
 var input_enabled: bool = true
@@ -29,6 +32,7 @@ var facing: Vector2i = Vector2i.DOWN:
 		facing = value
 		_update_probe()
 		_update_sprite()
+		_update_flashlight()
 		facing_changed.emit(facing)
 var is_sneaking: bool = false
 
@@ -38,12 +42,15 @@ var _anim_frame: int = 0
 
 @onready var _sprite: Sprite2D = $Sprite
 @onready var _probe: Area2D = $InteractProbe
+var _flashlight: PointLight2D = null
 
 
 func _ready() -> void:
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+	_flashlight = Lighting.attach_flashlight(self)
 	_update_probe()
 	_update_sprite()
+	_update_flashlight()
 
 
 func _physics_process(delta: float) -> void:
@@ -68,6 +75,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if target != null:
 			interaction_requested.emit(target)
 			get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("flashlight"):
+		Lighting.set_flashlight(not Lighting.flashlight_on)
+		get_viewport().set_input_as_handled()
 
 
 ## 4 方向のみ。斜め入力は「今向いている軸」を優先し、どちらでもなければ横を採る
@@ -117,6 +127,14 @@ func _update_probe() -> void:
 	if _probe == null:
 		return
 	_probe.position = (Vector2(facing) * PROBE_DISTANCE).round()
+
+
+## 懐中電灯の扇形（+X 向きのテクスチャ）を向きに合わせて回す
+func _update_flashlight() -> void:
+	if _flashlight == null:
+		return
+	_flashlight.rotation = Vector2(facing).angle()
+	_flashlight.position = Vector2(0, FLASHLIGHT_HEIGHT_OFFSET)
 
 
 ## 前方にある調べ対象。無ければ null。複数あれば最も近いもの
