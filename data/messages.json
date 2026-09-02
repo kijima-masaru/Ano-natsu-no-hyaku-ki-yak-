@@ -1984,6 +1984,113 @@
       "id": "msg_an_f13_count_3",
       "speaker": "yu",
       "text": "十軒。増えた一軒の表札は、まだ空欄だ。\n誰も、気にしていない。"
+    },
+    {
+      "id": "msg_f10_enter",
+      "speaker": "yu",
+      "text": "運動広場。草が膝まで伸びている。\n遮るものが何もない。見渡せることが、こんなに落ち着かない。"
+    },
+    {
+      "id": "msg_f10_night_enter",
+      "speaker": "yu",
+      "text": "夜の河川敷。照明塔は一本も点いていない。\n隠れる場所が、どこにもない。"
+    },
+    {
+      "id": "msg_f10_shed",
+      "speaker": "yu",
+      "text": "用具倉庫。施錠されている。\n中で、ボールが一つ転がる音。"
+    },
+    {
+      "id": "msg_f10_shed_again",
+      "speaker": "yu",
+      "text": "用具倉庫。今日は、音がしない。"
+    },
+    {
+      "id": "msg_f10_backnet",
+      "speaker": "yu",
+      "text": "朽ちたバックネット。金網が風で鳴る。\n網に、白いものが引っかかっている。ビニールだ。"
+    },
+    {
+      "id": "msg_f10_panel",
+      "speaker": "yu",
+      "text": "照明塔の配電盤。ブレーカーは全部落ちている。\nなのに、一灯だけ点いている夜があると、澪が言った。"
+    },
+    {
+      "id": "msg_f10_marker",
+      "speaker": "yu",
+      "text": "距離標。『蒼籠川 河口より 12.0km』。\n下流の側に、小さく矢印が彫られている。誰が。"
+    },
+    {
+      "id": "msg_f10_line_early",
+      "speaker": "yu",
+      "text": "グラウンドの端に、石の杭。\n白線を引くときの目印だ。線は、まだ無い。"
+    },
+    {
+      "id": "msg_f10_line",
+      "speaker": "yu",
+      "text": "誰も引いていない白線が、グラウンドを横切っている。\n真っ直ぐに。堤防の方へ。",
+      "truth_id": "msg_f10_line_t"
+    },
+    {
+      "id": "msg_f10_line_t",
+      "speaker": "yu",
+      "text": "誰も引いていない白線が、グラウンドを横切っている。\n堤防の向こう、谷の方角へ。俺が歩いた方角だ。"
+    },
+    {
+      "id": "msg_f10_dugout",
+      "speaker": "yu",
+      "text": "ダッグアウトの板の落書き。相合傘、チーム名、卒業の年。\n端の方に、蓮の字。『8/1 ゆうと花火』。",
+      "truth_id": "msg_f10_dugout_t"
+    },
+    {
+      "id": "msg_f10_dugout_t",
+      "speaker": "yu",
+      "text": "ダッグアウトの板の落書き。\n蓮の字。『8/1 ゆうと花火』。8/1 に、蓮はもういなかった。俺がそうした。"
+    },
+    {
+      "id": "evd_dugout_note_title",
+      "speaker": "",
+      "text": "ダッグアウトの落書き"
+    },
+    {
+      "id": "evd_dugout_note_surface",
+      "speaker": "",
+      "text": "ダッグアウトの板に、古い落書き。"
+    },
+    {
+      "id": "evd_dugout_note_truth",
+      "speaker": "",
+      "text": "蓮の字で『8/1 ゆうと花火』。夏祭りは中止になった。約束は、俺が先に壊した。"
+    },
+    {
+      "id": "evd_dugout_note_shown",
+      "speaker": "",
+      "text": "落書きを眺めた。"
+    },
+    {
+      "id": "evd_dugout_note_action",
+      "speaker": "",
+      "text": "『ゆうと』の部分を、鍵の先で削った。"
+    },
+    {
+      "id": "heroine_remark_dugout_note",
+      "speaker": "mio",
+      "text": "「そこ、何か彫ってあった？」"
+    },
+    {
+      "id": "msg_an_f10_line_1",
+      "speaker": "yu",
+      "text": "白線は、堤防の斜面を登っている。\n引いた人間は、斜面を登りながら線を引いたことになる。"
+    },
+    {
+      "id": "msg_an_f10_line_2",
+      "speaker": "yu",
+      "text": "白線は堤防を越え、河原の石の上を、まだ続いている。\n川の方へ。……いや、川ではない。その先へ。"
+    },
+    {
+      "id": "msg_an_f10_light",
+      "speaker": "yu",
+      "text": "照明塔が、一灯だけ点いた。\nブレーカーは落ちている。光の下に、誰も立っていない。"
     }
   ]
 }

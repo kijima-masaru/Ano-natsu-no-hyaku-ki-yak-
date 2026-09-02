@@ -2544,6 +2544,302 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_f10_enter",
+      "field": "F10",
+      "trigger": "on_enter",
+      "day_range": [
+        19,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f10_stalker_night",
+      "field": "F10",
+      "trigger": "on_enter",
+      "day_range": [
+        19,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [
+        {
+          "flag": "stalker_met"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_night_enter"
+        },
+        {
+          "type": "start_stalker",
+          "active": true,
+          "spawn_tile": [
+            24,
+            14
+          ],
+          "retreat_to": "F13"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f10_shed",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "shed",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_shed"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f10_shed_again",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "shed",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_shed_again"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f10_backnet",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "backnet",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_backnet"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f10_panel",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "panel",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_panel"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f10_panel_again",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "panel",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_panel"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f10_marker",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "marker",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_marker"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f10_marker_again",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "marker",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_marker"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f10_line_early",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "line_stake",
+      "day_range": [
+        1,
+        19
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_line_early"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f10_line",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "line_stake",
+      "day_range": [
+        20,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_line"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f10_line_again",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "line_stake",
+      "day_range": [
+        20,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_line"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f10_dugout_conceal",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "dugout",
+      "day_range": [
+        19,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f10_dugout"
+        },
+        {
+          "type": "conceal_evidence",
+          "evidence": "dugout_note"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f10_dugout_after",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "dugout",
+      "day_range": [
+        19,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "dugout_note"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f10_dugout_early",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "dugout",
+      "day_range": [
+        1,
+        18
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "evd_dugout_note_surface"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }

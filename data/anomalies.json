@@ -328,6 +328,85 @@
       ],
       "suspicion_delta": 1,
       "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f10_line",
+      "field": "F10",
+      "trigger": "on_interact",
+      "target": "line_stake",
+      "day_range": [
+        21,
+        29
+      ],
+      "conditions": [],
+      "mode": "escalate",
+      "once_per_day": true,
+      "stages": [
+        {
+          "day_range": [
+            21,
+            21
+          ],
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f10_line_1"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.4
+            }
+          ]
+        },
+        {
+          "day_range": [
+            22,
+            29
+          ],
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f10_line_2"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.7
+            }
+          ]
+        }
+      ],
+      "suspicion_delta": 1,
+      "comfort": ""
+    },
+    {
+      "id": "an_f10_light",
+      "field": "F10",
+      "trigger": "on_condition",
+      "day_range": [
+        19,
+        29
+      ],
+      "time_of_day": [
+        "night"
+      ],
+      "conditions": [],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 1.2
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f10_light"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.8
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": "night_walk"
     }
   ]
 }
