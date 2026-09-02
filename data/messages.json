@@ -837,6 +837,36 @@
       "id": "msg_map_not_unlocked",
       "speaker": "system",
       "text": "町の全体図はまだ頭に入っていない。"
+    },
+    {
+      "id": "heroine_remark_testimony_walking",
+      "speaker": "mio",
+      "text": "「並んで歩いてた、って。誰と歩いてたんだろう」"
+    },
+    {
+      "id": "heroine_remark_missing_poster_1",
+      "speaker": "mio",
+      "text": "「蓮だけじゃない。……この町、何かおかしい」"
+    },
+    {
+      "id": "heroine_remark_baba_words",
+      "speaker": "mio",
+      "text": "「シゲさん、私がしつこかったから」"
+    },
+    {
+      "id": "heroine_remark_seal_lore",
+      "speaker": "mio",
+      "text": "「石が動いた。誰が、動かしたの」"
+    },
+    {
+      "id": "heroine_remark_ren_memo",
+      "speaker": "mio",
+      "text": "「持ち物メモ。蓮、ちゃんと準備してたんだ」"
+    },
+    {
+      "id": "heroine_remark_timetable_pass",
+      "speaker": "mio",
+      "text": "「定期券。……蓮の？」"
     }
   ]
 }

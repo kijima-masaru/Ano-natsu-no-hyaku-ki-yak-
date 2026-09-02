@@ -71,7 +71,7 @@
 | `show_concealment_reveal` | EvidenceRegistry | なし（8/30 の提示画面） |
 | `autosave` | EventActions | なし |
 | `play_sound` | AudioManager（タスク6） | `id` |
-| `set_companion` | Heroine（タスク8） | `on` |
+| `set_companion` | EventActions → SceneRouter | `on`（ヒロインの同行 ON/OFF。`companion_on` フラグと同期） |
 | `entity_speak` | AttachedEntity（タスク9） | `id` |
 | `start_stalker` | Stalker（タスク10） | `active`, `spawn_tile?` |
 | `choice` | Dialogue（タスク4） | `options` |

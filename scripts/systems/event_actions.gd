@@ -27,6 +27,7 @@ static func register_all(es: Node) -> void:
 	es.register_action("end_game", func(a: Dictionary, _c: Dictionary) -> void: _end_game(es, a))
 	es.register_action("choice", func(a: Dictionary, c: Dictionary) -> void: await _choice(es, a, c))
 	es.register_action("autosave", func(_a: Dictionary, _c: Dictionary) -> void: SaveManager.autosave())
+	es.register_action("set_companion", func(a: Dictionary, _c: Dictionary) -> void: SceneRouter.set_companion(bool(a.get("on", true))))
 
 
 static func _unlock_field(es: Node, a: Dictionary, c: Dictionary) -> void:
