@@ -153,11 +153,6 @@
       "text": "8月11日。調査 5 日目。\n（この日のイベントは後のタスクで実装）"
     },
     {
-      "id": "msg_d12_open",
-      "speaker": "system",
-      "text": "8月12日。高架下。\n（この日のイベントは後のタスクで実装）"
-    },
-    {
       "id": "msg_d13_open",
       "speaker": "system",
       "text": "8月13日。調査 6 日目。\n（この日のイベントは後のタスクで実装）"
@@ -1751,6 +1746,121 @@
       "id": "msg_an_f12_stairwell_blink",
       "speaker": "yu",
       "text": "四棟の階段室の灯りが、同時に消えた。\n数秒おいて、三階だけが点く。\n上の階から、誰かが降りてくる足音——は、しなかった。"
+    },
+    {
+      "id": "msg_f03_enter",
+      "speaker": "yu",
+      "text": "高架の下。頭上を車が通るたび、防音壁がうなる。\n人の気配がない。バス停だけが白く光っている。"
+    },
+    {
+      "id": "msg_f03_timetable",
+      "speaker": "yu",
+      "text": "時刻表。欠便の張り紙が三枚。\n紙の隙間に、何も挟まっていない。",
+      "truth_id": "msg_f03_timetable_t"
+    },
+    {
+      "id": "msg_f03_timetable_t",
+      "speaker": "yu",
+      "text": "時刻表。欠便の張り紙が三枚。\n蓮の定期券は、もうここには無い。俺のポケットにある。"
+    },
+    {
+      "id": "msg_f03_bench_item",
+      "speaker": "yu",
+      "text": "待合ベンチに、誰かの折り畳み傘。\n7 月の終わりから、ずっとここにある気がする。",
+      "truth_id": "msg_f03_bench_item_t"
+    },
+    {
+      "id": "msg_f03_bench_item_t",
+      "speaker": "yu",
+      "text": "待合ベンチに、誰かの折り畳み傘。\n蓮の傘ではない。それだけを確かめて、安心している自分がいる。"
+    },
+    {
+      "id": "msg_f03_bench_again",
+      "speaker": "yu",
+      "text": "折り畳み傘は、まだそこにある。\n誰も持ち帰らない。"
+    },
+    {
+      "id": "msg_f03_vending",
+      "speaker": "yu",
+      "text": "自販機。『故障中』の紙が貼られている。\n返却口に、誰かの十円玉が一枚。"
+    },
+    {
+      "id": "msg_f03_graffiti",
+      "speaker": "yu",
+      "text": "隧道の壁の落書き。『かえれ』。\n下に小さく日付。6 月 28 日。",
+      "truth_id": "msg_f03_graffiti_t"
+    },
+    {
+      "id": "msg_f03_graffiti_t",
+      "speaker": "yu",
+      "text": "隧道の壁の落書き。『かえれ』。\n6 月 28 日。石をずらした日だ。誰が書いた。"
+    },
+    {
+      "id": "msg_f03_graffiti_again",
+      "speaker": "yu",
+      "text": "『かえれ』。\n昨日より、字が濃くなっている気がする。"
+    },
+    {
+      "id": "msg_f03_fence_locked",
+      "speaker": "yu",
+      "text": "『立入禁止 高架下 3』。\n鍵の番号札と、同じ字だ。"
+    },
+    {
+      "id": "msg_f03_fence_open",
+      "speaker": "yu",
+      "text": "『立入禁止 高架下 3』。\n鍵は合う。この先が、城址へ続く法面下の道。"
+    },
+    {
+      "id": "msg_d12_open",
+      "speaker": "yu",
+      "text": "8月12日。\n澪と高架下で待ち合わせた。鍵は、鞄の底にある。"
+    },
+    {
+      "id": "msg_f03_d12_1",
+      "speaker": "yu",
+      "text": "隧道の前で澪が待っていた。\n中は、外より暗い。出口の光が、遠い。"
+    },
+    {
+      "id": "msg_f03_d12_2",
+      "speaker": "mio",
+      "text": "「……音、しなかった？」"
+    },
+    {
+      "id": "msg_f03_d12_3",
+      "speaker": "yu",
+      "text": "何も聞こえない。\n聞こえないことが、答えだった。"
+    },
+    {
+      "id": "msg_f03_d12_after",
+      "speaker": "yu",
+      "text": "隧道の向こうに、誰かが立っていた気がする。\n振り向くと、澪は俺を見ていた。俺ではなく、俺の後ろを。",
+      "truth_id": "msg_f03_d12_after_t"
+    },
+    {
+      "id": "msg_f03_d12_after_t",
+      "speaker": "yu",
+      "text": "隧道の向こうに、誰かが立っていた。\n俺の横は通り過ぎて、澪の方へ行った。ナツの言うとおりだった。"
+    },
+    {
+      "id": "msg_f03_night_enter",
+      "speaker": "yu",
+      "text": "夜の高架下。防音壁の向こうの車の音が、\nここでは足音に聞こえる。"
+    },
+    {
+      "id": "msg_an_f03_bus",
+      "speaker": "yu",
+      "text": "バスが来た。ドアが開いて、閉まった。\n誰も降りなかった。運転手は、こちらを見なかった。"
+    },
+    {
+      "id": "msg_an_f03_tunnel_light",
+      "speaker": "yu",
+      "text": "隧道を抜けた。\n出口の明るさが、入ったときと違う。まだ、夕方のはずだ。",
+      "truth_id": "msg_an_f03_tunnel_light_t"
+    },
+    {
+      "id": "msg_an_f03_tunnel_light_t",
+      "speaker": "yu",
+      "text": "隧道を抜けた。\n出口の明るさが、入ったときと違う。あの夜も、こうだった。"
     }
   ]
 }
