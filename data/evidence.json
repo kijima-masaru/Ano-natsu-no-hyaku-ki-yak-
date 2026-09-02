@@ -253,6 +253,18 @@
       "surface_id": "evd_shrine_lore_surface",
       "truth_id": "evd_shrine_lore_truth",
       "suspicion_on_gain": 4
+    },
+    {
+      "id": "cairn_stone",
+      "kind": "concealable",
+      "field": "F15",
+      "day_min": 26,
+      "title_id": "evd_cairn_title",
+      "surface_id": "evd_cairn_surface",
+      "truth_id": "evd_cairn_truth",
+      "shown_id": "evd_cairn_shown",
+      "action_id": "evd_cairn_action",
+      "suspicion_on_witness": 20
     }
   ]
 }

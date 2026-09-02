@@ -720,6 +720,74 @@
       ],
       "suspicion_delta": 1,
       "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f15_footsteps",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "barricade",
+      "day_range": [
+        26,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [],
+      "mode": "repeat",
+      "once_per_day": true,
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 1.5
+        },
+        {
+          "type": "play_sound",
+          "id": "se_footstep"
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f15_footsteps"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.8
+        }
+      ],
+      "suspicion_delta": 1,
+      "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f15_fog",
+      "field": "F15",
+      "trigger": "on_condition",
+      "day_range": [
+        26,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "ev_done_ev_f15_barricade_first"
+        }
+      ],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f15_fog"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.5
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": ""
     }
   ]
 }
