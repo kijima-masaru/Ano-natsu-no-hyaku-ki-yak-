@@ -22,13 +22,13 @@ func _ready() -> void:
 	_bg.color = Palette.get_color(Palette.NIGHT_SKY)
 	_title.add_theme_font_size_override("font_size", TITLE_FONT_SIZE)
 	_title.add_theme_color_override("font_color", Palette.get_color(Palette.BONE_WHITE))
-	_title.text = "磐戸町奇譚"
+	_title.text = "磐戸町奇譚"  # 題字は固有名詞として直書きを許容
 	_sub.add_theme_font_size_override("font_size", FONT_SIZE)
 	_sub.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT_DIM))
 	_sub.text = _cleared_marks()
 	_footer.add_theme_font_size_override("font_size", FONT_SIZE)
 	_footer.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT_DIM))
-	_footer.text = "Z/決定　X/戻る"
+	_footer.text = MessageResolver.text("ui_hint_confirm_back")
 	_list.activated.connect(_on_activated)
 	_build_menu()
 	if not bool(SaveManager.system.get("content_notice_seen", false)):
@@ -41,17 +41,17 @@ func _build_menu() -> void:
 		if SaveManager.has_save(slot):
 			has_any = true
 	var items: Array[Dictionary] = [
-		{"id": "new", "text": "はじめる"},
-		{"id": "continue", "text": "つづきから", "disabled": not has_any},
-		{"id": "settings", "text": "設定"},
-		{"id": "quit", "text": "おわる"},
+		{"id": "new", "text": MessageResolver.text("ui_title_new")},
+		{"id": "continue", "text": MessageResolver.text("ui_title_continue"), "disabled": not has_any},
+		{"id": "settings", "text": MessageResolver.text("ui_title_settings")},
+		{"id": "quit", "text": MessageResolver.text("ui_title_quit")},
 	]
 	_list.set_items(items)
 
 
 func _cleared_marks() -> String:
 	var cleared: Array = SaveManager.system.get("cleared_endings", [])
-	return "面 ".repeat(cleared.size()).strip_edges() if not cleared.is_empty() else ""
+	return (MessageResolver.text("ui_cleared_mark") + " ").repeat(cleared.size()).strip_edges() if not cleared.is_empty() else ""
 
 
 func _on_activated(_index: int, id: String) -> void:

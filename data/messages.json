@@ -282,6 +282,186 @@
       "id": "msg_f06_phone",
       "speaker": "",
       "text": "緑色の公衆電話。受話器を上げると発信音がする。"
+    },
+    {
+      "id": "ui_title_new",
+      "speaker": "system",
+      "text": "はじめる"
+    },
+    {
+      "id": "ui_title_continue",
+      "speaker": "system",
+      "text": "つづきから"
+    },
+    {
+      "id": "ui_title_settings",
+      "speaker": "system",
+      "text": "設定"
+    },
+    {
+      "id": "ui_title_quit",
+      "speaker": "system",
+      "text": "おわる"
+    },
+    {
+      "id": "ui_hint_confirm_back",
+      "speaker": "system",
+      "text": "Z/決定　X/戻る"
+    },
+    {
+      "id": "ui_hint_close",
+      "speaker": "system",
+      "text": "Z で閉じる"
+    },
+    {
+      "id": "ui_slot_save_title",
+      "speaker": "system",
+      "text": "どこに記録する？"
+    },
+    {
+      "id": "ui_slot_load_title",
+      "speaker": "system",
+      "text": "どこから続ける？"
+    },
+    {
+      "id": "ui_slot_autosave",
+      "speaker": "system",
+      "text": "オートセーブ"
+    },
+    {
+      "id": "ui_slot_n",
+      "speaker": "system",
+      "text": "スロット %s"
+    },
+    {
+      "id": "ui_slot_empty",
+      "speaker": "system",
+      "text": "%s　――"
+    },
+    {
+      "id": "ui_slot_corrupt",
+      "speaker": "system",
+      "text": "%s　（読めません）"
+    },
+    {
+      "id": "ui_slot_entry",
+      "speaker": "system",
+      "text": "%s　%s %s　%s"
+    },
+    {
+      "id": "ui_slot_save_failed",
+      "speaker": "system",
+      "text": "記録できませんでした。"
+    },
+    {
+      "id": "ui_slot_load_failed",
+      "speaker": "system",
+      "text": "このデータは読めません。"
+    },
+    {
+      "id": "ui_settings_title",
+      "speaker": "system",
+      "text": "設定"
+    },
+    {
+      "id": "ui_setting_master_volume",
+      "speaker": "system",
+      "text": "全体の音量"
+    },
+    {
+      "id": "ui_setting_bgm_volume",
+      "speaker": "system",
+      "text": "音楽"
+    },
+    {
+      "id": "ui_setting_se_volume",
+      "speaker": "system",
+      "text": "効果音"
+    },
+    {
+      "id": "ui_setting_ambience_volume",
+      "speaker": "system",
+      "text": "環境音"
+    },
+    {
+      "id": "ui_setting_text_speed",
+      "speaker": "system",
+      "text": "文字送りの速さ"
+    },
+    {
+      "id": "ui_setting_instant_text",
+      "speaker": "system",
+      "text": "文字を一括表示"
+    },
+    {
+      "id": "ui_setting_brightness",
+      "speaker": "system",
+      "text": "明るさ"
+    },
+    {
+      "id": "ui_setting_debug_overlay",
+      "speaker": "system",
+      "text": "デバッグ表示"
+    },
+    {
+      "id": "ui_setting_content_notice",
+      "speaker": "system",
+      "text": "コンテンツに関するお知らせを見る"
+    },
+    {
+      "id": "ui_setting_back",
+      "speaker": "system",
+      "text": "もどる"
+    },
+    {
+      "id": "ui_on",
+      "speaker": "system",
+      "text": "オン"
+    },
+    {
+      "id": "ui_off",
+      "speaker": "system",
+      "text": "オフ"
+    },
+    {
+      "id": "ui_notice_title",
+      "speaker": "system",
+      "text": "はじめに"
+    },
+    {
+      "id": "ui_notice_body",
+      "speaker": "system",
+      "text": "本作には、自死とその喪失を扱う描写、追跡される恐怖、\n心理的な操作の描写が含まれます。\n具体的な方法は描写しません。\n\nつらいときは、話せる場所があります。\n［お住まいの地域の相談窓口をここに表示します］\n\nこのお知らせは「設定」からいつでも見直せます。"
+    },
+    {
+      "id": "ui_placeholder_unimplemented",
+      "speaker": "system",
+      "text": "%s %s（未実装）\n%s"
+    },
+    {
+      "id": "ui_placeholder_load_failed",
+      "speaker": "system",
+      "text": "フィールド定義を読み込めません\n%s"
+    },
+    {
+      "id": "ui_placeholder_unknown",
+      "speaker": "system",
+      "text": "不明なフィールド（未実装）"
+    },
+    {
+      "id": "ui_placeholder_bed",
+      "speaker": "system",
+      "text": "寝床（仮）"
+    },
+    {
+      "id": "ui_font_fallback",
+      "speaker": "system",
+      "text": "[代替フォント]"
+    },
+    {
+      "id": "ui_cleared_mark",
+      "speaker": "system",
+      "text": "面"
     }
   ]
 }

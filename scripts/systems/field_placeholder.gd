@@ -37,7 +37,7 @@ func _build_placeholder_bed() -> void:
 	@warning_ignore("integer_division")
 	var tile: Vector2i = Vector2i(size.x / 2 + 3, size.y / 2)
 	set_tile(objects, tile, "ベンチ")
-	var bed: Interactable = Interactable.create("placeholder_bed", "寝床（仮）", "", tile, Vector2i.ONE, "bed")
+	var bed: Interactable = Interactable.create("placeholder_bed", MessageResolver.text("ui_placeholder_bed"), "", tile, Vector2i.ONE, "bed")
 	bed.interacted.connect(_on_bed_interacted)
 	add_interactable(bed)
 
@@ -65,9 +65,9 @@ func _build_label(def: FieldData) -> void:
 	label.add_theme_font_size_override("font_size", LABEL_FONT_SIZE)
 	label.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT))
 	if not failure_reason.is_empty():
-		label.text = "フィールド定義を読み込めません\n%s" % failure_reason
+		label.text = MessageResolver.text("ui_placeholder_load_failed", [failure_reason])
 	elif def != null:
-		label.text = "%s %s（未実装）\n%s" % [def.id, def.name, def.ambience]
+		label.text = MessageResolver.text("ui_placeholder_unimplemented", [def.id, def.name, def.ambience])
 	else:
-		label.text = "不明なフィールド（未実装）"
+		label.text = MessageResolver.text("ui_placeholder_unknown")
 	ui.add_child(label)
