@@ -43,6 +43,44 @@ func _build(_def: FieldData) -> void:
 	pass
 
 
+## 時間帯（morning / noon / evening / night）に応じた見た目の差し替え。サブクラスが上書きする。
+## ツリーに入った直後に現在の時間帯で一度呼ばれ、以後 Calendar.time_of_day_changed で呼ばれる
+func _apply_time_of_day(_time_of_day: String) -> void:
+	pass
+
+
+## 日付に応じた配置の差し替え。サブクラスが上書きする。ツリーに入った直後と Calendar.day_advanced で呼ばれる
+func _apply_day(_day: int) -> void:
+	pass
+
+
+func _enter_tree() -> void:
+	if not Calendar.time_of_day_changed.is_connected(_on_calendar_time_changed):
+		Calendar.time_of_day_changed.connect(_on_calendar_time_changed)
+	if not Calendar.day_advanced.is_connected(_on_calendar_day_advanced):
+		Calendar.day_advanced.connect(_on_calendar_day_advanced)
+
+
+func _ready() -> void:
+	_apply_day(Calendar.day)
+	_apply_time_of_day(Calendar.time_of_day)
+
+
+func _exit_tree() -> void:
+	if Calendar.time_of_day_changed.is_connected(_on_calendar_time_changed):
+		Calendar.time_of_day_changed.disconnect(_on_calendar_time_changed)
+	if Calendar.day_advanced.is_connected(_on_calendar_day_advanced):
+		Calendar.day_advanced.disconnect(_on_calendar_day_advanced)
+
+
+func _on_calendar_time_changed(time_of_day: String, _previous: String) -> void:
+	_apply_time_of_day(time_of_day)
+
+
+func _on_calendar_day_advanced(day: int, _previous: int) -> void:
+	_apply_day(day)
+
+
 func get_size_tiles() -> Vector2i:
 	return field_def.size_tiles if field_def != null else FALLBACK_SIZE_TILES
 

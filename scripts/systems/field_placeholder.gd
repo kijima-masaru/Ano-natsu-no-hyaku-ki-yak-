@@ -27,6 +27,28 @@ func _build(def: FieldData) -> void:
 			if on_edge and not exit_tiles.has(Vector2i(x, y)):
 				set_tile(objects, Vector2i(x, y), WALL_TYPE)
 	_build_label(def)
+	if def != null and def.id == Calendar.get_home_field_id():
+		_build_placeholder_bed()
+
+
+## 自宅フィールドのプレースホルダに仮の寝床を置き、就寝で翌日へ進めるようにする
+func _build_placeholder_bed() -> void:
+	var size: Vector2i = get_size_tiles()
+	@warning_ignore("integer_division")
+	var tile: Vector2i = Vector2i(size.x / 2 + 3, size.y / 2)
+	set_tile(objects, tile, "ベンチ")
+	var bed: Interactable = Interactable.create("placeholder_bed", "寝床（仮）",
+		"横になる。（進行条件を満たしていれば翌日へ進む）", tile, Vector2i.ONE, "bed")
+	bed.interacted.connect(_on_bed_interacted)
+	add_interactable(bed)
+
+
+func _on_bed_interacted(_by: Node, target: Interactable) -> void:
+	if Calendar.can_sleep(field_id):
+		target.message = "眠った。"
+		Calendar.try_sleep(field_id)
+	else:
+		target.message = "まだ眠れない。今日やるべきことが残っている。"
 
 
 func _build_label(def: FieldData) -> void:
