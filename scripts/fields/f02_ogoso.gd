@@ -82,7 +82,6 @@ const MAP_ROWS: PackedStringArray = [
 ]
 
 
-
 ## 夜、蓮の部屋の窓だけが点く。初七日（8/8）を過ぎると点かなくなる
 func _apply_time_of_day(time_of_day: String) -> void:
 	var night: bool = time_of_day == Calendar.TIME_NIGHT or time_of_day == Calendar.TIME_EVENING

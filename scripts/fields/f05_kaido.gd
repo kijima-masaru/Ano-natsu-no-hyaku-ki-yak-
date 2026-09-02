@@ -88,7 +88,6 @@ const MAP_ROWS: PackedStringArray = [
 ]
 
 
-
 ## 夜：圓照寺の山門が閉まり、トキは店の奥へ引く（店先の灯だけが残る）
 func _apply_time_of_day(time_of_day: String) -> void:
 	var night: bool = time_of_day == Calendar.TIME_NIGHT

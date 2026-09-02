@@ -110,7 +110,6 @@ const MAP_ROWS: PackedStringArray = [
 ]
 
 
-
 ## 夜：駐車場の車が減り、ドラッグストアはシャッターを下ろす。8/1 の夕方以降は店先に澪が立つ
 func _apply_time_of_day(time_of_day: String) -> void:
 	var night: bool = time_of_day == Calendar.TIME_NIGHT or time_of_day == Calendar.TIME_EVENING

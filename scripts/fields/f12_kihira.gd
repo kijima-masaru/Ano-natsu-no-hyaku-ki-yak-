@@ -117,7 +117,6 @@ const MAP_ROWS: PackedStringArray = [
 ]
 
 
-
 ## 物体タイルの下地：支所周りは歩道タイル、給水塔と公園は下草・砂地、駐車場はライン、他はアスファルト
 func _ground_under(x: int, y: int) -> String:
 	for zone: Array in GROUND_ZONES:

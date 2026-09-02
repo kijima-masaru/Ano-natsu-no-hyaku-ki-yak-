@@ -85,6 +85,3 @@ const MAP_ROWS: PackedStringArray = [
 	"whhhg--g=====================w,,w======w",
 	"wwwww-wwwwwwwwwwwwwwwwwwwwwwww,wwwwwwwww",
 ]
-
-
-
