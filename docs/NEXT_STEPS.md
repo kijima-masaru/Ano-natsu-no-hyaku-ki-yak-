@@ -32,7 +32,7 @@
 
 ## 既知の設計判断（変えるなら早めに）
 
-- **フィールドは ASCII 地図 ＋ `data/events.json`**。手順は `docs/FIELD_IMPLEMENTATION_GUIDE.md`、地図の机上検証は `docs/tools/check_field_map.py`。ステップ4 タスク 0 はこれを `field_scaffold`（地図と .gd/.tscn の生成）と `validate_data`（JSON 参照検証の一括実行）に置き換える。
+- **フィールドは ASCII 地図 ＋ `data/events.json`**。共通処理は `FieldBase` / `FieldMapBuilder` / `scenes/fields/field_base.tscn`。雛形は `scripts/tools/field_scaffold.gd`、検証は `scripts/tools/validate_data.gd`（Godot 無しなら `docs/tools/validate_data.py`。CI もこれ）。手順は `docs/FIELD_IMPLEMENTATION_GUIDE.md`（タスク 0 で整備済み）。
 - **調査 P**：P を与えるイベントは `once: true`。自由日は「その日に初めて開く供給源が 3 つ以上」を保証する（8/3・8/4 は確認済み）。初訪問 +1 P は `Main` に直書き → `GameConstants` へ。
 - **就寝**：`can_sleep` 条件 ＋ `sleep` アクション。プレースホルダの仮寝床は旧方式（`Calendar.try_sleep` 直呼び）のまま残っている。
 - **隠蔽イベントの形**：`conceal_evidence` ＋ `add_points` の `once` イベントと、再表示用 `_after` イベントの 2 本。
@@ -53,7 +53,7 @@
 
 ## ステップ4で作るもの（指示の要約）
 
-0. `chore/field-pipeline`：`field_scaffold`・`validate_data`・ガイドの整備。**設計提示 → 確認 → 実装**
+0. `chore/field-pipeline`：済（PR #25）。`FieldMapBuilder` への共通化、`field_scaffold`、`validate_data`（GDScript ＋ Python）、ガイドの全面改訂
 1. フィールド 11：F07 → F11 → F13 → F10 → F15 → F03 → F08 → F14 → F04 → F09 → F16（`docs/field_build_order.md`）。各 1 PR、`FIELD_IMPLEMENTATION_GUIDE.md` に従う
 2. `feat/lighting`：`PointLight2D` ＋ パレット光源 4 色。GL Compatibility での挙動確認
 3. `feat/anomalies`：フィールド固有の怪異（尋ね人の増加、階段室の灯、田に映る月、追跡者の出現）。正体は説明しない
