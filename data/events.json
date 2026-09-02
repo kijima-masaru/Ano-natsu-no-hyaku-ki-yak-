@@ -125,6 +125,22 @@
         {
           "type": "message",
           "id": "msg_d23_open"
+        },
+        {
+          "type": "message",
+          "id": "msg_recall_june_a"
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_011"
+        },
+        {
+          "type": "message",
+          "id": "msg_recall_june_b"
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_007"
         }
       ],
       "once": true,
@@ -6040,6 +6056,237 @@
         }
       ],
       "once": true,
+      "priority": 5
+    },
+    {
+      "id": "ev_d16_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        16,
+        16
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d16_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d17_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        17,
+        17
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d17_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d20_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        20,
+        20
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d20_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d21_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        21,
+        21
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d21_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d22_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        22,
+        22
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d22_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d27_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        27,
+        27
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d27_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d28_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        28,
+        28
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d28_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_mio_004",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        26,
+        26
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_mio_004"
+        }
+      ],
+      "once": true,
+      "priority": 5
+    },
+    {
+      "id": "ev_f15_bridge_d26",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "barricade",
+      "day_range": [
+        26,
+        26
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_d26_1"
+        },
+        {
+          "type": "play_sound",
+          "id": "se_footstep"
+        },
+        {
+          "type": "message",
+          "id": "msg_f15_d26_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_f15_d26_3"
+        },
+        {
+          "type": "set_flag",
+          "flag": "bridge_steps"
+        },
+        {
+          "type": "entity_comfort",
+          "context": "after_anomaly"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 20
+    },
+    {
+      "id": "ev_f12_home_sleep_d29",
+      "field": "F12",
+      "trigger": "on_interact",
+      "target": "home_door",
+      "day_range": [
+        29,
+        29
+      ],
+      "conditions": [
+        {
+          "can_sleep": true
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f12_home"
+        },
+        {
+          "type": "message",
+          "id": "msg_d29_night_1"
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_013"
+        },
+        {
+          "type": "autosave"
+        },
+        {
+          "type": "sleep"
+        }
+      ],
+      "once": false,
       "priority": 5
     }
   ]

@@ -159,48 +159,50 @@
     },
     {
       "id": "msg_d16_open",
-      "speaker": "system",
-      "text": "8月16日。調査 7 日目。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月16日。澪が戻ってきた。\n昨日どこにいたか、聞かなかった。聞かれなかった。"
     },
     {
       "id": "msg_d17_open",
-      "speaker": "system",
-      "text": "8月17日。調査 8 日目。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月17日。展望所から見た光の話を、澪は三度した。\n俺は二度、話題を変えた。"
     },
     {
       "id": "msg_d20_open",
-      "speaker": "system",
-      "text": "8月20日。調査 9 日目。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月20日。旧校舎の鍵は、俺が持っている。\n澪は「悠が持ってて」と言った。",
+      "truth_id": "msg_d20_open_t"
     },
     {
       "id": "msg_d21_open",
-      "speaker": "system",
-      "text": "8月21日。調査 10 日目。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月21日。澪の質問が、短くなった。\n「何時に？」「誰と？」。"
     },
     {
       "id": "msg_d22_open",
-      "speaker": "system",
-      "text": "8月22日。調査 11 日目。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月22日。夜、寝る前に、隠したものを数えた。\n数えるのは、途中でやめた。",
+      "truth_id": "msg_d22_open_t"
     },
     {
       "id": "msg_d23_open",
-      "speaker": "system",
-      "text": "8月23日。封石の話。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月23日。\n澪「日誌の『石が動いた』って、封石のことでしょ。薬師谷へ行かなきゃ」"
     },
     {
       "id": "msg_d26_open",
-      "speaker": "system",
-      "text": "8月26日。川。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月26日。台風が抜けた。\n澪「川、見に行こう。橋まで」"
     },
     {
       "id": "msg_d27_open",
-      "speaker": "system",
-      "text": "8月27日。調査 12 日目。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月27日。台風の後。町は静かで、澪はもっと静かだった。\n「川、もう一度見たい」"
     },
     {
       "id": "msg_d28_open",
-      "speaker": "system",
-      "text": "8月28日。調査 13 日目。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月28日。夕方、朝和の林道の落石が崩れたと聞いた。\n澪は「明日」とだけ言った。"
     },
     {
       "id": "msg_d30_open",
@@ -716,7 +718,8 @@
     {
       "id": "msg_yu_stage_1",
       "speaker": "yu",
-      "text": "まだ、その必要はない。"
+      "text": "まだ、その必要はない。",
+      "truth_id": "msg_yu_stage_1_t"
     },
     {
       "id": "msg_mio_stage_2",
@@ -726,7 +729,8 @@
     {
       "id": "msg_yu_stage_2",
       "speaker": "yu",
-      "text": "澪は、どこまで。"
+      "text": "澪は、どこまで。",
+      "truth_id": "msg_yu_stage_2_t"
     },
     {
       "id": "msg_mio_stage_3",
@@ -736,7 +740,8 @@
     {
       "id": "msg_yu_stage_3",
       "speaker": "yu",
-      "text": "終わらせ方を、考えておく。"
+      "text": "終わらせ方を、考えておく。",
+      "truth_id": "msg_yu_stage_3_t"
     },
     {
       "id": "msg_conceal_witnessed",
@@ -3247,6 +3252,107 @@
       "id": "msg_mio_002_t",
       "speaker": "yu",
       "text": "「悠って、歩くの速いよね」。澪は足音を数えている。"
+    },
+    {
+      "id": "msg_yu_stage_1_t",
+      "speaker": "yu",
+      "text": "まだ、その必要はない。澪はまだ、俺を見ていない。"
+    },
+    {
+      "id": "msg_yu_stage_2_t",
+      "speaker": "yu",
+      "text": "澪は、どこまで知った。知られる前に、終わらせる。"
+    },
+    {
+      "id": "msg_yu_stage_3_t",
+      "speaker": "yu",
+      "text": "終わらせ方を、考えておく。"
+    },
+    {
+      "id": "msg_d20_open_t",
+      "speaker": "yu",
+      "text": "8月20日。旧校舎の鍵は、俺が持っている。\n澪は「悠が持ってて」と言った。俺がどこへ行くか、鍵で分かるからだ。"
+    },
+    {
+      "id": "msg_d22_open_t",
+      "speaker": "yu",
+      "text": "8月22日。夜、寝る前に、隠したものを数えた。\n七つ。まだ、足りない。"
+    },
+    {
+      "id": "msg_recall_june_a",
+      "speaker": "yu",
+      "text": "六月の終わり。夜の谷で、ナツが言った。",
+      "truth_id": "msg_recall_june_a_t"
+    },
+    {
+      "id": "msg_recall_june_a_t",
+      "speaker": "yu",
+      "text": "六月の終わり。夜の谷で、ナツが言った。俺は、その言葉を待っていた。"
+    },
+    {
+      "id": "msg_recall_june_b",
+      "speaker": "yu",
+      "text": "俺は、何とかしてやりたいと思った。\nそれだけだった。",
+      "truth_id": "msg_recall_june_b_t"
+    },
+    {
+      "id": "msg_recall_june_b_t",
+      "speaker": "yu",
+      "text": "俺は、誰を連れて来られるか考えた。\nそれだけだった。"
+    },
+    {
+      "id": "msg_mio_004",
+      "speaker": "yu",
+      "text": "「蓮の靴のこと、覚えてる？」。忘れるわけがない。",
+      "truth_id": "msg_mio_004_t"
+    },
+    {
+      "id": "msg_mio_004_t",
+      "speaker": "yu",
+      "text": "「蓮の靴のこと、覚えてる？」。澪は俺の靴のことを言っている。"
+    },
+    {
+      "id": "msg_f15_d26_1",
+      "speaker": "yu",
+      "text": "橋の中ほど。バリケードの手前で、澪が止まった。\n向こう岸から、足音。俺と、同じ歩調で。"
+    },
+    {
+      "id": "msg_f15_d26_2",
+      "speaker": "mio",
+      "text": "「悠、止まって。……今の足音、悠のと同じだった」"
+    },
+    {
+      "id": "msg_f15_d26_3",
+      "speaker": "yu",
+      "text": "澪は、俺の足を見ていた。\n怖かったのだろう。俺も、そう思うことにした。",
+      "truth_id": "msg_f15_d26_3_t"
+    },
+    {
+      "id": "msg_f15_d26_3_t",
+      "speaker": "yu",
+      "text": "澪は、俺の足音を数えていた。\n向こう岸の足音と、合わせるために。"
+    },
+    {
+      "id": "msg_d29_night_1",
+      "speaker": "yu",
+      "text": "明日、澪と封石を戻す。\n澪は今日、一度も俺の名前を呼ばなかった。",
+      "truth_id": "msg_d29_night_1_t"
+    },
+    {
+      "id": "msg_d29_night_1_t",
+      "speaker": "yu",
+      "text": "明日、澪と封石を戻す。\n澪は今日、一度も俺の名前を呼ばなかった。呼ぶ必要が、もう無いからだ。"
+    },
+    {
+      "id": "msg_natsu_013",
+      "speaker": "natsu",
+      "text": "明日だね。",
+      "truth_id": "msg_natsu_013_t"
+    },
+    {
+      "id": "msg_natsu_013_t",
+      "speaker": "natsu",
+      "text": "明日だね。二人で来るの、久しぶり。"
     }
   ]
 }
