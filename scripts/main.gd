@@ -30,6 +30,7 @@ func _ready() -> void:
 	Calendar.days_compressed.connect(_on_days_compressed)
 	Calendar.day_advanced.connect(_on_day_advanced)
 	SceneRouter.field_entered.connect(_on_field_entered)
+	SceneRouter.transition_finished.connect(_on_transition_finished)
 	SceneRouter.start()
 	_run_opening_event_if_needed()
 
@@ -39,6 +40,9 @@ func _on_field_entered(field_id: String, from_id: String) -> void:
 	var field: FieldBase = SceneRouter.current_field
 	if field != null and not field.interaction_started.is_connected(_on_interaction_started):
 		field.interaction_started.connect(_on_interaction_started)
+		field.actors.child_entered_tree.connect(func(node: Node) -> void:
+			if node.is_in_group("stalker") and not node.captured.is_connected(_on_stalker_captured):
+				node.captured.connect(_on_stalker_captured))
 	EventSystem.fire(EventSystem.TRIGGER_ENTER, field_id)
 
 
@@ -119,6 +123,22 @@ func _on_passage_blocked(exit: ExitData) -> void:
 	if not description.is_empty():
 		text = MessageResolver.text("msg_locked_with_hint", [description])
 	_show_message("", text)
+
+
+var _pushback_pending: bool = false
+
+
+func _on_transition_finished(_field_id: String) -> void:
+	if _pushback_pending:
+		_pushback_pending = false
+		_show_message("", MessageResolver.text("msg_stalker_pushback"))
+
+
+func _on_stalker_captured(target: Node2D) -> void:
+	if target == SceneRouter.player:
+		_pushback_pending = true
+	elif target == SceneRouter.heroine:
+		_show_message("", MessageResolver.text("msg_stalker_heroine_caught"))
 
 
 func _on_passage_closed_today(exit: ExitData) -> void:

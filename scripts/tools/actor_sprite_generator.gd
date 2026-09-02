@@ -23,6 +23,8 @@ static func get_texture(kind: String, facing: Vector2i, frame: int = 0) -> Image
 			_draw_player(image, facing, frame % FRAME_COUNT)
 		"heroine":
 			_draw_heroine(image, facing, frame % FRAME_COUNT)
+		"stalker":
+			_draw_stalker(image, facing, frame % FRAME_COUNT)
 		_:
 			push_warning("ActorSpriteGenerator: 種別 '%s' は未定義のためプレイヤーの絵を使います" % kind)
 			_draw_player(image, facing, frame % FRAME_COUNT)
@@ -127,5 +129,38 @@ static func _draw_heroine(image: Image, facing: Vector2i, frame: int) -> void:
 			_rect(image, 3, 1, 5, 9, hair)
 			_rect(image, 10, 5, 1, 1, hair)
 			_rect(image, 10, 11, 3, 3, book)
+		_:
+			push_error("ActorSpriteGenerator: facing %s は上下左右の単位ベクトルである必要があります" % facing)
+
+
+## 追跡者：顔の無い暗い人影。輪郭だけ僅かに明るく、向きは肩の傾きと歩幅で示す。血や傷は描かない
+static func _draw_stalker(image: Image, facing: Vector2i, frame: int) -> void:
+	var body: int = Palette.SUMI
+	var edge: int = Palette.NIGHT_SKY
+	_rect(image, 3, 22, 10, 2, Palette.NIGHT_SKY)
+	if frame == 0:
+		_rect(image, 5, 16, 2, 6, body)
+		_rect(image, 9, 16, 2, 6, body)
+	else:
+		_rect(image, 4, 15, 2, 7, body)
+		_rect(image, 10, 17, 2, 5, body)
+	_rect(image, 3, 7, 10, 10, body)
+	_rect(image, 5, 0, 6, 8, body)
+	_rect(image, 3, 7, 10, 1, edge)
+	_rect(image, 5, 0, 6, 1, edge)
+	match facing:
+		Vector2i.DOWN:
+			_rect(image, 2, 9, 1, 6, edge)
+			_rect(image, 13, 9, 1, 6, edge)
+		Vector2i.UP:
+			_rect(image, 2, 8, 1, 7, edge)
+			_rect(image, 13, 8, 1, 7, edge)
+			_rect(image, 5, 1, 6, 6, edge)
+		Vector2i.LEFT:
+			_rect(image, 2, 8, 1, 9, edge)
+			_rect(image, 4, 1, 1, 6, edge)
+		Vector2i.RIGHT:
+			_rect(image, 13, 8, 1, 9, edge)
+			_rect(image, 11, 1, 1, 6, edge)
 		_:
 			push_error("ActorSpriteGenerator: facing %s は上下左右の単位ベクトルである必要があります" % facing)
