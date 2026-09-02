@@ -187,6 +187,16 @@ func add_interactable(node: Interactable) -> void:
 	node.interacted.connect(func(_by: Node, target: Interactable) -> void: interaction_started.emit(target))
 
 
+## 日付やフラグで後から現れる調べ物を置く（見た目は set_tile で別に置く）。既にあればそれを返す
+func add_point_of_interest(id: String, label: String, tile: Vector2i, kind: String = "object") -> Interactable:
+	var existing: Interactable = get_interactable(id)
+	if existing != null:
+		return existing
+	var node: Interactable = Interactable.create(id, label, "", tile, Vector2i.ONE, kind)
+	add_interactable(node)
+	return node
+
+
 ## interaction_id で調べ物を探す。無ければ null
 func get_interactable(id: String) -> Interactable:
 	for node: Node in triggers.get_children():
