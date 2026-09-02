@@ -1,0 +1,287 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "truth_flag": "truth_revealed",
+    "speakers": {
+      "": {
+        "name": "",
+        "color": "UI_TEXT",
+        "speed": 1.0
+      },
+      "yu": {
+        "name": "悠",
+        "color": "UI_TEXT",
+        "speed": 1.0
+      },
+      "mio": {
+        "name": "澪",
+        "color": "BONE_WHITE",
+        "speed": 1.0
+      },
+      "natsu": {
+        "name": "ナツ",
+        "color": "FOG_INDIGO",
+        "speed": 0.8
+      },
+      "toki": {
+        "name": "トキ",
+        "color": "OCHRE",
+        "speed": 0.9
+      },
+      "shige": {
+        "name": "シゲ",
+        "color": "OCHRE",
+        "speed": 0.9
+      },
+      "ren_mother": {
+        "name": "蓮の母",
+        "color": "CONCRETE",
+        "speed": 0.9
+      },
+      "yu_mother": {
+        "name": "母",
+        "color": "CONCRETE",
+        "speed": 1.0
+      },
+      "system": {
+        "name": "",
+        "color": "UI_TEXT_DIM",
+        "speed": 2.0
+      }
+    },
+    "note": "全テキストの正本。truth_id を持つ entry は truth_revealed で差し替わる（MessageResolver.resolve が唯一の分岐点）。%s は format 引数"
+  },
+  "messages": [
+    {
+      "id": "msg_nothing_here",
+      "speaker": "",
+      "text": "特に何もない。"
+    },
+    {
+      "id": "msg_closed_today",
+      "speaker": "",
+      "text": "今日は %s へ行く用事がない。"
+    },
+    {
+      "id": "msg_locked",
+      "speaker": "",
+      "text": "施錠されていて通れない。"
+    },
+    {
+      "id": "msg_locked_with_hint",
+      "speaker": "",
+      "text": "施錠されていて通れない。\n%s"
+    },
+    {
+      "id": "msg_day_start",
+      "speaker": "system",
+      "text": "%s、%s。"
+    },
+    {
+      "id": "msg_bed_sleep",
+      "speaker": "",
+      "text": "眠った。"
+    },
+    {
+      "id": "msg_bed_not_yet",
+      "speaker": "",
+      "text": "まだ眠れない。今日やるべきことが残っている。"
+    },
+    {
+      "id": "msg_saved",
+      "speaker": "system",
+      "text": "記録した。（%s）"
+    },
+    {
+      "id": "msg_compress_d06",
+      "speaker": "",
+      "text": "二日、雨が降った。\n澪からの連絡は三回、全部証拠の話だった。"
+    },
+    {
+      "id": "msg_compress_d18",
+      "speaker": "",
+      "text": "一日、雨だった。澪は来なかった。"
+    },
+    {
+      "id": "msg_compress_d24",
+      "speaker": "",
+      "text": "二日、外に出られなかった。\n澪からの連絡は一回。『蓮の靴のこと、覚えてる？』"
+    },
+    {
+      "id": "msg_d01_open",
+      "speaker": "system",
+      "text": "8月1日。報せ。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d02_open",
+      "speaker": "system",
+      "text": "8月2日。通夜。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d03_open",
+      "speaker": "system",
+      "text": "8月3日。調査 1 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d04_open",
+      "speaker": "system",
+      "text": "8月4日。調査 2 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d05_open",
+      "speaker": "system",
+      "text": "8月5日。掲示板。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d08_open",
+      "speaker": "system",
+      "text": "8月8日。初七日。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d09_open",
+      "speaker": "system",
+      "text": "8月9日。調査 3 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d10_open",
+      "speaker": "system",
+      "text": "8月10日。調査 4 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d11_open",
+      "speaker": "system",
+      "text": "8月11日。調査 5 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d12_open",
+      "speaker": "system",
+      "text": "8月12日。高架下。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d13_open",
+      "speaker": "system",
+      "text": "8月13日。調査 6 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d14_open",
+      "speaker": "system",
+      "text": "8月14日。朝和の老婆。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d15_open",
+      "speaker": "system",
+      "text": "8月15日。盆。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d16_open",
+      "speaker": "system",
+      "text": "8月16日。調査 7 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d17_open",
+      "speaker": "system",
+      "text": "8月17日。調査 8 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d19_open",
+      "speaker": "system",
+      "text": "8月19日。小学校。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d20_open",
+      "speaker": "system",
+      "text": "8月20日。調査 9 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d21_open",
+      "speaker": "system",
+      "text": "8月21日。調査 10 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d22_open",
+      "speaker": "system",
+      "text": "8月22日。調査 11 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d23_open",
+      "speaker": "system",
+      "text": "8月23日。封石の話。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d26_open",
+      "speaker": "system",
+      "text": "8月26日。川。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d27_open",
+      "speaker": "system",
+      "text": "8月27日。調査 12 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d28_open",
+      "speaker": "system",
+      "text": "8月28日。調査 13 日目。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d29_open",
+      "speaker": "system",
+      "text": "8月29日。薬師谷へ。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d30_open",
+      "speaker": "system",
+      "text": "8月30日。封印。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_d31_open",
+      "speaker": "system",
+      "text": "8月31日。御渡橋。\n（この日のイベントは後のタスクで実装）"
+    },
+    {
+      "id": "msg_f06_library",
+      "speaker": "",
+      "text": "図書室の明かりだけが点いている。\n郷土資料の棚に『磐戸町史 下巻』が抜けた跡がある。"
+    },
+    {
+      "id": "msg_f06_lost_found_take",
+      "speaker": "",
+      "text": "遺失物箱の中に、番号札の付いた鍵があった。\n札には『高架下 3』とだけ書いてある。鍵を持ち帰った。"
+    },
+    {
+      "id": "msg_f06_lost_found_after",
+      "speaker": "",
+      "text": "遺失物箱。傘が三本残っている。\n鍵はもう、ここには無い。"
+    },
+    {
+      "id": "msg_f06_police",
+      "speaker": "",
+      "text": "赤色灯は回っているが、中に人はいない。\n日誌は昨日の日付で止まっている。"
+    },
+    {
+      "id": "msg_f06_board",
+      "speaker": "",
+      "text": "町内行事のお知らせと、尋ね人の紙が一枚。\n顔写真の部分だけが日に焼けて白い。",
+      "truth_id": "msg_f06_board_t"
+    },
+    {
+      "id": "msg_f06_board_t",
+      "speaker": "",
+      "text": "町内行事のお知らせと、尋ね人の紙が一枚。\n石をずらしたのは 6 月の末だった。増えるのは、これからだ。"
+    },
+    {
+      "id": "msg_f06_map",
+      "speaker": "",
+      "text": "磐戸町の全体図。西の国道から東の山まで。\n薬師谷のあたりだけ、誰かが塗り潰している。"
+    },
+    {
+      "id": "msg_f06_clock",
+      "speaker": "",
+      "text": "広場の時計。針は 2 時 41 分で止まっている。\n秒針だけが、同じ場所で震え続けている。"
+    },
+    {
+      "id": "msg_f06_phone",
+      "speaker": "",
+      "text": "緑色の公衆電話。受話器を上げると発信音がする。"
+    }
+  ]
+}
