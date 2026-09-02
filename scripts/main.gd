@@ -17,6 +17,8 @@ func _ready() -> void:
 	_message_window = MESSAGE_WINDOW_SCENE.instantiate() as Control
 	ui.add_child(_message_window)
 	_message_window.closed.connect(_on_message_closed)
+	EventSystem.register_message_window(_message_window)
+	GameState.field_visited.connect(func(_id: String) -> void: Calendar.add_investigation_points(1))
 	ui.add_child(DATE_HUD_SCENE.instantiate())
 	SceneRouter.register_world(world)
 	SceneRouter.passage_blocked.connect(_on_passage_blocked)
@@ -25,6 +27,7 @@ func _ready() -> void:
 	Calendar.day_advanced.connect(_on_day_advanced)
 	SceneRouter.field_entered.connect(_on_field_entered)
 	SceneRouter.start()
+	_run_opening_event_if_needed()
 
 
 func _on_field_entered(field_id: String, from_id: String) -> void:
@@ -32,13 +35,18 @@ func _on_field_entered(field_id: String, from_id: String) -> void:
 	var field: FieldBase = SceneRouter.current_field
 	if field != null and not field.interaction_started.is_connected(_on_interaction_started):
 		field.interaction_started.connect(_on_interaction_started)
+	EventSystem.fire(EventSystem.TRIGGER_ENTER, field_id)
 
 
 func _on_interaction_started(target: Interactable) -> void:
 	if target.kind == "save_point":
 		_open_save_menu()
 		return
-	_show_message(target.display_name, target.message)
+	if EventSystem.fire(EventSystem.TRIGGER_INTERACT, SceneRouter.current_field_id, target.interaction_id):
+		return
+	# イベント未定義の対象：Interactable 自身のテキストか「特に何もない」
+	var text: String = target.message if not target.message.is_empty() else MessageResolver.text("msg_nothing_here")
+	_show_message(target.display_name, text)
 
 
 func _open_save_menu() -> void:
@@ -50,7 +58,7 @@ func _open_save_menu() -> void:
 	menu.finished.connect(func(success: bool, slot: int) -> void:
 		menu.queue_free()
 		if success:
-			_show_message("", "記録した。（%s）" % SavePaths.slot_label(slot))
+			_show_message("", MessageResolver.text("msg_saved", [SavePaths.slot_label(slot)]))
 		else:
 			_on_message_closed())
 
@@ -70,29 +78,47 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_passage_blocked(exit: ExitData) -> void:
 	var description: String = FieldRegistry.get_lock_description(exit.lock)
-	var text: String = "施錠されていて通れない。"
+	var text: String = MessageResolver.text("msg_locked")
 	if not description.is_empty():
-		text += "\n" + description
+		text = MessageResolver.text("msg_locked_with_hint", [description])
 	_show_message("", text)
 
 
-## TODO(step-3 task-4): 以下の文言は messages.json へ移す
 func _on_passage_closed_today(exit: ExitData) -> void:
 	var target: FieldData = FieldRegistry.get_field(exit.to_id)
 	var label: String = target.name if target != null else exit.to_id
-	_show_message("", "今日は %s へ行く用事がない。" % label)
+	_show_message("", MessageResolver.text("msg_closed_today", [label]))
 
 
 func _on_days_compressed(from_day: int, to_day: int, text_id: String) -> void:
 	print("Main: day %d〜%d を圧縮（%s）" % [from_day, to_day - 1, text_id])
+	_pending_compressed_text = text_id
+
+
+var _pending_compressed_text: String = ""
 
 
 func _on_day_advanced(day: int, previous: int) -> void:
 	print("Main: %s になった（day %d → %d）" % [Calendar.format_date(day), previous, day])
-	if SceneRouter.current_field_id != GameState.HOME_FIELD_ID:
+	_run_day_start(day)
+
+
+## 日の開始：圧縮テキスト → 日付の告知 → schedule の opening_event
+func _run_day_start(day: int) -> void:
+	if GameState.has_flag("day_%d_started" % day):
 		return
-	# 自宅で目覚める：位置を再配置して暗転演出は省略（演出はタスク3のイベントで）
-	_show_message("", "%s、%s。" % [Calendar.format_date(day), Calendar.time_label()])
+	GameState.raise_flag("day_%d_started" % day)
+	if not _pending_compressed_text.is_empty():
+		await EventSystem.show_entry(MessageResolver.resolve(_pending_compressed_text))
+		_pending_compressed_text = ""
+	await EventSystem.show_entry(MessageResolver.resolve("msg_day_start", [Calendar.format_date(day), Calendar.time_label()]))
+	var schedule: DaySchedule = Calendar.get_schedule(day)
+	if schedule != null and not schedule.opening_event.is_empty():
+		EventSystem.run_event(schedule.opening_event)
+
+
+func _run_opening_event_if_needed() -> void:
+	_run_day_start(Calendar.day)
 
 
 func _show_message(title: String, text: String) -> void:
@@ -102,5 +128,5 @@ func _show_message(title: String, text: String) -> void:
 
 
 func _on_message_closed() -> void:
-	if SceneRouter.player != null and not SceneRouter.is_transitioning:
+	if SceneRouter.player != null and not SceneRouter.is_transitioning and not EventSystem.is_running:
 		SceneRouter.player.input_enabled = true

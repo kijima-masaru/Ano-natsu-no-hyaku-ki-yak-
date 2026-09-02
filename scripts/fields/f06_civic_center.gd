@@ -5,8 +5,6 @@ extends FieldBase
 ## 出口タイルは data/fields.json の F06.exits と一致させている（W:0,13 N:10,0 N:27,0 S:5,31 S:30,31）。
 
 const FIELD_ID: String = "F06"
-const KEY_TUNNEL_FENCE: String = "key_tunnel_fence"
-const FLAG_MAP_UNLOCKED: String = "flag_minimap_unlocked"
 
 ## 地面（通行可）の凡例
 const GROUND_LEGEND: Dictionary = {
@@ -39,22 +37,15 @@ const OVERHEAD_TILES: Array = [
 	[Vector2i(20, 15), "時計塔"],
 	[Vector2i(30, 5), "交番の赤色灯"],
 ]
-## 調べ物：id, 表示名, タイル, 種類, 仮テキスト
+## 調べ物：id, 表示名, タイル, 種類。テキストとフラグ操作は data/events.json（on_interact, target=id）
 const INTERACTABLES: Array = [
-	{"id": "library", "name": "図書室", "tile": Vector2i(18, 10), "kind": "object",
-		"text": "図書室の明かりだけが点いている。\n郷土資料の棚に『磐戸町史 下巻』が抜けた跡がある。"},
-	{"id": "lost_and_found", "name": "遺失物箱", "tile": Vector2i(22, 10), "kind": "object",
-		"text": "受付脇の遺失物箱。\n中には傘が三本と、番号札の付いた鍵が一つ。"},
-	{"id": "police_log", "name": "交番", "tile": Vector2i(30, 10), "kind": "object",
-		"text": "赤色灯は回っているが、中に人はいない。\n日誌は昨日の日付で止まっている。"},
-	{"id": "bulletin", "name": "掲示板", "tile": Vector2i(14, 12), "kind": "sign",
-		"text": "町内行事のお知らせと、尋ね人の紙が一枚。\n顔写真の部分だけが日に焼けて白い。"},
-	{"id": "map_sign", "name": "町の地図", "tile": Vector2i(8, 15), "kind": "sign",
-		"text": "磐戸町の全体図。西の国道から東の山まで。\n薬師谷のあたりだけ、誰かが塗り潰している。"},
-	{"id": "phone", "name": "公衆電話", "tile": Vector2i(34, 12), "kind": "save_point",
-		"text": "緑色の公衆電話。受話器を上げると発信音がする。\n（セーブ機能は未実装です）"},
-	{"id": "clock", "name": "時計塔", "tile": Vector2i(20, 16), "kind": "object",
-		"text": "広場の時計。針は 2 時 41 分で止まっている。\n秒針だけが、同じ場所で震え続けている。"},
+	{"id": "library", "name": "図書室", "tile": Vector2i(18, 10), "kind": "object"},
+	{"id": "lost_and_found", "name": "遺失物箱", "tile": Vector2i(22, 10), "kind": "object"},
+	{"id": "police_log", "name": "交番", "tile": Vector2i(30, 10), "kind": "object"},
+	{"id": "bulletin", "name": "掲示板", "tile": Vector2i(14, 12), "kind": "sign"},
+	{"id": "map_sign", "name": "町の地図", "tile": Vector2i(8, 15), "kind": "sign"},
+	{"id": "phone", "name": "公衆電話", "tile": Vector2i(34, 12), "kind": "save_point"},
+	{"id": "clock", "name": "時計塔", "tile": Vector2i(20, 16), "kind": "object"},
 ]
 ## 40 列 × 32 行。行が y、列が x
 const MAP_ROWS: PackedStringArray = [
@@ -122,26 +113,5 @@ func _build_tiles() -> void:
 
 func _build_interactables() -> void:
 	for data: Dictionary in INTERACTABLES:
-		var node: Interactable = Interactable.create(
-			str(data["id"]), str(data["name"]), str(data["text"]), data["tile"], Vector2i.ONE, str(data["kind"]))
-		match node.interaction_id:
-			"lost_and_found":
-				node.interacted.connect(_on_lost_and_found)
-			"map_sign":
-				node.interacted.connect(_on_map_sign)
-		add_interactable(node)
-
-
-## 遺失物箱：初回に隧道フェンスの鍵を得る（中盤の F03→F09 解放）
-func _on_lost_and_found(_by: Node, target: Interactable) -> void:
-	if GameState.has_item(KEY_TUNNEL_FENCE):
-		target.message = "遺失物箱。傘が三本残っている。\n鍵はもう、ここには無い。"
-		return
-	GameState.add_item(KEY_TUNNEL_FENCE)
-	GameState.raise_flag(KEY_TUNNEL_FENCE)
-	target.message = "遺失物箱の中に、番号札の付いた鍵があった。\n札には『高架下 3』とだけ書いてある。鍵を持ち帰った。"
-
-
-## 町の地図看板：ミニマップ解放フラグ
-func _on_map_sign(_by: Node, _target: Interactable) -> void:
-	GameState.raise_flag(FLAG_MAP_UNLOCKED)
+		add_interactable(Interactable.create(
+			str(data["id"]), str(data["name"]), "", data["tile"], Vector2i.ONE, str(data["kind"])))

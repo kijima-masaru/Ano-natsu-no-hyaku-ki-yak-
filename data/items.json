@@ -1,0 +1,10 @@
+{
+  "meta": {"schema_version": 1, "note": "所持品の定義。id は GameState.items と events.json の give_item/remove_item/has_item が参照する"},
+  "items": [
+    {"id": "key_tunnel_fence", "name": "番号札の付いた鍵", "description": "『高架下 3』とだけ書かれた札。F06 遺失物箱で入手", "category": "key"},
+    {"id": "key_old_school", "name": "旧校舎の鍵", "description": "職員室の鍵箱にあった古い鍵", "category": "key"},
+    {"id": "flashlight", "name": "懐中電灯", "description": "蓮の部屋にあったもの。8/8 以降", "category": "tool"},
+    {"id": "timetable_pass", "name": "定期券", "description": "時刻表に挟まっていた。誰のものかは、言わない", "category": "hidden"},
+    {"id": "notebook", "name": "証拠ノート", "description": "澪が用意した大学ノート", "category": "tool"}
+  ]
+}

@@ -37,18 +37,17 @@ func _build_placeholder_bed() -> void:
 	@warning_ignore("integer_division")
 	var tile: Vector2i = Vector2i(size.x / 2 + 3, size.y / 2)
 	set_tile(objects, tile, "ベンチ")
-	var bed: Interactable = Interactable.create("placeholder_bed", "寝床（仮）",
-		"横になる。（進行条件を満たしていれば翌日へ進む）", tile, Vector2i.ONE, "bed")
+	var bed: Interactable = Interactable.create("placeholder_bed", "寝床（仮）", "", tile, Vector2i.ONE, "bed")
 	bed.interacted.connect(_on_bed_interacted)
 	add_interactable(bed)
 
 
 func _on_bed_interacted(_by: Node, target: Interactable) -> void:
 	if Calendar.can_sleep(field_id):
-		target.message = "眠った。"
+		target.message = MessageResolver.text("msg_bed_sleep")
 		Calendar.try_sleep(field_id)
 	else:
-		target.message = "まだ眠れない。今日やるべきことが残っている。"
+		target.message = MessageResolver.text("msg_bed_not_yet")
 
 
 func _build_label(def: FieldData) -> void:
