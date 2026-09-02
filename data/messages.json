@@ -1530,6 +1530,145 @@
       "id": "msg_f02_slope",
       "speaker": "",
       "text": "高速の法面。上を車が通る音だけが、途切れずに降ってくる。"
+    },
+    {
+      "id": "ui_choice_tidy_shoes",
+      "speaker": "",
+      "text": "靴を揃える"
+    },
+    {
+      "id": "msg_f12_entrance_d1",
+      "speaker": "yu",
+      "text": "玄関。自分の靴が、揃えられずに転がっている。\n泥がついたままだ。"
+    },
+    {
+      "id": "msg_f12_shoes",
+      "speaker": "yu",
+      "text": "雨の日に履いた靴だ。泥は、そのせいだ。\n母に叱られる前に、片付けておこう。",
+      "truth_id": "msg_f12_shoes_t"
+    },
+    {
+      "id": "msg_f12_shoes_t",
+      "speaker": "yu",
+      "text": "薬師谷の泥だ。7 月の終わりから、落ちていない。\n母が見る前に、洗って靴箱の奥へ入れなければならない。"
+    },
+    {
+      "id": "msg_f12_home_d1_mother",
+      "speaker": "yu_mother",
+      "text": "「悠。行くなら、早くね」"
+    },
+    {
+      "id": "msg_f12_home_d1_go",
+      "speaker": "yu",
+      "text": "母は台所にいる。行く、と言ったばかりだ。\n今は戻れない。"
+    },
+    {
+      "id": "msg_f12_home",
+      "speaker": "yu",
+      "text": "自宅。母はまだ起きている。",
+      "truth_id": "msg_f12_home_t"
+    },
+    {
+      "id": "msg_f12_home_t",
+      "speaker": "yu",
+      "text": "自宅。母はまだ起きている。7/31 の夜、母は俺が出たことを知らない。"
+    },
+    {
+      "id": "msg_f12_post_weekend",
+      "speaker": "yu",
+      "text": "集合ポスト。蓋が風で開いて、閉じる。\nC-303 は俺の家だ。チラシしか入っていない。"
+    },
+    {
+      "id": "msg_f12_post_letters",
+      "speaker": "yu",
+      "text": "B-201 のポストから、封筒がはみ出している。\n消印は先月のものだ。回収された気配がない。"
+    },
+    {
+      "id": "msg_f12_post_letters_2",
+      "speaker": "yu",
+      "text": "そういえば、B 棟の二階の人を、最近見ていない。"
+    },
+    {
+      "id": "msg_f12_post_later",
+      "speaker": "yu",
+      "text": "B-201 の封筒が、また増えている。\n誰も取りに来ない。"
+    },
+    {
+      "id": "msg_f12_office_closed",
+      "speaker": "yu",
+      "text": "支所は閉まっている。休みの日だ。\nガラス越しに、受付台の届出用紙の束が見える。"
+    },
+    {
+      "id": "msg_f12_office_a",
+      "speaker": "yu",
+      "text": "受付台。転出届、死亡届、行方不明者届の用紙が並んでいる。\n行方不明者届の束だけが、薄い。"
+    },
+    {
+      "id": "msg_f12_office_b",
+      "speaker": "yu",
+      "text": "職員に聞くと、「今月に入って、何枚か出ました」とだけ言って、目を逸らした。"
+    },
+    {
+      "id": "msg_f12_office_repeat",
+      "speaker": "yu",
+      "text": "受付台。行方不明者届の束は、昨日より薄い気がする。\n数える気にはなれなかった。"
+    },
+    {
+      "id": "msg_f12_office_board",
+      "speaker": "yu",
+      "text": "支所の掲示板。『夏祭りは中止になりました』。\n理由は書いていない。"
+    },
+    {
+      "id": "msg_f12_slide",
+      "speaker": "yu",
+      "text": "象の滑り台の内側。落書きだらけだ。\n『ゆう れん』——中 1 のとき書いた字が、まだ残っている。",
+      "truth_id": "msg_f12_slide_t"
+    },
+    {
+      "id": "msg_f12_slide_t",
+      "speaker": "yu",
+      "text": "象の滑り台の内側。落書きだらけだ。\n『ゆう れん』——中 1 のとき書いた字が、まだ残っている。消しておくべきか、一瞬考えた。"
+    },
+    {
+      "id": "msg_f12_stairwell_notice",
+      "speaker": "yu",
+      "text": "『節電のため、階段室の灯りは各棟一箇所のみ点灯します』。\n点いている階を、つい数えてしまう。"
+    },
+    {
+      "id": "msg_f12_stairwell_c",
+      "speaker": "yu",
+      "text": "C 棟の掲示。『三階の電灯が消えません。管理会社へ連絡済み』。\n日付は、7 月 31 日。"
+    },
+    {
+      "id": "msg_f12_stairwell_aligned",
+      "speaker": "yu",
+      "text": "四棟の階段室。点いているのが、全部三階になっている。\n俺の家の階だ。"
+    },
+    {
+      "id": "msg_f12_tower",
+      "speaker": "yu",
+      "text": "給水塔の点検扉。施錠されている。\n中でモーターが回る音——いや、止まっている。今の音は、どこから来た。"
+    },
+    {
+      "id": "msg_f12_estate_board",
+      "speaker": "yu",
+      "text": "団地の案内板。A 棟から D 棟。\nC 棟の位置に、誰かが小さく丸をつけている。"
+    },
+    {
+      "id": "msg_f12_bike",
+      "speaker": "yu",
+      "text": "駐輪場。俺の自転車のハンドルに、水滴がついている。\n今朝、雨は降っていない。",
+      "truth_id": "msg_f12_bike_t"
+    },
+    {
+      "id": "msg_f12_bike_t",
+      "speaker": "yu",
+      "text": "駐輪場。俺の自転車のハンドルに、水滴がついている。\n谷の霧だ。あの夜からずっと、乾かない。"
+    },
+    {
+      "id": "msg_f06_slope_notice",
+      "speaker": "yu",
+      "text": "法面の階段。上は旧街道のバス停へ続く。\n時刻表の張り紙が、風で鳴っている。"
     }
   ]
 }

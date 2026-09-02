@@ -46,6 +46,7 @@ const INTERACTABLES: Array = [
 	{"id": "map_sign", "name": "町の地図", "tile": Vector2i(8, 15), "kind": "sign"},
 	{"id": "phone", "name": "公衆電話", "tile": Vector2i(34, 12), "kind": "save_point"},
 	{"id": "clock", "name": "時計塔", "tile": Vector2i(20, 16), "kind": "object"},
+	{"id": "slope_notice", "name": "法面階段の張り紙", "tile": Vector2i(28, 2), "kind": "sign"},
 ]
 ## 40 列 × 32 行。行が y、列が x
 const MAP_ROWS: PackedStringArray = [
