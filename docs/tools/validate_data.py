@@ -237,7 +237,7 @@ def interactable_ids(text):
     ids = {}
     for pid, kind in re.findall(r'"id": "([a-z_0-9]+)"[^\n]*?"kind": "([a-z_]+)"', text):
         ids[pid] = kind
-    for pat in (r'set_npc_present\("([a-z_0-9]+)"', r'Interactable\.create\("([a-z_0-9]+)"'):
+    for pat in (r'set_npc_present\("([a-z_0-9]+)"', r'Interactable\.create\("([a-z_0-9]+)"', r'add_point_of_interest\("([a-z_0-9]+)"'):
         for pid in re.findall(pat, text):
             ids.setdefault(pid, "npc")
     return ids

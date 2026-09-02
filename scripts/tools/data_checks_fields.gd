@@ -58,7 +58,7 @@ static func _interactable_ids(text: String) -> Dictionary:
 	poi_re.compile('"id": "([a-z_0-9]+)"[^\\n]*?"kind": "([a-z_]+)"')
 	for m: RegExMatch in poi_re.search_all(text):
 		ids[m.get_string(1)] = m.get_string(2)
-	for pattern: String in ['set_npc_present\\("([a-z_0-9]+)"', 'Interactable\\.create\\("([a-z_0-9]+)"']:
+	for pattern: String in ['set_npc_present\\("([a-z_0-9]+)"', 'Interactable\\.create\\("([a-z_0-9]+)"', 'add_point_of_interest\\("([a-z_0-9]+)"']:
 		var re: RegEx = RegEx.new()
 		re.compile(pattern)
 		for m: RegExMatch in re.search_all(text):
