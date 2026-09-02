@@ -11,6 +11,7 @@
 | アクター 16×24 | `scripts/tools/actor_sprite_generator.gd` | `SpriteFrames` リソース | `get_texture` の返却先を差し替え（タスク8で共通化） |
 | 音 | `scripts/tools/sound_synth.gd` | `resources/audio/<id>.ogg` | 同名 OGG があれば `AudioManager` が自動で優先 |
 | フォント | 代替フォント | `resources/fonts/PixelMplus12-Regular.ttf` | 配置するだけ（`resources/fonts/README.md`） |
+| 光源テクスチャ | `scripts/tools/light_texture_generator.gd`（放射 64×64、扇形 176×176） | `resources/lights/radial.png` / `cone.png`（グレースケール、白＝明） | `LightTextureGenerator` の返却先を差し替え |
 
 ## 音（data/audio.json の id と 1 対 1）
 

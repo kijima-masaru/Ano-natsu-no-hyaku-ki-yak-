@@ -21,6 +21,8 @@ const HEARING_DARK_BONUS: float = 0.8
 ## 視界：扇形の半径と半角（度）。暗いほど狭い
 const VISION_RANGE: float = 80.0
 const VISION_RANGE_DARK: float = 40.0
+## 照らされている対象は昼の視認距離のこの倍率まで見える
+const LIT_TARGET_RANGE_BONUS: float = 1.4
 const VISION_HALF_ANGLE_DEG: float = 32.0
 const VISION_HALF_ANGLE_DARK_DEG: float = 18.0
 const CAPTURE_DISTANCE: float = 10.0
@@ -56,6 +58,8 @@ func _ready() -> void:
 	_rng.seed = int(global_position.x) * 73856093 ^ int(global_position.y) * 19349663
 	home_position = global_position
 	AudioManager.noise_reported.connect(_on_noise)
+	darkness = Lighting.darkness
+	Lighting.darkness_changed.connect(func(value: float) -> void: darkness = value)
 	_update_sprite()
 	_set_state(State.PATROL)
 
@@ -89,9 +93,13 @@ func _on_noise(position: Vector2, radius: float) -> void:
 
 
 ## 扇形の視界に入っているか
+## 視界内か。暗所でも対象が照らされていれば（懐中電灯・街灯の下）遠くから見える
 func can_see(node: Node2D) -> bool:
 	var to: Vector2 = node.global_position - global_position
-	if to.length() > vision_range():
+	var range_px: float = vision_range()
+	if darkness > 0.0 and Lighting.is_lit_at(node.global_position):
+		range_px = maxf(range_px, VISION_RANGE * LIT_TARGET_RANGE_BONUS)
+	if to.length() > range_px:
 		return false
 	var forward: Vector2 = Vector2(facing)
 	return forward.angle_to(to) <= vision_half_angle() and absf(forward.angle_to(to)) <= vision_half_angle()

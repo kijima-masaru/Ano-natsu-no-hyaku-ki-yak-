@@ -25,7 +25,7 @@ godot --path . --editor      # エディタを開く
 ```
 
 タイトルの「はじめる」で 8 月 1 日の自宅（F12）から始まる。セーブは `user://saves/slot_NN.json`（0 はオートセーブ）、設定と周回情報は `user://system.json`。F01・F02・F05・F06・F12 は実装済みで、他のフィールドは未実装のプレースホルダで表示される。
-操作：WASD / 矢印で移動、Shift で忍び足、Z / Space / Enter で調べる、X / Esc でキャンセル（ゲームパッド：左スティック / D-pad、LB、A、B）。
+操作：WASD / 矢印で移動、Shift で忍び足、Z / Space / Enter で調べる、X / Esc でキャンセル、F で懐中電灯（ゲームパッド：左スティック / D-pad、LB、A、B、LT）。
 
 ## 描画仕様（厳守）
 

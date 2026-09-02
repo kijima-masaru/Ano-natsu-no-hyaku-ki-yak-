@@ -13,4 +13,6 @@ script = ExtResource("1_field_base")
 
 [node name="Overhead" type="TileMapLayer" parent="."]
 
+[node name="Lights" type="Node2D" parent="."]
+
 [node name="Triggers" type="Node2D" parent="."]

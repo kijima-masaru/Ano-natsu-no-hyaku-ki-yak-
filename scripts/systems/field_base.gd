@@ -1,7 +1,7 @@
 class_name FieldBase
 extends Node2D
 ## すべてのフィールドシーンのルートが継承する基底クラス。
-## 子ノードの構成（描画順＝この順）：Ground / Objects（TileMapLayer）→ Actors（Node2D）→ Overhead（TileMapLayer）→ Triggers
+## 子ノードの構成（描画順＝この順）：Ground / Objects（TileMapLayer）→ Actors（Node2D）→ Overhead（TileMapLayer）→ Lights → Triggers
 ## SceneRouter は setup(def) を呼んでから add_child する。
 ## サブクラスは MAP_ROWS 等の定数を定義するだけでよく（FieldMapBuilder 参照）、
 ## 時間帯・日付の差し替えは _apply_time_of_day / _apply_day を上書きする。
@@ -15,8 +15,7 @@ const LAYER_OBJECTS: String = "Objects"
 const LAYER_OVERHEAD: String = "Overhead"
 const ACTOR_ROOT: String = "Actors"
 const TRIGGER_ROOT: String = "Triggers"
-## 出口トリガーの当たり（タイルより少し小さくして隣接タイルから誤発火しない）
-const EXIT_TRIGGER_SIZE: Vector2 = Vector2(14, 14)
+const LIGHT_ROOT: String = "Lights"
 ## 定義が無いときの寸法（24×14 タイル＝1 画面）
 const FALLBACK_SIZE_TILES: Vector2i = Vector2i(24, 14)
 
@@ -30,6 +29,8 @@ var objects: TileMapLayer
 var overhead: TileMapLayer
 var actors: Node2D
 var triggers: Node2D
+## タイル光源（PointLight2D）の置き場。Lighting が set_tile に合わせて出し入れする
+var lights: Node2D
 
 
 ## SceneRouter から add_child の前に呼ばれる
@@ -128,11 +129,14 @@ func get_spawn_facing(from_id: String) -> Vector2i:
 
 # ── タイル配置ヘルパー ──
 
+## 種別名でタイルを置く。Objects / Overhead 層なら LightCatalog に従って光源も同期する
 func set_tile(layer: TileMapLayer, tile: Vector2i, type_name: String) -> void:
 	var coords: Vector2i = TileSetProvider.get_atlas_coords(type_name)
 	if coords.x < 0:
 		return
 	layer.set_cell(tile, TileGenerator.SOURCE_ID, coords)
+	if layer != ground and lights != null:
+		Lighting.sync_tile_light(lights, tile, type_name)
 
 
 func fill_rect(layer: TileMapLayer, rect: Rect2i, type_name: String) -> void:
@@ -214,13 +218,15 @@ func _ensure_layers() -> void:
 	objects = _ensure_tile_layer(LAYER_OBJECTS)
 	actors = _ensure_node2d(ACTOR_ROOT)
 	overhead = _ensure_tile_layer(LAYER_OVERHEAD)
+	lights = _ensure_node2d(LIGHT_ROOT)
 	triggers = _ensure_node2d(TRIGGER_ROOT)
-	# 描画順を保証する
+	# 描画順を保証する（光源は描画順に関係しない）
 	move_child(ground, 0)
 	move_child(objects, 1)
 	move_child(actors, 2)
 	move_child(overhead, 3)
-	move_child(triggers, 4)
+	move_child(lights, 4)
+	move_child(triggers, 5)
 
 
 func _ensure_tile_layer(node_name: String) -> TileMapLayer:
@@ -247,27 +253,9 @@ func _ensure_node2d(node_name: String) -> Node2D:
 	return node
 
 
-## fields.json の exits ごとに境界タイルへ Area2D を置く
+## fields.json の exits ごとに境界タイルへ Area2D を置く（FieldExitTriggers）
 func _build_exit_triggers() -> void:
-	if field_def == null:
-		return
-	for exit: ExitData in field_def.exits:
-		if not field_def.contains_tile(exit.tile):
-			push_error("FieldBase(%s): 出口 %s のタイルがフィールド外です" % [field_id, exit.describe()])
-			continue
-		var area: Area2D = Area2D.new()
-		area.name = "ExitTrigger_%s" % exit.to_id
-		area.collision_layer = 0
-		area.collision_mask = 1
-		area.monitorable = false
-		area.position = GameConstants.tile_to_world(exit.tile)
-		var shape: CollisionShape2D = CollisionShape2D.new()
-		var rect: RectangleShape2D = RectangleShape2D.new()
-		rect.size = EXIT_TRIGGER_SIZE
-		shape.shape = rect
-		area.add_child(shape)
-		area.body_entered.connect(_on_exit_body_entered.bind(exit))
-		triggers.add_child(area)
+	FieldExitTriggers.build(self, field_def, _on_exit_body_entered)
 
 
 func _on_exit_body_entered(body: Node2D, exit: ExitData) -> void:
