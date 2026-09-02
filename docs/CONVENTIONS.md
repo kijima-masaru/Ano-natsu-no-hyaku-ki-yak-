@@ -76,11 +76,15 @@ func find_exit(to_id):
 
 ## 6. 色とパレット
 
-- **コード中で `Color("#xxxxxx")` や `Color(r, g, b)` による直接指定を行わない。**
-  色は必ず `Palette.COLORS[Palette.<名前付き定数>]`（または `Palette.get_color(<定数>)`）から取得する。
+- 色の唯一の定義は `scripts/autoload/palette.gd`（autoload 名 `Palette`）の `COLORS` である。
+- **`palette.gd` 以外の場所で `Color("#xxxxxx")`、`Color(r, g, b)`、`Color.RED` などの直接指定を行わない。**
+  色は必ず `Palette.get_color(Palette.<名前付き定数>)`（または `Palette.COLORS[Palette.<定数>]`）から取得する。
+  透明度が必要なら `Palette.with_alpha(<定数>, alpha)` を使う。
+- 名前付き定数は **用途で選ぶ**。`Palette.get_color(13)` のように番号を直接書かない。
 - `.tscn` / `.tres` 内の `modulate` や `color` プロパティも同様。エディタで色を置いた場合は、対応する定数を `_ready()` で適用するか、テーマリソースに寄せる。
 - 例外は「透明」`Color.TRANSPARENT` と「乗算で無変化」`Color.WHITE`（modulate の初期値）だけ。
-- 光源の彩度を持つ色（自販機・街灯・蛍光灯・月）以外を発光表現に使わない。
+- 発光・加算合成に使えるのは `Palette.LIGHT_SOURCES`（骨白・街灯の黄・自販機の赤・蛍光灯の青白）だけ。
+- 見え方は `scenes/debug/palette_preview.tscn` で確認する。パレットを変更する場合は `data/fields.json` の `meta.palette` も同時に更新する。
 
 ## 7. ピクセル・座標
 
