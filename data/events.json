@@ -5,24 +5,6 @@
   },
   "events": [
     {
-      "id": "ev_d01_open",
-      "field": "",
-      "trigger": "manual",
-      "conditions": [],
-      "actions": [
-        {
-          "type": "message",
-          "id": "msg_d01_open"
-        },
-        {
-          "type": "set_flag",
-          "flag": "prologue_done"
-        }
-      ],
-      "once": true,
-      "priority": 0
-    },
-    {
       "id": "ev_d02_open",
       "field": "",
       "trigger": "manual",
@@ -334,6 +316,315 @@
         {
           "type": "message",
           "id": "msg_f06_clock"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_d01_open",
+      "field": "",
+      "trigger": "manual",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_recall_0731_a"
+        },
+        {
+          "type": "message",
+          "id": "msg_recall_0731_b"
+        },
+        {
+          "type": "message",
+          "id": "msg_recall_0731_c"
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_001"
+        },
+        {
+          "type": "message",
+          "id": "msg_d01_wake"
+        },
+        {
+          "type": "message",
+          "id": "msg_d01_mother_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_d01_mother_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_d01_mother_3"
+        },
+        {
+          "type": "message",
+          "id": "msg_d01_go_work"
+        },
+        {
+          "type": "set_flag",
+          "flag": "d01_told"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_shift",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "store_door",
+      "day_range": [
+        1,
+        1
+      ],
+      "conditions": [
+        {
+          "flag": "d01_shift_done",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_store_shift"
+        },
+        {
+          "type": "set_time",
+          "time_of_day": "evening"
+        },
+        {
+          "type": "set_flag",
+          "flag": "d01_shift_done"
+        },
+        {
+          "type": "message",
+          "id": "msg_f01_store_shift_done"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f01_store",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "store_door",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_store_closed"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_meet_mio",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "mio_npc",
+      "day_range": [
+        1,
+        1
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d01_mio_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_d01_mio_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_d01_mio_3"
+        },
+        {
+          "type": "message",
+          "id": "msg_d01_mio_4"
+        },
+        {
+          "type": "set_flag",
+          "flag": "met_heroine"
+        },
+        {
+          "type": "set_flag",
+          "flag": "prologue_done"
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_003"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_vending_w",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "vending_w",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_vending"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_vending_e",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "vending_e",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_vending"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_bulletin",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "bulletin",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_bulletin"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_trash",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "trash",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_trash"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_car_lot",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "car_lot",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_car_lot"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_cart",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "cart",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_cart"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_bridge_w",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "bridge_w",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_bridge"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_super_door",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "super_door",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_super"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_sushi_door",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "sushi_door",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_sushi"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_drug_door",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "drug_door",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_drug"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f01_receipt",
+      "field": "F01",
+      "trigger": "on_interact",
+      "target": "receipt_box",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "store_receipt"
         }
       ],
       "once": false,

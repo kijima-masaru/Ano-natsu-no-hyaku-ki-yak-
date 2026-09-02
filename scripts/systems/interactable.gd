@@ -29,6 +29,18 @@ func _ready() -> void:
 	add_to_group("interactable")
 
 
+## NPC など、見た目を持つ調べ物にアクタースプライトを付ける（ActorSpriteGenerator の種別）
+func set_actor_sprite(kind: String, facing: Vector2i = Vector2i.DOWN) -> void:
+	var sprite: Sprite2D = get_node_or_null("ActorSprite") as Sprite2D
+	if sprite == null:
+		sprite = Sprite2D.new()
+		sprite.name = "ActorSprite"
+		sprite.centered = false
+		sprite.offset = Vector2(-8, -14)
+		add_child(sprite)
+	sprite.texture = ActorSpriteGenerator.get_texture(kind, facing, 0)
+
+
 ## プレイヤーから呼ばれる
 func interact(by: Node) -> void:
 	times_interacted += 1
