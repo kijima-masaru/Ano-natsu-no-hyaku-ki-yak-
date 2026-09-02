@@ -15,6 +15,8 @@ signal field_load_failed(field_id: String, reason: String)
 signal player_spawned(player: Node)
 
 const PLAYER_SCENE_PATH: String = "res://scenes/actors/player.tscn"
+const HEROINE_SCENE_PATH: String = "res://scenes/actors/heroine.tscn"
+const COMPANION_FLAG: String = "companion_on"
 const PLACEHOLDER_SCENE_PATH: String = "res://scenes/fields/field_placeholder.tscn"
 const FADE_DURATION: float = 0.35
 const FADE_CANVAS_LAYER: int = 100
@@ -23,6 +25,7 @@ var world_root: Node2D = null
 var current_field: FieldBase = null
 var current_field_id: String = ""
 var player: CharacterBody2D = null
+var heroine: CharacterBody2D = null
 var camera: Camera2D = null
 var is_transitioning: bool = false
 
@@ -31,6 +34,37 @@ var _fade: ColorRect = null
 
 func _ready() -> void:
 	_build_fade_layer()
+	GameState.flag_raised.connect(_on_flag_changed)
+	GameState.flag_cleared.connect(_on_flag_changed)
+
+
+func _on_flag_changed(flag: String) -> void:
+	if flag == COMPANION_FLAG:
+		_sync_companion()
+
+
+## 同行を切り替える（set_companion アクション・日程のフラグ操作から）
+func set_companion(on: bool) -> void:
+	if on:
+		GameState.raise_flag(COMPANION_FLAG)
+	else:
+		GameState.clear_flag(COMPANION_FLAG)
+
+
+## companion_on とヒロインの存在を一致させる
+func _sync_companion() -> void:
+	var should_follow: bool = GameState.has_flag(COMPANION_FLAG) and current_field != null and player != null
+	if should_follow:
+		if heroine == null:
+			var packed: PackedScene = load(HEROINE_SCENE_PATH) as PackedScene
+			heroine = packed.instantiate() as CharacterBody2D
+		if heroine.get_parent() != current_field.get_actor_root():
+			if heroine.get_parent() != null:
+				heroine.get_parent().remove_child(heroine)
+			current_field.get_actor_root().add_child(heroine)
+		heroine.snap_behind(player, player.facing)
+	elif heroine != null and heroine.get_parent() != null:
+		heroine.get_parent().remove_child(heroine)
 
 
 ## Main シーンがワールドのルートを登録する
@@ -44,6 +78,9 @@ func reset() -> void:
 	current_field = null
 	current_field_id = ""
 	player = null
+	if heroine != null and heroine.get_parent() == null:
+		heroine.free()
+	heroine = null
 	camera = null
 	is_transitioning = false
 	_fade.color = Palette.with_alpha(Palette.FADE_BLACK, 0.0)
@@ -134,6 +171,7 @@ func _mount_field(scene: FieldBase, def: FieldData, from_id: String) -> void:
 	_apply_camera_limits(scene)
 	current_field = scene
 	current_field_id = def.id if def != null else ""
+	_sync_companion()
 	if def != null:
 		GameState.set_current_field(def.id)
 	GameState.set_player_pose(player.global_position, player.facing)
@@ -147,6 +185,8 @@ func _unmount_current() -> void:
 		return
 	if player.get_parent() != null:
 		player.get_parent().remove_child(player)
+	if heroine != null and heroine.get_parent() != null:
+		heroine.get_parent().remove_child(heroine)
 	world_root.remove_child(current_field)
 	current_field.queue_free()
 	current_field = null

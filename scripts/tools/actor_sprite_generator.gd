@@ -21,6 +21,8 @@ static func get_texture(kind: String, facing: Vector2i, frame: int = 0) -> Image
 	match kind:
 		"player":
 			_draw_player(image, facing, frame % FRAME_COUNT)
+		"heroine":
+			_draw_heroine(image, facing, frame % FRAME_COUNT)
 		_:
 			push_warning("ActorSpriteGenerator: 種別 '%s' は未定義のためプレイヤーの絵を使います" % kind)
 			_draw_player(image, facing, frame % FRAME_COUNT)
@@ -82,5 +84,48 @@ static func _draw_player(image: Image, facing: Vector2i, frame: int) -> void:
 			_rect(image, 10, 5, 1, 1, hair)
 			_rect(image, 3, 10, 2, 7, bag)
 			_rect(image, 10, 11, 1, 6, coat_dark)
+		_:
+			push_error("ActorSpriteGenerator: facing %s は上下左右の単位ベクトルである必要があります" % facing)
+
+
+## ヒロイン・澪：枯れ黄土のカーディガン、長めの髪、ノートを抱える。主人公より一段明るい配色で見分ける
+static func _draw_heroine(image: Image, facing: Vector2i, frame: int) -> void:
+	var top: int = Palette.OCHRE
+	var top_dark: int = Palette.RUST
+	var skirt: int = Palette.DUSK_INDIGO
+	var skin: int = Palette.CONCRETE
+	var hair: int = Palette.RUST_DARK
+	var book: int = Palette.BONE_WHITE
+	_rect(image, 4, 22, 8, 2, Palette.NIGHT_SKY)
+	if frame == 0:
+		_rect(image, 5, 18, 2, 4, skin)
+		_rect(image, 9, 18, 2, 4, skin)
+	else:
+		_rect(image, 5, 17, 2, 4, skin)
+		_rect(image, 9, 19, 2, 3, skin)
+	_rect(image, 4, 14, 8, 5, skirt)
+	_rect(image, 4, 9, 8, 5, top)
+	_rect(image, 3, 10, 1, 5, top_dark)
+	_rect(image, 12, 10, 1, 5, top_dark)
+	_rect(image, 4, 1, 8, 8, skin)
+	_rect(image, 4, 1, 8, 3, hair)
+	_rect(image, 3, 2, 1, 9, hair)
+	_rect(image, 12, 2, 1, 9, hair)
+	match facing:
+		Vector2i.DOWN:
+			_rect(image, 6, 5, 1, 1, hair)
+			_rect(image, 9, 5, 1, 1, hair)
+			_rect(image, 6, 11, 4, 3, book)
+		Vector2i.UP:
+			_rect(image, 4, 1, 8, 8, hair)
+			_rect(image, 3, 9, 10, 2, hair)
+		Vector2i.LEFT:
+			_rect(image, 8, 1, 5, 9, hair)
+			_rect(image, 5, 5, 1, 1, hair)
+			_rect(image, 3, 11, 3, 3, book)
+		Vector2i.RIGHT:
+			_rect(image, 3, 1, 5, 9, hair)
+			_rect(image, 10, 5, 1, 1, hair)
+			_rect(image, 10, 11, 3, 3, book)
 		_:
 			push_error("ActorSpriteGenerator: facing %s は上下左右の単位ベクトルである必要があります" % facing)
