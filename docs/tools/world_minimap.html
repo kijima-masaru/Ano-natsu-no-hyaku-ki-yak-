@@ -1,0 +1,351 @@
+<title>磐戸町 ワールドミニマップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* ── 16色パレット（fields.json meta.palette と同一。これ以外の色は使わない） ── */
+:root{
+  --p0:#0b0d14; --p1:#141a2b; --p2:#1f2a44; --p3:#2f3f5f; --p4:#4a5a78; --p5:#8590a3;
+  --p6:#1b2a24; --p7:#37533f; --p8:#6b8a5e; --p9:#3a2a22; --p10:#7a4a2e; --p11:#b08a5c;
+  --p12:#d9d2c0; --p13:#f2e9a8; --p14:#d84a3a; --p15:#5fd0c8;
+  --ground:var(--p0); --panel:var(--p1); --panel-2:var(--p2); --line:var(--p3);
+  --ink:var(--p12); --ink-muted:var(--p5); --ink-faint:var(--p4);
+  --accent:var(--p13); --lock:var(--p14); --focus:var(--p15);
+  --pix:"DotGothic16","Zen Kaku Gothic New",sans-serif;
+  --body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--ground)}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.7;min-height:100vh}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* ── ヘッダ ── */
+.hd{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding:18px 22px 12px;border-bottom:1px solid var(--line)}
+.hd h1{font-family:var(--pix);font-weight:400;font-size:22px;line-height:1.2;margin:0;letter-spacing:.04em;text-wrap:balance}
+.hd h1 small{display:block;font-size:11px;color:var(--ink-muted);letter-spacing:.14em;margin-bottom:6px}
+.pal{display:flex;flex-direction:column;gap:4px}
+.pal-label{font-family:var(--pix);font-size:10px;letter-spacing:.14em;color:var(--ink-muted);text-transform:uppercase}
+.sw{display:grid;grid-template-columns:repeat(16,20px);gap:2px}
+.sw span{display:block;width:20px;height:20px;border:1px solid var(--p0);position:relative}
+.sw span::after{content:attr(data-i);position:absolute;left:0;right:0;bottom:-15px;text-align:center;font-family:var(--pix);font-size:9px;color:var(--ink-faint)}
+.sw{margin-bottom:14px}
+
+/* ── 本体 ── */
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:0;min-height:calc(100vh - 92px)}
+@media (max-width:980px){.wrap{grid-template-columns:1fr}.panel{border-left:0;border-top:1px solid var(--line)}}
+.stage{padding:16px 22px 22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-family:var(--pix);font-size:12px;color:var(--ink-muted)}
+.toolbar label{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.toolbar input{accent-color:var(--p13);width:12px;height:12px;margin:0}
+.toolbar .sp{flex:1}
+.compass{font-family:var(--pix);font-size:11px;color:var(--ink-faint);letter-spacing:.2em}
+.mapbox{position:relative;align-self:flex-start;border:1px solid var(--line);background:var(--p1);line-height:0}
+canvas{display:block;image-rendering:pixelated;image-rendering:crisp-edges}
+.labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lab{position:absolute;font-family:var(--pix);color:var(--ink);white-space:nowrap;line-height:1;text-shadow:1px 0 var(--p0),-1px 0 var(--p0),0 1px var(--p0),0 -1px var(--p0),1px 1px var(--p0)}
+.lab b{font-weight:400;color:var(--ink-muted);margin-right:.35em}
+.lab.dim{color:var(--ink-muted)}
+.lab.sel{color:var(--accent)}
+.lab.spine{color:var(--p5);letter-spacing:.12em}
+.lab.spine.k{color:var(--p13)}
+.lab.v{writing-mode:vertical-rl}
+.legend{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:12px;color:var(--ink-muted);align-items:start;max-width:640px}
+.legend .k{font-family:var(--pix);font-size:11px;letter-spacing:.1em;color:var(--ink-faint);padding-top:2px}
+.elev{display:flex;gap:2px;align-items:center}
+.elev i{display:block;width:26px;height:12px;border:1px solid var(--p0)}
+.elev em{font-style:normal;font-family:var(--pix);font-size:10px;margin:0 4px}
+.lg{display:flex;flex-wrap:wrap;gap:4px 16px}
+.lg i{display:inline-block;width:10px;height:10px;vertical-align:-1px;margin-right:5px;border:1px solid var(--p0)}
+.lg .dash{background:repeating-linear-gradient(90deg,var(--p5) 0 3px,transparent 3px 5px);border:0;height:3px;vertical-align:1px;width:14px}
+
+/* ── パネル（調査手帳） ── */
+.panel{border-left:1px solid var(--line);background:var(--panel);padding:18px 20px 28px;overflow:auto;max-height:calc(100vh - 92px);position:sticky;top:0}
+@media (max-width:980px){.panel{position:static;max-height:none}}
+.ph{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.chip{font-family:var(--pix);font-size:12px;letter-spacing:.1em;padding:2px 7px;border:1px solid var(--p5);color:var(--ink)}
+.chip.sel{border-color:var(--accent);color:var(--accent)}
+.panel h2{font-family:var(--pix);font-weight:400;font-size:20px;margin:6px 0 0;line-height:1.3;text-wrap:balance}
+.rd{font-size:12px;color:var(--ink-muted);margin:0 0 14px;letter-spacing:.04em}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12.5px;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:14px}
+.meta dt{color:var(--ink-muted);font-family:var(--pix);font-size:11px;letter-spacing:.1em;padding-top:3px}
+.meta dd{margin:0;font-variant-numeric:tabular-nums}
+.meta code,.scene{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;color:var(--p11)}
+.ebar{display:inline-flex;gap:2px;vertical-align:middle;margin-right:8px}
+.ebar i{width:9px;height:9px;display:block;border:1px solid var(--p0)}
+.sec{margin:0 0 16px}
+.sec h3{font-family:var(--pix);font-weight:400;font-size:11px;letter-spacing:.16em;color:var(--ink-muted);margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.sec h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.sec p{margin:0;font-size:13.5px}
+.sec p.h{color:var(--p12);border-left:3px solid var(--p9);padding-left:10px}
+.sec ul{margin:0;padding-left:18px;font-size:13px}
+.sec li{margin:2px 0}
+.ex{list-style:none;padding:0;display:flex;flex-direction:column;gap:4px}
+.ex li{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:center;padding:5px 8px;background:var(--panel-2);font-size:12.5px}
+.ex li button{text-align:left;font-family:var(--pix);letter-spacing:.06em;color:var(--ink);font-size:13px}
+.ex li button:hover{color:var(--accent)}
+.ex .side{font-family:var(--pix);color:var(--ink-faint);font-size:11px;text-align:center;border:1px solid var(--line);padding:1px 0}
+.ex .note{grid-column:2/4;color:var(--ink-muted);font-size:11.5px;margin-top:-2px}
+.lk{font-family:var(--pix);font-size:10px;letter-spacing:.06em;color:var(--lock);border:1px solid var(--lock);padding:1px 5px}
+.ok{font-family:var(--pix);font-size:10px;color:var(--ink-faint)}
+.tiles{display:flex;flex-wrap:wrap;gap:4px}
+.tiles span{font-size:11.5px;padding:1px 7px;border:1px solid var(--p3);color:var(--p12);background:var(--p0)}
+.foot{font-size:11px;color:var(--ink-faint);margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
+@media (prefers-reduced-motion:no-preference){.lab.sel{animation:none}}
+</style>
+
+<header class="hd">
+  <h1><small>磐戸町奇譚 ── ステップ1 設計確認ツール</small>神代市 磐戸町 ワールドミニマップ</h1>
+  <div class="pal">
+    <span class="pal-label">16色パレット（idx 0–15）</span>
+    <div class="sw" id="sw"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="stage">
+    <div class="toolbar">
+      <label><input type="checkbox" id="tgConn" checked> 接続（出入口）</label>
+      <label><input type="checkbox" id="tgLab" checked> ラベル</label>
+      <label><input type="checkbox" id="tgGrid"> 6×6グリッド</label>
+      <span class="sp"></span>
+      <span class="compass">西 ◁ 低地・明 ── 丘陵・暗 ▷ 東 ／ 北↑</span>
+    </div>
+    <div class="mapbox" id="mapbox">
+      <canvas id="map" role="img" aria-label="磐戸町の16フィールドを配置したミニマップ"></canvas>
+      <div class="labels" id="labels"></div>
+    </div>
+    <div class="legend">
+      <span class="k">標高</span>
+      <div class="elev" id="elevLegend"></div>
+      <span class="k">記号</span>
+      <div class="lg">
+        <span><i style="background:var(--p12)"></i>出入口</span>
+        <span><i style="background:var(--p14)"></i>鍵付き／フラグ待ち</span>
+        <span><i class="dash"></i>隧道（高速の北側へ）</span>
+        <span><i style="background:var(--p13)"></i>常時光源（国道281号）</span>
+        <span><i style="background:var(--p4);border-color:var(--p5)"></i>東海縦貫道（高架）</span>
+        <span><i style="background:var(--p2)"></i>蒼籠川</span>
+      </div>
+      <span class="k">外周</span>
+      <div>F15の御渡橋が南限。他の外周は山・高速・私有地で封鎖。空セル（斜線）は法面・田園・河岸段丘で進入不可。</div>
+    </div>
+  </section>
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+</div>
+
+<script>
+const DATA = {"meta":{"title":"磐戸町奇譚","schema_version":1,"tile_size":16,"base_resolution":{"w":384,"h":216},"world_grid":{"cols":6,"rows":6,"note":"col 0=西端, row 0=北端。町は東西約2.5km・南北約2.9km"},"elevation_scale":{"min":0,"max":5,"note":"0=河畔（最も低く明るい） 5=臥牛山・薬師谷（最も高く暗い）"},"palette":[{"idx":0,"hex":"#0b0d14","name":"墨","role":"最暗部・影・輪郭"},{"idx":1,"hex":"#141a2b","name":"深藍・暗","role":"夜の地面・高標高の基調"},{"idx":2,"hex":"#1f2a44","name":"深藍","role":"中標高の基調・水面"},{"idx":3,"hex":"#2f3f5f","name":"宵藍","role":"低標高の基調・アスファルト影"},{"idx":4,"hex":"#4a5a78","name":"霧藍","role":"最低地の基調・コンクリート影"},{"idx":5,"hex":"#8590a3","name":"灰藍","role":"コンクリート面・道路・月に照らされた面"},{"idx":6,"hex":"#1b2a24","name":"苔・暗","role":"夜の樹木・田の影"},{"idx":7,"hex":"#37533f","name":"褪せた緑","role":"草地・梅林・水田"},{"idx":8,"hex":"#6b8a5e","name":"褪せた緑・明","role":"照らされた草・苔"},{"idx":9,"hex":"#3a2a22","name":"錆・暗","role":"古木材・土の影・錆びた鉄"},{"idx":10,"hex":"#7a4a2e","name":"錆色","role":"土・トタン・木造校舎の壁"},{"idx":11,"hex":"#b08a5c","name":"枯れ黄土","role":"畳・紙・乾いた土・稲藁"},{"idx":12,"hex":"#d9d2c0","name":"骨白","role":"月光・白線・障子・文字"},{"idx":13,"hex":"#f2e9a8","name":"街灯の黄","role":"光源：街灯・自販機・窓明かり（彩度あり）"},{"idx":14,"hex":"#d84a3a","name":"自販機の赤","role":"光源：自販機・非常灯・鍵付き接続の表示（彩度あり）"},{"idx":15,"hex":"#5fd0c8","name":"蛍光灯の青白","role":"光源：蛍光灯・コンビニ・公衆電話（彩度あり）"}],"spines":{"kokudo_281":"町の西端を南北に貫く国道281号。唯一の常時光源。南端で御渡橋を渡る","kanonoo_kaido":"国道の約200m東を並走する旧・鹿之尾街道。F02→F06→F05→F12→F13→F15の渡し場跡で終わる","tokai_expwy":"東海縦貫道。北西(F02北東角付近)から入り、F03を斜めに横切り、F09/F08・F16の間を抜けて東端へ出る高架","aogomori_river":"蒼籠川。row 5 の南端を東西に流れる。渡河点は御渡橋（国道）のみ"},"locks":{"key_tunnel_fence":"F03高架下隧道の立入禁止フェンスの鍵。F06市民センターの遺失物箱から入手（中盤）","key_old_school":"F11旧校舎 昇降口の鍵。F11の新校舎側職員室で入手（中核ダンジョン解放）","flag_yakushi_open":"F14林道の落石が崩れて通れるようになる（終盤フラグ）"}},"fields":[{"id":"F01","name":"国道281号 沿道商業地区","reading":"こくどう281ごう えんどうしょうぎょうちく","scene_path":"res://scenes/fields/f01_kokudo.tscn","world_pos":{"col":0,"row":1,"w":1,"h":2},"size_tiles":{"w":32,"h":48},"elevation":1,"biome":"roadside_commercial","palette_accent":"自販機の白光と赤","palette_accent_idx":[13,14,15],"ambience":"常時明るい。車の走行音、換気扇の低いうなり、自販機のコンプレッサ音。町で唯一の安全地帯","exits":[{"to":"F02","side":"N","tile":[13,0],"lock":null,"note":"国道の歩道をそのまま北へ"},{"to":"F06","side":"E","tile":[31,10],"lock":null,"note":"ドラッグストア脇の路地→市民センター前"},{"to":"F05","side":"E","tile":[31,34],"lock":null,"note":"駐車場の裏口→旧街道の商店街"},{"to":"F12","side":"S","tile":[13,47],"lock":null,"note":"国道の歩道を南へ→木平団地"}],"landmarks":["スーパー『いわとマート』","回転寿司","ドラッグストア","深夜のコンビニ","巨大駐車場","歩道橋"],"interactables":["自販機（回復・情報）","コンビニ雑誌棚","駐車場の車内","歩道橋の落書き","店先の掲示板","スーパーのカート置き場"],"required_tiles":["アスファルト","白線（実線・破線）","側溝・グレーチング","駐車場ライン","ガードレール","街灯（柱・光源）","自販機正面","店舗ガラス面（点灯）","店舗看板（無地）","歩道タイル","縞鋼板の歩道橋","駐車車両（暗）"],"story_role":"序盤拠点。プロローグと帰還点。各章の終わりに必ずここへ戻る","horror_beat":"安全なはずの場所が、後半で一度だけ静まり返る。車の音が消え、自販機の光だけが残る","unlock_flag":null},{"id":"F02","name":"於御所住宅地","reading":"おごそじゅうたくち","scene_path":"res://scenes/fields/f02_ogoso.tscn","world_pos":{"col":0,"row":0,"w":2,"h":1},"size_tiles":{"w":48,"h":32},"elevation":2,"biome":"suburban_residential","palette_accent":"二階の窓に残る一つだけの明かり","palette_accent_idx":[13],"ambience":"犬の声も車も無い。遠くの国道の音が壁に吸われる。ブロック塀の反響","exits":[{"to":"F01","side":"S","tile":[10,31],"lock":null,"note":"国道へ下る"},{"to":"F06","side":"S","tile":[36,31],"lock":null,"note":"旧街道を南へ→市民センター"},{"to":"F03","side":"E","tile":[47,20],"lock":null,"note":"法面沿いの生活道路→バスストップ"}],"landmarks":["昭和の建売住宅群","浄土宗の小さな庵","ゴミ集積所","子供のいない児童公園","高速の法面が迫る北東角"],"interactables":["表札（名前が消えている家）","庵の賽銭箱と過去帳","回覧板","干したままの洗濯物","郵便受け"],"required_tiles":["生活道路アスファルト（細）","ブロック塀","生垣","建売住宅の壁・屋根（瓦）","窓（消灯・点灯）","庵の板壁と瓦","物干し","ゴミ集積所ネット","電柱・電線","ブランコ・砂場"],"story_role":"序盤。主人公の縁者の家がここにある。最初の『不在』を知る場所","horror_beat":"生活感の残留。夕飯の匂いだけがして誰もいない。洗濯物が一晩たっても乾いていない","unlock_flag":null},{"id":"F03","name":"磐戸バスストップ・高架下","reading":"いわとバスストップ・こうかした","scene_path":"res://scenes/fields/f03_bus_stop.tscn","world_pos":{"col":2,"row":0,"w":2,"h":1},"size_tiles":{"w":48,"h":28},"elevation":2,"biome":"highway_underpass","palette_accent":"バス停の蛍光灯と、隧道の奥に見える一点の橙","palette_accent_idx":[15,13],"ambience":"頭上を車が通過するたび防音壁がうなる。隧道内は音が反響し、水滴の音","exits":[{"to":"F02","side":"W","tile":[0,18],"lock":null,"note":"法面下の生活道路"},{"to":"F06","side":"S","tile":[8,27],"lock":null,"note":"法面の階段を下りて市民センターへ"},{"to":"F04","side":"E","tile":[47,8],"lock":null,"note":"隧道を抜けた北側から農道へ"},{"to":"F09","side":"E","tile":[47,26],"lock":"key_tunnel_fence","note":"隧道を抜け、高速北側の法面下を東へ。城址の搦手口。フェンス施錠"}],"landmarks":["高速バス停の待合","法面の長い階段","防音壁","高架下の隧道（唯一の北側連絡路）","時刻表"],"interactables":["時刻表（欠便の張り紙）","待合ベンチの忘れ物","隧道内の落書き","施錠フェンスの掲示","自販機（故障）"],"required_tiles":["法面コンクリート（格子）","法面階段","防音壁","高架橋脚","高架床版（影）","隧道アーチ","隧道内壁（湿）","蛍光灯（バス停）","待合ベンチ","時刻表看板","フェンス（施錠）","アスファルト"],"story_role":"中盤ハブ。町の『裏側』（F04・F09）への唯一の出入口。鍵の使用箇所","horror_beat":"隧道の出口が、入ったときと違う明るさをしている。バスは来るが誰も降りない","unlock_flag":null},{"id":"F04","name":"八柱の谷戸","reading":"やはしらのやと","scene_path":"res://scenes/fields/f04_yahashira.tscn","world_pos":{"col":4,"row":0,"w":2,"h":1},"size_tiles":{"w":48,"h":32},"elevation":4,"biome":"orchard_valley","palette_accent":"小屋の中の裸電球一つ","palette_accent_idx":[13],"ambience":"虫の声、柿の落ちる音。風で農機具小屋のトタンが鳴る。国道の音はもう届かない","exits":[{"to":"F03","side":"W","tile":[0,7],"lock":null,"note":"農道→隧道の北口へ"}],"landmarks":["柿畑","栗林","放棄された農機具小屋","獣道（谷の奥へ続くが行き止まり）","獣害防止の電気柵（切れている）","八本の古い石柱の跡"],"interactables":["農機具小屋の日誌","電気柵のバッテリー","柿の木に結ばれた布","獣の足跡","石柱の刻字"],"required_tiles":["畑の土（畝）","柿の木（実あり）","栗の木","下草","獣道（踏み分け）","農機具小屋（トタン・板）","電気柵ポール","石柱","谷の斜面（暗い樹林）","農道の砂利"],"story_role":"中盤。町の成り立ち（八柱）に関する断片を得る。F09へは崖で行けない","horror_beat":"獣道を辿ると、必ず同じ小屋の裏に出る。小屋の電球は誰も点けていない","unlock_flag":null},{"id":"F05","name":"旧鹿之尾街道 商店街","reading":"きゅうかのおかいどう しょうてんがい","scene_path":"res://scenes/fields/f05_kaido.tscn","world_pos":{"col":1,"row":2,"w":1,"h":1},"size_tiles":{"w":32,"h":40},"elevation":2,"biome":"old_shopping_street","palette_accent":"駄菓子屋の窓から漏れる黄色い光","palette_accent_idx":[13],"ambience":"シャッターの内側から時々物音。歩道が狭く家屋が迫る。駄菓子屋の前だけ暖かい","exits":[{"to":"F01","side":"W","tile":[0,15],"lock":null,"note":"路地を抜けて国道の駐車場裏へ"},{"to":"F06","side":"N","tile":[8,0],"lock":null,"note":"旧街道を北へ"},{"to":"F07","side":"E","tile":[31,22],"lock":null,"note":"寺町の路地→光明院門前"},{"to":"F12","side":"S","tile":[8,39],"lock":null,"note":"旧街道を南へ→木平団地"}],"landmarks":["シャッターの下りた商店（呉服・時計・薬）","1920年代創業の駄菓子屋（唯一の営業店）","圓照寺の門前と山門","旧街道の道標","共同水道の跡"],"interactables":["駄菓子屋の店主（会話・情報）","駄菓子屋の駄菓子（回復）","シャッターの張り紙","圓照寺の掲示板","道標の文字","共同水道の蛇口"],"required_tiles":["旧街道アスファルト（狭）","狭い歩道（縁石）","シャッター（下・半開き）","商店の看板（褪せ）","店舗の木製戸","駄菓子屋の店先（点灯）","寺の山門","石の道標","瓦屋根（連続）","電柱・電線"],"story_role":"序盤〜全編。駄菓子屋の店主が語り部。情報と回復の副拠点","horror_beat":"シャッター街の一店だけ、商品が新しい。店主は『昨日も来たね』と言う","unlock_flag":null},{"id":"F06","name":"磐戸市民センター・交番前広場","reading":"いわとしみんセンター・こうばんまえひろば","scene_path":"res://scenes/fields/f06_civic_center.tscn","world_pos":{"col":1,"row":1,"w":2,"h":1},"size_tiles":{"w":40,"h":32},"elevation":2,"biome":"civic_plaza","palette_accent":"公衆電話の緑白と、図書室の蛍光灯","palette_accent_idx":[15,13],"ambience":"掲示板の紙が風で鳴る。交番の赤灯は点いているが人はいない。図書室だけ空調が動く","exits":[{"to":"F01","side":"W","tile":[0,13],"lock":null,"note":"路地→国道"},{"to":"F02","side":"N","tile":[10,0],"lock":null,"note":"旧街道を北へ→住宅地"},{"to":"F03","side":"N","tile":[27,0],"lock":null,"note":"法面の階段を上ってバスストップ"},{"to":"F05","side":"S","tile":[5,31],"lock":null,"note":"旧街道を南へ→商店街"},{"to":"F07","side":"S","tile":[30,31],"lock":null,"note":"寺町の路地→光明院"}],"landmarks":["市民センター（図書室・遺失物箱）","交番（無人）","町の掲示板","公衆電話ボックス","広場の時計塔","町の全体地図の看板"],"interactables":["図書室の郷土資料（読み物）","掲示板（尋ね人・行事）","公衆電話（セーブ）","遺失物箱（鍵の入手）","交番の日誌","町の地図看板（ミニマップ解放）"],"required_tiles":["広場の敷石（インターロッキング）","公共建築の壁（タイル）","ガラス扉（点灯）","掲示板","公衆電話ボックス","交番の赤色灯","時計塔","植栽（低木）","ベンチ","自転車置き場","看板（地図）"],"story_role":"セーブ／情報ハブ。ミニマップの解放地点。鍵の入手（隧道フェンス）","horror_beat":"掲示板の尋ね人の顔写真が、訪れるたび一枚ずつ増える。最後の一枚は誰かに似ている","unlock_flag":null},{"id":"F07","name":"光明院 門前","reading":"こうみょういん もんぜん","scene_path":"res://scenes/fields/f07_komyoin.tscn","world_pos":{"col":2,"row":2,"w":2,"h":1},"size_tiles":{"w":48,"h":36},"elevation":3,"biome":"temple_precinct","palette_accent":"観音堂の格子から漏れる灯明の橙","palette_accent_idx":[13],"ambience":"砂利を踏む音だけが大きい。墓域では風が止む。木の軋み","exits":[{"to":"F05","side":"W","tile":[0,20],"lock":null,"note":"寺町の路地→商店街"},{"to":"F06","side":"N","tile":[12,0],"lock":null,"note":"路地→市民センター前"},{"to":"F11","side":"S","tile":[22,35],"lock":null,"note":"墓域脇の坂→小学校"},{"to":"F08","side":"E","tile":[47,12],"lock":null,"note":"本堂跡の裏手の石段。天神社への唯一の道"}],"landmarks":["室町期創建の門","戦国期に焼けた本堂の礎石","焼け残った観音堂（現存）","古い墓域","焼け跡の大イチョウ","裏手の長い石段の登り口"],"interactables":["観音堂の格子（覗く）","礎石の配置","墓域の無縁墓","寺の由来書き","手水鉢","イチョウの幹の焼け跡"],"required_tiles":["境内の砂利","石畳","山門（木・瓦）","観音堂の板壁・格子・屋根","礎石","墓石（複数形）","苔むした石","イチョウ（大木）","石段（登り口）","土塀（漆喰・崩れ）"],"story_role":"中盤。町の火災と『焼け残った一棟』の伝承。F08への関門","horror_beat":"観音堂の格子の内側から、外を覗いている気配。灯明は誰が点けたのか","unlock_flag":null},{"id":"F08","name":"臥牛山 天神社","reading":"がぎゅうざん てんじんしゃ","scene_path":"res://scenes/fields/f08_tenjin.tscn","world_pos":{"col":4,"row":2,"w":1,"h":1},"size_tiles":{"w":40,"h":48},"elevation":5,"biome":"hilltop_shrine","palette_accent":"月に照らされた梅の白と、社殿の常夜灯","palette_accent_idx":[12,13],"ambience":"町の音が完全に消える。梅林の枝が触れ合う音。石段は自分の足音だけ","exits":[{"to":"F07","side":"W","tile":[0,16],"lock":null,"note":"長い石段を下って光明院の裏手へ"}],"landmarks":["長い石段（約200段）","約400本の梅林","撫で牛の石像","拝殿と本殿","節分の鬼が出る神事の面掛け所","町を見下ろす展望所"],"interactables":["撫で牛（撫でる）","絵馬掛け","鬼の面の保管箱","梅林の中の小さな祠","展望所からの町の眺め（各所の光の有無を確認）","手水舎"],"required_tiles":["石段（長・手すり）","梅の木（開花・裸）","社殿の壁・屋根（檜皮）","鳥居","石像（牛）","常夜灯","絵馬掛け","玉垣","山の斜面（樹林）","展望所の柵"],"story_role":"中盤後半。展望所から町を俯瞰し、消えた光の位置で次の目的地を知る","horror_beat":"展望所から見る町に、実際には無い明かりが一つ点いている。鬼の面が一枚足りない","unlock_flag":null},{"id":"F09","name":"磐戸城址","reading":"いわとじょうし","scene_path":"res://scenes/fields/f09_castle_ruins.tscn","world_pos":{"col":4,"row":1,"w":2,"h":1},"size_tiles":{"w":56,"h":44},"elevation":5,"biome":"castle_ruins","palette_accent":"空堀の底に落ちた懐中電灯の光","palette_accent_idx":[13],"ambience":"高速の走行音が防音壁越しに低く続く。土塁の上では風。空堀の底では無音","exits":[{"to":"F03","side":"W","tile":[0,6],"lock":"key_tunnel_fence","note":"搦手口→高速北側の法面下→隧道"}],"landmarks":["土塁（ほぼ完存）","空堀","土橋","馬出し","主郭の平場","崩れた案内板","F04側の断崖（通行不能）"],"interactables":["案内板（縄張図）","空堀の底の落とし物","土橋の途中の目印","主郭の礎石","馬出しの隠し口"],"required_tiles":["土塁（斜面・上面）","空堀（底・壁）","土橋","下草（丈高）","樹林（暗）","案内板","礎石","崖（通行不能）","防音壁（遠景）","獣道"],"story_role":"中盤。迷路探索。町の『守り』の由来と、封じられたものの断片","horror_beat":"縄張図と実際の地形が合わない。曲輪を一周すると、入ったはずの土橋が無い","unlock_flag":"key_tunnel_fence"},{"id":"F10","name":"磐戸運動広場・河川敷","reading":"いわとうんどうひろば・かせんじき","scene_path":"res://scenes/fields/f10_ground.tscn","world_pos":{"col":3,"row":4,"w":2,"h":1},"size_tiles":{"w":48,"h":32},"elevation":1,"biome":"riverside_ground","palette_accent":"消えたままのナイター照明の一灯だけが点く","palette_accent_idx":[13],"ambience":"川の音。草が風で寝る音。バックネットの金網が鳴る","exits":[{"to":"F13","side":"W","tile":[0,14],"lock":null,"note":"堤防道路→ニュータウン"},{"to":"F11","side":"N","tile":[10,0],"lock":null,"note":"小学校の裏門"},{"to":"F14","side":"N","tile":[40,0],"lock":null,"note":"農道→朝和の里"},{"to":"F15","side":"S","tile":[12,31],"lock":null,"note":"堤防を下って河畔"}],"landmarks":["草の伸びたグラウンド","朽ちたバックネット","ナイター照明塔","倉庫（用具）","堤防道路","ベンチとダッグアウト"],"interactables":["用具倉庫","ダッグアウトの落書き","照明塔の配電盤","グラウンドの白線（途中で消える）","堤防の距離標"],"required_tiles":["草地（丈高・低）","土のグラウンド","白線（土用）","バックネット（金網）","照明塔","堤防斜面","堤防道路","倉庫（トタン）","ベンチ","ダッグアウト"],"story_role":"中盤。小学校裏門への迂回路。児童の遊びの痕跡","horror_beat":"誰も引いていない白線がグラウンドを横切り、堤防の向こうへ続いている","unlock_flag":null},{"id":"F11","name":"磐戸第一小学校","reading":"いわとだいいちしょうがっこう","scene_path":"res://scenes/fields/f11_school.tscn","world_pos":{"col":2,"row":3,"w":2,"h":1},"size_tiles":{"w":48,"h":40},"elevation":2,"biome":"school_dungeon","palette_accent":"旧校舎の廊下の非常灯の緑白と、一教室だけの蛍光灯","palette_accent_idx":[15,13],"ambience":"校庭は無音。旧校舎に入ると床板が鳴り、遠くでチャイムのような残響","exits":[{"to":"F07","side":"N","tile":[22,0],"lock":null,"note":"正門→坂→光明院"},{"to":"F12","side":"W","tile":[0,18],"lock":null,"note":"西門→団地"},{"to":"F13","side":"S","tile":[12,39],"lock":null,"note":"南門→ニュータウン"},{"to":"F10","side":"S","tile":[34,39],"lock":null,"note":"裏門→運動広場"},{"to":"F14","side":"E","tile":[47,20],"lock":null,"note":"東の通用口→朝和の里"}],"landmarks":["木造の旧校舎（一棟現存・施錠）","鉄筋の新校舎","校庭と朝礼台","二宮像の台座（像は無い）","飼育小屋","百葉箱","体育館"],"interactables":["職員室の鍵箱（旧校舎の鍵）","旧校舎の昇降口","各教室の黒板","図工室の作品棚","保健室のベッド","飼育小屋","百葉箱の中","宿直室の日誌"],"required_tiles":["校庭の土","朝礼台","旧校舎 外壁（下見板）","旧校舎 廊下床（板）","旧校舎 窓（木枠）","教室の机・椅子","黒板","新校舎 外壁（タイル）","非常灯","蛍光灯","飼育小屋（金網）","百葉箱","校門（鉄）","体育館の壁"],"story_role":"中核ダンジョン。町の出来事の中心。複数回訪れ、旧校舎の階と教室が段階的に開く","horror_beat":"全教室の机が一つずつ減っていく。最後に残った机の名札だけが読める","unlock_flag":null},{"id":"F12","name":"木平団地・支所前","reading":"きひらだんち・ししょまえ","scene_path":"res://scenes/fields/f12_kihira.tscn","world_pos":{"col":0,"row":3,"w":2,"h":1},"size_tiles":{"w":40,"h":32},"elevation":1,"biome":"housing_estate","palette_accent":"団地の階段室の蛍光灯（一棟につき一箇所だけ点灯）","palette_accent_idx":[15],"ambience":"国道の音が壁に反射して届く。集合ポストの蓋が風で開閉する音","exits":[{"to":"F01","side":"N","tile":[8,0],"lock":null,"note":"国道の歩道"},{"to":"F05","side":"N","tile":[25,0],"lock":null,"note":"旧街道を北へ→商店街"},{"to":"F11","side":"E","tile":[39,14],"lock":null,"note":"西門→小学校"},{"to":"F13","side":"S","tile":[30,31],"lock":null,"note":"旧街道を南へ→ニュータウン"}],"landmarks":["市営住宅4棟（A〜D）","市役所支所","小さな公園（象の滑り台）","集合ポスト","給水塔","駐輪場"],"interactables":["集合ポスト（未回収の手紙）","支所の受付台（届出用紙）","公園の滑り台の内側","各棟の階段室掲示","給水塔の点検扉"],"required_tiles":["団地 外壁（コンクリート・雨染み）","階段室（点灯・消灯）","ベランダ","集合ポスト","支所の壁（タイル）","公園の砂地","象の滑り台","駐輪場の屋根","給水塔","アスファルト","植栽"],"story_role":"序盤〜中盤。住民の『届出』の記録から不在の連鎖を知る","horror_beat":"4棟の点灯している階段室が、訪れるたび同じ階へ揃っていく","unlock_flag":null},{"id":"F13","name":"倉ノ前ニュータウン","reading":"くらのまえニュータウン","scene_path":"res://scenes/fields/f13_newtown.tscn","world_pos":{"col":1,"row":4,"w":2,"h":1},"size_tiles":{"w":48,"h":32},"elevation":1,"biome":"newtown_residential","palette_accent":"均等に並ぶ街灯の白（すべて同じ明るさ）","palette_accent_idx":[13],"ambience":"無音に近い。同じ形の家の間で足音が二重に聞こえる","exits":[{"to":"F12","side":"N","tile":[12,0],"lock":null,"note":"旧街道を北へ→団地"},{"to":"F11","side":"N","tile":[36,0],"lock":null,"note":"南門→小学校"},{"to":"F10","side":"E","tile":[47,14],"lock":null,"note":"堤防道路→運動広場"},{"to":"F15","side":"S","tile":[6,31],"lock":null,"note":"旧街道の末端→渡し場跡・河畔"}],"landmarks":["同じ形の家が並ぶ区画","区画整理の記念碑","ゴミステーション","行き止まりの袋小路","売地の看板","調整池"],"interactables":["記念碑の碑文","表札（同じ姓が続く）","売地の看板","調整池の柵","袋小路の奥の家の窓"],"required_tiles":["区画道路アスファルト","白線（停止線）","同型住宅の壁・屋根（3色差分）","カーポート","門扉","街灯（均等）","記念碑","調整池（水面・柵）","売地の草","側溝"],"story_role":"中盤。『同じ家』の中で一軒だけ違う家を見つける","horror_beat":"袋小路を戻ると家の数が一軒増えている。表札はまだ空欄","unlock_flag":null},{"id":"F14","name":"朝和の里","reading":"あさわのさと","scene_path":"res://scenes/fields/f14_asawa.tscn","world_pos":{"col":4,"row":3,"w":2,"h":1},"size_tiles":{"w":56,"h":36},"elevation":2,"biome":"paddy_shrine","palette_accent":"式内社の常夜灯の橙と、水田に映る月","palette_accent_idx":[13,12],"ambience":"蛙の声（後半で止む）。水路の水音。古墳の上では風だけ","exits":[{"to":"F11","side":"W","tile":[0,18],"lock":null,"note":"通用口→小学校"},{"to":"F10","side":"S","tile":[19,35],"lock":null,"note":"農道→運動広場"},{"to":"F16","side":"N","tile":[44,0],"lock":"flag_yakushi_open","note":"薬師谷への林道。序盤は落石で封鎖"}],"landmarks":["水田","千年以上の由緒を持つ式内社","古墳群（円墳3基）","農業用水路","林道の入口（落石）","集落の火の見櫓"],"interactables":["式内社の由緒書き","古墳の石室入口（覗く）","水路の水門","火の見櫓の半鐘","落石の看板","田の畦の供え物"],"required_tiles":["水田（水面・稲）","畦道","用水路（水面・コンクリート）","式内社の社殿・鳥居","常夜灯","古墳（盛土・石室口）","杉林","林道の砂利","落石（岩）","火の見櫓","農家の壁・瓦"],"story_role":"中盤〜終盤。町で最も古い信仰の層。薬師谷の解放地点","horror_beat":"水田に映る月が一つ多い。蛙が一斉に止む瞬間に何かが畦を渡る","unlock_flag":null},{"id":"F15","name":"蒼籠川 河畔・御渡橋","reading":"あおごもりがわ かはん・みわたりばし","scene_path":"res://scenes/fields/f15_riverbank.tscn","world_pos":{"col":1,"row":5,"w":3,"h":1},"size_tiles":{"w":64,"h":24},"elevation":0,"biome":"riverbank_bridge","palette_accent":"御渡橋の橋灯（国道の光の最後の一つ）","palette_accent_idx":[13,12],"ambience":"川の音が全てを覆う。橋上だけ車の音。対岸は霧で見えない","exits":[{"to":"F13","side":"N","tile":[5,0],"lock":null,"note":"旧街道の渡し場跡→ニュータウン"},{"to":"F10","side":"N","tile":[53,0],"lock":null,"note":"堤防→運動広場"}],"landmarks":["御渡橋（国道281号・町で唯一の渡河点・通行止め）","渡し場跡の石碑","河原","堤防の桜並木","水位標","対岸の霧"],"interactables":["渡し場跡の石碑","橋のバリケード（進めない）","水位標","河原の流れ着いた物","桜並木のベンチ"],"required_tiles":["水面（流れ）","河原の石","堤防斜面（草）","堤防道路","橋（桁・欄干・橋灯）","バリケード","石碑","桜（葉・裸）","水位標","霧（半透明オーバーレイ）"],"story_role":"町の境界。全編を通じ『出られない』ことを示す。終盤の選択の場","horror_beat":"橋の中ほどまで行くと、向こう岸から自分と同じ歩調の足音が近づく","unlock_flag":null},{"id":"F16","name":"薬師谷","reading":"やくしだに","scene_path":"res://scenes/fields/f16_yakushidani.tscn","world_pos":{"col":5,"row":2,"w":1,"h":1},"size_tiles":{"w":32,"h":48},"elevation":5,"biome":"forbidden_valley_temple","palette_accent":"廃寺の奥の、色の名前を持たない光（骨白）","palette_accent_idx":[12],"ambience":"水音も風も無い。自分の呼吸だけ。奥へ進むほど音が吸われる","exits":[{"to":"F14","side":"S","tile":[18,47],"lock":"flag_yakushi_open","note":"林道を下って朝和の里へ"}],"landmarks":["山中の廃寺（薬師堂）","崩れた石段","湧水","その奥（岩壁の裂け目）","積まれた古い面"],"interactables":["薬師堂の厨子","積まれた鬼の面（F08で欠けた一枚）","湧水","岩壁の裂け目（最終地点）","落石の跡"],"required_tiles":["谷の岩壁","崩れた石段","廃寺の壁・屋根（崩落）","厨子","湧水（水面・小）","杉林（暗）","落石（岩）","裂け目（暗）","苔","積まれた面"],"story_role":"終盤専用の禁域。全ての伏線の収束点","horror_beat":"音が完全に無くなる。恐怖は『何も起こらない』ことの持続で作る","unlock_flag":"flag_yakushi_open"}]};
+const PAL = DATA.meta.palette.map(p=>p.hex);
+const FIELDS = DATA.fields;
+const BY = Object.fromEntries(FIELDS.map(f=>[f.id,f]));
+const SHORT = {F01:"国道商業地区",F02:"於御所",F03:"高架下",F04:"八柱の谷戸",F05:"旧街道商店街",F06:"市民センター",F07:"光明院",F08:"天神社",F09:"城址",F10:"運動広場",F11:"第一小",F12:"木平団地",F13:"倉ノ前NT",F14:"朝和の里",F15:"御渡橋",F16:"薬師谷"};
+const ROLE = {F01:"序盤拠点",F02:"序盤",F03:"中盤ハブ",F04:"中盤",F05:"副拠点",F06:"セーブ/情報",F07:"中盤",F08:"中盤後半",F09:"中盤・迷路",F10:"中盤",F11:"中核ダンジョン",F12:"序盤〜中盤",F13:"中盤",F14:"中盤〜終盤",F15:"境界",F16:"終盤禁域"};
+const CW=32, CH=36, W=6*CW, H=6*CH;           // 内部解像度 192×216（1セル=32×36px）
+const ELEV_FILL = [5,4,3,2,1,0];               // elevation 0..5 → パレットidx（低いほど明るい）
+const KOKUDO = [[13,0],[13,170],[45,200],[45,216]];
+const KAIDO_X = 40, KAIDO_END = 200;
+const EXPWY = [[42,0],[77,18],[115,45],[128,70],[192,71]];
+const TUNNEL = [90,27];
+const RIVER_Y = 200;
+
+// ── 状態（JS変数のみ。storage は使わない） ──
+let selected = "F01", hovered = null, scale = 3;
+const show = {conn:true, lab:true, grid:false};
+
+const off = document.createElement("canvas"); off.width=W; off.height=H;
+const oc = off.getContext("2d");
+const cv = document.getElementById("map"), cx = cv.getContext("2d");
+const labels = document.getElementById("labels");
+
+const rectOf = f => { const w=f.world_pos; return {x:w.col*CW, y:w.row*CH, w:w.w*CW, h:w.h*CH}; };
+const exitPt = (f,e) => { const w=f.world_pos, s=f.size_tiles, r=rectOf(f);
+  return { x: Math.min(r.x+r.w-1, Math.round(r.x + e.tile[0]/s.w*r.w)), y: Math.min(r.y+r.h-1, Math.round(r.y + e.tile[1]/s.h*r.h)) }; };
+const px = (x,y,c) => { oc.fillStyle=PAL[c]; oc.fillRect(x,y,1,1); };
+const rect = (x,y,w,h,c) => { oc.fillStyle=PAL[c]; oc.fillRect(x,y,w,h); };
+const hash = (x,y) => { let h=(x*374761393 + y*668265263) ^ 0x5bd1e995; h=(h^(h>>>13))*1274126177; return ((h^(h>>>16))>>>0)/4294967296; };
+const BAYER = [[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
+
+function line(x0,y0,x1,y1,c,wid=1){ // 整数ブレゼンハム
+  let dx=Math.abs(x1-x0), dy=-Math.abs(y1-y0), sx=x0<x1?1:-1, sy=y0<y1?1:-1, err=dx+dy;
+  for(;;){ rect(x0-Math.floor(wid/2), y0-Math.floor(wid/2), wid, wid, c);
+    if(x0===x1&&y0===y1) break; const e2=2*err; if(e2>=dy){err+=dy;x0+=sx;} if(e2<=dx){err+=dx;y0+=sy;} }
+}
+function poly(pts,c,wid){ for(let i=0;i<pts.length-1;i++) line(pts[i][0],pts[i][1],pts[i+1][0],pts[i+1][1],c,wid); }
+
+// ── 地面：西→東で暗くなるディザ勾配 + 東の樹林 ──
+function drawGround(){
+  const shades=[2,1,1,0];
+  for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+    const t=(x/W)*(shades.length-1); const i=Math.floor(t), fr=t-i;
+    const c = (fr*16 > BAYER[y&3][x&3]) ? shades[Math.min(i+1,shades.length-1)] : shades[i];
+    px(x,y,c);
+    if(x>128 && hash(x,y)<0.10) px(x,y,6);                        // 丘陵の樹林
+    if(x<32 && y>=144 && y<200 && (x%4===0) && hash(x,y)<0.5) px(x,y,6); // 南西の田園
+    if(x>=160 && y>=144 && y<200 && hash(x,y)<0.06) px(x,y,7);   // 南東の河岸段丘
+  }
+  // 空セルの斜線（進入不可）
+  const empty=[[3,1],[0,4],[5,4],[0,5],[4,5],[5,5]];
+  for(const [c,r] of empty) for(let y=r*CH;y<r*CH+CH;y++) for(let x=c*CW;x<c*CW+CW;x++) if(((x+y)&7)===0 && y<RIVER_Y) px(x,y,2);
+}
+function drawRiver(){
+  for(let y=RIVER_Y;y<H;y++) for(let x=0;x<W;x++){ px(x,y, y===RIVER_Y?3:2); if(y>RIVER_Y+1 && ((x+y*3)%11)===0) px(x,y,4); if(hash(x,y)<0.015) px(x,y,5); }
+}
+
+// ── ビオーム模様（フィールド内側 2px 余白） ──
+function pattern(f,r){
+  const x0=r.x+2,y0=r.y+2,x1=r.x+r.w-2,y1=r.y+r.h-2; const e=f.elevation;
+  const dark = e>=4 ? 9 : 1, mid = e>=3 ? 2 : 3;
+  switch(f.biome){
+    case "roadside_commercial": // 店舗の箱と駐車場ライン、光源
+      for(let y=y0+3;y<y1-6;y+=14){ rect(x0+3,y,10,6,5); rect(x0+4,y+1,8,4,15); rect(x0+3,y+7,10,1,13);} 
+      for(let y=y0+2;y<y1;y+=3) rect(x1-12,y,10,1,4); rect(x1-4,y0+8,2,3,14); rect(x1-4,y0+30,2,3,14); break;
+    case "suburban_residential": for(let y=y0+2;y<y1-4;y+=7) for(let x=x0+2;x<x1-5;x+=8){ rect(x,y,5,3,10); rect(x,y+3,5,1,9); if(hash(x,y)<0.08) px(x+2,y+1,13);} break;
+    case "highway_underpass": for(let x=x0;x<x1;x+=4) rect(x,y1-5,2,4,5); rect(x0+2,y0+3,7,3,15); break;
+    case "orchard_valley": for(let y=y0+1;y<y1-1;y+=4) for(let x=x0+1+((y>>2)&1)*2;x<x1-1;x+=4){ rect(x,y,2,2,7); px(x+1,y,10);} rect(x1-9,y1-8,6,4,9); px(x1-6,y1-6,13); break;
+    case "old_shopping_street": for(let y=y0+1;y<y1-3;y+=4){ rect(x0+1,y,4,3,9); rect(x1-5,y,4,3,9); rect(x0+2,y+2,2,1,4); rect(x1-4,y+2,2,1,4);} rect(x0+1,y0+14,4,3,10); rect(x0+2,y0+15,2,1,13); rect(x0+1,y1-8,5,5,11); break;
+    case "civic_plaza": rect(x0+2,y0+2,20,8,5); rect(x0+4,y0+4,6,3,15); rect(x0+13,y0+4,6,3,15); rect(x1-9,y0+3,4,4,4); px(x1-7,y0+2,14); rect(x0+3,y1-6,3,4,15); for(let x=x0;x<x1;x+=3) for(let y=y0+12;y<y1-8;y+=3) px(x,y,4); break;
+    case "temple_precinct": rect(x0+18,y0+8,12,10,9); rect(x0+20,y0+10,8,6,10); rect(x0+23,y0+12,2,2,13); for(let y=y0+4;y<y1-3;y+=4) for(let x=x0+3;x<x0+14;x+=4) rect(x,y,2,3,5); for(let x=x0+2;x<x1-2;x+=5) px(x,y0+1,11); rect(x1-3,y0+8,2,2,5); break;
+    case "hilltop_shrine": for(let y=y0+1;y<y1-1;y+=3) for(let x=x0+1+(((y/3)|0)&1)*2;x<x1-1;x+=4) px(x,y,12); rect(x0+3,y0+1,2,y1-y0-2,5); rect(x0+3,y0+1,2,2,4); rect(x1-11,y0+6,8,6,9); rect(x1-9,y0+8,4,3,10); px(x1-7,y0+5,13); break;
+    case "castle_ruins": rect(x0+4,y0+4,x1-x0-8,y1-y0-8,7); rect(x0+7,y0+7,x1-x0-14,y1-y0-14,dark); rect(x0+12,y0+12,x1-x0-24,y1-y0-24,7); rect(x0+15,y0+15,x1-x0-30,y1-y0-30,dark); rect(x0+4,y0+18,x1-x0-8,2,dark); rect(x0+9,y0+18,4,2,7); rect(x1-7,y0+4,3,3,dark); px(x0+20,y0+20,13); break;
+    case "riverside_ground": rect(x0+6,y0+4,x1-x0-14,y1-y0-10,10); rect(x0+7,y0+5,x1-x0-16,y1-y0-12,11); rect(x0+7,y0+9,x1-x0-16,1,12); rect(x0+7,y1-11,x1-x0-16,1,12); rect(x0+2,y0+2,3,3,5); rect(x1-5,y0+3,1,6,5); px(x1-5,y0+2,13); for(let x=x0;x<x1;x+=2) px(x,y1-1,7); break;
+    case "school_dungeon": rect(x0+3,y0+3,22,8,5); rect(x0+5,y0+5,3,2,15); rect(x0+3,y1-11,20,8,10); rect(x0+4,y1-10,18,6,9); rect(x0+7,y1-8,2,2,13); rect(x0+13,y1-8,2,2,15); for(let x=x0+28;x<x1-2;x+=3) for(let y=y0+4;y<y1-3;y+=3) px(x,y,11); rect(x0+33,y0+12,6,1,12); break;
+    case "housing_estate": for(let x=x0+3;x<x1-10;x+=9){ rect(x,y0+3,6,y1-y0-12,5); for(let y=y0+5;y<y1-11;y+=3) px(x+2,y,dark); px(x+2,y0+5+3*((x/9|0)%3),15);} rect(x1-8,y0+3,6,5,4); rect(x1-8,y1-8,6,4,11); break;
+    case "newtown_residential": for(let y=y0+2;y<y1-3;y+=5) for(let x=x0+2;x<x1-3;x+=5){ rect(x,y,3,3,[10,9,11][(((x/5)|0)+((y/5)|0))%3]); if(((x/5)|0)%3===0) px(x+4,y+4,13);} break;
+    case "paddy_shrine": for(let y=y0+1;y<y1-1;y++) for(let x=x0+1;x<x1-1;x++){ if(y%6===0||x%8===0) px(x,y,mid); else px(x,y,7);} rect(x1-16,y0+3,7,6,9); rect(x1-14,y0+5,3,2,13); rect(x0+4,y1-9,6,5,6); rect(x0+12,y1-8,5,4,6); rect(x0+19,y1-9,6,5,6); break;
+    case "riverbank_bridge": for(let y=r.y;y<r.y+r.h;y++) for(let x=r.x;x<r.x+r.w;x++) if(((x+y)&1)===0 || hash(x,y)<0.2) px(x,y,4); for(let x=x0;x<x1;x+=3) px(x,y0+2,7); break;
+    case "forbidden_valley_temple": for(let y=y0;y<y1;y++) for(let x=x0;x<x1;x++) if(((x-y)&5)===0) px(x,y,9); rect(x0+4,y0+8,x1-x0-8,8,dark); rect(x0+6,y0+10,x1-x0-12,4,9); px(x0+((x1-x0)>>1),y0+12,12); break;
+  }
+}
+
+function drawOutlines(){
+  for(const f of FIELDS){ const r=rectOf(f); oc.fillStyle=PAL[5];
+    oc.fillRect(r.x,r.y,r.w,1); oc.fillRect(r.x,r.y+r.h-1,r.w,1); oc.fillRect(r.x,r.y,1,r.h); oc.fillRect(r.x+r.w-1,r.y,1,r.h); }
+}
+
+function drawFields(){
+  for(const f of FIELDS){ const r=rectOf(f); rect(r.x,r.y,r.w,r.h,ELEV_FILL[f.elevation]); pattern(f,r); }
+}
+function drawSpines(){
+  // 旧・鹿之尾街道
+  rect(KAIDO_X, 0, 2, KAIDO_END, 4); for(let y=2;y<KAIDO_END;y+=6) px(KAIDO_X, y, 3);
+  // 国道281号（唯一の光源）
+  poly(KOKUDO, 5, 3); for(let y=2;y<170;y+=6) px(13,y,12);
+  for(let y=4;y<170;y+=8){ px(11,y,13); px(15,y+4,13); }
+  for(let y=172;y<216;y+=8){ const t=(y-170)/30, x=Math.round(13+32*Math.min(t,1)); px(x-2,y,13); px(x+2,y+4,13); }
+  // 御渡橋
+  rect(43,RIVER_Y-1,5,17,5); rect(44,RIVER_Y,3,15,4); rect(43,RIVER_Y+15,5,2,0); rect(43,RIVER_Y+13,5,1,14); px(42,RIVER_Y+3,13); px(48,RIVER_Y+9,13);
+  // 渡し場跡
+  rect(39,RIVER_Y-2,4,2,11);
+  // 東海縦貫道：影→床版→防音壁
+  poly(EXPWY.map(p=>[p[0]+1,p[1]+2]), 0, 5);
+  poly(EXPWY, 4, 5); poly(EXPWY.map(p=>[p[0],p[1]-3]), 5, 1); poly(EXPWY.map(p=>[p[0],p[1]+3]), 5, 1);
+  for(let i=0;i<EXPWY.length-1;i++){ const [ax,ay]=EXPWY[i],[bx,by]=EXPWY[i+1], n=Math.hypot(bx-ax,by-ay)|0; for(let k=0;k<n;k+=5){ px(Math.round(ax+(bx-ax)*k/n), Math.round(ay+(by-ay)*k/n), 2);} }
+  // 隧道（F03）とその北口→F04/F09への法面下の道
+  rect(TUNNEL[0]-1,TUNNEL[1]-3,3,7,0); px(TUNNEL[0],TUNNEL[1]-3,12); px(TUNNEL[0],TUNNEL[1]+3,12);
+  line(TUNNEL[0],TUNNEL[1]-4,127,8,9,1); line(TUNNEL[0],TUNNEL[1]-4,110,26,9,1); line(110,26,127,33,9,1);
+  // 法面の階段（F03南側→F06）
+  for(let y=30;y<36;y+=2) rect(73,y,3,1,5);
+}
+
+function drawConnections(){
+  const done=new Set();
+  for(const f of FIELDS) for(const e of f.exits){
+    const key=[f.id,e.to].sort().join("-"); if(done.has(key)) continue; done.add(key);
+    const t=BY[e.to], back=t.exits.find(x=>x.to===f.id); const a=exitPt(f,e), b=exitPt(t,back);
+    const c = e.lock ? 14 : 12;
+    const hi = selected && (f.id===selected||t.id===selected);
+    if(Math.hypot(a.x-b.x,a.y-b.y)>4){ // 隧道経路（点線）
+      const n=Math.max(Math.abs(a.x-b.x),Math.abs(a.y-b.y)); for(let k=0;k<=n;k+=2) px(Math.round(a.x+(b.x-a.x)*k/n),Math.round(a.y+(b.y-a.y)*k/n),c);
+    }
+    const mx=Math.round((a.x+b.x)/2), my=Math.round((a.y+b.y)/2);
+    rect(mx-1,my-1,4,4,0); rect(mx,my,2,2,c);
+    if(hi){ rect(mx-2,my-2,6,1,c); rect(mx-2,my+3,6,1,c); rect(mx-2,my-1,1,4,c); rect(mx+3,my-1,1,4,c); }
+  }
+}
+
+function drawGrid(){ for(let c=1;c<6;c++) for(let y=0;y<H;y+=2) px(c*CW,y,15); for(let r=1;r<6;r++) for(let x=0;x<W;x+=2) px(x,r*CH,15); }
+
+function drawHighlight(){
+  const draw=(id,c,inset)=>{ const r=rectOf(BY[id]); oc.fillStyle=PAL[c];
+    oc.fillRect(r.x+inset,r.y+inset,r.w-2*inset,1); oc.fillRect(r.x+inset,r.y+r.h-1-inset,r.w-2*inset,1);
+    oc.fillRect(r.x+inset,r.y+inset,1,r.h-2*inset); oc.fillRect(r.x+r.w-1-inset,r.y+inset,1,r.h-2*inset); };
+  if(selected){ draw(selected,13,0); draw(selected,0,1); for(const e of BY[selected].exits) draw(e.to, e.lock?14:5, 0); }
+  if(hovered && hovered!==selected) draw(hovered,15,0);
+}
+
+function render(){
+  drawGround(); drawFields(); drawRiver(); drawOutlines(); drawSpines();
+  if(show.grid) drawGrid();
+  if(show.conn) drawConnections();
+  drawHighlight();
+  cx.imageSmoothingEnabled=false; cx.clearRect(0,0,cv.width,cv.height); cx.drawImage(off,0,0,W*scale,H*scale);
+  renderLabels();
+}
+
+function renderLabels(){
+  labels.innerHTML="";
+  if(!show.lab) return;
+  const fs = Math.max(9, 3*scale+1);
+  const add=(txt,x,y,cls,big)=>{ const d=document.createElement("div"); d.className="lab "+(cls||""); d.innerHTML=txt;
+    d.style.left=(x*scale)+"px"; d.style.top=(y*scale)+"px"; d.style.fontSize=(big?fs:Math.max(8,fs-2))+"px"; labels.appendChild(d); };
+  for(const f of FIELDS){ const r=rectOf(f); const sel=f.id===selected;
+    add(`<b>${f.id}</b>${SHORT[f.id]}`, r.x+3, r.y+3, sel?"sel":(f.elevation>=4?"dim":""), true); }
+  add("国道281号", 16, 60, "spine k v"); add("旧鹿之尾街道", 43, 112, "spine v"); add("東海縦貫道", 96, 19, "spine"); add("蒼籠川", 140, 205, "spine");
+  add("隧道", TUNNEL[0]+3, TUNNEL[1]-1, "spine"); add("御渡橋", 49, 202, "spine"); add("渡し場跡", 24, 190, "spine");
+  add("法面", 104, 52, "spine"); add("断崖", 152, 34, "spine");
+}
+
+function fit(){
+  const avail = document.querySelector(".stage").clientWidth - 2;
+  const availH = Math.max(360, window.innerHeight - 250);
+  scale = Math.max(2, Math.min(5, Math.floor(Math.min(avail/W, availH/H))));
+  cv.width=W*scale; cv.height=H*scale; cv.style.width=cv.width+"px"; cv.style.height=cv.height+"px";
+  render();
+}
+
+function fieldAt(ev){ const b=cv.getBoundingClientRect(); const x=(ev.clientX-b.left)/scale, y=(ev.clientY-b.top)/scale;
+  return FIELDS.find(f=>{const r=rectOf(f); return x>=r.x&&x<r.x+r.w&&y>=r.y&&y<r.y+r.h;}); }
+cv.addEventListener("mousemove",ev=>{ const f=fieldAt(ev); const id=f?f.id:null; if(id!==hovered){hovered=id; cv.style.cursor=f?"pointer":"default"; render();} });
+cv.addEventListener("mouseleave",()=>{hovered=null;render();});
+cv.addEventListener("click",ev=>{ const f=fieldAt(ev); if(f) select(f.id); });
+for(const [k,id] of [["conn","tgConn"],["lab","tgLab"],["grid","tgGrid"]]) document.getElementById(id).addEventListener("change",e=>{show[k]=e.target.checked;render();});
+window.addEventListener("resize",fit);
+
+// ── パネル ──
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function select(id){ selected=id; render(); renderPanel(); }
+function renderPanel(){
+  const f=BY[selected]; const s=f.size_tiles, wp=f.world_pos; const tiles=s.w*s.h;
+  const ebar = [0,1,2,3,4,5].map(i=>`<i style="background:${i<=f.elevation?PAL[ELEV_FILL[i]]:PAL[1]};opacity:${i<=f.elevation?1:.35}"></i>`).join("");
+  const ELEV_NAME=["河畔","低地","微高地","寺町の丘","谷戸・丘陵","山頂・禁域"];
+  const exits = f.exits.map(e=>{ const t=BY[e.to]; return `<li><span class="side">${e.side}</span><button type="button" data-go="${e.to}">${e.to} ${esc(t.name)}</button>${e.lock?`<span class="lk">${esc(e.lock)}</span>`:`<span class="ok">開放</span>`}<span class="note">${esc(e.note||"")}${e.lock?` ── ${esc(DATA.meta.locks[e.lock]||"")}`:""}</span></li>`; }).join("");
+  document.getElementById("panel").innerHTML = `
+    <div class="ph"><span class="chip sel">${f.id}</span><span class="chip">${esc(ROLE[f.id]||"")}</span><span class="chip" title="biome">${esc(f.biome)}</span></div>
+    <h2>${esc(f.name)}</h2>
+    <p class="rd">${esc(f.reading)}</p>
+    <dl class="meta">
+      <dt>標高</dt><dd><span class="ebar">${ebar}</span>${f.elevation} / 5 ── ${ELEV_NAME[f.elevation]}</dd>
+      <dt>面積</dt><dd>${s.w} × ${s.h} タイル ＝ ${tiles.toLocaleString()} タイル（${s.w*16} × ${s.h*16} px ／ 画面 ${(s.w/24).toFixed(1)} × ${(s.h/13.5).toFixed(1)} 枚分）</dd>
+      <dt>配置</dt><dd>col ${wp.col} · row ${wp.row}（${wp.w}×${wp.h} セル）</dd>
+      <dt>アクセント</dt><dd>${esc(f.palette_accent)} <span style="display:inline-flex;gap:2px;vertical-align:middle;margin-left:4px">${(f.palette_accent_idx||[]).map(i=>`<i style="display:block;width:10px;height:10px;background:${PAL[i]};border:1px solid ${PAL[0]}" title="idx ${i}"></i>`).join("")}</span></dd>
+      <dt>シーン</dt><dd><span class="scene">${esc(f.scene_path)}</span></dd>
+      ${f.unlock_flag?`<dt>進入条件</dt><dd><span class="lk">${esc(f.unlock_flag)}</span> ${esc(DATA.meta.locks[f.unlock_flag]||"")}</dd>`:""}
+    </dl>
+    <div class="sec"><h3>雰囲気</h3><p>${esc(f.ambience)}</p></div>
+    <div class="sec"><h3>接続先 ${f.exits.length}</h3><ul class="ex">${exits}</ul></div>
+    <div class="sec"><h3>想定される調べもの</h3><ul>${f.interactables.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div class="sec"><h3>恐怖演出の方向性</h3><p class="h">${esc(f.horror_beat)}</p></div>
+    <div class="sec"><h3>物語上の役割</h3><p>${esc(f.story_role)}</p></div>
+    <div class="sec"><h3>ランドマーク</h3><ul>${f.landmarks.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div class="sec"><h3>必要タイル種別 ${f.required_tiles.length}</h3><div class="tiles">${f.required_tiles.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div>
+    <p class="foot">1タイル=16px。基準解像度 384×216 は 24×13.5 タイル。全データは <span class="scene">res://data/fields.json</span> と同一。</p>`;
+  document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>select(b.dataset.go)));
+}
+
+// ── 凡例・スウォッチ ──
+document.getElementById("sw").innerHTML = DATA.meta.palette.map(p=>`<span data-i="${p.idx}" style="background:${p.hex}" title="${p.idx} ${p.name} ${p.hex} ── ${p.role}"></span>`).join("");
+document.getElementById("elevLegend").innerHTML = `<em>0 河畔</em>` + [0,1,2,3,4,5].map(i=>`<i style="background:${PAL[ELEV_FILL[i]]}" title="標高 ${i}"></i>`).join("") + `<em>5 山頂</em>`;
+
+fit(); renderPanel();
+</script>
