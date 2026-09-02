@@ -20,6 +20,7 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 Palette="*res://scripts/autoload/palette.gd"
 GameState="*res://scripts/autoload/game_state.gd"
 FieldRegistry="*res://scripts/autoload/field_registry.gd"
+Calendar="*res://scripts/autoload/calendar.gd"
 SceneRouter="*res://scripts/autoload/scene_router.gd"
 SteamBridge="*res://scripts/autoload/steam_bridge.gd"
 
