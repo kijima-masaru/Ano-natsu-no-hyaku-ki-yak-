@@ -4,6 +4,8 @@ extends Node
 
 const MESSAGE_WINDOW_SCENE: PackedScene = preload("res://scenes/ui/message_window.tscn")
 const DATE_HUD_SCENE: PackedScene = preload("res://scenes/ui/date_hud.tscn")
+const SLOT_MENU_SCENE: PackedScene = preload("res://scenes/ui/slot_menu.tscn")
+const TITLE_SCENE: String = "res://scenes/ui/title.tscn"
 
 @onready var world: Node2D = $World
 @onready var ui: CanvasLayer = $UI
@@ -33,7 +35,37 @@ func _on_field_entered(field_id: String, from_id: String) -> void:
 
 
 func _on_interaction_started(target: Interactable) -> void:
+	if target.kind == "save_point":
+		_open_save_menu()
+		return
 	_show_message(target.display_name, target.message)
+
+
+func _open_save_menu() -> void:
+	if SceneRouter.player != null:
+		SceneRouter.player.input_enabled = false
+	var menu: Control = SLOT_MENU_SCENE.instantiate() as Control
+	menu.set("mode", "save")
+	ui.add_child(menu)
+	menu.finished.connect(func(success: bool, slot: int) -> void:
+		menu.queue_free()
+		if success:
+			_show_message("", "記録した。（%s）" % SavePaths.slot_label(slot))
+		else:
+			_on_message_closed())
+
+
+func _exit_tree() -> void:
+	SceneRouter.reset()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	# 暫定：X 長押し等のメニューは未実装。Esc でタイトルへ（オートセーブ済み）。TODO(step-3 task-4): ポーズメニュー
+	if event.is_action_pressed("cancel") and not _message_window.is_open and SceneRouter.player != null \
+			and SceneRouter.player.input_enabled:
+		get_viewport().set_input_as_handled()
+		SaveManager.autosave()
+		get_tree().change_scene_to_file(TITLE_SCENE)
 
 
 func _on_passage_blocked(exit: ExitData) -> void:

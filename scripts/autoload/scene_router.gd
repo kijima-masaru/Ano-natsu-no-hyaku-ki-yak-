@@ -36,6 +36,17 @@ func register_world(root: Node2D) -> void:
 	world_root = root
 
 
+## ゲームシーンを離れるときに呼ぶ。フィールドとプレイヤーはシーンごと解放されるため参照を捨てる
+func reset() -> void:
+	world_root = null
+	current_field = null
+	current_field_id = ""
+	player = null
+	camera = null
+	is_transitioning = false
+	_fade.color = Palette.with_alpha(Palette.FADE_BLACK, 0.0)
+
+
 ## 起動時：GameState.current_field_id のフィールドを読み込む
 func start() -> void:
 	if world_root == null:
@@ -124,6 +135,8 @@ func _mount_field(scene: FieldBase, def: FieldData, from_id: String) -> void:
 	if def != null:
 		GameState.set_current_field(def.id)
 	GameState.set_player_pose(player.global_position, player.facing)
+	if def != null:
+		GameState.mark_visited(def.id)
 	field_entered.emit(current_field_id, from_id)
 
 
