@@ -223,6 +223,11 @@ def check_fields(r, fields):
     for f in fields:
         if os.path.exists(res(f.get("scene_path", ""))):
             implemented.add(f["id"])
+        else:
+            # scripts/fields/fXX_*.gd があるのに scene_path のシーンが無い → 名前の不一致（プレースホルダ表示になる）
+            stray = [g for g in os.listdir(os.path.join(ROOT, "scripts", "fields")) if g.startswith(f["id"].lower() + "_") and g.endswith(".gd")]
+            if stray:
+                r.error("fields", "%s: %s があるのに scene_path '%s' のシーンが無い（ファイル名を fields.json に合わせる）" % (f["id"], stray[0], f.get("scene_path")))
         for e in f.get("exits", []):
             to = e.get("to")
             if to not in by_id:
@@ -292,7 +297,8 @@ def check_map(r, f, text):
     isolated = sum(1 for y in range(h) for x in range(w) if rows[y][x] in walk and (x, y) not in seen)
     if isolated:
         r.warn("map", "%s: 孤立した通行可タイル %d 個（意図した閉域なら可）" % (fid, isolated))
-    for pid, x, y in re.findall(r'"id": "([a-z_0-9]+)"[^\n]*?"tile": Vector2i\((-?\d+), (-?\d+)\)', text):
+    block = re.search(r"\nconst INTERACTABLES: Array = \[(.*?)\n\]", text, re.S)
+    for pid, x, y in re.findall(r'"id": "([a-z_0-9]+)"[^\n]*?"tile": Vector2i\((-?\d+), (-?\d+)\)', block.group(1) if block else ""):
         x, y = int(x), int(y)
         if not (0 <= x < w and 0 <= y < h):
             r.error("map", "%s: 調べ物 %s の座標 (%d, %d) がフィールド外です（雛形の未設定値も含む）" % (fid, pid, x, y)); continue

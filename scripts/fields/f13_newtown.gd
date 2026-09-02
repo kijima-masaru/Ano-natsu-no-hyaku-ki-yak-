@@ -30,7 +30,6 @@ const EXTRA_HOUSE_TILES: Array = [
 	[Vector2i(29, 30), "="], [Vector2i(30, 30), "="], [Vector2i(31, 30), "="],
 	[Vector2i(30, 28), "M"],
 ]
-const EXTRA_NAMEPLATE_ID: String = "extra_nameplate"
 const EXTRA_NAMEPLATE_TILE: Vector2i = Vector2i(30, 28)
 ## 調べ物。テキストとフラグ操作は data/events.json（on_interact, target=id）
 const INTERACTABLES: Array = [
@@ -109,5 +108,5 @@ func _update_extra_house() -> void:
 		return
 	for entry: Array in EXTRA_HOUSE_TILES:
 		set_tile(objects, entry[0], OBJECT_LEGEND[entry[1]])
-	if get_interactable(EXTRA_NAMEPLATE_ID) == null:
-		add_point_of_interest(EXTRA_NAMEPLATE_ID, MessageResolver.text("ui_f13_extra_nameplate"), EXTRA_NAMEPLATE_TILE, "sign")
+	# id はリテラルで渡す（validate_data が調べ物として拾う）
+	add_point_of_interest("extra_nameplate", MessageResolver.text("ui_f13_extra_nameplate"), EXTRA_NAMEPLATE_TILE, "sign")

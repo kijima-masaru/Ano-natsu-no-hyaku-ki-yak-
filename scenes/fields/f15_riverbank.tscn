@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/fields/field_base.tscn" id="1_base"]
-[ext_resource type="Script" path="res://scripts/fields/f15_aogogawa.gd" id="2_script"]
+[ext_resource type="Script" path="res://scripts/fields/f15_riverbank.gd" id="2_script"]
 
-[node name="F15Aogogawa" instance=ExtResource("1_base")]
+[node name="F15Riverbank" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
 default_spawn_tile = Vector2i(5, 1)
