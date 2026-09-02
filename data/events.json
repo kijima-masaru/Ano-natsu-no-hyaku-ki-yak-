@@ -629,6 +629,246 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_f05_toki_testimony",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "toki_npc",
+      "day_range": [
+        3,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_toki_greet"
+        },
+        {
+          "type": "message",
+          "id": "msg_f05_toki_testimony_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f05_toki_testimony_2"
+        },
+        {
+          "type": "give_evidence",
+          "evidence": "testimony_walking"
+        },
+        {
+          "type": "message",
+          "id": "msg_f05_toki_testimony_3"
+        },
+        {
+          "type": "set_flag",
+          "flag": "heard_testimony_direct"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f05_toki_again",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "toki_npc",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_toki_again"
+        },
+        {
+          "type": "message",
+          "id": "msg_f05_storefront"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_shop",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "toki_shop",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_shop"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_calendar_early",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "calendar",
+      "day_range": [
+        1,
+        2
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_calendar_early"
+        }
+      ],
+      "once": false,
+      "priority": 5
+    },
+    {
+      "id": "ev_f05_calendar_conceal",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "calendar",
+      "day_range": [
+        3,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "storefront_note"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_gate",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "temple_gate",
+      "conditions": [
+        {
+          "time_of_day": "night",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_gate"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_gate_night",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "temple_gate",
+      "conditions": [
+        {
+          "time_of_day": "night"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_gate_closed"
+        }
+      ],
+      "once": false,
+      "priority": 5
+    },
+    {
+      "id": "ev_f05_temple_board",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "temple_board",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_temple_board"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_water",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "water",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_water"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_signpost",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "signpost",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_signpost"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_shutter_a",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "shutter_a",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_shutter_a"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_shutter_b",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "shutter_b",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_shutter_b"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f05_wooden_door",
+      "field": "F05",
+      "trigger": "on_interact",
+      "target": "wooden_door",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f05_wooden_door"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }

@@ -119,8 +119,8 @@
     },
     {
       "id": "msg_d03_open",
-      "speaker": "system",
-      "text": "8月3日。調査 1 日目。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "",
+      "text": "8月3日。朝、澪が団地の下に立っていた。\n「ノート、用意した。今日から、一緒に回ろう」"
     },
     {
       "id": "msg_d04_open",
@@ -1251,6 +1251,104 @@
       "id": "msg_d01_mio_4_t",
       "speaker": "yu",
       "text": "話したいこと。\n何を知っているのか、確かめる必要があった。"
+    },
+    {
+      "id": "msg_f05_storefront",
+      "speaker": "yu",
+      "text": "トキさんが「昨日も来たね」と言う。来ていない。物忘れだろう。",
+      "truth_id": "msg_f05_storefront_t"
+    },
+    {
+      "id": "msg_f05_storefront_t",
+      "speaker": "yu",
+      "text": "トキさんが「昨日も来たね」と言う。\n7/31 も、ここを通った。蓮と。"
+    },
+    {
+      "id": "msg_f05_toki_greet",
+      "speaker": "toki",
+      "text": "「昨日も来たね。……蓮くんのこと、聞いたよ」"
+    },
+    {
+      "id": "msg_f05_toki_testimony_1",
+      "speaker": "toki",
+      "text": "「三十一日の夕方だったかね。蓮くんが店の前を通ったの。\nもう一人、並んで歩いてた」"
+    },
+    {
+      "id": "msg_f05_toki_testimony_2",
+      "speaker": "toki",
+      "text": "「顔は見てないよ。夕暮れで、こっちは目が悪いから。\n背の高さは、あんたくらいだったかねえ」"
+    },
+    {
+      "id": "msg_f05_toki_testimony_3",
+      "speaker": "yu",
+      "text": "背の高さは、俺くらい。\n澪がノートに何か書いた。",
+      "truth_id": "msg_f05_toki_testimony_3_t"
+    },
+    {
+      "id": "msg_f05_toki_testimony_3_t",
+      "speaker": "yu",
+      "text": "背の高さは、俺くらい。当然だ。\n澪がノートに何か書いた。何を書いたのか、見ておく必要があった。"
+    },
+    {
+      "id": "msg_f05_toki_again",
+      "speaker": "toki",
+      "text": "「今日も来たね。飴でも持っていきなさい」"
+    },
+    {
+      "id": "msg_f05_shop",
+      "speaker": "",
+      "text": "駄菓子屋の店先。商品だけが新しい。\n他の店はもう、何年も開いていない。"
+    },
+    {
+      "id": "msg_f05_calendar_early",
+      "speaker": "",
+      "text": "店先の日めくり。まだ 7 月 31 日のままだ。\nトキさんは日めくりを、めくらない。"
+    },
+    {
+      "id": "msg_f05_gate",
+      "speaker": "",
+      "text": "圓照寺の山門。門前までで、中へは入らない。\n砂利の向こうに本堂と墓域が見える。"
+    },
+    {
+      "id": "msg_f05_gate_closed",
+      "speaker": "",
+      "text": "門扉が閉まっている。"
+    },
+    {
+      "id": "msg_f05_temple_board",
+      "speaker": "",
+      "text": "「盂蘭盆会 八月十五日」。去年の紙の上に、今年の紙が貼ってある。"
+    },
+    {
+      "id": "msg_f05_water",
+      "speaker": "",
+      "text": "共同水道の跡。蛇口を回すと、乾いた音だけがする。"
+    },
+    {
+      "id": "msg_f05_signpost",
+      "speaker": "yu",
+      "text": "石の道標。『右 鹿之尾　左 薬師』。左の字は削れている。",
+      "truth_id": "msg_f05_signpost_t"
+    },
+    {
+      "id": "msg_f05_signpost_t",
+      "speaker": "yu",
+      "text": "石の道標。『右 鹿之尾　左 薬師』。\n7/31 の夜、俺たちは左へ行った。"
+    },
+    {
+      "id": "msg_f05_shutter_a",
+      "speaker": "",
+      "text": "呉服店。シャッターの張り紙は色が抜けて、字が読めない。"
+    },
+    {
+      "id": "msg_f05_shutter_b",
+      "speaker": "",
+      "text": "時計店。中の時計が全部、同じ時刻で止まっている。"
+    },
+    {
+      "id": "msg_f05_wooden_door",
+      "speaker": "",
+      "text": "薬屋。木の戸の隙間から、薬草の匂いだけが残っている。"
     }
   ]
 }
