@@ -17,10 +17,10 @@ KNOWN_ACTIONS = {
     "message", "set_flag", "clear_flag", "give_item", "remove_item", "unlock_field", "move_player", "advance_day",
     "set_time", "add_points", "wait", "run_event", "end_game", "choice", "autosave", "set_companion", "start_stalker",
     "sleep", "give_evidence", "conceal_evidence", "show_concealment_reveal", "raise_suspicion", "play_sound",
-    "play_bgm", "stop_bgm", "entity_speak", "entity_comfort", "entity_pulse",
+    "play_bgm", "stop_bgm", "entity_speak", "entity_comfort", "entity_pulse", "switch_floor",
 }
 KNOWN_CONDITIONS = {"flag", "has_item", "field_visited", "day", "day_range", "time_of_day", "not", "any", "all",
-                    "suspicion", "can_sleep"}
+                    "suspicion", "can_sleep", "floor"}
 FLAG_PREFIXES = ("hid_", "hid_fail_", "ev_", "ev_done_", "day_", "seen_", "visited_", "luck_", "an_done_")
 ANOMALY_TRIGGERS = {"on_enter", "on_interact", "on_condition"}
 ANOMALY_MODES = {"once", "repeat", "escalate"}

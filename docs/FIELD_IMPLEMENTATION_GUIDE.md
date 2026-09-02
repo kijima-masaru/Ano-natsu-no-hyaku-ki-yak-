@@ -42,6 +42,14 @@ godot --headless --path . -s scripts/tools/field_scaffold.gd -- F03
 - [ ] `_apply_time_of_day(tod)`：灯り（`階段室（点灯・消灯）` ↔ `階段室（消灯）`、`ガラス扉（点灯）` ↔ `窓（消灯・点灯）`）、門、NPC。`Calendar.TIME_*` で比較。
 - [ ] `_apply_day(day)`：日替わりの配置。表は `const`（F12 `LIT_FLOORS_BY_DAY`）。最後に `_apply_time_of_day(Calendar.time_of_day)` を呼ぶ。
 
+### 屋内の階（複数フロア）
+
+- [ ] 屋内を持つフィールドは `FLOORS: Dictionary = {"1f": {"rows": ROWS_1F, "ground": …, "objects": …, "default_ground": …, "interactables": POI_1F}, …}` を定義する（F11 参照）。屋外は `outside`。
+- [ ] 階の移動はイベントの `switch_floor` アクション（`floor`, `tile`, `facing`）。階段や戸口の調べ物に付ける。屋内の調べ物イベントには条件 `{"floor": "1f"}` を付ける（id は全階で一意にする）。
+- [ ] 屋内は時間帯と独立に暗い（`FieldFloors.INDOOR_DARKNESS`。階ごとに `"darkness"` で上書き可）。非常灯など `LightCatalog` の光源を廊下に置く。
+- [ ] 出口トリガーは屋外でだけ働く。追跡者は階の切替で消える（必要なら `on_enter` ＋ `floor` 条件で再配置）。
+- [ ] `validate_data` は屋外の `MAP_ROWS` だけを検査する。階の地図は Python の生成スクリプトで到達性を確認する。
+
 ## 3. イベント記述（`data/events.json` / `data/messages.json`）
 
 - [ ] `data/skeletons/fXX_<slug>.json` の `events` と `messages` を貼り込み、スケルトンを削除する。

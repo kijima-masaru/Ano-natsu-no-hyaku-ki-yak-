@@ -40,6 +40,9 @@ func _on_field_entered(field_id: String, from_id: String) -> void:
 	var field: FieldBase = SceneRouter.current_field
 	if field != null and not field.interaction_started.is_connected(_on_interaction_started):
 		field.interaction_started.connect(_on_interaction_started)
+		field.floor_changed.connect(func(_floor: String) -> void:
+			EventSystem.fire(EventSystem.TRIGGER_ENTER, field_id)
+			AnomalySystem.fire(AnomalySystem.TRIGGER_ENTER, field_id))
 		field.actors.child_entered_tree.connect(func(node: Node) -> void:
 			if node.is_in_group("stalker") and not node.captured.is_connected(_on_stalker_captured):
 				node.captured.connect(_on_stalker_captured))

@@ -116,6 +116,14 @@
 | `msg_f04_battery` | 外したのは獣ではない。人の手だ。 | `msg_f04_battery_t` | 端子は俺が外した。六月の夜、柵を越えるために。 | F04 |
 | `msg_f04_pillar` | 石は、ここには無い。 | `msg_f04_pillar_t` | 石の方を俺がずらした。柱はもう意味がない。 | F04 8/13〜 |
 | `msg_an_f04_bulb` | 窓に俺の影だけが映っている。 | `msg_an_f04_bulb_t` | 俺の隣の影だ。 | 怪異 an_f04_bulb |
+| `msg_f11_pedestal` | 三人で座った。蓮と、俺と、転校してきたばかりの別の子。 | `msg_f11_pedestal_t` | その子の名前を、俺は思い出さないことにしている。 | F11 屋外。「三人目」 |
+| `msg_f11_hutch` | 蓮は名前を付けるのが上手かった。 | `msg_f11_hutch_t` | ナツ、という名前も、最初は蓮が言った。 | F11 屋外 |
+| `msg_f11_health_bed` | 隣で、授業が終わるまで待った。 | `msg_f11_health_bed_t` | 蓮が一人になるのを、待っていた。 | F11 1F |
+| `msg_f11_art_shelf_2` | もう一つは—— | `msg_f11_art_shelf_2_t` | 俺へ。読まない。読めば戻れなくなる。 | F11 1F 隠蔽 C-17 と対 |
+| `msg_f11_night_journal` | 『校門の外に二人』。 | `msg_f11_night_journal_t` | 俺と蓮だ。俺が先に歩き出した。 | F11 1F 証拠 night_watch_log |
+| `msg_f11_class6_board` | 蓮が描いて、俺が隣に描き足した。 | `msg_f11_class6_board_t` | 俺が描き足したのは三人目だった。今はもう消えている。 | F11 2F |
+| `msg_f11_library` | 丸のところだけ色が違う。 | `msg_f11_library_t` | 俺が六年の時にそこだけ塗った。あの頃から知っていた。 | F11 2F |
+| `msg_an_f11_desks_3` | 名札は読める。読めるが、読まなかった。 | `msg_an_f11_desks_3_t` | 三人目の名前だった。 | 怪異 an_f11_desks |
 
 ## 集計と実装要件
 

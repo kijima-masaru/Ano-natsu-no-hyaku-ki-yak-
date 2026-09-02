@@ -30,6 +30,10 @@ static func register_all(es: Node) -> void:
 	es.register_action("set_companion", func(a: Dictionary, _c: Dictionary) -> void: SceneRouter.set_companion(bool(a.get("on", true))))
 	es.register_action("start_stalker", func(a: Dictionary, c: Dictionary) -> void: _start_stalker(es, a, c))
 	es.register_action("sleep", func(_a: Dictionary, _c: Dictionary) -> void: await _sleep(es))
+	es.register_action("switch_floor", func(a: Dictionary, c: Dictionary) -> void: _switch_floor(es, a, c))
+	ConditionEvaluator.register("floor", func(cond: Dictionary) -> bool:
+		var field: FieldBase = SceneRouter.current_field
+		return field != null and (field.current_floor == str(cond.get("floor", ""))) == bool(cond.get("is", true)))
 	ConditionEvaluator.register("can_sleep", func(cond: Dictionary) -> bool:
 		return Calendar.can_sleep(SceneRouter.current_field_id) == bool(cond.get("can_sleep", true)))
 
@@ -116,3 +120,22 @@ static func _sleep(es: Node) -> void:
 	GameState.raise_flag("slept_at_home")
 	await es.show_entry(MessageResolver.resolve("msg_bed_sleep"))
 	es.event_finished.connect(func(_id: String) -> void: Calendar.try_sleep(field_id), Object.CONNECT_ONE_SHOT | Object.CONNECT_DEFERRED)
+
+
+## switch_floor: {floor, tile, facing?}。現在フィールドの屋内の階へ移る／屋外（"outside"）へ戻る
+static func _switch_floor(es: Node, a: Dictionary, c: Dictionary) -> void:
+	var field: FieldBase = SceneRouter.current_field
+	if field == null:
+		es.emit_action_failed(str(c["event_id"]), a, "フィールド未読込")
+		return
+	var tile_value: Variant = a.get("tile", null)
+	if not (tile_value is Array and (tile_value as Array).size() == 2):
+		es.emit_action_failed(str(c["event_id"]), a, "tile が必要")
+		return
+	var tile: Vector2i = Vector2i(int((tile_value as Array)[0]), int((tile_value as Array)[1]))
+	var facing: Vector2i = Vector2i.DOWN
+	var f: Variant = a.get("facing", null)
+	if f is Array and (f as Array).size() == 2:
+		facing = Vector2i(int((f as Array)[0]), int((f as Array)[1]))
+	if not field.switch_floor(str(a.get("floor", "outside")), tile, facing):
+		es.emit_action_failed(str(c["event_id"]), a, "階の切替に失敗")
