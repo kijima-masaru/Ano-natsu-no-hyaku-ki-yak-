@@ -56,7 +56,7 @@
 0. `chore/field-pipeline`：済（PR #25）。`FieldMapBuilder` への共通化、`field_scaffold`、`validate_data`（GDScript ＋ Python）、ガイドの全面改訂
 1. フィールド 11：F07 → F11 → F13 → F10 → F15 → F03 → F08 → F14 → F04 → F09 → F16（`docs/field_build_order.md`）。各 1 PR、`FIELD_IMPLEMENTATION_GUIDE.md` に従う
 2. `feat/lighting-and-night`：済（PR #26）。`Lighting` autoload（CanvasModulate の時間帯色調・明るさ設定・タイル光源・月光・懐中電灯）、Stalker の暗所ボーナスと照明下の視認距離
-3. `feat/anomalies`：フィールド固有の怪異（尋ね人の増加、階段室の灯、田に映る月、追跡者の出現）。正体は説明しない
+3. `feat/anomaly-encounters`：済（PR #27）。`AnomalySystem` ＋ `data/anomalies.json`（once / repeat / escalate、接近度、憑いた怪異の介入）。既存 5 フィールドに各 1 件
 4. `feat/schedule-act1` `feat/schedule-act2`：8/5〜8/31 のイベント、中盤の老婆（F14 シゲ）の激昂、8/30 の提示画面と `truth_revealed`、終幕の澪操作
 5. `chore/act2-playtest`：通しの机上／実機確認、v0.3.0
 

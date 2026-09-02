@@ -21,7 +21,10 @@ KNOWN_ACTIONS = {
 }
 KNOWN_CONDITIONS = {"flag", "has_item", "field_visited", "day", "day_range", "time_of_day", "not", "any", "all",
                     "suspicion", "can_sleep"}
-FLAG_PREFIXES = ("hid_", "hid_fail_", "ev_", "ev_done_", "day_", "seen_", "visited_", "luck_")
+FLAG_PREFIXES = ("hid_", "hid_fail_", "ev_", "ev_done_", "day_", "seen_", "visited_", "luck_", "an_done_")
+ANOMALY_TRIGGERS = {"on_enter", "on_interact", "on_condition"}
+ANOMALY_MODES = {"once", "repeat", "escalate"}
+COMFORT_CONTEXTS = {"after_anomaly", "after_stalker", "night_walk", "yakushi_gate", "heroine_near"}
 NEIGHBORS = ((1, 0), (-1, 0), (0, 1), (0, -1))
 
 
@@ -185,6 +188,35 @@ def check_evidence(r, evidence, ctx):
                 r.error("evidence", "%s: %s '%s' は messages.json にありません" % (e["id"], k, e[k]))
 
 
+def check_anomalies(r, anomalies, ctx, event_ids, targets):
+    for a in anomalies:
+        aid, field = a.get("id", ""), a.get("field", "")
+        if field not in ctx["fields"]:
+            r.error("anomalies", "%s: field '%s' は存在しません" % (aid, field))
+        trig = a.get("trigger", "on_enter")
+        if trig not in ANOMALY_TRIGGERS:
+            r.error("anomalies", "%s: trigger '%s' は %s のいずれか" % (aid, trig, sorted(ANOMALY_TRIGGERS)))
+        if trig == "on_interact" and field in targets and a.get("target", "") not in targets[field]:
+            r.error("anomalies", "%s: target '%s' は %s の調べ物にありません" % (aid, a.get("target", ""), field))
+        mode = a.get("mode", "once")
+        if mode not in ANOMALY_MODES:
+            r.error("anomalies", "%s: mode '%s' は %s のいずれか" % (aid, mode, sorted(ANOMALY_MODES)))
+        if a.get("comfort") and a["comfort"] not in COMFORT_CONTEXTS:
+            r.error("anomalies", "%s: comfort '%s' は未定義です" % (aid, a["comfort"]))
+        for c in a.get("conditions", []):
+            check_condition(r, aid, c, ctx)
+        lists = [a.get("actions", [])]
+        if mode == "escalate":
+            lists = [st.get("actions", []) for st in a.get("stages", [])]
+            if not lists:
+                r.error("anomalies", "%s: escalate には stages が必要です" % aid)
+        for acts in lists:
+            if not acts:
+                r.error("anomalies", "%s: actions が空です" % aid)
+            for act in acts:
+                check_action(r, aid, act, ctx, event_ids)
+
+
 def check_fields(r, fields):
     by_id = {f["id"]: f for f in fields}
     implemented = set()
@@ -334,6 +366,7 @@ def main(argv):
     check_evidence(r, evidence, ctx)
     targets = check_maps(r, fields, ctx["implemented"])
     check_targets(r, events, targets)
+    check_anomalies(r, load("anomalies")["anomalies"], ctx, id_set(events), targets)
     check_points(r, schedule, events)
     for f in fields:
         if f.get("ambience_track") and f["ambience_track"] not in ctx["tracks"]:

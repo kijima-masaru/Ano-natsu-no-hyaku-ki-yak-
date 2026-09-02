@@ -52,6 +52,7 @@
 | `day_<n>_done` | n 日目を終えた（就寝または固定イベント終端） | `Calendar` | 進行検証 |
 | `visited_F<nn>` | フィールド初訪問 | `SceneRouter.field_entered` | ミニマップの表示、調査 P |
 | `slept_at_home` | 一度でも就寝した | 初回就寝 | チュートリアル文の抑制 |
+| `an_done_<anomaly_id>` | 一度きりの怪異 `<anomaly_id>` が起きた | `AnomalySystem`（`mode: once`） | 再発防止、`on_condition` の条件 |
 
 ## 証拠・隠蔽系（`docs/CONCEALMENT_LIST.md` と対応）
 

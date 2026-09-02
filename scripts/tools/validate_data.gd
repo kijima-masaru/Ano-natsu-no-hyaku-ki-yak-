@@ -8,7 +8,7 @@ extends SceneTree
 const PATHS: Dictionary = {
 	"fields": "res://data/fields.json", "events": "res://data/events.json", "messages": "res://data/messages.json",
 	"schedule": "res://data/schedule.json", "evidence": "res://data/evidence.json", "items": "res://data/items.json",
-	"audio": "res://data/audio.json",
+	"audio": "res://data/audio.json", "anomalies": "res://data/anomalies.json",
 }
 
 
@@ -46,6 +46,7 @@ static func run(report: DataReport, strict: bool) -> bool:
 	DataChecksRefs.check_evidence(report, evidence, ctx)
 	var targets: Dictionary = DataChecksFields.check_maps(report, fields, ctx["implemented"])
 	DataChecksFields.check_targets(report, events, targets)
+	DataChecksRefs.check_anomalies(report, data["anomalies"].get("anomalies", []), ctx, _id_set(events), targets)
 	DataChecksFields.check_points(report, schedule, events)
 	for f: Dictionary in fields:
 		var track: String = str(f.get("ambience_track", ""))
