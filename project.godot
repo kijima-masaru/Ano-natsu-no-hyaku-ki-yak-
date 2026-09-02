@@ -48,6 +48,11 @@ theme/default_font_subpixel_positioning=0
 
 locale/fallback="ja"
 
+[iwato]
+
+tileset/source="generated"
+tileset/resource_path="res://resources/tilesets/common.tres"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
