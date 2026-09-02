@@ -3170,6 +3170,271 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_f08_enter",
+      "field": "F08",
+      "trigger": "on_enter",
+      "day_range": [
+        15,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f08_cow",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "cow",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_cow"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f08_cow_again",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "cow",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_cow"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f08_haiden",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "haiden",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_haiden"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f08_basin",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "basin",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_basin"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f08_small_shrine",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "small_shrine",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_small_shrine"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f08_small_shrine_again",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "small_shrine",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_small_shrine"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f08_mask_box",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "mask_box",
+      "day_range": [
+        16,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_mask_box"
+        },
+        {
+          "type": "give_evidence",
+          "evidence": "oni_masks"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f08_mask_box_again",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "mask_box",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_mask_box_again"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f08_ema_conceal",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "ema",
+      "day_range": [
+        16,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_ema"
+        },
+        {
+          "type": "conceal_evidence",
+          "evidence": "ema_wish"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f08_ema_after",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "ema",
+      "day_range": [
+        16,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "ema_wish"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f08_ema_early",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "ema",
+      "day_range": [
+        1,
+        15
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "evd_ema_wish_surface"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f08_lookout",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "lookout",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_lookout"
+        },
+        {
+          "type": "message",
+          "id": "msg_f08_lookout_hint"
+        },
+        {
+          "type": "set_flag",
+          "flag": "saw_lookout"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f08_lookout_again",
+      "field": "F08",
+      "trigger": "on_interact",
+      "target": "lookout",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f08_lookout_again"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }

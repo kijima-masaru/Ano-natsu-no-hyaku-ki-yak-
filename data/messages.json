@@ -2220,6 +2220,145 @@
       "id": "msg_an_f07_lamps_2",
       "speaker": "yu",
       "text": "灯明が、三つ。\n数えるのをやめた。増えるものは、数えないほうがいい。"
+    },
+    {
+      "id": "msg_f08_enter",
+      "speaker": "yu",
+      "text": "二百段の石段を登りきると、風の音だけになった。\n梅林は、八月には裸の枝だ。枝の向こうに、社殿。"
+    },
+    {
+      "id": "msg_f08_cow",
+      "speaker": "yu",
+      "text": "撫で牛。頭が撫でられて艶を持っている。\n俺も一度、撫でた。何を願ったか、もう覚えていない。",
+      "truth_id": "msg_f08_cow_t"
+    },
+    {
+      "id": "msg_f08_cow_t",
+      "speaker": "yu",
+      "text": "撫で牛。頭が撫でられて艶を持っている。\n俺も一度、撫でた。何を願ったか、覚えている。叶った。"
+    },
+    {
+      "id": "msg_f08_haiden",
+      "speaker": "yu",
+      "text": "拝殿。鈴の緒が、途中で短く切られている。\n賽銭箱の上に、誰かが置いた梅の枝。花はない。"
+    },
+    {
+      "id": "msg_f08_basin",
+      "speaker": "yu",
+      "text": "手水舎。水は止まっている。\n柄杓に、梅の花びらが一枚。八月なのに。"
+    },
+    {
+      "id": "msg_f08_small_shrine",
+      "speaker": "yu",
+      "text": "梅林の中の小さな祠。扉は開いていて、中は空。\n供え物の塩が、湿って固まっている。",
+      "truth_id": "msg_f08_small_shrine_t"
+    },
+    {
+      "id": "msg_f08_small_shrine_t",
+      "speaker": "yu",
+      "text": "梅林の中の小さな祠。中は空。\n塩は、俺が持って行った袋と同じ銘柄だった。"
+    },
+    {
+      "id": "msg_f08_lookout",
+      "speaker": "yu",
+      "text": "展望所。町の光。国道、団地、コンビニ、市民センター。\n数えると、一つ多い。谷の方に、無いはずの光。",
+      "truth_id": "msg_f08_lookout_t"
+    },
+    {
+      "id": "msg_f08_lookout_t",
+      "speaker": "yu",
+      "text": "展望所。谷の方の光。\nあれは俺が置いた懐中電灯だ。まだ、点いている。"
+    },
+    {
+      "id": "msg_f08_lookout_hint",
+      "speaker": "yu",
+      "text": "団地の光が、一棟分だけ消えている。\n消えた場所を、澪なら覚えておくだろう。"
+    },
+    {
+      "id": "msg_f08_lookout_again",
+      "speaker": "yu",
+      "text": "展望所。町の光は、今日も一つ多い。"
+    },
+    {
+      "id": "evd_oni_masks_title",
+      "speaker": "",
+      "text": "鬼の面の台帳"
+    },
+    {
+      "id": "evd_oni_masks_surface",
+      "speaker": "",
+      "text": "面掛け所の保管箱。鬼の面は七枚。台帳には八枚と書いてある。一枚足りない。"
+    },
+    {
+      "id": "evd_oni_masks_truth",
+      "speaker": "",
+      "text": "鬼の面は七枚。八枚目は谷から出たものの顔で、今は俺の隣にいる。"
+    },
+    {
+      "id": "msg_f08_mask_box",
+      "speaker": "yu",
+      "text": "面掛け所の保管箱。節分の鬼の面が、布に包まれて並んでいる。\n七枚。台帳の数と、合わない。"
+    },
+    {
+      "id": "msg_f08_mask_box_again",
+      "speaker": "yu",
+      "text": "鬼の面は七枚。数え直しても七枚。"
+    },
+    {
+      "id": "evd_ema_wish_title",
+      "speaker": "",
+      "text": "六月の絵馬"
+    },
+    {
+      "id": "evd_ema_wish_surface",
+      "speaker": "",
+      "text": "絵馬掛け。合格祈願、健康、家内安全。"
+    },
+    {
+      "id": "evd_ema_wish_truth",
+      "speaker": "",
+      "text": "六月に俺が掛けた絵馬。『ずっと友達でいてくれる人がほしい』。名前も書いた。"
+    },
+    {
+      "id": "evd_ema_wish_shown",
+      "speaker": "",
+      "text": "絵馬を眺めた。"
+    },
+    {
+      "id": "evd_ema_wish_action",
+      "speaker": "",
+      "text": "自分の絵馬を外して、ポケットに入れた。願いは、叶っている。"
+    },
+    {
+      "id": "heroine_remark_ema_wish",
+      "speaker": "mio",
+      "text": "「今、一枚外した？」"
+    },
+    {
+      "id": "msg_f08_ema",
+      "speaker": "yu",
+      "text": "絵馬掛け。合格祈願、健康、家内安全。\n一枚だけ、裏返しに掛かっている。",
+      "truth_id": "msg_f08_ema_t"
+    },
+    {
+      "id": "msg_f08_ema_t",
+      "speaker": "yu",
+      "text": "絵馬掛け。一枚だけ裏返しに掛かっている。\n俺の字だ。六月の。"
+    },
+    {
+      "id": "msg_an_f08_plum",
+      "speaker": "yu",
+      "text": "梅林の奥で、枝が鳴った。\n風はない。誰も歩いていない。鳴った場所が、少しずつ近づいてくる。"
+    },
+    {
+      "id": "msg_an_f08_lights_1",
+      "speaker": "yu",
+      "text": "無いはずの光が、二つになっている。\n谷の方と、もう一つは——団地の、三階。"
+    },
+    {
+      "id": "msg_an_f08_lights_2",
+      "speaker": "yu",
+      "text": "無いはずの光が、三つ。\n三つ目は、この山の麓。今、俺が登ってきた道の途中だ。"
     }
   ]
 }
