@@ -40,7 +40,7 @@
 | `{"day_range": [3, 12]}` | 期間内 |
 | `{"time_of_day": "night"}` / `["evening","night"]` | 時間帯 |
 | `{"not": {…}}` / `{"any": […]}` / `{"all": […]}` | 論理 |
-| `{"suspicion": {"min": 25}}` | 接近度（タスク5で `ConditionEvaluator.register` により追加） |
+| `{"suspicion": {"min": 25, "max": 74}}` / `{"suspicion": {"stage": "doubt"}}` | 接近度（Suspicion が登録。stage は unaware / unease / doubt / certainty） |
 
 ## アクション（Action）
 
@@ -65,8 +65,11 @@
 
 | type | 追加元 | 引数 |
 |---|---|---|
-| `raise_suspicion` | Suspicion（タスク5） | `amount`, `reason?` |
-| `give_evidence` / `conceal_evidence` | Suspicion（タスク5） | `evidence` |
+| `raise_suspicion` | Suspicion | `amount`, `reason?` |
+| `give_evidence` | EvidenceRegistry | `evidence`（ノートに記録、`suspicion_on_gain` を加算） |
+| `conceal_evidence` | EvidenceRegistry | `evidence`（澪が近ければ失敗。表示は `shown_id` か `msg_conceal_witnessed`） |
+| `show_concealment_reveal` | EvidenceRegistry | なし（8/30 の提示画面） |
+| `autosave` | EventActions | なし |
 | `play_sound` | AudioManager（タスク6） | `id` |
 | `set_companion` | Heroine（タスク8） | `on` |
 | `entity_speak` | AttachedEntity（タスク9） | `id` |
