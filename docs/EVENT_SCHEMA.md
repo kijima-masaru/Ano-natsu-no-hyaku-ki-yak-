@@ -72,7 +72,9 @@
 | `autosave` | EventActions | なし |
 | `play_sound` | AudioManager（タスク6） | `id` |
 | `set_companion` | EventActions → SceneRouter | `on`（ヒロインの同行 ON/OFF。`companion_on` フラグと同期） |
-| `entity_speak` | AttachedEntity（タスク9） | `id` |
+| `entity_speak` | AttachedEntity | `id`（ナツの台詞。二層は messages.json の truth_id） |
+| `entity_comfort` | AttachedEntity | `context`（after_anomaly / after_stalker / night_walk / yakushi_gate / heroine_near） |
+| `entity_pulse` | AttachedEntity | `strength`（環境の微細な変化の通知） |
 | `start_stalker` | Stalker（タスク10） | `active`, `spawn_tile?` |
 | `choice` | Dialogue（タスク4） | `options` |
 
