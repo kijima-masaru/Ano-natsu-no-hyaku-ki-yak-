@@ -4310,6 +4310,332 @@
       ],
       "once": true,
       "priority": 5
+    },
+    {
+      "id": "ev_f04_enter",
+      "field": "F04",
+      "trigger": "on_enter",
+      "day_range": [
+        12,
+        31
+      ],
+      "time_of_day": [
+        "morning",
+        "noon"
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_night_enter",
+      "field": "F04",
+      "trigger": "on_enter",
+      "day_range": [
+        13,
+        31
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_night_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_stalker_night",
+      "field": "F04",
+      "trigger": "on_enter",
+      "day_range": [
+        13,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [
+        {
+          "flag": "stalker_met"
+        }
+      ],
+      "actions": [
+        {
+          "type": "start_stalker",
+          "active": true,
+          "spawn_tile": [
+            34,
+            3
+          ],
+          "retreat_to": "F03"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_journal_conceal",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "shed_door",
+      "day_range": [
+        13,
+        22
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_journal_early"
+        },
+        {
+          "type": "conceal_evidence",
+          "evidence": "journal_page"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f04_journal_after",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "shed_door",
+      "day_range": [
+        13,
+        22
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "journal_page"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_journal_seal",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "shed_door",
+      "day_range": [
+        23,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_journal"
+        },
+        {
+          "type": "give_evidence",
+          "evidence": "seal_lore"
+        },
+        {
+          "type": "set_flag",
+          "flag": "learned_seal"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f04_journal_seal_again",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "shed_door",
+      "day_range": [
+        23,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_journal"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_journal_early",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "shed_door",
+      "day_range": [
+        1,
+        12
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_journal_early"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_battery",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "battery",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_battery"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f04_battery_again",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "battery",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_battery"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_cloth",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "cloth_tree",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_cloth"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_footprints",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "footprints",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_footprints"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f04_footprints_again",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "footprints",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_footprints"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_pillar",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "pillar",
+      "day_range": [
+        13,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_pillar"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f04_pillar_again",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "pillar",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_pillar"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f04_trail_sign",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "trail_sign",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f04_trail_sign"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }

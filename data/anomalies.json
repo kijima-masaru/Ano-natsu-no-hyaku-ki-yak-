@@ -788,6 +788,99 @@
       ],
       "suspicion_delta": 0,
       "comfort": ""
+    },
+    {
+      "id": "an_f04_loop",
+      "field": "F04",
+      "trigger": "on_interact",
+      "target": "trail_sign",
+      "day_range": [
+        13,
+        29
+      ],
+      "conditions": [],
+      "mode": "escalate",
+      "once_per_day": true,
+      "stages": [
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f04_loop_1"
+            },
+            {
+              "type": "move_player",
+              "tile": [
+                28,
+                9
+              ],
+              "facing": [
+                0,
+                1
+              ]
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.5
+            }
+          ]
+        },
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f04_loop_2"
+            },
+            {
+              "type": "move_player",
+              "tile": [
+                28,
+                9
+              ],
+              "facing": [
+                0,
+                1
+              ]
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.8
+            }
+          ]
+        }
+      ],
+      "suspicion_delta": 1,
+      "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f04_bulb",
+      "field": "F04",
+      "trigger": "on_condition",
+      "day_range": [
+        13,
+        29
+      ],
+      "time_of_day": [
+        "night"
+      ],
+      "conditions": [],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 1.5
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f04_bulb"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.8
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": "night_walk"
     }
   ]
 }

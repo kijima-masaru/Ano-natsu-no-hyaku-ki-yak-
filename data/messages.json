@@ -2783,6 +2783,96 @@
       "id": "msg_an_f15_fog",
       "speaker": "yu",
       "text": "対岸の霧が、橋の中ほどまで来ている。\nバリケードの向こうが、もう見えない。"
+    },
+    {
+      "id": "msg_f04_enter",
+      "speaker": "yu",
+      "text": "八柱の谷戸。柿と栗の畑。人の手が、途中で止まった場所。\n谷の奥へ続く獣道は、行き止まりだと聞いている。"
+    },
+    {
+      "id": "msg_f04_night_enter",
+      "speaker": "yu",
+      "text": "夜の谷戸。畑の向こうの小屋に、電球が一つ。\n誰も点けていないはずの電球。"
+    },
+    {
+      "id": "msg_f04_journal",
+      "speaker": "yu",
+      "text": "農機具小屋の日誌。七月から始まっている。\n『石が動いた』。誰が。",
+      "truth_id": "msg_f04_journal_t"
+    },
+    {
+      "id": "msg_f04_journal_t",
+      "speaker": "yu",
+      "text": "農機具小屋の日誌。『石が動いた』。\n俺が。"
+    },
+    {
+      "id": "msg_f04_journal_early",
+      "speaker": "yu",
+      "text": "農機具小屋の日誌。六月二十八日の頁。『夜、谷で人影。若い』。\n七月からは、農作業のことしか書いていない。",
+      "truth_id": "msg_f04_journal_early_t"
+    },
+    {
+      "id": "msg_f04_journal_early_t",
+      "speaker": "yu",
+      "text": "農機具小屋の日誌。六月二十八日の頁。『夜、谷で人影。若い』。\n見られていた。"
+    },
+    {
+      "id": "msg_f04_battery",
+      "speaker": "yu",
+      "text": "電気柵のバッテリー。端子が外れている。\n外したのは獣ではない。人の手だ。",
+      "truth_id": "msg_f04_battery_t"
+    },
+    {
+      "id": "msg_f04_battery_t",
+      "speaker": "yu",
+      "text": "電気柵のバッテリー。端子は俺が外した。\n六月の夜、柵を越えるために。"
+    },
+    {
+      "id": "msg_f04_cloth",
+      "speaker": "yu",
+      "text": "柿の木に結ばれた布。褪せた青。\n鳥よけにしては、位置が低い。人の目の高さだ。"
+    },
+    {
+      "id": "msg_f04_footprints",
+      "speaker": "yu",
+      "text": "獣の足跡。イノシシか。\nその横に、もう一つ。獣ではない。裸足だ。"
+    },
+    {
+      "id": "msg_f04_pillar",
+      "speaker": "yu",
+      "text": "石柱の刻字。『八柱一石』。\n八本の柱と、一つの石。石は、ここには無い。",
+      "truth_id": "msg_f04_pillar_t"
+    },
+    {
+      "id": "msg_f04_pillar_t",
+      "speaker": "yu",
+      "text": "『八柱一石』。八本の柱で囲い、一つの石で塞ぐ。\n石の方を、俺がずらした。柱は、もう意味がない。"
+    },
+    {
+      "id": "msg_f04_trail_sign",
+      "speaker": "yu",
+      "text": "『この先 薬師谷 通行止め』。\n獣道は、看板の向こうで谷の斜面に消えている。"
+    },
+    {
+      "id": "msg_an_f04_loop_1",
+      "speaker": "yu",
+      "text": "獣道を戻った。\n出た場所は、小屋の裏だった。入ったのも、小屋の裏だった。……そうだったか。"
+    },
+    {
+      "id": "msg_an_f04_loop_2",
+      "speaker": "yu",
+      "text": "もう一度、獣道を辿った。違う枝を選んだはずだ。\n小屋の裏に出た。電球が、点いている。"
+    },
+    {
+      "id": "msg_an_f04_bulb",
+      "speaker": "yu",
+      "text": "小屋の電球が点いた。\n配線は切れている。中に、誰もいない。窓に、俺の影だけが映っている。",
+      "truth_id": "msg_an_f04_bulb_t"
+    },
+    {
+      "id": "msg_an_f04_bulb_t",
+      "speaker": "yu",
+      "text": "小屋の電球が点いた。\n窓に映っているのは、俺の影ではない。俺の隣の影だ。"
     }
   ]
 }
