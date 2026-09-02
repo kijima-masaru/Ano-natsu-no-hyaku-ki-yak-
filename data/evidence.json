@@ -151,6 +151,18 @@
       "shown_id": "evd_store_receipt_shown",
       "action_id": "evd_store_receipt_action",
       "suspicion_on_witness": 15
+    },
+    {
+      "id": "flashlight_box",
+      "kind": "concealable",
+      "field": "F13",
+      "day_min": 19,
+      "title_id": "evd_flashlight_box_title",
+      "surface_id": "evd_flashlight_box_surface",
+      "truth_id": "evd_flashlight_box_truth",
+      "shown_id": "evd_flashlight_box_shown",
+      "action_id": "evd_flashlight_box_action",
+      "suspicion_on_witness": 20
     }
   ]
 }

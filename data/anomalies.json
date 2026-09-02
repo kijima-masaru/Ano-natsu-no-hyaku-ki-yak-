@@ -275,6 +275,59 @@
       ],
       "suspicion_delta": 1,
       "comfort": ""
+    },
+    {
+      "id": "an_f13_house_count",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "deadend_window",
+      "day_range": [
+        19,
+        29
+      ],
+      "conditions": [],
+      "mode": "escalate",
+      "once_per_day": true,
+      "stages": [
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f13_count_1"
+            }
+          ]
+        },
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f13_count_2"
+            },
+            {
+              "type": "set_flag",
+              "flag": "f13_extra_house"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.5
+            }
+          ]
+        },
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f13_count_3"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.7
+            }
+          ]
+        }
+      ],
+      "suspicion_delta": 1,
+      "comfort": "after_anomaly"
     }
   ]
 }

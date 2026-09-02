@@ -1861,6 +1861,129 @@
       "id": "msg_an_f03_tunnel_light_t",
       "speaker": "yu",
       "text": "隧道を抜けた。\n出口の明るさが、入ったときと違う。あの夜も、こうだった。"
+    },
+    {
+      "id": "ui_f13_extra_nameplate",
+      "speaker": "system",
+      "text": "表札（空欄）"
+    },
+    {
+      "id": "msg_f13_enter",
+      "speaker": "yu",
+      "text": "倉ノ前ニュータウン。同じ形の家が、同じ間隔で並んでいる。\n街灯の音だけがして、人の声がない。"
+    },
+    {
+      "id": "msg_f13_monument",
+      "speaker": "yu",
+      "text": "区画整理記念碑。昭和五十八年。\n『ここに三十二戸の暮らしが始まる』。",
+      "truth_id": "msg_f13_monument_t"
+    },
+    {
+      "id": "msg_f13_monument_t",
+      "speaker": "yu",
+      "text": "区画整理記念碑。昭和五十八年。『三十二戸』。\n数えるたびに、合わない。増えているのか、減っているのか。"
+    },
+    {
+      "id": "msg_f13_nameplate_a",
+      "speaker": "yu",
+      "text": "表札。倉田。"
+    },
+    {
+      "id": "msg_f13_nameplate_b",
+      "speaker": "yu",
+      "text": "表札。倉田。\n隣も、倉田だった。"
+    },
+    {
+      "id": "msg_f13_nameplate_c",
+      "speaker": "yu",
+      "text": "表札。倉田。三軒目。\n同じ字体、同じ塗料の剥げ方。親戚ではない気がする。"
+    },
+    {
+      "id": "msg_f13_odd_house_early",
+      "speaker": "yu",
+      "text": "瓦屋根の家。この区画で一軒だけ、型が違う。\n窓にカーテンがない。"
+    },
+    {
+      "id": "msg_f13_odd_house",
+      "speaker": "yu",
+      "text": "一軒だけ違う家。瓦の色が、他の家より新しい。\n窓越しに見える部屋には、家具が一つもない。",
+      "truth_id": "msg_f13_odd_house_t"
+    },
+    {
+      "id": "msg_f13_odd_house_t",
+      "speaker": "yu",
+      "text": "一軒だけ違う家。\n住んでいるのは、誰でもない。ナツが見つけた「空き」だ。"
+    },
+    {
+      "id": "msg_f13_sale_sign",
+      "speaker": "yu",
+      "text": "売地。『分譲中』。\n電話番号の局番が、今の桁数と違う。"
+    },
+    {
+      "id": "msg_f13_pond_fence",
+      "speaker": "yu",
+      "text": "調整池。柵に、しおれた花束が結び付けられている。\n名前はない。"
+    },
+    {
+      "id": "msg_f13_deadend_window",
+      "speaker": "yu",
+      "text": "袋小路の奥の家。窓に明かり。\nカーテンの向こうで、誰かが立ったまま動かない。"
+    },
+    {
+      "id": "msg_f13_extra_nameplate",
+      "speaker": "yu",
+      "text": "表札は空欄。ポストには、宛名のないチラシだけ。",
+      "truth_id": "msg_f13_extra_nameplate_t"
+    },
+    {
+      "id": "msg_f13_extra_nameplate_t",
+      "speaker": "yu",
+      "text": "表札は空欄。\n次にここへ入るのが誰か、俺は知っている気がする。"
+    },
+    {
+      "id": "evd_flashlight_box_title",
+      "speaker": "",
+      "text": "懐中電灯の空箱"
+    },
+    {
+      "id": "evd_flashlight_box_surface",
+      "speaker": "",
+      "text": "ゴミステーションの回収袋。生活ごみ。"
+    },
+    {
+      "id": "evd_flashlight_box_truth",
+      "speaker": "",
+      "text": "回収袋からはみ出した懐中電灯の空箱。7 月の終わりに、俺が買った型だ。"
+    },
+    {
+      "id": "evd_flashlight_box_shown",
+      "speaker": "",
+      "text": "ゴミステーションを見た。回収日は明日だ。"
+    },
+    {
+      "id": "evd_flashlight_box_action",
+      "speaker": "",
+      "text": "空箱を袋の奥へ押し込み、上に他の袋を載せた。"
+    },
+    {
+      "id": "heroine_remark_flashlight_box",
+      "speaker": "mio",
+      "text": "「懐中電灯の箱……新しいの、買ったの？」"
+    },
+    {
+      "id": "msg_an_f13_count_1",
+      "speaker": "yu",
+      "text": "袋小路を戻る。家の数を、つい数える。\n九軒。"
+    },
+    {
+      "id": "msg_an_f13_count_2",
+      "speaker": "yu",
+      "text": "十軒。\n……数え間違いだ。もう一度、数えない。"
+    },
+    {
+      "id": "msg_an_f13_count_3",
+      "speaker": "yu",
+      "text": "十軒。増えた一軒の表札は、まだ空欄だ。\n誰も、気にしていない。"
     }
   ]
 }

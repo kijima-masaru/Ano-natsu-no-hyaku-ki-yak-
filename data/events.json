@@ -2223,6 +2223,327 @@
       ],
       "once": true,
       "priority": 5
+    },
+    {
+      "id": "ev_f13_enter",
+      "field": "F13",
+      "trigger": "on_enter",
+      "day_range": [
+        19,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_monument",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "monument",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_monument"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f13_monument_again",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "monument",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_monument"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_nameplate_a",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "nameplate_a",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_nameplate_a"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_nameplate_b",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "nameplate_b",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_nameplate_b"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_nameplate_c",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "nameplate_c",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_nameplate_c"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f13_nameplate_c_again",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "nameplate_c",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_nameplate_c"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_odd_house_early",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "odd_house",
+      "day_range": [
+        1,
+        19
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_odd_house_early"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_odd_house",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "odd_house",
+      "day_range": [
+        20,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_odd_house"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        },
+        {
+          "type": "set_flag",
+          "flag": "found_odd_house"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f13_odd_house_again",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "odd_house",
+      "day_range": [
+        20,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_odd_house"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_sale_sign",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "sale_sign",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_sale_sign"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_pond_fence",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "pond_fence",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_pond_fence"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f13_pond_fence_again",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "pond_fence",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_pond_fence"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_deadend_window",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "deadend_window",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_deadend_window"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_extra_nameplate",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "extra_nameplate",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f13_extra_nameplate"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_trash_conceal",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "trash_station",
+      "day_range": [
+        19,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "flashlight_box"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f13_trash_after",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "trash_station",
+      "day_range": [
+        19,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "flashlight_box"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f13_trash_early",
+      "field": "F13",
+      "trigger": "on_interact",
+      "target": "trash_station",
+      "day_range": [
+        1,
+        18
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "evd_flashlight_box_surface"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }
