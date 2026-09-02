@@ -31,6 +31,8 @@ var story_role: String = ""
 var horror_beat: String = ""
 ## 進入に必要なフラグ名。空文字なら常に進入可
 var unlock_flag: String = ""
+## 環境音トラック ID（data/audio.json）。空なら無音
+var ambience_track: String = ""
 
 
 ## フィールドの寸法（ピクセル）
@@ -70,6 +72,7 @@ static func from_dict(d: Dictionary, errors: PackedStringArray) -> FieldData:
 	f.horror_beat = str(d.get("horror_beat", ""))
 	var unlock: Variant = d.get("unlock_flag", null)
 	f.unlock_flag = "" if unlock == null else str(unlock)
+	f.ambience_track = str(d.get("ambience_track", ""))
 
 	var wp: Variant = d.get("world_pos", {})
 	if wp is Dictionary:

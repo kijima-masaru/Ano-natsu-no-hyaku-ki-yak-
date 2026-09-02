@@ -1,0 +1,411 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "note": "kind: bgm / ambience / se。synth は SoundSynth の暫定合成。本番は同 id の OGG を resources/audio/<id>.ogg に置くと AudioManager が優先して読む。seasonal=cicada の音量は Calendar.day で減衰"
+  },
+  "tracks": [
+    {
+      "id": "bgm_title",
+      "kind": "bgm",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "drone",
+        "seconds": 8.0,
+        "gain": 0.18,
+        "loop": true,
+        "freq": 55.0
+      }
+    },
+    {
+      "id": "bgm_tension",
+      "kind": "bgm",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "drone",
+        "seconds": 6.0,
+        "gain": 0.2,
+        "loop": true,
+        "freq": 41.0
+      }
+    },
+    {
+      "id": "amb_road",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "hum",
+        "seconds": 6.0,
+        "gain": 0.25,
+        "loop": true,
+        "freq": 90.0
+      }
+    },
+    {
+      "id": "amb_road_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "hum",
+        "seconds": 6.0,
+        "gain": 0.18,
+        "loop": true,
+        "freq": 80.0
+      }
+    },
+    {
+      "id": "amb_town",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "cicada",
+        "seconds": 8.0,
+        "gain": 0.22,
+        "loop": true,
+        "freq": 4200.0,
+        "density": 0.6
+      },
+      "seasonal": "cicada"
+    },
+    {
+      "id": "amb_town_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "cicada",
+        "seconds": 8.0,
+        "gain": 0.12,
+        "loop": true,
+        "freq": 2400.0,
+        "density": 0.35
+      }
+    },
+    {
+      "id": "amb_residential",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "cicada",
+        "seconds": 8.0,
+        "gain": 0.2,
+        "loop": true,
+        "freq": 4000.0,
+        "density": 0.5
+      },
+      "seasonal": "cicada"
+    },
+    {
+      "id": "amb_residential_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "noise",
+        "seconds": 6.0,
+        "gain": 0.08,
+        "loop": true,
+        "lowpass": 0.02
+      }
+    },
+    {
+      "id": "amb_shopping_street",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "noise",
+        "seconds": 6.0,
+        "gain": 0.07,
+        "loop": true,
+        "lowpass": 0.03
+      }
+    },
+    {
+      "id": "amb_estate",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "hum",
+        "seconds": 6.0,
+        "gain": 0.14,
+        "loop": true,
+        "freq": 120.0
+      },
+      "seasonal": "cicada"
+    },
+    {
+      "id": "amb_newtown",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "noise",
+        "seconds": 6.0,
+        "gain": 0.06,
+        "loop": true,
+        "lowpass": 0.02
+      }
+    },
+    {
+      "id": "amb_underpass",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "noise",
+        "seconds": 6.0,
+        "gain": 0.3,
+        "loop": true,
+        "lowpass": 0.01
+      }
+    },
+    {
+      "id": "amb_orchard",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "cicada",
+        "seconds": 8.0,
+        "gain": 0.24,
+        "loop": true,
+        "freq": 4600.0,
+        "density": 0.7
+      },
+      "seasonal": "cicada"
+    },
+    {
+      "id": "amb_temple",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "noise",
+        "seconds": 6.0,
+        "gain": 0.05,
+        "loop": true,
+        "lowpass": 0.02
+      }
+    },
+    {
+      "id": "amb_shrine",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "noise",
+        "seconds": 6.0,
+        "gain": 0.06,
+        "loop": true,
+        "lowpass": 0.015
+      }
+    },
+    {
+      "id": "amb_castle",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "noise",
+        "seconds": 6.0,
+        "gain": 0.08,
+        "loop": true,
+        "lowpass": 0.02
+      }
+    },
+    {
+      "id": "amb_ground",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "noise",
+        "seconds": 6.0,
+        "gain": 0.1,
+        "loop": true,
+        "lowpass": 0.03
+      }
+    },
+    {
+      "id": "amb_school",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "hum",
+        "seconds": 6.0,
+        "gain": 0.08,
+        "loop": true,
+        "freq": 100.0
+      }
+    },
+    {
+      "id": "amb_paddy",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "cicada",
+        "seconds": 8.0,
+        "gain": 0.2,
+        "loop": true,
+        "freq": 3800.0,
+        "density": 0.6
+      },
+      "seasonal": "cicada"
+    },
+    {
+      "id": "amb_paddy_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "cicada",
+        "seconds": 8.0,
+        "gain": 0.16,
+        "loop": true,
+        "freq": 900.0,
+        "density": 0.8
+      }
+    },
+    {
+      "id": "amb_river",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "water",
+        "seconds": 6.0,
+        "gain": 0.25,
+        "loop": true
+      }
+    },
+    {
+      "id": "amb_valley",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "silence",
+        "seconds": 2.0,
+        "gain": 0.0,
+        "loop": true
+      }
+    },
+    {
+      "id": "se_footstep",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "click",
+        "seconds": 0.12,
+        "gain": 0.25,
+        "loop": false,
+        "decay": 45.0
+      }
+    },
+    {
+      "id": "se_footstep_sneak",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "click",
+        "seconds": 0.08,
+        "gain": 0.1,
+        "loop": false,
+        "decay": 70.0
+      }
+    },
+    {
+      "id": "se_interact",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "tone",
+        "seconds": 0.15,
+        "gain": 0.2,
+        "loop": false,
+        "freq": 660.0,
+        "decay": 12.0
+      }
+    },
+    {
+      "id": "se_menu_move",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "tone",
+        "seconds": 0.06,
+        "gain": 0.15,
+        "loop": false,
+        "freq": 880.0,
+        "decay": 30.0
+      }
+    },
+    {
+      "id": "se_menu_ok",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "tone",
+        "seconds": 0.12,
+        "gain": 0.18,
+        "loop": false,
+        "freq": 990.0,
+        "decay": 15.0
+      }
+    },
+    {
+      "id": "se_menu_cancel",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "tone",
+        "seconds": 0.12,
+        "gain": 0.15,
+        "loop": false,
+        "freq": 330.0,
+        "decay": 15.0
+      }
+    },
+    {
+      "id": "se_door",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "click",
+        "seconds": 0.3,
+        "gain": 0.3,
+        "loop": false,
+        "decay": 12.0
+      }
+    },
+    {
+      "id": "se_heartbeat",
+      "kind": "se",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "heartbeat",
+        "seconds": 4.0,
+        "gain": 0.35,
+        "loop": true,
+        "bpm": 62.0
+      }
+    }
+  ]
+}

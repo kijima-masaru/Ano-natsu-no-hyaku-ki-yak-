@@ -226,7 +226,8 @@
       ],
       "story_role": "序盤拠点。プロローグと帰還点。各章の終わりに必ずここへ戻る",
       "horror_beat": "安全なはずの場所が、後半で一度だけ静まり返る。車の音が消え、自販機の光だけが残る",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_road"
     },
     {
       "id": "F02",
@@ -310,7 +311,8 @@
       ],
       "story_role": "序盤。親友・日向蓮の家がここにある。最初の『不在』を知る場所",
       "horror_beat": "生活感の残留。夕飯の匂いだけがして誰もいない。洗濯物が一晩たっても乾いていない",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_residential"
     },
     {
       "id": "F03",
@@ -407,7 +409,8 @@
       ],
       "story_role": "中盤ハブ。町の『裏側』（F04・F09）への唯一の出入口。鍵の使用箇所",
       "horror_beat": "隧道の出口が、入ったときと違う明るさをしている。バスは来るが誰も降りない",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_underpass"
     },
     {
       "id": "F04",
@@ -472,7 +475,8 @@
       ],
       "story_role": "中盤。町の成り立ち（八柱）に関する断片を得る。F09へは崖で行けない",
       "horror_beat": "獣道を辿ると、必ず同じ小屋の裏に出る。小屋の電球は誰も点けていない",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_orchard"
     },
     {
       "id": "F05",
@@ -567,7 +571,8 @@
       ],
       "story_role": "序盤〜全編。駄菓子屋の店主が語り部。情報と回復の副拠点",
       "horror_beat": "シャッター街の一店だけ、商品が新しい。店主は『昨日も来たね』と言う",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_shopping_street"
     },
     {
       "id": "F06",
@@ -675,7 +680,8 @@
       ],
       "story_role": "セーブ／情報ハブ。ミニマップの解放地点。鍵の入手（隧道フェンス）",
       "horror_beat": "掲示板の尋ね人の顔写真が、訪れるたび一枚ずつ増える。最後の一枚は誰かに似ている",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_town"
     },
     {
       "id": "F07",
@@ -771,7 +777,8 @@
       ],
       "story_role": "中盤。町の火災と『焼け残った一棟』の伝承。F08への関門",
       "horror_beat": "観音堂の格子の内側から、外を覗いている気配。灯明は誰が点けたのか",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_temple"
     },
     {
       "id": "F08",
@@ -838,7 +845,8 @@
       ],
       "story_role": "中盤後半。展望所から町を俯瞰し、消えた光の位置で次の目的地を知る",
       "horror_beat": "展望所から見る町に、実際には無い明かりが一つ点いている。鬼の面が一枚足りない",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_shrine"
     },
     {
       "id": "F09",
@@ -904,7 +912,8 @@
       ],
       "story_role": "中盤。迷路探索。町の『守り』の由来と、封じられたものの断片",
       "horror_beat": "縄張図と実際の地形が合わない。曲輪を一周すると、入ったはずの土橋が無い",
-      "unlock_flag": "key_tunnel_fence"
+      "unlock_flag": "key_tunnel_fence",
+      "ambience_track": "amb_castle"
     },
     {
       "id": "F10",
@@ -999,7 +1008,8 @@
       ],
       "story_role": "中盤。小学校裏門への迂回路。児童の遊びの痕跡",
       "horror_beat": "誰も引いていない白線がグラウンドを横切り、堤防の向こうへ続いている",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_ground"
     },
     {
       "id": "F11",
@@ -1113,7 +1123,8 @@
       ],
       "story_role": "中核ダンジョン。町の出来事の中心。複数回訪れ、旧校舎の階と教室が段階的に開く",
       "horror_beat": "全教室の机が一つずつ減っていく。最後に残った机の名札だけが読める",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_school"
     },
     {
       "id": "F12",
@@ -1209,7 +1220,8 @@
       ],
       "story_role": "序盤〜中盤。住民の『届出』の記録から不在の連鎖を知る",
       "horror_beat": "4棟の点灯している階段室が、訪れるたび同じ階へ揃っていく",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_estate"
     },
     {
       "id": "F13",
@@ -1304,7 +1316,8 @@
       ],
       "story_role": "中盤。『同じ家』の中で一軒だけ違う家を見つける",
       "horror_beat": "袋小路を戻ると家の数が一軒増えている。表札はまだ空欄",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_newtown"
     },
     {
       "id": "F14",
@@ -1394,7 +1407,8 @@
       ],
       "story_role": "中盤〜終盤。町で最も古い信仰の層。8/14 老婆シゲの激昂、8/29 封石の戻し方。薬師谷の解放地点",
       "horror_beat": "水田に映る月が一つ多い。蛙が一斉に止む瞬間に何かが畦を渡る",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_paddy"
     },
     {
       "id": "F15",
@@ -1470,7 +1484,8 @@
       ],
       "story_role": "町の境界。全編を通じ『出られない』ことを示す。終盤の選択の場",
       "horror_beat": "橋の中ほどまで行くと、向こう岸から自分と同じ歩調の足音が近づく",
-      "unlock_flag": null
+      "unlock_flag": null,
+      "ambience_track": "amb_river"
     },
     {
       "id": "F16",
@@ -1534,7 +1549,8 @@
       ],
       "story_role": "終盤専用の禁域。全ての伏線の収束点",
       "horror_beat": "音が完全に無くなる。恐怖は『何も起こらない』ことの持続で作る",
-      "unlock_flag": "flag_yakushi_open"
+      "unlock_flag": "flag_yakushi_open",
+      "ambience_track": "amb_valley"
     }
   ]
 }

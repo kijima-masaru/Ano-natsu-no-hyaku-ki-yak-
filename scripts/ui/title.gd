@@ -31,6 +31,7 @@ func _ready() -> void:
 	_footer.text = MessageResolver.text("ui_hint_confirm_back")
 	_list.activated.connect(_on_activated)
 	_build_menu()
+	AudioManager.play_bgm("bgm_title")
 	if not bool(SaveManager.system.get("content_notice_seen", false)):
 		_show_notice()
 
@@ -102,6 +103,7 @@ func _show_notice() -> void:
 
 
 func _change_to_game() -> void:
+	AudioManager.stop_bgm()
 	var err: Error = get_tree().change_scene_to_file(GAME_SCENE)
 	if err != OK:
 		push_error("Title: ゲームシーンへ遷移できません（%s）" % error_string(err))

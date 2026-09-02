@@ -11,6 +11,8 @@ signal passage_blocked(exit: ExitData)
 ## その日は入れないフィールドへの出口に触れた（Calendar の available_fields 外）
 signal passage_closed_today(exit: ExitData)
 signal field_load_failed(field_id: String, reason: String)
+## プレイヤーを生成した（AudioManager 等が接続する）
+signal player_spawned(player: Node)
 
 const PLAYER_SCENE_PATH: String = "res://scenes/actors/player.tscn"
 const PLACEHOLDER_SCENE_PATH: String = "res://scenes/fields/field_placeholder.tscn"
@@ -194,6 +196,7 @@ func _ensure_player() -> void:
 	# enabled=true のカメラはツリーに入った時点で current になる（ツリー外で make_current は呼べない）
 	camera.enabled = true
 	player.add_child(camera)
+	player_spawned.emit(player)
 
 
 ## カメラをフィールドの外へ出さない
