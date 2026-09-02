@@ -1,0 +1,829 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "month": 8,
+    "first_day": 1,
+    "last_day": 31,
+    "first_weekday": 6,
+    "note": "first_weekday: 0=日 … 6=土。8月1日を土曜とする架空の年。type: fixed / free / compressed。available_fields は当日入れるフィールド（累積）。advance_condition は fixed なら {flag,is}、free なら {points}。compressed は skip_to の日へ自動で進む",
+    "time_of_day": [
+      "morning",
+      "noon",
+      "evening",
+      "night"
+    ],
+    "home_field": "F12"
+  },
+  "days": [
+    {
+      "day": 1,
+      "type": "fixed",
+      "title": "報せ",
+      "opening_event": "ev_d01_open",
+      "advance_condition": {
+        "flag": "prologue_done",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 2,
+      "type": "fixed",
+      "title": "通夜",
+      "opening_event": "ev_d02_open",
+      "advance_condition": {
+        "flag": "heard_testimony",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 3,
+      "type": "free",
+      "title": "調査 1 日目",
+      "opening_event": "ev_d03_open",
+      "advance_condition": {
+        "points": 3
+      },
+      "set_flags_on_start": [
+        "companion_on",
+        "notebook_unlocked"
+      ],
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06"
+      ],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 4,
+      "type": "free",
+      "title": "調査 2 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 3
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 5,
+      "type": "fixed",
+      "title": "掲示板",
+      "opening_event": "ev_d05_open",
+      "advance_condition": {
+        "flag": "saw_first_missing",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 6,
+      "type": "compressed",
+      "title": "初七日まで",
+      "compressed_text_id": "msg_compress_d06",
+      "skip_to": 8,
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06"
+      ],
+      "opening_event": null,
+      "advance_condition": null,
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": []
+    },
+    {
+      "day": 7,
+      "type": "compressed",
+      "title": "初七日まで",
+      "compressed_text_id": "msg_compress_d06",
+      "skip_to": 8,
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06"
+      ],
+      "opening_event": null,
+      "advance_condition": null,
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": []
+    },
+    {
+      "day": 8,
+      "type": "fixed",
+      "title": "初七日",
+      "opening_event": "ev_d08_open",
+      "advance_condition": {
+        "flag": "entered_ren_room",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 9,
+      "type": "free",
+      "title": "調査 3 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 4
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 10,
+      "type": "free",
+      "title": "調査 4 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 4
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 11,
+      "type": "free",
+      "title": "調査 5 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 4
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 12,
+      "type": "fixed",
+      "title": "高架下",
+      "opening_event": "ev_d12_open",
+      "advance_condition": {
+        "flag": "stalker_met",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 13,
+      "type": "free",
+      "title": "調査 6 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 4
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 14,
+      "type": "fixed",
+      "title": "朝和の老婆",
+      "opening_event": "ev_d14_open",
+      "advance_condition": {
+        "flag": "baba_rage",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 15,
+      "type": "fixed",
+      "title": "盆",
+      "opening_event": "ev_d15_open",
+      "advance_condition": {
+        "flag": "obon_done",
+        "is": true
+      },
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [
+        "companion_on"
+      ],
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08"
+      ],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 16,
+      "type": "free",
+      "title": "調査 7 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 5
+      },
+      "set_flags_on_start": [
+        "companion_on"
+      ],
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08"
+      ],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 17,
+      "type": "free",
+      "title": "調査 8 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 5
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 18,
+      "type": "compressed",
+      "title": "雨",
+      "compressed_text_id": "msg_compress_d18",
+      "skip_to": 19,
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08"
+      ],
+      "opening_event": null,
+      "advance_condition": null,
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": []
+    },
+    {
+      "day": 19,
+      "type": "fixed",
+      "title": "小学校",
+      "opening_event": "ev_d19_open",
+      "advance_condition": {
+        "flag": "old_school_opened",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 20,
+      "type": "free",
+      "title": "調査 9 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 5
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 21,
+      "type": "free",
+      "title": "調査 10 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 5
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 22,
+      "type": "free",
+      "title": "調査 11 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 5
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 23,
+      "type": "fixed",
+      "title": "封石の話",
+      "opening_event": "ev_d23_open",
+      "advance_condition": {
+        "flag": "learned_seal",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 24,
+      "type": "compressed",
+      "title": "台風",
+      "compressed_text_id": "msg_compress_d24",
+      "skip_to": 26,
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13"
+      ],
+      "opening_event": null,
+      "advance_condition": null,
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": []
+    },
+    {
+      "day": 25,
+      "type": "compressed",
+      "title": "台風",
+      "compressed_text_id": "msg_compress_d24",
+      "skip_to": 26,
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13"
+      ],
+      "opening_event": null,
+      "advance_condition": null,
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": []
+    },
+    {
+      "day": 26,
+      "type": "fixed",
+      "title": "川",
+      "opening_event": "ev_d26_open",
+      "advance_condition": {
+        "flag": "bridge_steps",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13",
+        "F15"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 27,
+      "type": "free",
+      "title": "調査 12 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 5
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13",
+        "F15"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 28,
+      "type": "free",
+      "title": "調査 13 日目",
+      "opening_event": null,
+      "advance_condition": {
+        "points": 5
+      },
+      "set_flags_on_end": [
+        "flag_yakushi_open"
+      ],
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13",
+        "F15"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 29,
+      "type": "fixed",
+      "title": "薬師谷へ",
+      "opening_event": "ev_d29_open",
+      "advance_condition": {
+        "flag": "entered_yakushi",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13",
+        "F15",
+        "F16"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 30,
+      "type": "fixed",
+      "title": "封印",
+      "opening_event": "ev_d30_open",
+      "advance_condition": {
+        "flag": "truth_revealed",
+        "is": true
+      },
+      "available_fields": [
+        "F12",
+        "F01",
+        "F02",
+        "F05",
+        "F06",
+        "F03",
+        "F09",
+        "F04",
+        "F14",
+        "F07",
+        "F08",
+        "F11",
+        "F10",
+        "F13",
+        "F15",
+        "F16"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    },
+    {
+      "day": 31,
+      "type": "fixed",
+      "title": "御渡橋",
+      "opening_event": "ev_d31_open",
+      "advance_condition": {
+        "flag": "ending_reached",
+        "is": true
+      },
+      "available_fields": [
+        "F05",
+        "F01",
+        "F12",
+        "F15"
+      ],
+      "set_flags_on_start": [],
+      "clear_flags_on_start": [],
+      "set_flags_on_end": [],
+      "compressed_text_id": null,
+      "skip_to": null
+    }
+  ]
+}
