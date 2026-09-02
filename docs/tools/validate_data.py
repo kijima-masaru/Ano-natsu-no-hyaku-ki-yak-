@@ -269,22 +269,26 @@ def check_map(r, f, text):
     if len(rows) != h or not rows or len(rows[0]) != w:
         r.error("map", "%s: MAP_ROWS %dx%d が size_tiles %dx%d と一致しません" % (fid, len(rows[0]) if rows else 0, len(rows), w, h)); return
     exits = {tuple(e["tile"]) for e in f.get("exits", [])}
-    start = None
+    locked = {tuple(e["tile"]) for e in f.get("exits", []) if e.get("lock")}
     for y in range(h):
         for x in range(w):
             ch = rows[y][x]
             edge = x in (0, w - 1) or y in (0, h - 1)
-            if ch in walk and start is None:
-                start = (x, y)
             if edge and ch in walk and (x, y) not in exits:
                 r.error("map", "%s: 外周 (%d, %d) '%s' が開いています" % (fid, x, y, ch))
     for ex in exits:
         if rows[ex[1]][ex[0]] not in walk:
             r.error("map", "%s: 出口 %s が通行不可です" % (fid, ex))
-    seen = flood(rows, walk, start, w, h)
+    # 主領域＝出口から辿れる最大の領域（施錠出口は落石などで塞がれていてよい）
+    seen = set()
+    for ex in sorted(exits):
+        if rows[ex[1]][ex[0]] in walk:
+            region = flood(rows, walk, ex, w, h)
+            if len(region) > len(seen):
+                seen = region
     for ex in exits:
         if ex not in seen:
-            r.error("map", "%s: 出口 %s に到達できません" % (fid, ex))
+            (r.warn if ex in locked else r.error)("map", "%s: 出口 %s に主領域から到達できません%s" % (fid, ex, "（施錠出口。フラグで開くなら可）" if ex in locked else ""))
     isolated = sum(1 for y in range(h) for x in range(w) if rows[y][x] in walk and (x, y) not in seen)
     if isolated:
         r.warn("map", "%s: 孤立した通行可タイル %d 個（意図した閉域なら可）" % (fid, isolated))

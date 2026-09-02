@@ -3640,6 +3640,415 @@
       ],
       "once": false,
       "priority": 5
+    },
+    {
+      "id": "ev_f14_enter",
+      "field": "F14",
+      "trigger": "on_enter",
+      "day_range": [
+        14,
+        31
+      ],
+      "time_of_day": [
+        "morning",
+        "noon"
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_night_enter",
+      "field": "F14",
+      "trigger": "on_enter",
+      "day_range": [
+        14,
+        31
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_night_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_shrine_board",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shrine_board",
+      "day_range": [
+        14,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_shrine_board"
+        },
+        {
+          "type": "give_evidence",
+          "evidence": "shrine_lore"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f14_shrine_board_again",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shrine_board",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_shrine_board"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_kofun",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "kofun",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_kofun"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f14_kofun_again",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "kofun",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_kofun"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_sluice",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "sluice",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_sluice"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_tower_bell",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "tower_bell",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_tower_bell"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f14_tower_bell_again",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "tower_bell",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_tower_bell"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_rock_sign",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "rock_sign",
+      "conditions": [
+        {
+          "flag": "flag_yakushi_open",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_rock_sign"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_rock_open",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "rock_sign",
+      "conditions": [
+        {
+          "flag": "flag_yakushi_open"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_rock_open"
+        }
+      ],
+      "once": false,
+      "priority": 5
+    },
+    {
+      "id": "ev_f14_offering",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "offering",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_offering"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f14_offering_again",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "offering",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_offering"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_book_conceal",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "visitor_book",
+      "day_range": [
+        14,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "visitor_book"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f14_book_after",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "visitor_book",
+      "day_range": [
+        14,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "visitor_book"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_shige_door",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_door",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_shige_door_closed"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_d14_enter",
+      "field": "F14",
+      "trigger": "on_enter",
+      "day_range": [
+        14,
+        14
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_d14_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d14_2"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f14_shige_rage",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_npc",
+      "day_range": [
+        14,
+        14
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_d14_3"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d14_4"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d14_5"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d14_6"
+        },
+        {
+          "type": "give_evidence",
+          "evidence": "baba_words"
+        },
+        {
+          "type": "set_flag",
+          "flag": "baba_rage"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_003"
+        },
+        {
+          "type": "entity_comfort",
+          "context": "heroine_near"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 20
+    },
+    {
+      "id": "ev_f14_shige_after",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_npc",
+      "day_range": [
+        15,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_shige_after"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f14_shige_early",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_npc",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_shige_early"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }

@@ -96,25 +96,35 @@ static func _check_map(report: DataReport, f: Dictionary, text: String, _ids: Di
 		report.error("map", "%s: MAP_ROWS %d×%d が size_tiles %d×%d と一致しません" % [id, rows[0].length() if not rows.is_empty() else 0, rows.size(), w, h])
 		return
 	var exits: Dictionary = {}
+	var locked: Dictionary = {}
 	for e: Dictionary in f.get("exits", []):
 		var t: Array = e.get("tile", [0, 0])
-		exits[Vector2i(int(t[0]), int(t[1]))] = true
-	var start: Vector2i = Vector2i(-1, -1)
+		var tile: Vector2i = Vector2i(int(t[0]), int(t[1]))
+		exits[tile] = true
+		if e.get("lock", null) != null and not str(e["lock"]).is_empty():
+			locked[tile] = true
 	for y: int in h:
 		for x: int in w:
 			var ch: String = rows[y][x]
 			var edge: bool = x == 0 or y == 0 or x == w - 1 or y == h - 1
-			if walk.has(ch) and start.x < 0:
-				start = Vector2i(x, y)
 			if edge and walk.has(ch) and not exits.has(Vector2i(x, y)):
 				report.error("map", "%s: 外周 (%d, %d) '%s' が開いています" % [id, x, y, ch])
 	for ex: Vector2i in exits.keys():
 		if not walk.has(rows[ex.y][ex.x]):
 			report.error("map", "%s: 出口 %s が通行不可です" % [id, ex])
-	var seen: Dictionary = _flood(rows, walk, start, w, h)
+	# 主領域＝出口から辿れる最大の領域（施錠出口は落石などで塞がれていてよい）
+	var seen: Dictionary = {}
+	for ex: Vector2i in exits.keys():
+		if walk.has(rows[ex.y][ex.x]):
+			var region: Dictionary = _flood(rows, walk, ex, w, h)
+			if region.size() > seen.size():
+				seen = region
 	for ex: Vector2i in exits.keys():
 		if not seen.has(ex):
-			report.error("map", "%s: 出口 %s に到達できません" % [id, ex])
+			if locked.has(ex):
+				report.warn("map", "%s: 施錠出口 %s に主領域から到達できません（フラグで開くなら可）" % [id, ex])
+			else:
+				report.error("map", "%s: 出口 %s に主領域から到達できません" % [id, ex])
 	var isolated: int = 0
 	for y: int in h:
 		for x: int in w:
