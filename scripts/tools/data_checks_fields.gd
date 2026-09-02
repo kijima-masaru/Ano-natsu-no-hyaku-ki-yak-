@@ -18,6 +18,11 @@ static func check_fields(report: DataReport, fields: Array) -> Dictionary:
 		var scene: String = str(f.get("scene_path", ""))
 		if FileAccess.file_exists(scene):
 			implemented[id] = true
+		else:
+			# scripts/fields/fXX_*.gd があるのに scene_path のシーンが無い → 名前の不一致（プレースホルダ表示になる）
+			var stray: String = _find_script_for(id)
+			if not stray.is_empty():
+				report.error("fields", "%s: %s があるのに scene_path '%s' のシーンが無い（ファイル名を fields.json に合わせる）" % [id, stray, scene])
 		for e: Dictionary in f.get("exits", []):
 			var to: String = str(e.get("to", ""))
 			if not by_id.has(to):
@@ -30,6 +35,17 @@ static func check_fields(report: DataReport, fields: Array) -> Dictionary:
 			if not back:
 				report.error("fields", "%s→%s があるのに %s→%s がありません（双方向でない）" % [id, to, to, id])
 	return implemented
+
+
+## scripts/fields/ に fXX_ で始まる .gd があればその名前を返す
+static func _find_script_for(field_id: String) -> String:
+	var dir: DirAccess = DirAccess.open(SCRIPT_DIR)
+	if dir == null:
+		return ""
+	for name: String in dir.get_files():
+		if name.begins_with(field_id.to_lower() + "_") and name.ends_with(".gd"):
+			return name
+	return ""
 
 
 ## 実装済みフィールドの .gd を読み、MAP_ROWS と調べ物を検査する。戻り値は field_id → 調べ物 id の集合
@@ -132,9 +148,14 @@ static func _check_map(report: DataReport, f: Dictionary, text: String, _ids: Di
 				isolated += 1
 	if isolated > 0:
 		report.warn("map", "%s: 孤立した通行可タイル %d 個（意図した閉域なら可）" % [id, isolated])
+	# 隣接・座標の検査は屋外の INTERACTABLES ブロックだけ（屋内の階の調べ物は FLOORS 側）
+	var block_re: RegEx = RegEx.new()
+	block_re.compile("\\nconst INTERACTABLES: Array = \\[([\\s\\S]*?)\\n\\]")
+	var block_m: RegExMatch = block_re.search(text)
+	var block: String = block_m.get_string(1) if block_m != null else ""
 	var poi_re: RegEx = RegEx.new()
 	poi_re.compile('"id": "([a-z_0-9]+)"[^\\n]*?"tile": Vector2i\\((-?\\d+), (-?\\d+)\\)')
-	for m: RegExMatch in poi_re.search_all(text):
+	for m: RegExMatch in poi_re.search_all(block):
 		var p: Vector2i = Vector2i(int(m.get_string(2)), int(m.get_string(3)))
 		if p.x < 0 or p.y < 0 or p.x >= w or p.y >= h:
 			report.error("map", "%s: 調べ物 %s の座標 %s がフィールド外です（雛形の未設定値も含む）" % [id, m.get_string(1), p])
