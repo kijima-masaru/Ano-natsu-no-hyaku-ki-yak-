@@ -462,6 +462,351 @@
       "id": "ui_cleared_mark",
       "speaker": "system",
       "text": "面"
+    },
+    {
+      "id": "evd_shoe_mud_title",
+      "speaker": "",
+      "text": "靴の泥"
+    },
+    {
+      "id": "evd_shoe_mud_surface",
+      "speaker": "",
+      "text": "玄関の自分の靴。泥は雨のせいだ。"
+    },
+    {
+      "id": "evd_shoe_mud_truth",
+      "speaker": "",
+      "text": "玄関の自分の靴。薬師谷の泥だ。7 月からずっと、落ちない。"
+    },
+    {
+      "id": "evd_shoe_mud_shown",
+      "speaker": "",
+      "text": "靴を揃えた。"
+    },
+    {
+      "id": "evd_shoe_mud_action",
+      "speaker": "",
+      "text": "泥を洗い、母に見られる前に靴箱の奥へ入れた。"
+    },
+    {
+      "id": "evd_ren_memo_title",
+      "speaker": "",
+      "text": "机の引き出し"
+    },
+    {
+      "id": "evd_ren_memo_surface",
+      "speaker": "",
+      "text": "蓮の机。引き出しには文房具しか入っていなかった。"
+    },
+    {
+      "id": "evd_ren_memo_truth",
+      "speaker": "",
+      "text": "蓮の机。引き出しに、肝試しの持ち物メモがあった。俺の名前と『21:00 バス停』。"
+    },
+    {
+      "id": "evd_ren_memo_shown",
+      "speaker": "",
+      "text": "引き出しには文房具しか入っていなかった。"
+    },
+    {
+      "id": "evd_ren_memo_action",
+      "speaker": "",
+      "text": "メモを抜き、丸めてポケットへ。帰路、コンビニのゴミ箱に捨てた。"
+    },
+    {
+      "id": "evd_timetable_pass_title",
+      "speaker": "",
+      "text": "バス停の時刻表"
+    },
+    {
+      "id": "evd_timetable_pass_surface",
+      "speaker": "",
+      "text": "時刻表を見た。欠便の張り紙がある。"
+    },
+    {
+      "id": "evd_timetable_pass_truth",
+      "speaker": "",
+      "text": "時刻表に、蓮の定期券が挟まっていた。7/31 の帰り、ここで捨てたつもりだった。"
+    },
+    {
+      "id": "evd_timetable_pass_shown",
+      "speaker": "",
+      "text": "時刻表を見た。欠便の張り紙がある。"
+    },
+    {
+      "id": "evd_timetable_pass_action",
+      "speaker": "",
+      "text": "定期券を抜き取った。以後ずっと、俺のポケットにある。"
+    },
+    {
+      "id": "evd_storefront_note_title",
+      "speaker": "",
+      "text": "たちばな屋の日めくり"
+    },
+    {
+      "id": "evd_storefront_note_surface",
+      "speaker": "",
+      "text": "日めくりは 8 月になっていた。"
+    },
+    {
+      "id": "evd_storefront_note_truth",
+      "speaker": "",
+      "text": "日めくりの 7 月 31 日に、トキさんの字。『夕 蓮くんと男の子』。"
+    },
+    {
+      "id": "evd_storefront_note_shown",
+      "speaker": "",
+      "text": "日めくりは 8 月になっていた。"
+    },
+    {
+      "id": "evd_storefront_note_action",
+      "speaker": "",
+      "text": "7 月 31 日の紙を破って持ち帰った。トキさんは翌日『まだ 7 月だったかね』と言う。"
+    },
+    {
+      "id": "evd_phone_reply_title",
+      "speaker": "",
+      "text": "蓮の端末"
+    },
+    {
+      "id": "evd_phone_reply_surface",
+      "speaker": "",
+      "text": "蓮の端末は母親が持っていた。見せてもらえなかった。"
+    },
+    {
+      "id": "evd_phone_reply_truth",
+      "speaker": "",
+      "text": "蓮の端末。『行けなくてごめん』への既読は、同じ家の Wi-Fi から付いている。"
+    },
+    {
+      "id": "evd_phone_reply_shown",
+      "speaker": "",
+      "text": "蓮の端末は母親が持っていた。見せてもらえなかった。"
+    },
+    {
+      "id": "evd_phone_reply_action",
+      "speaker": "",
+      "text": "母親が見せようとしたのを、やんわり止めた。見せてもらう必要が無いと言った。"
+    },
+    {
+      "id": "evd_salt_bag_title",
+      "speaker": "",
+      "text": "廃寺前の小袋"
+    },
+    {
+      "id": "evd_salt_bag_surface",
+      "speaker": "",
+      "text": "何もなかった。"
+    },
+    {
+      "id": "evd_salt_bag_truth",
+      "speaker": "",
+      "text": "塩の小袋。蓮の字で『悠』と書いてある。持ち物メモの品だ。"
+    },
+    {
+      "id": "evd_salt_bag_shown",
+      "speaker": "",
+      "text": "何もなかった。"
+    },
+    {
+      "id": "evd_salt_bag_action",
+      "speaker": "",
+      "text": "拾い、握りつぶし、裂け目に落とした。"
+    },
+    {
+      "id": "evd_journal_page_title",
+      "speaker": "",
+      "text": "農機具小屋の日誌"
+    },
+    {
+      "id": "evd_journal_page_surface",
+      "speaker": "",
+      "text": "日誌は 7 月から始まっていた。"
+    },
+    {
+      "id": "evd_journal_page_truth",
+      "speaker": "",
+      "text": "日誌の 6 月 28 日。『夜、谷で人影。若い』。俺だ。"
+    },
+    {
+      "id": "evd_journal_page_shown",
+      "speaker": "",
+      "text": "日誌は 7 月から始まっていた。"
+    },
+    {
+      "id": "evd_journal_page_action",
+      "speaker": "",
+      "text": "6 月の頁を破った。8/23 に澪が読む頁だけを残した。"
+    },
+    {
+      "id": "evd_library_book_title",
+      "speaker": "",
+      "text": "『磐戸町史 下巻』"
+    },
+    {
+      "id": "evd_library_book_surface",
+      "speaker": "",
+      "text": "郷土資料の棚に、抜けた跡がある。"
+    },
+    {
+      "id": "evd_library_book_truth",
+      "speaker": "",
+      "text": "『磐戸町史 下巻』は俺の部屋にある。封石の章に折り目が付いている。"
+    },
+    {
+      "id": "evd_library_book_shown",
+      "speaker": "",
+      "text": "郷土資料の棚に、抜けた跡がある。"
+    },
+    {
+      "id": "evd_library_book_action",
+      "speaker": "",
+      "text": "8/1 より前に借り出し、返していない。『無い』と確認するふりをした。"
+    },
+    {
+      "id": "evd_testimony_walking_title",
+      "speaker": "",
+      "text": "トキさんの証言"
+    },
+    {
+      "id": "evd_testimony_walking_surface",
+      "speaker": "",
+      "text": "7 月 31 日の夕方、蓮ともう一人が店の前を並んで歩いていた。顔は見ていない。"
+    },
+    {
+      "id": "evd_testimony_walking_truth",
+      "speaker": "",
+      "text": "7 月 31 日の夕方、蓮と俺が店の前を並んで歩いていた。トキさんは俺の顔を見ていない。"
+    },
+    {
+      "id": "evd_missing_poster_1_title",
+      "speaker": "",
+      "text": "尋ね人の紙"
+    },
+    {
+      "id": "evd_missing_poster_1_surface",
+      "speaker": "",
+      "text": "掲示板に増えた尋ね人。町で、蓮だけではない何かが起きている。"
+    },
+    {
+      "id": "evd_missing_poster_1_truth",
+      "speaker": "",
+      "text": "掲示板に増えた尋ね人。石をずらしてから、増えている。"
+    },
+    {
+      "id": "evd_baba_words_title",
+      "speaker": "",
+      "text": "シゲさんの言葉"
+    },
+    {
+      "id": "evd_baba_words_surface",
+      "speaker": "",
+      "text": "『早く帰れ。連れて帰るな』。澪のしつこさを叱ったのだと思う。"
+    },
+    {
+      "id": "evd_baba_words_truth",
+      "speaker": "",
+      "text": "『早く帰れ。連れて帰るな』。俺と、俺の隣を見て言った。"
+    },
+    {
+      "id": "evd_seal_lore_title",
+      "speaker": "",
+      "text": "封石の話"
+    },
+    {
+      "id": "evd_seal_lore_surface",
+      "speaker": "",
+      "text": "日誌に『石が動いた』。薬師谷の封石。誰が動かしたのか。"
+    },
+    {
+      "id": "evd_seal_lore_truth",
+      "speaker": "",
+      "text": "日誌に『石が動いた』。俺が動かした。6 月の末に。"
+    },
+    {
+      "id": "msg_mio_stage_0",
+      "speaker": "",
+      "text": "澪は俺の少し前を歩く。「悠、こっち」"
+    },
+    {
+      "id": "msg_yu_stage_0",
+      "speaker": "yu",
+      "text": "大丈夫。ナツがそう言うなら、大丈夫だ。"
+    },
+    {
+      "id": "msg_mio_stage_1",
+      "speaker": "",
+      "text": "澪は俺の半歩後ろにいる。「悠って、歩くの速いよね」"
+    },
+    {
+      "id": "msg_yu_stage_1",
+      "speaker": "yu",
+      "text": "まだ、その必要はない。"
+    },
+    {
+      "id": "msg_mio_stage_2",
+      "speaker": "",
+      "text": "澪は距離を置いて歩く。時々、俺の足元を見る。"
+    },
+    {
+      "id": "msg_yu_stage_2",
+      "speaker": "yu",
+      "text": "澪は、どこまで。"
+    },
+    {
+      "id": "msg_mio_stage_3",
+      "speaker": "",
+      "text": "澪は俺を見ている。話しかけると、短く返す。"
+    },
+    {
+      "id": "msg_yu_stage_3",
+      "speaker": "yu",
+      "text": "終わらせ方を、考えておく。"
+    },
+    {
+      "id": "msg_conceal_witnessed",
+      "speaker": "",
+      "text": "澪が先に手を伸ばした。"
+    },
+    {
+      "id": "msg_notebook_locked",
+      "speaker": "",
+      "text": "ノートはまだ無い。"
+    },
+    {
+      "id": "ui_notebook_title",
+      "speaker": "system",
+      "text": "証拠ノート"
+    },
+    {
+      "id": "ui_notebook_empty",
+      "speaker": "system",
+      "text": "まだ何も書いていない。"
+    },
+    {
+      "id": "ui_notebook_hint",
+      "speaker": "system",
+      "text": "↑↓/選ぶ　X/閉じる"
+    },
+    {
+      "id": "ui_reveal_title",
+      "speaker": "system",
+      "text": "あなたが調べたもの"
+    },
+    {
+      "id": "ui_reveal_witnessed",
+      "speaker": "system",
+      "text": "澪はそれを、ずっと持っていた。"
+    },
+    {
+      "id": "ui_reveal_empty",
+      "speaker": "system",
+      "text": "何も隠さなかった。それでも、あの夜のことは変わらない。"
+    },
+    {
+      "id": "ui_reveal_hint",
+      "speaker": "system",
+      "text": "Z/次へ"
     }
   ]
 }
