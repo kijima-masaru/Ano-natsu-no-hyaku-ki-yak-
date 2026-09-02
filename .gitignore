@@ -1,0 +1,23 @@
+# Godot 4 生成物（絶対にコミットしない）
+.godot/
+*.import
+.import/
+*.tmp
+*.translation
+
+# エクスポート設定（署名・パスを含むためローカル管理）
+export_presets.cfg
+export/
+build/
+*.pck
+
+# エディタ・OS
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Python（docs/tools のビルドスクリプト用）
+__pycache__/
+*.pyc
