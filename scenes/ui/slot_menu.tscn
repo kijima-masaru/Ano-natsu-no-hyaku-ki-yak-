@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/slot_menu.gd" id="1_slot_menu"]
+[ext_resource type="Script" path="res://scripts/ui/menu_list.gd" id="2_menu_list"]
+
+[node name="SlotMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1_slot_menu")
+
+[node name="Panel" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 344.0
+offset_bottom = 176.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 296.0
+offset_bottom = 20.0
+
+[node name="List" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 26.0
+offset_right = 296.0
+offset_bottom = 110.0
+script = ExtResource("2_menu_list")
+
+[node name="Hint" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 116.0
+offset_right = 296.0
+offset_bottom = 130.0
