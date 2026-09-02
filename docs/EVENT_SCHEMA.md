@@ -103,7 +103,7 @@
 
 ## 日の開始との接続
 
-`schedule.json` の `opening_event` は `manual` イベントの ID。Main が日の開始で `msg_day_start` → 圧縮テキスト → `opening_event` の順に実行する。
+`schedule.json` の `opening_event` は `manual` イベントの ID。Main が日の開始で 圧縮テキスト → `msg_day_start` → `opening_event` → `on_day_start` の発火（自由日の導入、接近度の段階ごとの朝の澪の様子）の順に実行する。接近度の段階が上がったときは Main が `msg_yu_stage_<n>` を出す（数値は見せない）。
 `schedule.json` の `set_flags_on_start` 等は Calendar が直接処理する（イベントを介さない）。
 
 ## 実行の規則

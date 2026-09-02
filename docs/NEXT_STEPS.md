@@ -57,7 +57,7 @@
 1. フィールド 11（Step 4 指示の順）：F03（済 PR #28）→ F13（済 PR #29）→ F10（済 PR #30）→ F07（済 PR #31）→ F08（済 PR #32）→ F09（済 PR #33）→ F14（済 PR #34）→ F15（済 PR #35）→ F04（済 PR #36）→ F11（済 PR #37）→ F16（済 PR #38）。**11 フィールドすべて実装済み**。各 1 PR、`FIELD_IMPLEMENTATION_GUIDE.md` に従う
 2. `feat/lighting-and-night`：済（PR #26）。`Lighting` autoload（CanvasModulate の時間帯色調・明るさ設定・タイル光源・月光・懐中電灯）、Stalker の暗所ボーナスと照明下の視認距離
 3. `feat/anomaly-encounters`：済（PR #27）。`AnomalySystem` ＋ `data/anomalies.json`（once / repeat / escalate、接近度、憑いた怪異の介入）。既存 5 フィールドに各 1 件
-4. `feat/schedule-act1` `feat/schedule-act2`：8/5〜8/31 のイベント、中盤の老婆（F14 シゲ）の激昂、8/30 の提示画面と `truth_revealed`、終幕の澪操作
+4. `feat/schedule-act1`：済（PR #40）。8/1〜15 の固定日・自由日・圧縮日を完成（8/5 掲示板、8/9〜 鍵、自由日の導入、接近度の段階ごとの朝の澪、段階が上がったときの独白）。`feat/schedule-act2`：8/16〜29。8/30〜31（提示画面・`truth_revealed`・終幕）は Step 5
 5. `chore/act2-playtest`：通しの机上／実機確認、v0.3.0
 
 ## 手作業が必要な項目（環境の制約で未実施）

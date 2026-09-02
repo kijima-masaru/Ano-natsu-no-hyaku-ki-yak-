@@ -9,6 +9,8 @@ const TITLE_SCENE: String = "res://scenes/ui/title.tscn"
 const NOTEBOOK_SCENE: PackedScene = preload("res://scenes/ui/notebook.tscn")
 const MINIMAP_SCENE: PackedScene = preload("res://scenes/ui/minimap.tscn")
 const DEBUG_OVERLAY_SCENE: PackedScene = preload("res://scenes/debug/debug_overlay.tscn")
+## 接近度の独白を出し始める日（澪が同行し始める 8/3）
+const STAGE_MONOLOGUE_FIRST_DAY: int = 3
 
 @onready var world: Node2D = $World
 @onready var ui: CanvasLayer = $UI
@@ -29,6 +31,7 @@ func _ready() -> void:
 	SceneRouter.passage_closed_today.connect(_on_passage_closed_today)
 	Calendar.days_compressed.connect(_on_days_compressed)
 	Calendar.day_advanced.connect(_on_day_advanced)
+	Suspicion.stage_changed.connect(_on_suspicion_stage_changed)
 	SceneRouter.field_entered.connect(_on_field_entered)
 	SceneRouter.transition_finished.connect(_on_transition_finished)
 	SceneRouter.start()
@@ -161,6 +164,15 @@ func _on_days_compressed(from_day: int, to_day: int, text_id: String) -> void:
 var _pending_compressed_text: String = ""
 
 
+## 接近度の段階が上がったら主人公の独白（msg_yu_stage_<n>）。数値は見せない。下がったときは何も言わない
+func _on_suspicion_stage_changed(stage: int, previous: int) -> void:
+	if stage <= previous or Calendar.day < STAGE_MONOLOGUE_FIRST_DAY:
+		return
+	var id: String = "msg_yu_stage_%d" % stage
+	if MessageResolver.has_message(id):
+		EventSystem.run_actions("suspicion_stage_%d" % stage, [{"type": "message", "id": id}])
+
+
 func _on_day_advanced(day: int, previous: int) -> void:
 	print("Main: %s になった（day %d → %d）" % [Calendar.format_date(day), previous, day])
 	_run_day_start(day)
@@ -178,6 +190,8 @@ func _run_day_start(day: int) -> void:
 	var schedule: DaySchedule = Calendar.get_schedule(day)
 	if schedule != null and not schedule.opening_event.is_empty():
 		EventSystem.run_event(schedule.opening_event)
+	# 自由日の導入や、接近度の段階に応じた朝の澪の様子（on_day_start。opening_event の後に並ぶ）
+	EventSystem.fire(EventSystem.TRIGGER_DAY_START, SceneRouter.current_field_id)
 
 
 func _run_opening_event_if_needed() -> void:
