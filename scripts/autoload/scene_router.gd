@@ -1,0 +1,211 @@
+extends Node
+## フィールド間の遷移を司る autoload。
+## 暗転 → 現在のフィールドを破棄 → 接続先を読み込み → 対応する出口の 1 タイル内側にプレイヤーを配置 → 明転。
+## lock 付きの出口は GameState のフラグを満たすまで通れず、passage_blocked を発火する。
+## 存在しない ID・未実装シーンはクラッシュさせず、エラーを出してフォールバックする。
+
+signal transition_started(from_id: String, to_id: String)
+signal field_entered(field_id: String, from_id: String)
+signal transition_finished(field_id: String)
+signal passage_blocked(exit: ExitData)
+signal field_load_failed(field_id: String, reason: String)
+
+const PLAYER_SCENE_PATH: String = "res://scenes/actors/player.tscn"
+const PLACEHOLDER_SCENE_PATH: String = "res://scenes/fields/field_placeholder.tscn"
+const FADE_DURATION: float = 0.35
+const FADE_CANVAS_LAYER: int = 100
+
+var world_root: Node2D = null
+var current_field: FieldBase = null
+var current_field_id: String = ""
+var player: CharacterBody2D = null
+var camera: Camera2D = null
+var is_transitioning: bool = false
+
+var _fade: ColorRect = null
+
+
+func _ready() -> void:
+	_build_fade_layer()
+
+
+## Main シーンがワールドのルートを登録する
+func register_world(root: Node2D) -> void:
+	world_root = root
+
+
+## 起動時：GameState.current_field_id のフィールドを読み込む
+func start() -> void:
+	if world_root == null:
+		push_error("SceneRouter: register_world() が呼ばれていません")
+		return
+	_ensure_player()
+	var id: String = GameState.current_field_id
+	if not FieldRegistry.is_loaded:
+		push_error("SceneRouter: FieldRegistry が読み込まれていないため、エラー表示のプレースホルダを出します")
+		_mount_field(_make_placeholder(null, "\n".join(FieldRegistry.load_errors)), null, "")
+		return
+	if not FieldRegistry.has_field(id):
+		push_error("SceneRouter: フィールド '%s' は存在しません。初期フィールド %s にフォールバックします" % [id, GameState.INITIAL_FIELD_ID])
+		id = GameState.INITIAL_FIELD_ID
+		GameState.player_position = Vector2.ZERO
+	_load_field(id, "")
+	_fade.color = Palette.with_alpha(Palette.FADE_BLACK, 1.0)
+	_fade_to(0.0)
+
+
+## 出口に到達したときの遷移要求（FieldBase.exit_reached から）
+func request_transition(exit: ExitData) -> void:
+	if exit == null:
+		push_error("SceneRouter: null の出口が渡されました")
+		return
+	if is_transitioning:
+		return
+	if not FieldRegistry.is_exit_open(exit) or not FieldRegistry.is_unlocked(exit.to_id):
+		_push_back_from_exit(exit)
+		passage_blocked.emit(exit)
+		return
+	_transition_to(exit.to_id, exit.from_id)
+
+
+## 任意のフィールドへ直接移動する（デバッグ・イベント用）
+func go_to(field_id: String, from_id: String = "") -> void:
+	if is_transitioning:
+		return
+	if not FieldRegistry.has_field(field_id):
+		push_error("SceneRouter: go_to('%s') 存在しないフィールドです" % field_id)
+		return
+	_transition_to(field_id, from_id)
+
+
+func _transition_to(to_id: String, from_id: String) -> void:
+	is_transitioning = true
+	player.input_enabled = false
+	transition_started.emit(from_id, to_id)
+	await _fade_to(1.0)
+	_load_field(to_id, from_id)
+	await _fade_to(0.0)
+	player.input_enabled = true
+	is_transitioning = false
+	transition_finished.emit(to_id)
+
+
+## 現在のフィールドを外し、to_id のフィールドを組み立てて配置する
+func _load_field(to_id: String, from_id: String) -> void:
+	var def: FieldData = FieldRegistry.get_field(to_id)
+	var scene: FieldBase = _instantiate_field(def, to_id)
+	_mount_field(scene, def, from_id)
+
+
+func _mount_field(scene: FieldBase, def: FieldData, from_id: String) -> void:
+	_unmount_current()
+	scene.setup(def)
+	world_root.add_child(scene)
+	scene.get_actor_root().add_child(player)
+	scene.exit_reached.connect(request_transition)
+	# 出現位置：出口から来たならその内側、起動直後でセーブ座標があればそこ、無ければ既定位置
+	if from_id.is_empty() and GameState.player_position != Vector2.ZERO and GameState.current_field_id == (def.id if def != null else ""):
+		player.global_position = GameState.player_position
+		player.facing = GameState.player_facing
+		player.velocity = Vector2.ZERO
+	else:
+		player.place_at_tile(scene.get_spawn_tile(from_id), scene.get_spawn_facing(from_id))
+	_apply_camera_limits(scene)
+	current_field = scene
+	current_field_id = def.id if def != null else ""
+	if def != null:
+		GameState.set_current_field(def.id)
+	GameState.set_player_pose(player.global_position, player.facing)
+	field_entered.emit(current_field_id, from_id)
+
+
+func _unmount_current() -> void:
+	if current_field == null:
+		return
+	if player.get_parent() != null:
+		player.get_parent().remove_child(player)
+	world_root.remove_child(current_field)
+	current_field.queue_free()
+	current_field = null
+
+
+## scene_path が存在し FieldBase を継承していればそれを、そうでなければプレースホルダを返す
+func _instantiate_field(def: FieldData, id: String) -> FieldBase:
+	if def == null:
+		field_load_failed.emit(id, "定義が存在しない")
+		return _make_placeholder(null, "フィールド '%s' の定義がありません" % id)
+	if not ResourceLoader.exists(def.scene_path):
+		push_warning("SceneRouter: %s のシーン %s は未実装のためプレースホルダを表示します" % [def.id, def.scene_path])
+		return _make_placeholder(def, "")
+	var packed: PackedScene = load(def.scene_path) as PackedScene
+	if packed == null:
+		push_error("SceneRouter: %s を PackedScene として読み込めません" % def.scene_path)
+		field_load_failed.emit(id, "PackedScene ではない")
+		return _make_placeholder(def, "")
+	var instance: Node = packed.instantiate()
+	var field: FieldBase = instance as FieldBase
+	if field == null:
+		push_error("SceneRouter: %s のルートは FieldBase を継承する必要があります" % def.scene_path)
+		field_load_failed.emit(id, "ルートが FieldBase ではない")
+		instance.free()
+		return _make_placeholder(def, "")
+	return field
+
+
+func _make_placeholder(def: FieldData, reason: String) -> FieldBase:
+	var packed: PackedScene = load(PLACEHOLDER_SCENE_PATH) as PackedScene
+	var placeholder: FieldBase = packed.instantiate() as FieldBase
+	placeholder.set("failure_reason", reason)
+	if def == null and reason.is_empty():
+		placeholder.set("failure_reason", "定義なし")
+	return placeholder
+
+
+func _ensure_player() -> void:
+	if player != null:
+		return
+	var packed: PackedScene = load(PLAYER_SCENE_PATH) as PackedScene
+	player = packed.instantiate() as CharacterBody2D
+	camera = Camera2D.new()
+	camera.name = "Camera"
+	camera.position_smoothing_enabled = false
+	camera.position = Vector2(0, -GameConstants.TILE_SIZE * 0.5)
+	# enabled=true のカメラはツリーに入った時点で current になる（ツリー外で make_current は呼べない）
+	camera.enabled = true
+	player.add_child(camera)
+
+
+## カメラをフィールドの外へ出さない
+func _apply_camera_limits(scene: FieldBase) -> void:
+	var bounds: Rect2i = scene.get_bounds_px()
+	camera.limit_left = bounds.position.x
+	camera.limit_top = bounds.position.y
+	camera.limit_right = bounds.end.x
+	camera.limit_bottom = bounds.end.y
+	camera.reset_smoothing()
+
+
+## 通れない出口に触れたプレイヤーを 1 タイル内側へ戻す（トリガーの連続発火を防ぐ）
+func _push_back_from_exit(exit: ExitData) -> void:
+	if current_field == null or exit.from_id != current_field_id:
+		return
+	player.place_at_tile(exit.inward_tile(), player.facing)
+
+
+func _build_fade_layer() -> void:
+	var layer: CanvasLayer = CanvasLayer.new()
+	layer.name = "FadeLayer"
+	layer.layer = FADE_CANVAS_LAYER
+	add_child(layer)
+	_fade = ColorRect.new()
+	_fade.name = "Fade"
+	_fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_fade.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_fade.color = Palette.with_alpha(Palette.FADE_BLACK, 0.0)
+	layer.add_child(_fade)
+
+
+func _fade_to(alpha: float) -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(_fade, "color:a", alpha, FADE_DURATION)
+	await tween.finished
