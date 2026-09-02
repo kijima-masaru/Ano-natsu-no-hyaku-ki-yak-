@@ -33,14 +33,14 @@
 - **すべて**の変数・引数・戻り値に型を付ける。推論に任せる `:=` は右辺の型が一目で分かる場合（リテラル、コンストラクタ、`as` キャスト）のみ許可。
 - `Variant` を返す API（`JSON.parse_string` など）は受け取った直後に型を確定させる。
 - 配列は要素型を明示する：`var exits: Array[Dictionary]`、`PackedStringArray` 等の Packed 型を優先。
-- `Dictionary` を構造体代わりに使うのは JSON 読み込み直後の境界だけに限り、内部では専用クラス（`FieldDef` など）に変換する。
+- `Dictionary` を構造体代わりに使うのは JSON 読み込み直後の境界だけに限り、内部では専用クラス（`FieldData` / `ExitData` など）に変換する。
 - 静的型チェックの警告（`UNTYPED_DECLARATION`, `INFERRED_DECLARATION` 以外）を **エラー扱い**にする設定を後続タスクで `project.godot` に追加する。
 
 ```gdscript
 # 良い
 var speed: float = 48.0
-var field: FieldDef = FieldRegistry.get_field("F06")
-func find_exit(to_id: String) -> ExitDef:
+var field: FieldData = FieldRegistry.get_field("F06")
+func find_exit(to_id: String) -> ExitData:
 
 # 悪い
 var speed = 48
@@ -65,13 +65,15 @@ func find_exit(to_id):
 | 名前 | 役割 |
 |---|---|
 | `Palette` | 16 色パレットの唯一の定義 |
-| `FieldRegistry` | `data/fields.json` の読み込みと `FieldDef` の提供 |
+| `FieldRegistry` | `data/fields.json` の読み込み・スキーマ検証と `FieldData` / `ExitData` の提供 |
 | `SceneRouter` | フィールド遷移とプレイヤー配置 |
 | `GameState` | フラグ・所持品・セーブデータ |
 | `SteamBridge` | GodotSteam への空実装インターフェース（実績・クラウドセーブのフック） |
 
 - autoload はシーンツリーのノードを **保持しない**（参照は遷移で無効になる）。必要ならシグナルで受け渡す。
-- autoload 同士の依存は一方向にする：`Palette` ← `FieldRegistry` ← `SceneRouter` ← `GameState`。逆方向の参照は禁止。
+- autoload 同士の依存は一方向にする：`Palette` ← `GameState` ← `FieldRegistry` ← `SceneRouter`。逆方向の参照は禁止。
+  `SteamBridge` は他の autoload に依存せず、`GameState` のセーブ処理からだけ呼ばれる。
+  読み込み順（project.godot の `[autoload]`）もこの順に並べる。
 - `get_node("/root/Xxx")` で autoload を取らない。登録名で直接参照する。
 
 ## 6. 色とパレット
