@@ -201,35 +201,10 @@ func _set_player_input(enabled: bool) -> void:
 		SceneRouter.player.input_enabled = enabled
 
 
-# ── 組み込みアクション ──
+# ── 組み込みアクション（EventActions に定義） ──
 
 func _register_builtin_actions() -> void:
-	register_action("message", _act_message)
-	register_action("set_flag", func(a: Dictionary, _c: Dictionary) -> void:
-		if bool(a.get("value", true)):
-			GameState.raise_flag(str(a.get("flag", "")))
-		else:
-			GameState.clear_flag(str(a.get("flag", ""))))
-	register_action("clear_flag", func(a: Dictionary, _c: Dictionary) -> void: GameState.clear_flag(str(a.get("flag", ""))))
-	register_action("give_item", func(a: Dictionary, _c: Dictionary) -> void: GameState.add_item(str(a.get("item", ""))))
-	register_action("remove_item", func(a: Dictionary, _c: Dictionary) -> void: GameState.remove_item(str(a.get("item", ""))))
-	register_action("unlock_field", _act_unlock_field)
-	register_action("move_player", _act_move_player)
-	register_action("advance_day", func(_a: Dictionary, _c: Dictionary) -> void: Calendar.advance_day())
-	register_action("set_time", func(a: Dictionary, _c: Dictionary) -> void: Calendar.set_time_of_day(str(a.get("time_of_day", ""))))
-	register_action("add_points", func(a: Dictionary, _c: Dictionary) -> void: Calendar.add_investigation_points(int(a.get("amount", 1))))
-	register_action("wait", _act_wait)
-	register_action("run_event", func(a: Dictionary, _c: Dictionary) -> void: run_event(str(a.get("id", ""))))
-	register_action("end_game", _act_end_game)
-	register_action("choice", _act_choice)
-
-
-## message: {id, truth_id?, args?}。二層分岐は MessageResolver.resolve に任せる
-func _act_message(a: Dictionary, _c: Dictionary) -> void:
-	var id: String = str(a.get("id", ""))
-	var args: Array = a.get("args", []) if a.get("args", []) is Array else []
-	var entry: MessageEntry = MessageResolver.resolve(id, args)
-	await show_entry(entry)
+	EventActions.register_all(self)
 
 
 ## 解決済みメッセージをウィンドウに出し、閉じるまで待つ（他の autoload からも使う）
@@ -244,67 +219,24 @@ func show_entry(entry: MessageEntry) -> void:
 	await Signal(_message_window, "closed")
 
 
-## choice: {options: [{text_id, set_flag?, run_event?}], prompt_id?}。選んだ選択肢の set_flag / run_event を適用
-func _act_choice(a: Dictionary, c: Dictionary) -> void:
+## 選択肢の前置き本文（閉じるのを待たず、ウィンドウに保留中の選択肢を渡す）
+func show_prompt(entry: MessageEntry) -> void:
+	if _message_window != null and _message_window.has_method("show_entry"):
+		_message_window.call("show_entry", entry)
+
+
+## 選択肢を出して結果の index を返す（-1 は表示不可）
+func show_choice(labels: PackedStringArray) -> int:
 	if _message_window == null or not _message_window.has_method("show_choice"):
 		push_error("EventSystem: 選択肢を表示できるウィンドウが未登録です")
-		return
-	var options: Variant = a.get("options", [])
-	if not options is Array or (options as Array).is_empty():
-		action_failed.emit(str(c["event_id"]), a, "options が空")
-		return
-	var labels: PackedStringArray = PackedStringArray()
-	for opt: Variant in options as Array:
-		labels.append(MessageResolver.text(str((opt as Dictionary).get("text_id", ""))))
-	if a.has("prompt_id"):
-		_message_window.call("show_entry", MessageResolver.resolve(str(a["prompt_id"])))
+		return -1
 	_message_window.call("show_choice", labels)
 	var index: int = await Signal(_message_window, "choice_made")
-	if index < 0 or index >= (options as Array).size():
-		return
-	var chosen: Dictionary = (options as Array)[index]
-	if chosen.has("set_flag"):
-		GameState.raise_flag(str(chosen["set_flag"]))
-	if chosen.has("run_event"):
-		run_event(str(chosen["run_event"]))
+	return index
 
 
-func _act_unlock_field(a: Dictionary, c: Dictionary) -> void:
-	var def: FieldData = FieldRegistry.get_field(str(a.get("field", "")))
-	if def == null:
-		action_failed.emit(str(c["event_id"]), a, "unknown field")
-		return
-	if def.unlock_flag.is_empty():
-		push_warning("EventSystem: %s に unlock_flag が無いため unlock_field は何もしません" % def.id)
-		return
-	GameState.raise_flag(def.unlock_flag)
-
-
-func _act_move_player(a: Dictionary, _c: Dictionary) -> void:
-	var field: String = str(a.get("field", ""))
-	if not field.is_empty() and field != SceneRouter.current_field_id:
-		SceneRouter.go_to(field)
-		await SceneRouter.transition_finished
-	var tile: Variant = a.get("tile", null)
-	if tile is Array and (tile as Array).size() == 2 and SceneRouter.player != null:
-		var facing: Vector2i = Vector2i.ZERO
-		var f: Variant = a.get("facing", null)
-		if f is Array and (f as Array).size() == 2:
-			facing = Vector2i(int((f as Array)[0]), int((f as Array)[1]))
-		SceneRouter.player.place_at_tile(Vector2i(int((tile as Array)[0]), int((tile as Array)[1])), facing)
-
-
-func _act_wait(a: Dictionary, _c: Dictionary) -> void:
-	await get_tree().create_timer(maxf(0.0, float(a.get("seconds", 0.5)))).timeout
-
-
-## end_game: {ending}。クリア記録を残しタイトルへ（本実装はステップ5）
-func _act_end_game(a: Dictionary, _c: Dictionary) -> void:
-	var ending: String = str(a.get("ending", ""))
-	if not ending.is_empty():
-		SaveManager.record_cleared_ending(ending)
-		GameState.raise_flag("ending_reached")
-	get_tree().change_scene_to_file("res://scenes/ui/title.tscn")
+func emit_action_failed(event_id: String, action: Dictionary, reason: String) -> void:
+	action_failed.emit(event_id, action, reason)
 
 
 func _read_json(path: String, errors: PackedStringArray) -> Dictionary:

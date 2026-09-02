@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "note": "kind: evidence（ノートに載る）/ concealable（隠蔽対象。成功時はノートに載らず GameState.concealed_evidence へ）。テキストは messages.json の ID 参照"
+  },
+  "evidence": [
+    {
+      "id": "shoe_mud",
+      "kind": "concealable",
+      "field": "F12",
+      "day_min": 1,
+      "title_id": "evd_shoe_mud_title",
+      "surface_id": "evd_shoe_mud_surface",
+      "truth_id": "evd_shoe_mud_truth",
+      "shown_id": "evd_shoe_mud_shown",
+      "action_id": "evd_shoe_mud_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "ren_memo",
+      "kind": "concealable",
+      "field": "F02",
+      "day_min": 8,
+      "title_id": "evd_ren_memo_title",
+      "surface_id": "evd_ren_memo_surface",
+      "truth_id": "evd_ren_memo_truth",
+      "shown_id": "evd_ren_memo_shown",
+      "action_id": "evd_ren_memo_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "timetable_pass",
+      "kind": "concealable",
+      "field": "F06",
+      "day_min": 4,
+      "title_id": "evd_timetable_pass_title",
+      "surface_id": "evd_timetable_pass_surface",
+      "truth_id": "evd_timetable_pass_truth",
+      "shown_id": "evd_timetable_pass_shown",
+      "action_id": "evd_timetable_pass_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "storefront_note",
+      "kind": "concealable",
+      "field": "F05",
+      "day_min": 3,
+      "title_id": "evd_storefront_note_title",
+      "surface_id": "evd_storefront_note_surface",
+      "truth_id": "evd_storefront_note_truth",
+      "shown_id": "evd_storefront_note_shown",
+      "action_id": "evd_storefront_note_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "phone_reply",
+      "kind": "concealable",
+      "field": "F02",
+      "day_min": 8,
+      "title_id": "evd_phone_reply_title",
+      "surface_id": "evd_phone_reply_surface",
+      "truth_id": "evd_phone_reply_truth",
+      "shown_id": "evd_phone_reply_shown",
+      "action_id": "evd_phone_reply_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "salt_bag",
+      "kind": "concealable",
+      "field": "F16",
+      "day_min": 29,
+      "title_id": "evd_salt_bag_title",
+      "surface_id": "evd_salt_bag_surface",
+      "truth_id": "evd_salt_bag_truth",
+      "shown_id": "evd_salt_bag_shown",
+      "action_id": "evd_salt_bag_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "journal_page",
+      "kind": "concealable",
+      "field": "F04",
+      "day_min": 13,
+      "title_id": "evd_journal_page_title",
+      "surface_id": "evd_journal_page_surface",
+      "truth_id": "evd_journal_page_truth",
+      "shown_id": "evd_journal_page_shown",
+      "action_id": "evd_journal_page_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "library_book",
+      "kind": "concealable",
+      "field": "F06",
+      "day_min": 9,
+      "title_id": "evd_library_book_title",
+      "surface_id": "evd_library_book_surface",
+      "truth_id": "evd_library_book_truth",
+      "shown_id": "evd_library_book_shown",
+      "action_id": "evd_library_book_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "testimony_walking",
+      "kind": "evidence",
+      "field": "F05",
+      "day_min": 2,
+      "title_id": "evd_testimony_walking_title",
+      "surface_id": "evd_testimony_walking_surface",
+      "truth_id": "evd_testimony_walking_truth",
+      "suspicion_on_gain": 4
+    },
+    {
+      "id": "missing_poster_1",
+      "kind": "evidence",
+      "field": "F06",
+      "day_min": 5,
+      "title_id": "evd_missing_poster_1_title",
+      "surface_id": "evd_missing_poster_1_surface",
+      "truth_id": "evd_missing_poster_1_truth",
+      "suspicion_on_gain": 4
+    },
+    {
+      "id": "baba_words",
+      "kind": "evidence",
+      "field": "F14",
+      "day_min": 14,
+      "title_id": "evd_baba_words_title",
+      "surface_id": "evd_baba_words_surface",
+      "truth_id": "evd_baba_words_truth",
+      "suspicion_on_gain": 4
+    },
+    {
+      "id": "seal_lore",
+      "kind": "evidence",
+      "field": "F04",
+      "day_min": 23,
+      "title_id": "evd_seal_lore_title",
+      "surface_id": "evd_seal_lore_surface",
+      "truth_id": "evd_seal_lore_truth",
+      "suspicion_on_gain": 4
+    }
+  ]
+}
