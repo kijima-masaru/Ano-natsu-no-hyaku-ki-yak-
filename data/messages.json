@@ -168,11 +168,6 @@
       "text": "8月17日。調査 8 日目。\n（この日のイベントは後のタスクで実装）"
     },
     {
-      "id": "msg_d19_open",
-      "speaker": "system",
-      "text": "8月19日。小学校。\n（この日のイベントは後のタスクで実装）"
-    },
-    {
       "id": "msg_d20_open",
       "speaker": "system",
       "text": "8月20日。調査 9 日目。\n（この日のイベントは後のタスクで実装）"
@@ -2873,6 +2868,264 @@
       "id": "msg_an_f04_bulb_t",
       "speaker": "yu",
       "text": "小屋の電球が点いた。\n窓に映っているのは、俺の影ではない。俺の隣の影だ。"
+    },
+    {
+      "id": "msg_f11_enter",
+      "speaker": "yu",
+      "text": "磐戸第一小学校。夏休みの校庭。\n木造の旧校舎が、一棟だけ取り壊されずに残っている。俺たちが六年間通った方の校舎だ。"
+    },
+    {
+      "id": "msg_d19_open",
+      "speaker": "yu",
+      "text": "8月19日。\n澪が、小学校の旧校舎に入る鍵を職員室が持っていると聞いてきた。夏休みの学校は、静かすぎる。"
+    },
+    {
+      "id": "msg_f11_staff_key",
+      "speaker": "yu",
+      "text": "職員室。夏季の当番の先生が一人。\n『旧校舎の鍵？　卒業生なら……気をつけて』。番号札の付いた鍵を渡された。"
+    },
+    {
+      "id": "msg_f11_staff_after",
+      "speaker": "yu",
+      "text": "職員室。先生は書類から目を上げない。\n『鍵、返すのはいつでもいいから』。"
+    },
+    {
+      "id": "msg_f11_staff_early",
+      "speaker": "yu",
+      "text": "新校舎の職員室。ガラス越しに、誰もいない机が並ぶ。\n夏休みだ。"
+    },
+    {
+      "id": "msg_f11_entrance_locked",
+      "speaker": "yu",
+      "text": "旧校舎の昇降口。錠が下りている。\n鍵は職員室にあるはずだ。"
+    },
+    {
+      "id": "msg_f11_entrance_open",
+      "speaker": "yu",
+      "text": "鍵が回った。昇降口の戸は、六年前と同じ重さで開いた。\n中は暗い。廊下の奥に、非常灯の緑。"
+    },
+    {
+      "id": "msg_f11_pedestal",
+      "speaker": "yu",
+      "text": "二宮像の台座。像は、もう無い。\n六年のとき、この台座に三人で座った。蓮と、俺と、転校してきたばかりの——澪ではない、別の子。",
+      "truth_id": "msg_f11_pedestal_t"
+    },
+    {
+      "id": "msg_f11_pedestal_t",
+      "speaker": "yu",
+      "text": "二宮像の台座。像は無い。\n三人で座った。蓮と、俺と、もう一人。その子の名前を、俺は思い出さないことにしている。"
+    },
+    {
+      "id": "msg_f11_platform",
+      "speaker": "yu",
+      "text": "朝礼台。ペンキが剥げて、木が出ている。\n上に立つと、校庭が思ったより狭い。"
+    },
+    {
+      "id": "msg_f11_gym",
+      "speaker": "yu",
+      "text": "体育館。施錠。\n中でボールが跳ねる音——は、しなかった。"
+    },
+    {
+      "id": "msg_f11_hutch",
+      "speaker": "yu",
+      "text": "飼育小屋。空だ。金網に、餌の袋が引っかかっている。\n五年のとき、蓮と飼育係だった。蓮は名前を付けるのが上手かった。",
+      "truth_id": "msg_f11_hutch_t"
+    },
+    {
+      "id": "msg_f11_hutch_t",
+      "speaker": "yu",
+      "text": "飼育小屋。空だ。\n蓮は名前を付けるのが上手かった。ナツ、という名前も、最初は蓮が言った。"
+    },
+    {
+      "id": "msg_f11_weather_box",
+      "speaker": "yu",
+      "text": "百葉箱。中の温度計は、割れている。\n記録用紙の最後の日付は、七月三十一日。"
+    },
+    {
+      "id": "msg_f11_1f_enter",
+      "speaker": "yu",
+      "text": "旧校舎一階。板の廊下。歩くと、六年前と同じ場所が鳴る。\n非常灯だけが点いている。"
+    },
+    {
+      "id": "msg_f11_1f_night",
+      "speaker": "yu",
+      "text": "夜の旧校舎。非常灯の緑が、廊下の奥まで届かない。\n二階から、何かを引きずる音。二階は、施錠されている。"
+    },
+    {
+      "id": "msg_f11_health_bed",
+      "speaker": "yu",
+      "text": "保健室のベッド。カーテンは開いている。\n四年のとき、蓮が熱を出した。俺は隣で、授業が終わるまで待った。",
+      "truth_id": "msg_f11_health_bed_t"
+    },
+    {
+      "id": "msg_f11_health_bed_t",
+      "speaker": "yu",
+      "text": "保健室のベッド。\n蓮が熱を出した日、俺は隣で待った。蓮が一人になるのを、待っていた。"
+    },
+    {
+      "id": "msg_f11_class1_board",
+      "speaker": "yu",
+      "text": "一年教室の黒板。ひらがなの書き順が残っている。\n消し忘れではない。誰かが最近、書いた。"
+    },
+    {
+      "id": "msg_f11_art_shelf_early",
+      "speaker": "yu",
+      "text": "図工室の作品棚。埃。\n棚の奥に、木箱が一つ。手が届かない。"
+    },
+    {
+      "id": "msg_f11_art_shelf_1",
+      "speaker": "yu",
+      "text": "図工室の作品棚。奥の木箱を引き出した。『六年二組 タイムカプセル 二十歳のぼくへ』。\n蓋は、釘が抜かれている。"
+    },
+    {
+      "id": "msg_f11_art_shelf_2",
+      "speaker": "yu",
+      "text": "手紙の束。宛名は全部、二十歳の自分たち。\n蓮の字の封筒が二つ。一つは蓮自身へ。もう一つは——",
+      "truth_id": "msg_f11_art_shelf_2_t"
+    },
+    {
+      "id": "msg_f11_art_shelf_2_t",
+      "speaker": "yu",
+      "text": "手紙の束。蓮の字の封筒が二つ。\n一つは蓮自身へ。もう一つは、俺へ。読まない。読めば、戻れなくなる。"
+    },
+    {
+      "id": "msg_f11_night_journal",
+      "speaker": "yu",
+      "text": "宿直室の日誌。七月三十一日、二十一時。\n『校門の外に二人。一人は在校生ではない。声をかけたが、行ってしまった』。",
+      "truth_id": "msg_f11_night_journal_t"
+    },
+    {
+      "id": "msg_f11_night_journal_t",
+      "speaker": "yu",
+      "text": "宿直室の日誌。七月三十一日、二十一時。\n『校門の外に二人』。俺と蓮だ。声をかけられて、俺が先に歩き出した。"
+    },
+    {
+      "id": "msg_f11_stairs_locked",
+      "speaker": "yu",
+      "text": "二階への階段。踊り場に『立入禁止』の札。\n床板が抜けているらしい。上から、風の音。"
+    },
+    {
+      "id": "msg_f11_stairs_open",
+      "speaker": "yu",
+      "text": "二階への階段。札は、外されている。\n誰が外したのか。"
+    },
+    {
+      "id": "msg_f11_2f_enter",
+      "speaker": "yu",
+      "text": "旧校舎二階。六年間の最後の一年を過ごした階。\n窓が全部、少しだけ開いている。"
+    },
+    {
+      "id": "msg_f11_class4_board",
+      "speaker": "yu",
+      "text": "四年教室の黒板。日直の名前の欄が、空白のまま消されていない。"
+    },
+    {
+      "id": "msg_f11_class5_board",
+      "speaker": "yu",
+      "text": "五年教室の黒板。『飼育係：ひなた・かがり』。\n六年前の字が、消されずに残っている。"
+    },
+    {
+      "id": "msg_f11_class6_board",
+      "speaker": "yu",
+      "text": "六年教室の黒板。隅に、小さく二人の落書き。棒人間が二つ。\n卒業式の日、蓮が描いて、俺が隣に描き足した。",
+      "truth_id": "msg_f11_class6_board_t"
+    },
+    {
+      "id": "msg_f11_class6_board_t",
+      "speaker": "yu",
+      "text": "六年教室の黒板。棒人間が二つ。\n蓮が描いたのは、俺と蓮だ。俺が描き足したのは、三人目だった。今はもう消えている。"
+    },
+    {
+      "id": "msg_f11_class6_desk",
+      "speaker": "yu",
+      "text": "六年教室の机。名札のシールが残っている。\n読めるのは一つだけ。他は、日に焼けて白い。"
+    },
+    {
+      "id": "msg_f11_library",
+      "speaker": "yu",
+      "text": "図書室の棚。郷土学習の掛け図『磐戸の八柱』。\n八本の柱の位置と、真ん中に丸。丸のところだけ、色が違う。",
+      "truth_id": "msg_f11_library_t"
+    },
+    {
+      "id": "msg_f11_library_t",
+      "speaker": "yu",
+      "text": "掛け図『磐戸の八柱』。真ん中の丸は封石だ。\n色が違うのは、俺が六年の時にそこだけ塗ったからだ。あの頃から、知っていた。"
+    },
+    {
+      "id": "evd_capsule_letter_title",
+      "speaker": "",
+      "text": "蓮からの手紙"
+    },
+    {
+      "id": "evd_capsule_letter_surface",
+      "speaker": "",
+      "text": "タイムカプセルの手紙の束。宛名は二十歳の自分たち。"
+    },
+    {
+      "id": "evd_capsule_letter_truth",
+      "speaker": "",
+      "text": "蓮が二十歳の俺に書いた手紙。読んでいない。読まないまま、持っている。"
+    },
+    {
+      "id": "evd_capsule_letter_shown",
+      "speaker": "",
+      "text": "手紙の束を見た。宛名は全部、二十歳の自分たち。"
+    },
+    {
+      "id": "evd_capsule_letter_action",
+      "speaker": "",
+      "text": "蓮が俺に書いた手紙を抜いた。読まずに、ポケットへ。木箱は元の位置に戻した。"
+    },
+    {
+      "id": "heroine_remark_capsule_letter",
+      "speaker": "mio",
+      "text": "「……今、何か取った？　蓮の字だったよね」"
+    },
+    {
+      "id": "evd_night_watch_title",
+      "speaker": "",
+      "text": "宿直日誌 7/31"
+    },
+    {
+      "id": "evd_night_watch_surface",
+      "speaker": "",
+      "text": "7/31 21 時、校門の外に二人。一人は在校生ではない。"
+    },
+    {
+      "id": "evd_night_watch_truth",
+      "speaker": "",
+      "text": "7/31 21 時、校門の外に二人。俺と蓮。声をかけられて、俺が先に歩き出した。"
+    },
+    {
+      "id": "msg_an_f11_desks_1",
+      "speaker": "yu",
+      "text": "六年教室。机が、一つ減っている。\n数えたわけではない。並びが、ずれている。"
+    },
+    {
+      "id": "msg_an_f11_desks_2",
+      "speaker": "yu",
+      "text": "机が、また減っている。\n残った机の名札は、全部白い。読めるのは、一つだけ。"
+    },
+    {
+      "id": "msg_an_f11_desks_3",
+      "speaker": "yu",
+      "text": "机は、一つしか残っていない。\n名札は読める。読めるが、読まなかった。",
+      "truth_id": "msg_an_f11_desks_3_t"
+    },
+    {
+      "id": "msg_an_f11_desks_3_t",
+      "speaker": "yu",
+      "text": "机は、一つしか残っていない。\n名札の名前は、蓮ではなかった。俺でもなかった。三人目の名前だった。"
+    },
+    {
+      "id": "msg_an_f11_chime",
+      "speaker": "yu",
+      "text": "チャイムが鳴った。\n夏休みの、誰もいない学校で。放送室の窓は、暗いままだ。"
+    },
+    {
+      "id": "msg_an_f11_upstairs",
+      "speaker": "yu",
+      "text": "二階から、机を引きずる音。\n一つ。間を置いて、もう一つ。"
     }
   ]
 }

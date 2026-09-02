@@ -265,6 +265,28 @@
       "shown_id": "evd_cairn_shown",
       "action_id": "evd_cairn_action",
       "suspicion_on_witness": 20
+    },
+    {
+      "id": "capsule_letter",
+      "kind": "concealable",
+      "field": "F11",
+      "day_min": 20,
+      "title_id": "evd_capsule_letter_title",
+      "surface_id": "evd_capsule_letter_surface",
+      "truth_id": "evd_capsule_letter_truth",
+      "shown_id": "evd_capsule_letter_shown",
+      "action_id": "evd_capsule_letter_action",
+      "suspicion_on_witness": 25
+    },
+    {
+      "id": "night_watch_log",
+      "kind": "evidence",
+      "field": "F11",
+      "day_min": 19,
+      "title_id": "evd_night_watch_title",
+      "surface_id": "evd_night_watch_surface",
+      "truth_id": "evd_night_watch_truth",
+      "suspicion_on_gain": 6
     }
   ]
 }

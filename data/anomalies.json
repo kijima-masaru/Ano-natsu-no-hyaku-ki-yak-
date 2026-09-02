@@ -881,6 +881,138 @@
       ],
       "suspicion_delta": 0,
       "comfort": "night_walk"
+    },
+    {
+      "id": "an_f11_desks",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "class6_desk",
+      "day_range": [
+        21,
+        29
+      ],
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "mode": "escalate",
+      "once_per_day": true,
+      "stages": [
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f11_desks_1"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.4
+            }
+          ]
+        },
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f11_desks_2"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.6
+            }
+          ]
+        },
+        {
+          "actions": [
+            {
+              "type": "message",
+              "id": "msg_an_f11_desks_3"
+            },
+            {
+              "type": "entity_pulse",
+              "strength": 0.9
+            }
+          ]
+        }
+      ],
+      "suspicion_delta": 2,
+      "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f11_chime",
+      "field": "F11",
+      "trigger": "on_condition",
+      "day_range": [
+        19,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [
+        {
+          "floor": "outside"
+        }
+      ],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 1.5
+        },
+        {
+          "type": "play_sound",
+          "id": "se_menu_ok"
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f11_chime"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.6
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": ""
+    },
+    {
+      "id": "an_f11_upstairs",
+      "field": "F11",
+      "trigger": "on_condition",
+      "day_range": [
+        19,
+        20
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "mode": "repeat",
+      "once_per_day": true,
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 2.0
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f11_upstairs"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.7
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": "night_walk"
     }
   ]
 }

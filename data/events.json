@@ -4636,6 +4636,868 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_f11_enter",
+      "field": "F11",
+      "trigger": "on_enter",
+      "day_range": [
+        19,
+        31
+      ],
+      "conditions": [
+        {
+          "floor": "outside"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_staff_key",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "staff_room",
+      "day_range": [
+        19,
+        31
+      ],
+      "conditions": [
+        {
+          "has_item": "key_old_school",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_staff_key"
+        },
+        {
+          "type": "give_item",
+          "item": "key_old_school"
+        },
+        {
+          "type": "set_flag",
+          "flag": "key_old_school"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_staff_after",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "staff_room",
+      "conditions": [
+        {
+          "has_item": "key_old_school"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_staff_after"
+        }
+      ],
+      "once": false,
+      "priority": 5
+    },
+    {
+      "id": "ev_f11_staff_early",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "staff_room",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_staff_early"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_entrance_locked",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "old_entrance",
+      "conditions": [
+        {
+          "has_item": "key_old_school",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_entrance_locked"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_entrance_open",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "old_entrance",
+      "conditions": [
+        {
+          "has_item": "key_old_school"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_entrance_open"
+        },
+        {
+          "type": "play_sound",
+          "id": "se_door"
+        },
+        {
+          "type": "set_flag",
+          "flag": "old_school_opened"
+        },
+        {
+          "type": "switch_floor",
+          "floor": "1f",
+          "tile": [
+            2,
+            9
+          ],
+          "facing": [
+            0,
+            -1
+          ]
+        }
+      ],
+      "once": false,
+      "priority": 5
+    },
+    {
+      "id": "ev_f11_pedestal",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "pedestal",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_pedestal"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_pedestal_again",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "pedestal",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_pedestal"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_platform",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "platform",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_platform"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_gym",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "gym_door",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_gym"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_hutch",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "hutch",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_hutch"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_hutch_again",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "hutch",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_hutch"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_weather_box",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "weather_box",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_weather_box"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_weather_box_again",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "weather_box",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_weather_box"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_1f_enter",
+      "field": "F11",
+      "trigger": "on_enter",
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_1f_enter"
+        }
+      ],
+      "once": true,
+      "priority": 5
+    },
+    {
+      "id": "ev_f11_1f_stalker_first",
+      "field": "F11",
+      "trigger": "on_enter",
+      "day_range": [
+        19,
+        19
+      ],
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "start_stalker",
+          "active": true,
+          "spawn_tile": [
+            30,
+            8
+          ],
+          "retreat_to": "F13"
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_012"
+        },
+        {
+          "type": "play_bgm",
+          "id": "bgm_tension"
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_1f_stalker_night",
+      "field": "F11",
+      "trigger": "on_enter",
+      "day_range": [
+        20,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [
+        {
+          "floor": "1f"
+        },
+        {
+          "flag": "stalker_met"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_1f_night"
+        },
+        {
+          "type": "start_stalker",
+          "active": true,
+          "spawn_tile": [
+            30,
+            8
+          ],
+          "retreat_to": "F13"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_entrance_in",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "entrance_in",
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "switch_floor",
+          "floor": "outside",
+          "tile": [
+            35,
+            20
+          ],
+          "facing": [
+            -1,
+            0
+          ]
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_health_bed",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "health_bed",
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_health_bed"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_health_bed_again",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "health_bed",
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_health_bed"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_class1_board",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "class1_board",
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_class1_board"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_art_shelf_early",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "art_shelf",
+      "day_range": [
+        1,
+        19
+      ],
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_art_shelf_early"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_art_shelf_conceal",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "art_shelf",
+      "day_range": [
+        20,
+        31
+      ],
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_art_shelf_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f11_art_shelf_2"
+        },
+        {
+          "type": "conceal_evidence",
+          "evidence": "capsule_letter"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_art_shelf_after",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "art_shelf",
+      "day_range": [
+        20,
+        31
+      ],
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "capsule_letter"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_night_journal",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "night_journal",
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_night_journal"
+        },
+        {
+          "type": "give_evidence",
+          "evidence": "night_watch_log"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_night_journal_again",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "night_journal",
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_night_journal"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_stairs_locked",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "stairs_up_1f",
+      "day_range": [
+        1,
+        20
+      ],
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_stairs_locked"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_stairs_up",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "stairs_up_1f",
+      "day_range": [
+        21,
+        31
+      ],
+      "conditions": [
+        {
+          "floor": "1f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_stairs_open"
+        },
+        {
+          "type": "switch_floor",
+          "floor": "2f",
+          "tile": [
+            36,
+            8
+          ],
+          "facing": [
+            0,
+            -1
+          ]
+        }
+      ],
+      "once": false,
+      "priority": 5
+    },
+    {
+      "id": "ev_f11_2f_enter",
+      "field": "F11",
+      "trigger": "on_enter",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_2f_enter"
+        }
+      ],
+      "once": true,
+      "priority": 5
+    },
+    {
+      "id": "ev_f11_stairs_down",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "stairs_down_2f",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "switch_floor",
+          "floor": "1f",
+          "tile": [
+            36,
+            8
+          ],
+          "facing": [
+            0,
+            1
+          ]
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_class4_board",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "class4_board",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_class4_board"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_class5_board",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "class5_board",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_class5_board"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_class5_board_again",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "class5_board",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_class5_board"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_class6_board",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "class6_board",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_class6_board"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_class6_board_again",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "class6_board",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_class6_board"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_class6_desk",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "class6_desk",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_class6_desk"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f11_library",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "library_shelf",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_library"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f11_library_again",
+      "field": "F11",
+      "trigger": "on_interact",
+      "target": "library_shelf",
+      "conditions": [
+        {
+          "floor": "2f"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f11_library"
+        }
+      ],
+      "once": false,
+      "priority": 0
     }
   ]
 }
