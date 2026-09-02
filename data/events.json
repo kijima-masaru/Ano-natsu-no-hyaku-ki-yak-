@@ -4049,6 +4049,267 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_f15_enter",
+      "field": "F15",
+      "trigger": "on_enter",
+      "day_range": [
+        26,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_stele",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "stele",
+      "day_range": [
+        1,
+        25
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_stele"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_stele_conceal",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "stele",
+      "day_range": [
+        26,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_stele"
+        },
+        {
+          "type": "conceal_evidence",
+          "evidence": "cairn_stone"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f15_stele_after",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "stele",
+      "day_range": [
+        26,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "cairn_stone"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_gauge",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "gauge",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_gauge"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f15_gauge_again",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "gauge",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_gauge"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_driftwood",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "driftwood",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_driftwood"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f15_driftwood_again",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "driftwood",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_driftwood"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_bench",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "bench",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_bench"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_barricade_1",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "barricade",
+      "day_range": [
+        1,
+        26
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_barricade_1"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_barricade_2",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "barricade",
+      "day_range": [
+        27,
+        27
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_barricade_2"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_barricade_3",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "barricade",
+      "day_range": [
+        28,
+        28
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_barricade_3"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_barricade_4",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "barricade",
+      "day_range": [
+        29,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f15_barricade_4"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f15_barricade_first",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "barricade",
+      "day_range": [
+        26,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 5
     }
   ]
 }

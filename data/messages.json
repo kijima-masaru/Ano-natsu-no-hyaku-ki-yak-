@@ -2674,6 +2674,115 @@
       "id": "msg_an_f14_frogs",
       "speaker": "yu",
       "text": "蛙の声が、一斉に止んだ。\n何かが畦を渡っていく。足音はしない。草だけが倒れていく。"
+    },
+    {
+      "id": "msg_f15_enter",
+      "speaker": "yu",
+      "text": "蒼籠川。町の南の端。\n対岸は霧で見えない。見えないだけで、あることは分かっている。"
+    },
+    {
+      "id": "msg_f15_stele",
+      "speaker": "yu",
+      "text": "渡し場跡の石碑。『川を渡る者、名を残せ』。\n昔はここに舟があった。今は橋があって、渡れない。",
+      "truth_id": "msg_f15_stele_t"
+    },
+    {
+      "id": "msg_f15_stele_t",
+      "speaker": "yu",
+      "text": "渡し場跡の石碑。『川を渡る者、名を残せ』。\n六月の夜、俺はここまで来て、渡らなかった。名も残さなかった。"
+    },
+    {
+      "id": "msg_f15_gauge",
+      "speaker": "yu",
+      "text": "水位標。今年の印は低い。\n一番上の古い印に、鉛筆で『ここまで来た』。誰の字だ。"
+    },
+    {
+      "id": "msg_f15_driftwood",
+      "speaker": "yu",
+      "text": "河原に流れ着いた物。木の枝、ビニール、片方だけのサンダル。\n上流から来たものは、ここで止まる。"
+    },
+    {
+      "id": "msg_f15_bench",
+      "speaker": "yu",
+      "text": "桜並木のベンチ。葉桜の影。\n座ると、川の音しか聞こえない。町の音が届かない。"
+    },
+    {
+      "id": "msg_f15_barricade_1",
+      "speaker": "yu",
+      "text": "バリケード。『橋梁補修工事のため通行止め』。\n工期の欄は、雨で滲んで読めない。"
+    },
+    {
+      "id": "msg_f15_barricade_2",
+      "speaker": "yu",
+      "text": "バリケード。工事の看板の上に、新しい紙。『台風接近のため通行止め』。\n空は晴れている。"
+    },
+    {
+      "id": "msg_f15_barricade_3",
+      "speaker": "yu",
+      "text": "バリケード。看板はそのまま。\n対岸へ行くバスの最終は、もう出たと澪が言った。乗る気もなかった。",
+      "truth_id": "msg_f15_barricade_3_t"
+    },
+    {
+      "id": "msg_f15_barricade_3_t",
+      "speaker": "yu",
+      "text": "バリケード。\n最終バスは出た。乗る気もなかった。出られないのではない。出ないのだ。"
+    },
+    {
+      "id": "msg_f15_barricade_4",
+      "speaker": "yu",
+      "text": "バリケードの向こうは霧。\n母から電話。「今日は早く帰って」。理由は聞かなかった。",
+      "truth_id": "msg_f15_barricade_4_t"
+    },
+    {
+      "id": "msg_f15_barricade_4_t",
+      "speaker": "yu",
+      "text": "バリケードの向こうは霧。\n母から電話。ナツは、橋を渡るなと言わない。言う必要がないからだ。"
+    },
+    {
+      "id": "evd_cairn_title",
+      "speaker": "",
+      "text": "石碑の台座の積み石"
+    },
+    {
+      "id": "evd_cairn_surface",
+      "speaker": "",
+      "text": "石碑の台座に、誰かが小石を積んでいる。"
+    },
+    {
+      "id": "evd_cairn_truth",
+      "speaker": "",
+      "text": "六月の夜に俺が積んだ石。町の境を確かめて、戻った印。"
+    },
+    {
+      "id": "evd_cairn_shown",
+      "speaker": "",
+      "text": "石碑の台座を見た。"
+    },
+    {
+      "id": "evd_cairn_action",
+      "speaker": "",
+      "text": "自分が積んだ小石を崩した。六月の夜、境を確かめるために積んだ。"
+    },
+    {
+      "id": "heroine_remark_cairn",
+      "speaker": "mio",
+      "text": "「石、崩れちゃった……？」"
+    },
+    {
+      "id": "msg_an_f15_footsteps",
+      "speaker": "yu",
+      "text": "橋の中ほど。向こう岸から、足音が近づいてくる。\n俺と、同じ歩調で。止まると、止まった。",
+      "truth_id": "msg_an_f15_footsteps_t"
+    },
+    {
+      "id": "msg_an_f15_footsteps_t",
+      "speaker": "yu",
+      "text": "橋の中ほど。向こう岸から、足音。\n俺と同じ歩調。ナツは橋を渡れない。渡れないものが、向こうから来ている。"
+    },
+    {
+      "id": "msg_an_f15_fog",
+      "speaker": "yu",
+      "text": "対岸の霧が、橋の中ほどまで来ている。\nバリケードの向こうが、もう見えない。"
     }
   ]
 }
