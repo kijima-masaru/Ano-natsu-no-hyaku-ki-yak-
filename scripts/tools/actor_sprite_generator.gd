@@ -25,6 +25,8 @@ static func get_texture(kind: String, facing: Vector2i, frame: int = 0) -> Image
 			_draw_heroine(image, facing, frame % FRAME_COUNT)
 		"stalker":
 			_draw_stalker(image, facing, frame % FRAME_COUNT)
+		"toki":
+			_draw_toki(image, facing, frame % FRAME_COUNT)
 		_:
 			push_warning("ActorSpriteGenerator: 種別 '%s' は未定義のためプレイヤーの絵を使います" % kind)
 			_draw_player(image, facing, frame % FRAME_COUNT)
@@ -162,5 +164,36 @@ static func _draw_stalker(image: Image, facing: Vector2i, frame: int) -> void:
 		Vector2i.RIGHT:
 			_rect(image, 13, 8, 1, 9, edge)
 			_rect(image, 11, 1, 1, 6, edge)
+		_:
+			push_error("ActorSpriteGenerator: facing %s は上下左右の単位ベクトルである必要があります" % facing)
+
+
+## 駄菓子屋の店主トキ：小柄、白髪、前掛け。動かない NPC なので歩行フレームは同じ
+static func _draw_toki(image: Image, facing: Vector2i, _frame: int) -> void:
+	var apron: int = Palette.BONE_WHITE
+	var kimono: int = Palette.DUSK_INDIGO
+	var skin: int = Palette.CONCRETE
+	var hair: int = Palette.CONCRETE
+	_rect(image, 4, 22, 8, 2, Palette.NIGHT_SKY)
+	_rect(image, 5, 18, 2, 4, kimono)
+	_rect(image, 9, 18, 2, 4, kimono)
+	_rect(image, 4, 11, 8, 8, kimono)
+	_rect(image, 5, 12, 6, 6, apron)
+	_rect(image, 4, 4, 8, 7, skin)
+	_rect(image, 4, 3, 8, 3, hair)
+	_rect(image, 4, 3, 1, 5, hair)
+	_rect(image, 11, 3, 1, 5, hair)
+	match facing:
+		Vector2i.DOWN:
+			_rect(image, 6, 7, 1, 1, Palette.SUMI)
+			_rect(image, 9, 7, 1, 1, Palette.SUMI)
+		Vector2i.UP:
+			_rect(image, 4, 4, 8, 6, hair)
+		Vector2i.LEFT:
+			_rect(image, 8, 3, 4, 8, hair)
+			_rect(image, 5, 7, 1, 1, Palette.SUMI)
+		Vector2i.RIGHT:
+			_rect(image, 4, 3, 4, 8, hair)
+			_rect(image, 10, 7, 1, 1, Palette.SUMI)
 		_:
 			push_error("ActorSpriteGenerator: facing %s は上下左右の単位ベクトルである必要があります" % facing)

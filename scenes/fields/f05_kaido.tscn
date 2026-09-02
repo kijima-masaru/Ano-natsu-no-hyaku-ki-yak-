@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/fields/f05_kaido.gd" id="1_f05"]
+
+[node name="F05Kaido" type="Node2D"]
+script = ExtResource("1_f05")
+default_spawn_tile = Vector2i(8, 20)
+
+[node name="Ground" type="TileMapLayer" parent="."]
+
+[node name="Objects" type="TileMapLayer" parent="."]
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Overhead" type="TileMapLayer" parent="."]
+
+[node name="Triggers" type="Node2D" parent="."]
