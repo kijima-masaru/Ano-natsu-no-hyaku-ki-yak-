@@ -54,7 +54,7 @@
 ## ステップ4で作るもの（指示の要約）
 
 0. `chore/field-pipeline`：済（PR #25）。`FieldMapBuilder` への共通化、`field_scaffold`、`validate_data`（GDScript ＋ Python）、ガイドの全面改訂
-1. フィールド 11（Step 4 指示の順）：F03（済 PR #28）→ F13（済 PR #29）→ F10（済 PR #30）→ F07（済 PR #31）→ F08（済 PR #32）→ F09（済 PR #33）→ F14（済 PR #34）→ F15（済 PR #35）→ F04 → F11 → F16。各 1 PR、`FIELD_IMPLEMENTATION_GUIDE.md` に従う
+1. フィールド 11（Step 4 指示の順）：F03（済 PR #28）→ F13（済 PR #29）→ F10（済 PR #30）→ F07（済 PR #31）→ F08（済 PR #32）→ F09（済 PR #33）→ F14（済 PR #34）→ F15（済 PR #35）→ F04（済 PR #36）→ F11 → F16。各 1 PR、`FIELD_IMPLEMENTATION_GUIDE.md` に従う
 2. `feat/lighting-and-night`：済（PR #26）。`Lighting` autoload（CanvasModulate の時間帯色調・明るさ設定・タイル光源・月光・懐中電灯）、Stalker の暗所ボーナスと照明下の視認距離
 3. `feat/anomaly-encounters`：済（PR #27）。`AnomalySystem` ＋ `data/anomalies.json`（once / repeat / escalate、接近度、憑いた怪異の介入）。既存 5 フィールドに各 1 件
 4. `feat/schedule-act1` `feat/schedule-act2`：8/5〜8/31 のイベント、中盤の老婆（F14 シゲ）の激昂、8/30 の提示画面と `truth_revealed`、終幕の澪操作
