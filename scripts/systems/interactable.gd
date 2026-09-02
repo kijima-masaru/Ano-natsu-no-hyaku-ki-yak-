@@ -36,11 +36,11 @@ func interact(by: Node) -> void:
 
 
 ## タイル座標と大きさ（タイル数）から Interactable を組み立てる
-static func create(id: String, name: String, text: String, tile: Vector2i, size_tiles: Vector2i = Vector2i.ONE, node_kind: String = "object") -> Interactable:
+static func create(id: String, label: String, text: String, tile: Vector2i, size_tiles: Vector2i = Vector2i.ONE, node_kind: String = "object") -> Interactable:
 	var node: Interactable = Interactable.new()
 	node.name = "Interactable_" + id
 	node.interaction_id = id
-	node.display_name = name
+	node.display_name = label
 	node.message = text
 	node.kind = node_kind
 	var shape: CollisionShape2D = CollisionShape2D.new()
