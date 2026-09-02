@@ -2,7 +2,10 @@ class_name FieldBase
 extends Node2D
 ## すべてのフィールドシーンのルートが継承する基底クラス。
 ## 子ノードの構成（描画順＝この順）：Ground / Objects（TileMapLayer）→ Actors（Node2D）→ Overhead（TileMapLayer）→ Triggers
-## SceneRouter は setup(def) を呼んでから add_child する。サブクラスは _build(def) でタイルと調べ物を配置する。
+## SceneRouter は setup(def) を呼んでから add_child する。
+## サブクラスは MAP_ROWS 等の定数を定義するだけでよく（FieldMapBuilder 参照）、
+## 時間帯・日付の差し替えは _apply_time_of_day / _apply_day を上書きする。
+## 基底シーンは scenes/fields/field_base.tscn。各フィールドの .tscn はこれを継承してスクリプトだけ差し替える。
 
 signal exit_reached(exit: ExitData)
 signal interaction_started(interactable: Interactable)
@@ -38,9 +41,17 @@ func setup(def: FieldData) -> void:
 	_build_exit_triggers()
 
 
-## サブクラスが上書きしてタイル・調べ物を配置する
-func _build(_def: FieldData) -> void:
-	pass
+## タイル・調べ物の配置。既定では MAP_ROWS / GROUND_LEGEND / OBJECT_LEGEND などの定数から
+## FieldMapBuilder が組み立てる。定数を持たないフィールド（プレースホルダ等）は上書きする
+func _build(def: FieldData) -> void:
+	if not FieldMapBuilder.build(self, def):
+		push_warning("FieldBase(%s): MAP_ROWS が無く _build も上書きされていません" % field_id)
+
+
+## 物体タイルの下地となる地面の種別名。空文字なら DEFAULT_GROUND（無ければ GROUND_LEGEND の先頭）。
+## 場所によって下地を変えるフィールドが上書きする
+func _ground_under(_x: int, _y: int) -> String:
+	return ""
 
 
 ## 時間帯（morning / noon / evening / night）に応じた見た目の差し替え。サブクラスが上書きする。
@@ -170,6 +181,30 @@ func get_stalker() -> Node2D:
 func add_interactable(node: Interactable) -> void:
 	triggers.add_child(node)
 	node.interacted.connect(func(_by: Node, target: Interactable) -> void: interaction_started.emit(target))
+
+
+## interaction_id で調べ物を探す。無ければ null
+func get_interactable(id: String) -> Interactable:
+	for node: Node in triggers.get_children():
+		var it: Interactable = node as Interactable
+		if it != null and it.interaction_id == id:
+			return it
+	return null
+
+
+## 時間帯・日付で出し入れする NPC（見た目付きの調べ物）。present に合わせて生成／削除し、現在のノードを返す
+func set_npc_present(id: String, present: bool, tile: Vector2i, sprite_kind: String, facing: Vector2i = Vector2i.DOWN) -> Interactable:
+	var existing: Interactable = get_interactable(id)
+	if present and existing == null:
+		var npc: Interactable = Interactable.create(id, "", "", tile, Vector2i.ONE, "npc")
+		npc.set_actor_sprite(sprite_kind, facing)
+		add_interactable(npc)
+		return npc
+	if not present and existing != null:
+		triggers.remove_child(existing)
+		existing.queue_free()
+		return null
+	return existing
 
 
 # ── 内部 ──

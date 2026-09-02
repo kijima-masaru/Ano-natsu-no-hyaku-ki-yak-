@@ -14,7 +14,7 @@ const GROUND_LEGEND: Dictionary = {
 	"S": "法面階段",
 	"g": "側溝",
 }
-## Objects 層（通行不可）の凡例。地面は既定で広場の敷石
+## Objects 層（通行不可）の凡例。地面は既定で広場の敷石（DEFAULT_GROUND）
 const OBJECT_LEGEND: Dictionary = {
 	"w": "ブロック塀",
 	"h": "生垣",
@@ -49,6 +49,8 @@ const INTERACTABLES: Array = [
 	{"id": "slope_notice", "name": "法面階段の張り紙", "tile": Vector2i(28, 2), "kind": "sign"},
 ]
 ## 40 列 × 32 行。行が y、列が x
+## 物体タイルの下地
+const DEFAULT_GROUND: String = "広場の敷石（インターロッキング）"
 const MAP_ROWS: PackedStringArray = [
 	"wwwwwwwwww-wwwwwwwww~~~~~~~S~~~~~~~~~~~~",
 	"whhhhhhhg--g========~~~~~~~S~~~~~~~~~~~~",
@@ -83,36 +85,3 @@ const MAP_ROWS: PackedStringArray = [
 	"whhhg--g=====================w,,w======w",
 	"wwwww-wwwwwwwwwwwwwwwwwwwwwwww,wwwwwwwww",
 ]
-
-
-func _build(def: FieldData) -> void:
-	if def != null and def.size_tiles != Vector2i(MAP_ROWS[0].length(), MAP_ROWS.size()):
-		push_error("F06: MAP_ROWS の寸法 %d×%d が fields.json の size_tiles %s と一致しません"
-			% [MAP_ROWS[0].length(), MAP_ROWS.size(), def.size_tiles])
-	_build_tiles()
-	_build_interactables()
-
-
-func _build_tiles() -> void:
-	var default_ground: String = GROUND_LEGEND["."]
-	for y: int in MAP_ROWS.size():
-		var row: String = MAP_ROWS[y]
-		for x: int in row.length():
-			var ch: String = row[x]
-			var tile: Vector2i = Vector2i(x, y)
-			if GROUND_LEGEND.has(ch):
-				set_tile(ground, tile, GROUND_LEGEND[ch])
-			elif OBJECT_LEGEND.has(ch):
-				set_tile(ground, tile, default_ground)
-				set_tile(objects, tile, OBJECT_LEGEND[ch])
-			else:
-				push_error("F06: 凡例に無い文字 '%s'（%s）" % [ch, tile])
-				set_tile(ground, tile, default_ground)
-	for entry: Array in OVERHEAD_TILES:
-		set_tile(overhead, entry[0], entry[1])
-
-
-func _build_interactables() -> void:
-	for data: Dictionary in INTERACTABLES:
-		add_interactable(Interactable.create(
-			str(data["id"]), str(data["name"]), "", data["tile"], Vector2i.ONE, str(data["kind"])))

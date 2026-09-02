@@ -56,6 +56,8 @@ const INTERACTABLES: Array = [
 	{"id": "sushi_door", "name": "回転寿司", "tile": Vector2i(4, 38), "kind": "object"},
 	{"id": "drug_door", "name": "ドラッグストア", "tile": Vector2i(4, 45), "kind": "object"},
 ]
+## 物体タイルの下地
+const DEFAULT_GROUND: String = "アスファルト"
 const MAP_ROWS: PackedStringArray = [
 	"wwwwwwwwwwwww,wwwwwwwwwwwwwwwwww",
 	"wKKKKKKKKgtt,|,,ttg.KKKKKKKKK..w",
@@ -107,29 +109,6 @@ const MAP_ROWS: PackedStringArray = [
 	"wwwwwwwwwwwww,wwwwwwwwwwwwwwwwww",
 ]
 
-var _mio: Interactable = null
-
-
-func _build(def: FieldData) -> void:
-	if def != null and def.size_tiles != Vector2i(MAP_ROWS[0].length(), MAP_ROWS.size()):
-		push_error("F01: MAP_ROWS の寸法が fields.json と一致しません")
-	for y: int in MAP_ROWS.size():
-		var row: String = MAP_ROWS[y]
-		for x: int in row.length():
-			var ch: String = row[x]
-			var tile: Vector2i = Vector2i(x, y)
-			if GROUND_LEGEND.has(ch):
-				set_tile(ground, tile, GROUND_LEGEND[ch])
-			elif OBJECT_LEGEND.has(ch):
-				set_tile(ground, tile, GROUND_LEGEND["."])
-				set_tile(objects, tile, OBJECT_LEGEND[ch])
-			else:
-				push_error("F01: 凡例に無い文字 '%s'（%s）" % [ch, tile])
-	for entry: Array in OVERHEAD_TILES:
-		set_tile(overhead, entry[0], entry[1])
-	for data: Dictionary in INTERACTABLES:
-		add_interactable(Interactable.create(str(data["id"]), str(data["name"]), "", data["tile"], Vector2i.ONE, str(data["kind"])))
-
 
 ## 夜：駐車場の車が減り、ドラッグストアはシャッターを下ろす。8/1 の夕方以降は店先に澪が立つ
 func _apply_time_of_day(time_of_day: String) -> void:
@@ -150,10 +129,4 @@ func _apply_day(_day: int) -> void:
 ## 8/1 の夕方、店先に澪が立っている（初対面）。met_heroine が立てば消える
 func _update_mio(night: bool) -> void:
 	var should_stand: bool = Calendar.day == 1 and night and not GameState.has_flag("met_heroine")
-	if should_stand and _mio == null:
-		_mio = Interactable.create("mio_npc", "", "", MIO_TILE, Vector2i.ONE, "npc")
-		_mio.set_actor_sprite("heroine", Vector2i.LEFT)
-		add_interactable(_mio)
-	elif not should_stand and _mio != null:
-		_mio.queue_free()
-		_mio = null
+	set_npc_present("mio_npc", should_stand, MIO_TILE, "heroine", Vector2i.LEFT)

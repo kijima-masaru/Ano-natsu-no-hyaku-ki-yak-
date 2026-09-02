@@ -36,6 +36,13 @@ const OBJECT_LEGEND: Dictionary = {
 	"e": "電柱・電線",
 	"C": "駐車車両（暗）",
 }
+## 物体タイルの下地を変える区画：[Rect2i, GROUND_LEGEND のキー]
+const GROUND_ZONES: Array = [
+	[Rect2i(27, 0, 13, 13), "t"],  # 支所周り
+	[Rect2i(0, 0, 7, 9), "g"],     # 給水塔
+	[Rect2i(0, 9, 7, 11), "S"],    # 公園
+	[Rect2i(33, 23, 7, 9), "P"],   # 駐車場
+]
 const STAIRWELL_LIT: String = "階段室（点灯・消灯）"
 const STAIRWELL_DARK: String = "階段室（消灯）"
 const OFFICE_DOOR_TILE: Vector2i = Vector2i(32, 7)
@@ -72,6 +79,8 @@ const INTERACTABLES: Array = [
 	{"id": "estate_board", "name": "団地の案内板", "tile": Vector2i(12, 17), "kind": "sign"},
 	{"id": "bike_shed", "name": "駐輪場", "tile": Vector2i(19, 29), "kind": "object"},
 ]
+## 物体タイルの下地
+const DEFAULT_GROUND: String = "アスファルト"
 const MAP_ROWS: PackedStringArray = [
 	"wwwwwwwwawwwwwwwwwwwwwwww-wwwwwwwwwwwwww",
 	"wggggggaaa,,,,,,,,,,,,,,---ttttttttttttw",
@@ -108,36 +117,13 @@ const MAP_ROWS: PackedStringArray = [
 ]
 
 
-func _build(def: FieldData) -> void:
-	if def != null and def.size_tiles != Vector2i(MAP_ROWS[0].length(), MAP_ROWS.size()):
-		push_error("F12: MAP_ROWS の寸法が fields.json と一致しません")
-	for y: int in MAP_ROWS.size():
-		var row: String = MAP_ROWS[y]
-		for x: int in row.length():
-			var ch: String = row[x]
-			var tile: Vector2i = Vector2i(x, y)
-			if GROUND_LEGEND.has(ch):
-				set_tile(ground, tile, GROUND_LEGEND[ch])
-			elif OBJECT_LEGEND.has(ch):
-				set_tile(ground, tile, _ground_under(x, y))
-				set_tile(objects, tile, OBJECT_LEGEND[ch])
-			else:
-				push_error("F12: 凡例に無い文字 '%s'（%s）" % [ch, tile])
-	for data: Dictionary in INTERACTABLES:
-		add_interactable(Interactable.create(str(data["id"]), str(data["name"]), "", data["tile"], Vector2i.ONE, str(data["kind"])))
-
-
-## 物体タイルの下地：支所周りは歩道タイル、給水塔と公園は下草・砂地、他はアスファルト
+## 物体タイルの下地：支所周りは歩道タイル、給水塔と公園は下草・砂地、駐車場はライン、他はアスファルト
 func _ground_under(x: int, y: int) -> String:
-	if x >= 27 and y <= 12:
-		return GROUND_LEGEND["t"]
-	if x <= 6 and y <= 8:
-		return GROUND_LEGEND["g"]
-	if x <= 6 and y <= 19:
-		return GROUND_LEGEND["S"]
-	if x >= 33 and y >= 23:
-		return GROUND_LEGEND["P"]
-	return GROUND_LEGEND[","]
+	for zone: Array in GROUND_ZONES:
+		var rect: Rect2i = zone[0]
+		if rect.has_point(Vector2i(x, y)):
+			return GROUND_LEGEND[zone[1]]
+	return ""
 
 
 ## 支所は平日の朝・昼だけ開いている（8/1 は土曜、8/2 は日曜）

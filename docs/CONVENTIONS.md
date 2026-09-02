@@ -97,7 +97,8 @@ func find_exit(to_id):
 
 ## 8. データ
 
-- 静的データは `data/*.json`。読み込みは対応する autoload に集約し、他所で `FileAccess` を直接開かない。
+- 静的データは `data/*.json`。読み込みは対応する autoload に集約し、他所で `FileAccess` を直接開かない（例外：`scripts/tools/` の開発ツール `field_scaffold` / `validate_data` は autoload を使えないため JSON を直接読む）。
+- フィールドの地図・凡例・調べ物は `const`（`MAP_ROWS` ほか）で宣言し、組み立ては `FieldMapBuilder` に任せる。フィールドスクリプトに `_build` や `Interactable.create` を書かない（`docs/FIELD_IMPLEMENTATION_GUIDE.md`）。
 - JSON のキーは snake_case。フィールド定義のスキーマは `data/fields.json` を正とし、変更時は `docs/tools/build_minimap.py` でミニマップを再生成する。
 
 ## 9. コメント・ドキュメント

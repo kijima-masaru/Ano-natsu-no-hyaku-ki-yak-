@@ -1,17 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
+[ext_resource type="PackedScene" path="res://scenes/fields/field_base.tscn" id="1_base"]
 [ext_resource type="Script" path="res://scripts/fields/f06_civic_center.gd" id="1_f06"]
 
-[node name="F06CivicCenter" type="Node2D"]
+[node name="F06CivicCenter" instance=ExtResource("1_base")]
 script = ExtResource("1_f06")
 default_spawn_tile = Vector2i(20, 18)
-
-[node name="Ground" type="TileMapLayer" parent="."]
-
-[node name="Objects" type="TileMapLayer" parent="."]
-
-[node name="Actors" type="Node2D" parent="."]
-
-[node name="Overhead" type="TileMapLayer" parent="."]
-
-[node name="Triggers" type="Node2D" parent="."]

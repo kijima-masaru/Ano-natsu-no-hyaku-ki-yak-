@@ -29,6 +29,8 @@ const OBJECT_LEGEND: Dictionary = {
 }
 const GATE_TILES: Array = [Vector2i(22, 19), Vector2i(23, 19)]
 const TOKI_TILE: Vector2i = Vector2i(6, 19)
+## この列以下は街道側（物体タイルの下地がアスファルト）
+const STREET_MAX_X: int = 10
 const INTERACTABLES: Array = [
 	{"id": "toki_shop", "name": "たちばな屋", "tile": Vector2i(5, 20), "kind": "object"},
 	{"id": "calendar", "name": "日めくり", "tile": Vector2i(5, 21), "kind": "object"},
@@ -40,6 +42,8 @@ const INTERACTABLES: Array = [
 	{"id": "shutter_b", "name": "時計店（閉店）", "tile": Vector2i(11, 4), "kind": "object"},
 	{"id": "wooden_door", "name": "薬屋（閉店）", "tile": Vector2i(11, 15), "kind": "object"},
 ]
+## 物体タイルの下地
+const DEFAULT_GROUND: String = "旧街道アスファルト（狭）"
 const MAP_ROWS: PackedStringArray = [
 	"wwwwwwww-wwwwwwwwwwwwwwwwwwwwwww",
 	"w=====t---t====================w",
@@ -83,27 +87,6 @@ const MAP_ROWS: PackedStringArray = [
 	"wwwwwwww-wwwwwwwwwwwwwwwwwwwwwww",
 ]
 
-var _toki: Interactable = null
-
-
-func _build(def: FieldData) -> void:
-	if def != null and def.size_tiles != Vector2i(MAP_ROWS[0].length(), MAP_ROWS.size()):
-		push_error("F05: MAP_ROWS の寸法が fields.json と一致しません")
-	for y: int in MAP_ROWS.size():
-		var row: String = MAP_ROWS[y]
-		for x: int in row.length():
-			var ch: String = row[x]
-			var tile: Vector2i = Vector2i(x, y)
-			if GROUND_LEGEND.has(ch):
-				set_tile(ground, tile, GROUND_LEGEND[ch])
-			elif OBJECT_LEGEND.has(ch):
-				set_tile(ground, tile, GROUND_LEGEND["-"] if x <= 10 else GROUND_LEGEND["j"])
-				set_tile(objects, tile, OBJECT_LEGEND[ch])
-			else:
-				push_error("F05: 凡例に無い文字 '%s'（%s）" % [ch, tile])
-	for data: Dictionary in INTERACTABLES:
-		add_interactable(Interactable.create(str(data["id"]), str(data["name"]), "", data["tile"], Vector2i.ONE, str(data["kind"])))
-
 
 ## 夜：圓照寺の山門が閉まり、トキは店の奥へ引く（店先の灯だけが残る）
 func _apply_time_of_day(time_of_day: String) -> void:
@@ -118,10 +101,9 @@ func _apply_day(_day: int) -> void:
 
 
 func _update_toki(present: bool) -> void:
-	if present and _toki == null:
-		_toki = Interactable.create("toki_npc", "", "", TOKI_TILE, Vector2i.ONE, "npc")
-		_toki.set_actor_sprite("toki", Vector2i.RIGHT)
-		add_interactable(_toki)
-	elif not present and _toki != null:
-		_toki.queue_free()
-		_toki = null
+	set_npc_present("toki_npc", present, TOKI_TILE, "toki", Vector2i.RIGHT)
+
+
+## 物体タイルの下地：街道側（x ≤ 10）はアスファルト、境内側は砂利
+func _ground_under(x: int, _y: int) -> String:
+	return GROUND_LEGEND["-"] if x <= STREET_MAX_X else GROUND_LEGEND["j"]

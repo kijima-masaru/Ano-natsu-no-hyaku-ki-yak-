@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
+[ext_resource type="PackedScene" path="res://scenes/fields/field_base.tscn" id="1_base"]
 [ext_resource type="Script" path="res://scripts/systems/field_placeholder.gd" id="1_placeholder"]
 
-[node name="FieldPlaceholder" type="Node2D"]
+[node name="FieldPlaceholder" instance=ExtResource("1_base")]
 script = ExtResource("1_placeholder")
