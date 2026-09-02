@@ -24,7 +24,8 @@ godot --path .
 godot --path . --editor      # エディタを開く
 ```
 
-現時点（ステップ2 進行中）では、起動しても空の World と "bootstrap" ラベルしか表示されない。
+起動すると F06「磐戸市民センター・交番前広場」から始まる。他のフィールドは未実装のプレースホルダで表示される。
+操作：WASD / 矢印で移動、Shift で忍び足、Z / Space / Enter で調べる、X / Esc でキャンセル（ゲームパッド：左スティック / D-pad、LB、A、B）。
 
 ## 描画仕様（厳守）
 
@@ -43,14 +44,18 @@ project.godot
 data/                    静的データ（fields.json など）
 scenes/
   main.tscn              エントリポイント
-  fields/                各フィールドの .tscn（F01〜F16）
+  fields/                各フィールドの .tscn（F01〜F16）と未実装プレースホルダ
   actors/                プレイヤー等
-  debug/                 確認用シーン（パレットプレビュー等）
+  ui/                    メッセージウィンドウ等の UI
+  debug/                 確認用シーン（パレット・タイル一覧）
 scripts/
-  autoload/              シングルトン（Palette, FieldRegistry, SceneRouter …）
+  autoload/              シングルトン（Palette, GameState, FieldRegistry, SceneRouter, SteamBridge）
   actors/                アクターのスクリプト
-  systems/               ゲームシステム（セーブ、フラグ、Steam フック）
-  tools/                 タイル生成などの補助（ゲームロジックから隔離）
+  fields/                各フィールド固有のスクリプト（FieldBase を継承）
+  systems/               共通システム（FieldBase, FieldData, Interactable, GameConstants …）
+  ui/                    UI のスクリプト
+  tools/                 タイル・スプライト生成（ゲームロジックから隔離）
+  debug/                 確認用シーンのスクリプト
 resources/
   tilesets/              生成・保存された TileSet
   fonts/                 PixelMplus12（後から配置）
