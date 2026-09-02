@@ -221,6 +221,7 @@ func _register_builtin_actions() -> void:
 	register_action("wait", _act_wait)
 	register_action("run_event", func(a: Dictionary, _c: Dictionary) -> void: run_event(str(a.get("id", ""))))
 	register_action("end_game", _act_end_game)
+	register_action("choice", _act_choice)
 
 
 ## message: {id, truth_id?, args?}。二層分岐は MessageResolver.resolve に任せる
@@ -236,8 +237,36 @@ func show_entry(entry: MessageEntry) -> void:
 	if _message_window == null:
 		push_error("EventSystem: メッセージウィンドウが未登録です（'%s'）" % entry.id)
 		return
-	_message_window.call("show_message", entry.speaker_name, entry.text)
+	if _message_window.has_method("show_entry"):
+		_message_window.call("show_entry", entry)
+	else:
+		_message_window.call("show_message", entry.speaker_name, entry.text)
 	await Signal(_message_window, "closed")
+
+
+## choice: {options: [{text_id, set_flag?, run_event?}], prompt_id?}。選んだ選択肢の set_flag / run_event を適用
+func _act_choice(a: Dictionary, c: Dictionary) -> void:
+	if _message_window == null or not _message_window.has_method("show_choice"):
+		push_error("EventSystem: 選択肢を表示できるウィンドウが未登録です")
+		return
+	var options: Variant = a.get("options", [])
+	if not options is Array or (options as Array).is_empty():
+		action_failed.emit(str(c["event_id"]), a, "options が空")
+		return
+	var labels: PackedStringArray = PackedStringArray()
+	for opt: Variant in options as Array:
+		labels.append(MessageResolver.text(str((opt as Dictionary).get("text_id", ""))))
+	if a.has("prompt_id"):
+		_message_window.call("show_entry", MessageResolver.resolve(str(a["prompt_id"])))
+	_message_window.call("show_choice", labels)
+	var index: int = await Signal(_message_window, "choice_made")
+	if index < 0 or index >= (options as Array).size():
+		return
+	var chosen: Dictionary = (options as Array)[index]
+	if chosen.has("set_flag"):
+		GameState.raise_flag(str(chosen["set_flag"]))
+	if chosen.has("run_event"):
+		run_event(str(chosen["run_event"]))
 
 
 func _act_unlock_field(a: Dictionary, c: Dictionary) -> void:

@@ -39,6 +39,17 @@ static func validate(events: Dictionary, known_actions: PackedStringArray, item_
 				"run_event":
 					if not events.has(str(action.get("id", ""))):
 						errors.append("%s: run_event の '%s' が存在しません" % [id, str(action.get("id", ""))])
+				"choice":
+					if action.has("prompt_id") and not MessageResolver.has_message(str(action["prompt_id"])):
+						errors.append("%s: prompt_id '%s' が存在しません" % [id, str(action["prompt_id"])])
+					for opt: Variant in action.get("options", []) as Array:
+						if not opt is Dictionary:
+							continue
+						var o: Dictionary = opt
+						if not MessageResolver.has_message(str(o.get("text_id", ""))):
+							errors.append("%s: 選択肢のテキスト '%s' が存在しません" % [id, str(o.get("text_id", ""))])
+						if o.has("run_event") and not events.has(str(o["run_event"])):
+							errors.append("%s: 選択肢の run_event '%s' が存在しません" % [id, str(o["run_event"])])
 		for f: String in flags:
 			if not _is_known_flag(f, defined_flags):
 				errors.append("%s: フラグ '%s' はどこでも立てられません" % [id, f])
@@ -62,6 +73,10 @@ static func _collect_defined_flags(events: Dictionary) -> Dictionary:
 		for action: Dictionary in e.actions:
 			if str(action.get("type", "")) in ["set_flag", "clear_flag"]:
 				defined[str(action.get("flag", ""))] = true
+			if str(action.get("type", "")) == "choice":
+				for opt: Variant in action.get("options", []) as Array:
+					if opt is Dictionary and (opt as Dictionary).has("set_flag"):
+						defined[str((opt as Dictionary)["set_flag"])] = true
 	for day: int in range(1, 32):
 		var s: DaySchedule = Calendar.get_schedule(day) if Calendar.is_valid_day(day) else null
 		if s == null:
