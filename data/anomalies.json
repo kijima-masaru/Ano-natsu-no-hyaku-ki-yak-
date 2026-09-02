@@ -651,6 +651,75 @@
       ],
       "suspicion_delta": 1,
       "comfort": ""
+    },
+    {
+      "id": "an_f14_moon",
+      "field": "F14",
+      "trigger": "on_condition",
+      "day_range": [
+        14,
+        29
+      ],
+      "time_of_day": [
+        "night"
+      ],
+      "conditions": [],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f14_moon"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.7
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": "night_walk"
+    },
+    {
+      "id": "an_f14_frogs",
+      "field": "F14",
+      "trigger": "on_condition",
+      "day_range": [
+        15,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [
+        {
+          "flag": "an_done_an_f14_moon"
+        }
+      ],
+      "mode": "repeat",
+      "once_per_day": true,
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 2.0
+        },
+        {
+          "type": "stop_bgm"
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f14_frogs"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.9
+        }
+      ],
+      "suspicion_delta": 1,
+      "comfort": "after_anomaly"
     }
   ]
 }

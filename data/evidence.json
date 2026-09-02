@@ -231,6 +231,28 @@
       "surface_id": "evd_castle_map_surface",
       "truth_id": "evd_castle_map_truth",
       "suspicion_on_gain": 4
+    },
+    {
+      "id": "visitor_book",
+      "kind": "concealable",
+      "field": "F14",
+      "day_min": 14,
+      "title_id": "evd_visitor_book_title",
+      "surface_id": "evd_visitor_book_surface",
+      "truth_id": "evd_visitor_book_truth",
+      "shown_id": "evd_visitor_book_shown",
+      "action_id": "evd_visitor_book_action",
+      "suspicion_on_witness": 20
+    },
+    {
+      "id": "shrine_lore",
+      "kind": "evidence",
+      "field": "F14",
+      "day_min": 14,
+      "title_id": "evd_shrine_lore_title",
+      "surface_id": "evd_shrine_lore_surface",
+      "truth_id": "evd_shrine_lore_truth",
+      "suspicion_on_gain": 4
     }
   ]
 }

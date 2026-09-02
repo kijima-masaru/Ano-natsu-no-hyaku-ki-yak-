@@ -158,11 +158,6 @@
       "text": "8月13日。調査 6 日目。\n（この日のイベントは後のタスクで実装）"
     },
     {
-      "id": "msg_d14_open",
-      "speaker": "system",
-      "text": "8月14日。朝和の老婆。\n（この日のイベントは後のタスクで実装）"
-    },
-    {
       "id": "msg_d16_open",
       "speaker": "system",
       "text": "8月16日。調査 7 日目。\n（この日のイベントは後のタスクで実装）"
@@ -2488,6 +2483,197 @@
       "id": "msg_an_f09_map_2",
       "speaker": "yu",
       "text": "縄張図に描かれた曲輪の数が、また増えている。\n実際の地形の方が、図に合わせて増えているのかもしれない。"
+    },
+    {
+      "id": "msg_f14_enter",
+      "speaker": "yu",
+      "text": "朝和の里。水田が光っている。蛙の声。\n町の中で、ここだけが昼のままの顔をしている。"
+    },
+    {
+      "id": "msg_f14_night_enter",
+      "speaker": "yu",
+      "text": "夜の朝和。灯りは常夜灯と、農家の窓が一つ。\n水田は黒い。蛙の声だけが、方向を教える。"
+    },
+    {
+      "id": "msg_f14_shrine_board",
+      "speaker": "yu",
+      "text": "式内社の由緒書き。『千年余、谷のものを鎮め、八柱をもって境とす』。\n『石を動かすべからず』。最後の一行だけ、字が新しい。",
+      "truth_id": "msg_f14_shrine_board_t"
+    },
+    {
+      "id": "msg_f14_shrine_board_t",
+      "speaker": "yu",
+      "text": "『石を動かすべからず』。\n新しい字は、誰かが最近、書き足した。動かした者がいたからだ。"
+    },
+    {
+      "id": "msg_f14_kofun",
+      "speaker": "yu",
+      "text": "古墳の石室入口。格子の隙間から中を覗く。\n暗い。奥から、冷えた空気だけが来る。",
+      "truth_id": "msg_f14_kofun_t"
+    },
+    {
+      "id": "msg_f14_kofun_t",
+      "speaker": "yu",
+      "text": "古墳の石室。奥から冷えた空気。\n谷とつながっている、とシゲは言った。俺は知っていた。"
+    },
+    {
+      "id": "msg_f14_sluice",
+      "speaker": "yu",
+      "text": "水路の水門。錆びたハンドル。\n水は、田へ向かう側だけが止まっている。"
+    },
+    {
+      "id": "msg_f14_tower_bell",
+      "speaker": "yu",
+      "text": "火の見櫓。半鐘の縄は、届かない高さで切られている。\n最後に鳴ったのは、六月の末だと聞いた。"
+    },
+    {
+      "id": "msg_f14_rock_sign",
+      "speaker": "yu",
+      "text": "『落石のため通行止め 林道薬師谷線』。\n看板の日付は、七月。"
+    },
+    {
+      "id": "msg_f14_rock_open",
+      "speaker": "yu",
+      "text": "落石は崩れて、脇に道ができている。\n林道は谷へ続く。看板は、まだ『通行止め』のままだ。"
+    },
+    {
+      "id": "msg_f14_offering",
+      "speaker": "yu",
+      "text": "畦に供え物。塩と、水と、小さな面。\n誰が、誰に供えているのか。",
+      "truth_id": "msg_f14_offering_t"
+    },
+    {
+      "id": "msg_f14_offering_t",
+      "speaker": "yu",
+      "text": "畦の供え物。塩と、水と、小さな面。\n供える相手は、俺の隣にいる。里の人は、それを知らずに供えている。"
+    },
+    {
+      "id": "msg_f14_shige_door_closed",
+      "speaker": "yu",
+      "text": "朝和家。表札は『朝和』。\n中から返事はない。"
+    },
+    {
+      "id": "msg_f14_shige_early",
+      "speaker": "shige",
+      "text": "「……何の用だね。話すことはないよ」"
+    },
+    {
+      "id": "msg_d14_open",
+      "speaker": "yu",
+      "text": "8月14日。\n澪は先に朝和へ行くと言った。霊感のある老婆がいるらしい。俺は後から追う。"
+    },
+    {
+      "id": "msg_f14_d14_1",
+      "speaker": "yu",
+      "text": "朝和家の庭。澪が、老婆に頭を下げていた。\n老婆は縁側に座ったまま、澪を見ていない。"
+    },
+    {
+      "id": "msg_f14_d14_2",
+      "speaker": "shige",
+      "text": "「話すことはない。何度来てもだ」"
+    },
+    {
+      "id": "msg_f14_d14_3",
+      "speaker": "yu",
+      "text": "澪が振り返って、俺に気づいた。\n老婆も、こちらを見た。"
+    },
+    {
+      "id": "msg_f14_d14_4",
+      "speaker": "shige",
+      "text": "「——早く帰れ」"
+    },
+    {
+      "id": "msg_f14_d14_5",
+      "speaker": "shige",
+      "text": "「連れて帰るな。そのまま帰れ。ここへ来るな」"
+    },
+    {
+      "id": "msg_f14_d14_6",
+      "speaker": "yu",
+      "text": "老婆は立ち上がって、家の中へ入った。\n戸が閉まる音。澪は、自分のしつこさのせいだと思ったようだった。",
+      "truth_id": "msg_f14_d14_6_t"
+    },
+    {
+      "id": "msg_f14_d14_6_t",
+      "speaker": "yu",
+      "text": "老婆は俺を見て言った。俺と、俺の隣を。\n澪は自分のせいだと思った。そう思わせておいた。"
+    },
+    {
+      "id": "msg_mio_003",
+      "speaker": "mio",
+      "text": "「シゲさん、私がしつこかったから」。澪は自分を責めている。",
+      "truth_id": "msg_mio_003_t"
+    },
+    {
+      "id": "msg_mio_003_t",
+      "speaker": "mio",
+      "text": "「シゲさん、私がしつこかったから」。澪はそう言いながら、俺を見ていた。"
+    },
+    {
+      "id": "msg_f14_shige_after",
+      "speaker": "shige",
+      "text": "「……帰れと言ったろう。あの子だけなら、話してもいい」"
+    },
+    {
+      "id": "evd_visitor_book_title",
+      "speaker": "",
+      "text": "奉納帳の六月の頁"
+    },
+    {
+      "id": "evd_visitor_book_surface",
+      "speaker": "",
+      "text": "式内社の奉納帳。参拝者の名前が並ぶ。"
+    },
+    {
+      "id": "evd_visitor_book_truth",
+      "speaker": "",
+      "text": "六月二十八日の頁に、俺の名前。夜に参拝した。石を動かす前に。"
+    },
+    {
+      "id": "evd_visitor_book_shown",
+      "speaker": "",
+      "text": "奉納帳をめくった。"
+    },
+    {
+      "id": "evd_visitor_book_action",
+      "speaker": "",
+      "text": "六月二十八日の頁を、指で破って取った。"
+    },
+    {
+      "id": "heroine_remark_visitor_book",
+      "speaker": "mio",
+      "text": "「頁、破れた？」"
+    },
+    {
+      "id": "evd_shrine_lore_title",
+      "speaker": "",
+      "text": "式内社の由緒"
+    },
+    {
+      "id": "evd_shrine_lore_surface",
+      "speaker": "",
+      "text": "『谷のものを鎮め、八柱をもって境とす。石を動かすべからず』。"
+    },
+    {
+      "id": "evd_shrine_lore_truth",
+      "speaker": "",
+      "text": "『石を動かすべからず』。動かしたのは俺だ。谷のものは、もう境の内にいる。"
+    },
+    {
+      "id": "msg_an_f14_moon",
+      "speaker": "yu",
+      "text": "水田に映る月が、一つ多い。\n空には一つしかないのに。",
+      "truth_id": "msg_an_f14_moon_t"
+    },
+    {
+      "id": "msg_an_f14_moon_t",
+      "speaker": "yu",
+      "text": "水田に映る月が、一つ多い。\n多い方の月は、俺の隣の水面に映っている。"
+    },
+    {
+      "id": "msg_an_f14_frogs",
+      "speaker": "yu",
+      "text": "蛙の声が、一斉に止んだ。\n何かが畦を渡っていく。足音はしない。草だけが倒れていく。"
     }
   ]
 }
