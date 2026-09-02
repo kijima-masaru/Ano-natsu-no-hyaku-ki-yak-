@@ -235,7 +235,11 @@
         }
       ],
       "once": true,
-      "priority": 10
+      "priority": 10,
+      "day_range": [
+        9,
+        31
+      ]
     },
     {
       "id": "ev_f06_lost_found_after",
@@ -5712,6 +5716,331 @@
       ],
       "once": false,
       "priority": 0
+    },
+    {
+      "id": "ev_d04_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        4,
+        4
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d04_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d09_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        9,
+        9
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d09_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d10_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        10,
+        10
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d10_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d11_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        11,
+        11
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d11_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d13_start",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        13,
+        13
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d13_open"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_mio_morning_0",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        3,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on"
+        },
+        {
+          "suspicion": {
+            "stage": "unaware"
+          }
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_mio_stage_0"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_mio_morning_1",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        3,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on"
+        },
+        {
+          "suspicion": {
+            "stage": "unease"
+          }
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_mio_stage_1"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_mio_morning_2",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        3,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on"
+        },
+        {
+          "suspicion": {
+            "stage": "doubt"
+          }
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_mio_stage_2"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_mio_morning_3",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        3,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on"
+        },
+        {
+          "suspicion": {
+            "stage": "certainty"
+          }
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_mio_stage_3"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f06_bulletin_d05",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "bulletin",
+      "day_range": [
+        5,
+        5
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_d05_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f06_d05_2"
+        },
+        {
+          "type": "give_evidence",
+          "evidence": "missing_poster_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f06_d05_3"
+        },
+        {
+          "type": "message",
+          "id": "msg_f06_d05_4"
+        },
+        {
+          "type": "set_flag",
+          "flag": "saw_first_missing"
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_003"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 20
+    },
+    {
+      "id": "ev_f06_lost_found_early",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "lost_and_found",
+      "day_range": [
+        1,
+        8
+      ],
+      "conditions": [
+        {
+          "has_item": "key_tunnel_fence",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f06_lost_found_early"
+        }
+      ],
+      "once": false,
+      "priority": 5
+    },
+    {
+      "id": "ev_natsu_night_walk",
+      "field": "",
+      "trigger": "on_enter",
+      "day_range": [
+        3,
+        29
+      ],
+      "time_of_day": [
+        "night"
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on"
+        }
+      ],
+      "actions": [
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_004"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_mio_002",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        14,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on"
+        },
+        {
+          "suspicion": {
+            "min": 25,
+            "max": 100
+          }
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_mio_002"
+        }
+      ],
+      "once": true,
+      "priority": 5
     }
   ]
 }
