@@ -21,3 +21,6 @@ Thumbs.db
 # Python（docs/tools のビルドスクリプト用）
 __pycache__/
 *.pyc
+
+# field_scaffold の出力（events.json / messages.json へ貼り込んだら削除する）
+data/skeletons/
