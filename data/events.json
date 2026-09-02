@@ -1923,6 +1923,306 @@
       ],
       "once": true,
       "priority": 10
+    },
+    {
+      "id": "ev_f03_enter",
+      "field": "F03",
+      "trigger": "on_enter",
+      "day_range": [
+        10,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_enter"
+        }
+      ],
+      "once": true,
+      "priority": 0
+    },
+    {
+      "id": "ev_f03_timetable",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "timetable",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_timetable"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f03_timetable_again",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "timetable",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_timetable"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f03_bench",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "bench_item",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_bench_item"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f03_bench_again",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "bench_item",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_bench_again"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f03_vending",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "vending_broken",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_vending"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f03_graffiti",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "graffiti",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_graffiti"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f03_graffiti_again",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "graffiti",
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_graffiti_again"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f03_fence_locked",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "fence_notice",
+      "conditions": [
+        {
+          "has_item": "key_tunnel_fence",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_fence_locked"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f03_fence_open",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "fence_notice",
+      "conditions": [
+        {
+          "has_item": "key_tunnel_fence"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_fence_open"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f03_fence_open_again",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "fence_notice",
+      "conditions": [
+        {
+          "has_item": "key_tunnel_fence"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_fence_open"
+        }
+      ],
+      "once": false,
+      "priority": 5
+    },
+    {
+      "id": "ev_f03_stalker_first",
+      "field": "F03",
+      "trigger": "on_enter",
+      "day_range": [
+        12,
+        12
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_d12_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f03_d12_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_f03_d12_3"
+        },
+        {
+          "type": "start_stalker",
+          "active": true,
+          "spawn_tile": [
+            37,
+            12
+          ],
+          "retreat_to": "F06"
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_006"
+        },
+        {
+          "type": "play_bgm",
+          "id": "bgm_tension"
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f03_stalker_night",
+      "field": "F03",
+      "trigger": "on_enter",
+      "day_range": [
+        13,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [
+        {
+          "flag": "stalker_met"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_night_enter"
+        },
+        {
+          "type": "start_stalker",
+          "active": true,
+          "spawn_tile": [
+            37,
+            12
+          ],
+          "retreat_to": "F06"
+        }
+      ],
+      "once": false,
+      "priority": 0
+    },
+    {
+      "id": "ev_f03_d12_recall",
+      "field": "F03",
+      "trigger": "on_enter",
+      "day_range": [
+        13,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "luck_1"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f03_d12_after"
+        }
+      ],
+      "once": true,
+      "priority": 5
     }
   ]
 }

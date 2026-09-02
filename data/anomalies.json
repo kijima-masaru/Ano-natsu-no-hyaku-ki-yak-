@@ -211,6 +211,70 @@
       ],
       "suspicion_delta": 0,
       "comfort": "night_walk"
+    },
+    {
+      "id": "an_f03_bus_nobody",
+      "field": "F03",
+      "trigger": "on_condition",
+      "day_range": [
+        10,
+        29
+      ],
+      "time_of_day": [
+        "evening",
+        "night"
+      ],
+      "conditions": [],
+      "mode": "once",
+      "actions": [
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "play_sound",
+          "id": "se_door"
+        },
+        {
+          "type": "message",
+          "id": "msg_an_f03_bus"
+        }
+      ],
+      "suspicion_delta": 0,
+      "comfort": "after_anomaly"
+    },
+    {
+      "id": "an_f03_tunnel_light",
+      "field": "F03",
+      "trigger": "on_interact",
+      "target": "graffiti",
+      "day_range": [
+        13,
+        29
+      ],
+      "time_of_day": [
+        "noon",
+        "evening"
+      ],
+      "conditions": [
+        {
+          "flag": "stalker_met"
+        }
+      ],
+      "mode": "repeat",
+      "once_per_day": true,
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_an_f03_tunnel_light"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.5
+        }
+      ],
+      "suspicion_delta": 1,
+      "comfort": ""
     }
   ]
 }
