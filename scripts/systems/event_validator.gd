@@ -31,6 +31,10 @@ static func validate(events: Dictionary, known_actions: PackedStringArray, item_
 					for key: String in ["id", "truth_id"]:
 						if action.has(key) and not MessageResolver.has_message(str(action[key])):
 							errors.append("%s: メッセージ '%s' が存在しません" % [id, str(action[key])])
+				"entity_comfort":
+					var ctx: String = str(action.get("context", ""))
+					if not MessageResolver.has_message("msg_natsu_comfort_%s" % ctx):
+						errors.append("%s: entity_comfort の context '%s' に対応する台詞がありません" % [id, ctx])
 				"give_item", "remove_item":
 					items.append(str(action.get("item", "")))
 				"move_player", "unlock_field":
