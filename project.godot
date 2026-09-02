@@ -27,6 +27,7 @@ SaveManager="*res://scripts/autoload/save_manager.gd"
 EventSystem="*res://scripts/autoload/event_system.gd"
 Suspicion="*res://scripts/autoload/suspicion.gd"
 EvidenceRegistry="*res://scripts/autoload/evidence_registry.gd"
+AudioManager="*res://scripts/autoload/audio_manager.gd"
 SteamBridge="*res://scripts/autoload/steam_bridge.gd"
 
 [debug]
