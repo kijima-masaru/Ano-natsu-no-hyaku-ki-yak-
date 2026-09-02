@@ -6,6 +6,8 @@ const MESSAGE_WINDOW_SCENE: PackedScene = preload("res://scenes/ui/dialogue_wind
 const DATE_HUD_SCENE: PackedScene = preload("res://scenes/ui/date_hud.tscn")
 const SLOT_MENU_SCENE: PackedScene = preload("res://scenes/ui/slot_menu.tscn")
 const TITLE_SCENE: String = "res://scenes/ui/title.tscn"
+const NOTEBOOK_SCENE: PackedScene = preload("res://scenes/ui/notebook.tscn")
+const DEBUG_OVERLAY_SCENE: PackedScene = preload("res://scenes/debug/debug_overlay.tscn")
 
 @onready var world: Node2D = $World
 @onready var ui: CanvasLayer = $UI
@@ -20,6 +22,7 @@ func _ready() -> void:
 	EventSystem.register_message_window(_message_window)
 	GameState.field_visited.connect(func(_id: String) -> void: Calendar.add_investigation_points(1))
 	ui.add_child(DATE_HUD_SCENE.instantiate())
+	add_child(DEBUG_OVERLAY_SCENE.instantiate())
 	SceneRouter.register_world(world)
 	SceneRouter.passage_blocked.connect(_on_passage_blocked)
 	SceneRouter.passage_closed_today.connect(_on_passage_closed_today)
@@ -67,13 +70,33 @@ func _exit_tree() -> void:
 	SceneRouter.reset()
 
 
+var _notebook: Control = null
+
+
 func _unhandled_input(event: InputEvent) -> void:
-	# 暫定：X 長押し等のメニューは未実装。Esc でタイトルへ（オートセーブ済み）。TODO(step-3 task-4): ポーズメニュー
-	if event.is_action_pressed("cancel") and not _message_window.is_open and SceneRouter.player != null \
-			and SceneRouter.player.input_enabled:
+	if _message_window.is_open or SceneRouter.player == null or not SceneRouter.player.input_enabled:
+		return
+	if event.is_action_pressed("open_notebook"):
+		get_viewport().set_input_as_handled()
+		_open_notebook()
+	elif event.is_action_pressed("cancel"):
+		# 暫定：ポーズメニューは未実装。Esc でオートセーブしてタイトルへ
 		get_viewport().set_input_as_handled()
 		SaveManager.autosave()
 		get_tree().change_scene_to_file(TITLE_SCENE)
+
+
+func _open_notebook() -> void:
+	if not GameState.has_flag("notebook_unlocked"):
+		_show_message("", MessageResolver.text("msg_notebook_locked"))
+		return
+	SceneRouter.player.input_enabled = false
+	_notebook = NOTEBOOK_SCENE.instantiate() as Control
+	ui.add_child(_notebook)
+	_notebook.closed.connect(func() -> void:
+		_notebook.queue_free()
+		_notebook = null
+		_on_message_closed())
 
 
 func _on_passage_blocked(exit: ExitData) -> void:

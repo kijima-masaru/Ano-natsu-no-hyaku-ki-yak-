@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/concealment_reveal.gd" id="1_reveal"]
+
+[node name="ConcealmentReveal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1_reveal")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 360.0
+offset_bottom = 30.0
+
+[node name="Body" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 44.0
+offset_right = 360.0
+offset_bottom = 180.0
+
+[node name="Hint" type="Label" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 192.0
+offset_right = 360.0
+offset_bottom = 206.0
