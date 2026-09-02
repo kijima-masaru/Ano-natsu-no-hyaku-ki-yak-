@@ -106,7 +106,14 @@ func find_exit(to_id):
 - 公開関数には `##` ドキュメントコメントを付ける（エディタのヘルプに反映される）。
 - TODO は `# TODO(step-N): …` の形式で、どのステップで解消する予定かを書く。
 
-## 10. 禁止事項（まとめ）
+## 10. テキストとイベント
+
+- 日本語テキストは **すべて `data/messages.json`** に置き、`MessageResolver.text(id)` / `resolve(id)` で取得する。GDScript に日本語リテラルを書かない（例外：題字「磐戸町奇譚」、ログ・エラーメッセージ、コメント）。
+- 二層テキスト（表層版／真相版）の分岐は `MessageResolver.resolve()` の中だけで行う。他の場所で `truth_revealed` を見てテキストを選ばない。
+- ゲーム内容（会話・フラグ操作・入手・分岐）は `data/events.json` に書く。GDScript にはシステムだけを書く。
+- 会話 UI は `scenes/ui/dialogue_window.tscn`。行分割は `TextLayout`（禁則処理）に任せ、手で改行位置を調整しない。
+
+## 11. 禁止事項（まとめ）
 
 1. `Color("#…")` 等の直接色指定
 2. `TileMap` ノードの使用
@@ -115,3 +122,4 @@ func find_exit(to_id):
 5. 兄弟ノードの直接参照
 6. 型注釈の省略
 7. 画像ファイル（PNG / SVG / base64）の生成やコミット（手描き素材が用意されるまで）
+8. GDScript への日本語テキスト直書き、`MessageResolver` を通さないテキスト取得

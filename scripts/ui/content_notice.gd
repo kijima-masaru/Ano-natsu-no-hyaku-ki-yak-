@@ -1,12 +1,10 @@
 extends Control
 ## コンテンツ警告と相談窓口案内。初回起動時にタイトルの前に表示し、設定から再表示できる。
-## 文言は暫定（TODO(step-3 task-4): messages.json と data/locale/<lang>/support.json へ移す）。
-## 相談窓口の具体的な連絡先はプレースホルダ。配信地域確定後にローカライズデータで差し込む（docs/CONTENT_NOTICE.md）。
+## 文言は messages.json（ui_notice_*）。相談窓口の具体的な連絡先はプレースホルダで、配信地域確定後にローカライズデータで差し込む（docs/CONTENT_NOTICE.md）。
 
 signal acknowledged()
 
 const FONT_SIZE: int = 12
-const BODY: String = "本作には、自死とその喪失を扱う描写、追跡される恐怖、\n心理的な操作の描写が含まれます。\n具体的な方法は描写しません。\n\nつらいときは、話せる場所があります。\n［お住まいの地域の相談窓口をここに表示します］\n\nこのお知らせは「設定」からいつでも見直せます。"
 
 @onready var _bg: ColorRect = $Background
 @onready var _title: Label = $Title
@@ -21,9 +19,9 @@ func _ready() -> void:
 	_title.add_theme_color_override("font_color", Palette.get_color(Palette.UI_ACCENT))
 	_body.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT))
 	_hint.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT_DIM))
-	_title.text = "はじめに"
-	_body.text = BODY
-	_hint.text = "Z で閉じる"
+	_title.text = MessageResolver.text("ui_notice_title")
+	_body.text = MessageResolver.text("ui_notice_body")
+	_hint.text = MessageResolver.text("ui_hint_close")
 
 
 func _unhandled_input(event: InputEvent) -> void:
