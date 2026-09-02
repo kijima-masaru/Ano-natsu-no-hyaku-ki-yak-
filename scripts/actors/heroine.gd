@@ -14,6 +14,8 @@ const TRAIL_MAX: int = 96
 const ARRIVE_DISTANCE: float = 4.0
 ## 隠蔽を目撃する半径（4 タイル）
 const WITNESS_RADIUS: float = 64.0
+## 段階（無自覚／違和感／疑念／確信）ごとの目撃半径
+const WITNESS_RADIUS_BY_STAGE: PackedFloat32Array = [64.0, 64.0, 80.0, 96.0]
 const LOST_DISTANCE: float = 160.0
 const STUCK_SECONDS: float = 1.2
 const AHEAD_IDLE_SECONDS: float = 2.0
@@ -49,9 +51,12 @@ func _ready() -> void:
 	_update_sprite()
 
 
-## 隠蔽の目撃判定。同行中で、位置から WITNESS_RADIUS 以内なら true
+## 隠蔽の目撃判定。同行中で、位置から目撃半径以内なら true。接近度の段階が進むほど半径が広がる（第二幕で失敗しやすくなる）
 func is_near(position: Vector2) -> bool:
-	return is_active and is_inside_tree() and global_position.distance_to(position) <= WITNESS_RADIUS
+	if not is_active or not is_inside_tree():
+		return false
+	var stage: int = clampi(Suspicion.get_stage(), 0, WITNESS_RADIUS_BY_STAGE.size() - 1)
+	return global_position.distance_to(position) <= WITNESS_RADIUS_BY_STAGE[stage]
 
 
 ## プレイヤーの隣（後ろ）に即座に配置する（遷移直後・見失い時）
