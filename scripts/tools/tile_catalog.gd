@@ -142,6 +142,7 @@ static func _build() -> Dictionary:
 	e["窓（消灯・点灯）"] = _t("window", false)
 	e["旧校舎 窓（木枠）"] = _t("window", false, {"wall": Palette.RUST, "frame": Palette.RUST_DARK}, true)
 	e["階段室（点灯・消灯）"] = _t("window", false, {"wall": Palette.CONCRETE, "lit": true, "glow": Palette.FLUORESCENT}, true)
+	e["階段室（消灯）"] = _t("window", false, {"wall": Palette.CONCRETE, "lit": false}, true)
 	e["駄菓子屋の店先（点灯）"] = _t("window", false, {"wall": Palette.RUST, "lit": true, "glow": Palette.STREETLAMP_GLOW}, true)
 	e["店舗ガラス面（点灯）"] = _t("glass", false, {"lit": true})
 	e["ガラス扉（点灯）"] = _t("glass", false, {"lit": true, "glow": Palette.STREETLAMP_GLOW})

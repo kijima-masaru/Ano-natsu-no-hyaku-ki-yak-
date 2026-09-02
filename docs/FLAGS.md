@@ -28,6 +28,7 @@
 | `entered_ren_room` | 蓮の部屋に入った | 8/8 初七日 | day 8 進行、F02 部屋の配置 |
 | `key_tunnel_fence` | 隧道フェンスの鍵（既存） | F06 遺失物箱 | F03→F09 出口 lock |
 | `stalker_met` | 追跡者と初遭遇 | 8/12 F03 | day 12 進行、`start_stalker` 以降の出現許可 |
+| `saw_notifications` | 支所の受付台で届出用紙の減りを見た | 8/3 以降 F12 支所 | 「不在の連鎖」導線、調査 P +1 |
 | `baba_rage` | シゲが激昂した | 8/14 F14、悠合流時 | day 14 進行、**接近度を最低 30 に強制**、澪の段階テキスト |
 | `obon_done` | 盆の灯明イベント | 8/15 F07 | day 15 進行、F08 開放 |
 | `key_old_school` | 旧校舎の鍵（既存） | F11 職員室 | F11 旧校舎の扉 |
