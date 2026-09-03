@@ -17,7 +17,7 @@ KNOWN_ACTIONS = {
     "message", "set_flag", "clear_flag", "give_item", "remove_item", "unlock_field", "move_player", "advance_day",
     "set_time", "add_points", "wait", "run_event", "end_game", "choice", "autosave", "set_companion", "start_stalker",
     "sleep", "give_evidence", "conceal_evidence", "show_concealment_reveal", "raise_suspicion", "play_sound",
-    "play_bgm", "stop_bgm", "set_ambience", "branch", "close_concealment_reveal", "entity_speak", "entity_comfort", "entity_pulse", "switch_floor",
+    "play_bgm", "stop_bgm", "set_ambience", "branch", "close_concealment_reveal", "fade", "entity_speak", "entity_comfort", "entity_pulse", "switch_floor",
 }
 KNOWN_CONDITIONS = {"flag", "has_item", "field_visited", "day", "day_range", "time_of_day", "not", "any", "all",
                     "suspicion", "can_sleep", "floor"}

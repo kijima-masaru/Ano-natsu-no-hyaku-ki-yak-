@@ -283,6 +283,15 @@ func _build_fade_layer() -> void:
 	layer.add_child(_fade)
 
 
+## 画面の暗転を明示的に行う（fade アクション。終幕の間の取り方に使う）
+func fade_screen(alpha: float, seconds: float) -> void:
+	if _fade == null:
+		return
+	var tween: Tween = create_tween()
+	tween.tween_property(_fade, "color:a", clampf(alpha, 0.0, 1.0), maxf(0.0, seconds))
+	await tween.finished
+
+
 func _fade_to(alpha: float) -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(_fade, "color:a", alpha, FADE_DURATION)

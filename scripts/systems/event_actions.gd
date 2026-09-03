@@ -20,6 +20,8 @@ static func register_all(es: Node) -> void:
 	es.register_action("move_player", func(a: Dictionary, _c: Dictionary) -> void: await _move_player(a))
 	es.register_action("advance_day", func(_a: Dictionary, _c: Dictionary) -> void: _advance_day_deferred(es))
 	es.register_action("branch", func(a: Dictionary, c: Dictionary) -> void: await _branch(es, a, c))
+	es.register_action("fade", func(a: Dictionary, _c: Dictionary) -> void:
+		await SceneRouter.fade_screen(float(a.get("to", 1.0)), float(a.get("seconds", 0.7))))
 	es.register_action("set_time", func(a: Dictionary, _c: Dictionary) -> void: Calendar.set_time_of_day(str(a.get("time_of_day", ""))))
 	es.register_action("add_points", func(a: Dictionary, _c: Dictionary) -> void: Calendar.add_investigation_points(int(a.get("amount", 1))))
 	es.register_action("wait", func(a: Dictionary, _c: Dictionary) -> void:
