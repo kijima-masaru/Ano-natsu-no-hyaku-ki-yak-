@@ -11,7 +11,7 @@
 | エンジン | **Godot 4.7**（GDScript）。4.3 未満では `TileMapLayer` が無いため開けない |
 | レンダラ | GL Compatibility（`project.godot` で固定） |
 | 配信先 | Steam（Windows / Linux / Steam Deck）。Steam 連携は GodotSteam（GDExtension）を前提とし、現時点では空実装 |
-| 補助ツール | Python 3（`docs/tools/build_minimap.py` の実行にのみ使用） |
+| 補助ツール | Python 3（`docs/tools/validate_data.py` によるデータ検証、`docs/tools/flag_usage.py`、`docs/tools/build_minimap.py`） |
 
 ## 起動方法
 
@@ -24,7 +24,7 @@ godot --path .
 godot --path . --editor      # エディタを開く
 ```
 
-タイトルの「はじめる」で 8 月 1 日の自宅（F12）から始まる。セーブは `user://saves/slot_NN.json`（0 はオートセーブ）、設定と周回情報は `user://system.json`。F01・F02・F05・F06・F12 は実装済みで、他のフィールドは未実装のプレースホルダで表示される。
+タイトルの「はじめる」で 8 月 1 日の自宅（F12）から始まる。セーブは `user://saves/slot_NN.json`（0 はオートセーブ）、設定・既読・クリア記録は `user://system.json`。16 フィールドと 8/1〜8/31 の全日程、エンディング 3 種、周回「裏面から」まで実装済み（v0.4.0）。画像・音声は差し替え待ちの生成素材で動く（`docs/ASSETS_NEEDED.md`）。
 操作：WASD / 矢印で移動、Shift で忍び足、Z / Space / Enter で調べる、X / Esc でキャンセル、F で懐中電灯（ゲームパッド：左スティック / D-pad、LB、A、B、LT）。
 
 ## 描画仕様（厳守）
@@ -41,29 +41,56 @@ godot --path . --editor      # エディタを開く
 
 ```
 project.godot
-data/                    静的データ（fields.json など）
+data/                    静的データ（fields / schedule / events / messages / evidence / anomalies / items / audio）
+  locale/ja/support.json 相談窓口（docs/CONTENT_NOTICE.md §5）
 scenes/
   main.tscn              エントリポイント
-  fields/                各フィールドの .tscn（F01〜F16）と未実装プレースホルダ
+  fields/                各フィールドの .tscn（F01〜F16）
   actors/                プレイヤー等
   ui/                    メッセージウィンドウ等の UI
-  debug/                 確認用シーン（パレット・タイル一覧）
+  debug/                 確認用シーン（パレット・タイル一覧・検証ドライバの土台 playtest_driver.tscn）
 scripts/
-  autoload/              シングルトン（Palette, GameState, FieldRegistry, SceneRouter, SteamBridge）
+  autoload/              シングルトン 16 個（docs/CONVENTIONS.md §5 の表）
   actors/                アクターのスクリプト
   fields/                各フィールド固有のスクリプト（FieldBase を継承）
   systems/               共通システム（FieldBase, FieldData, Interactable, GameConstants …）
   ui/                    UI のスクリプト
-  tools/                 タイル・スプライト生成（ゲームロジックから隔離）
+  tools/                 タイル・スプライト・音の生成、データ検証（ゲームロジックから隔離）
+    playtest/            実機検証ドライバ（docs/PLAYTEST_LOG.md）
   debug/                 確認用シーンのスクリプト
 resources/
   tilesets/              生成・保存された TileSet
   fonts/                 PixelMplus12（後から配置）
-docs/
-  CONVENTIONS.md         コーディング規約
-  field_build_order.md   フィールド作成の推奨順序（ステップ1 成果物C）
-  tools/                 設計確認用ミニマップ（HTML）とそのビルドスクリプト
+docs/                    設計・運用資料（下表）
+  tools/                 データ検証 validate_data.py、フラグ棚卸し flag_usage.py、ミニマップ生成
 ```
+
+## 設計・運用資料
+
+| 資料 | 内容 |
+|---|---|
+| `docs/NEXT_STEPS.md` | **最初に読む。** 現状と申し送り（ステップ6 の作業一覧、決定事項、手作業が要る項目） |
+| `docs/SCENARIO.md` | 登場人物・世界設定・日程表・8/30〜31 の構成 |
+| `docs/FLAGS.md` | フラグ一覧と接近度の閾値・加算 |
+| `docs/EVENT_SCHEMA.md` / `docs/ANOMALY_SCHEMA.md` | `events.json` / `anomalies.json` の書式（トリガー・条件・アクション） |
+| `docs/DECEPTION_MAP.md` / `docs/CONCEALMENT_LIST.md` | 二層テキスト 118 対、隠蔽 17 件 |
+| `docs/CONTENT_NOTICE.md` | 描写制約、コンテンツ警告、相談窓口の掲載手順 |
+| `docs/STORE_PAGE.md` | Steam ストアページ文案 |
+| `docs/PLAYTEST_LOG.md` | 実機検証の記録（通しプレイ、閾値の確定、問題一覧） |
+| `docs/ASSETS_NEEDED.md` | 素材の発注書 |
+| `docs/CONVENTIONS.md` | コーディング規約と autoload の一覧 |
+| `docs/FIELD_IMPLEMENTATION_GUIDE.md` / `docs/TILESET_PIPELINE.md` / `docs/field_build_order.md` | フィールドとタイルの作り方 |
+
+## 検証（Godot が使える環境で）
+
+```
+python3 docs/tools/validate_data.py                                  # データ検証（CI と同じ）
+godot --headless --path . -s scripts/tools/validate_data.gd           # 同じ検査の GDScript 版
+godot --headless --path . res://scenes/debug/playtest_driver.tscn -- --runner=res://scripts/tools/playtest/driver_smoke.gd
+godot --headless --path . res://scenes/debug/playtest_driver.tscn -- --runner=res://scripts/tools/playtest/driver_play.gd --stop-day=30
+```
+
+`godot` コマンドが無い環境では GitHub Releases の公式バイナリ（`Godot_v4.7-stable_linux.x86_64.zip`）を取得して使う（`docs/NEXT_STEPS.md`「Godot の用意」）。描画確認は `xvfb-run` で `driver_shots`。
 
 ## 設計資料（ステップ1の成果物）
 

@@ -58,7 +58,7 @@
 | C-16 `cairn_stone` | `ev_f15_stele_conceal` / `_after` / `_early`（8/26〜） | F15 `stele` | #35 |
 | C-17 `capsule_letter` | `ev_f11_art_shelf_conceal` / `_after`（旧校舎 1 階、8/20〜） | F11 `art_shelf` | #37 |
 
-イベント ID と interaction_id は `data/events.json` を正とする（表は検索の手掛かり）。8/30 の提示画面は `ConcealmentReveal`（`scripts/ui/concealment_reveal.gd`）に実装済みで、`show_concealment_reveal` アクションから呼ぶ（ステップ5で 8/30 の日程に組み込む）。
+イベント ID と interaction_id は `data/events.json` を正とする（表は検索の手掛かり）。8/30 の提示画面は `ConcealmentReveal`（`scripts/ui/concealment_reveal.gd`）に実装済みで、`show_concealment_reveal` アクションから呼ぶ（8/30 夜 `ev_d30_confront` に組み込み済み。隠蔽 17 件すべてが提示に出ることを実機で確認）。
 
 ## 提示画面（8/30 夜）の構成（`ConcealmentReveal`、実装済み）
 
