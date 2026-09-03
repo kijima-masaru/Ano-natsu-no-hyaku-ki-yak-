@@ -52,13 +52,13 @@ def build_one(d: dict, check: bool) -> dict:
     t0 = time.time()
     x = d["render"](rng)
     y, info = master.finalize(x, d["kind"], bool(d.get("loop", d["kind"] != "se")), bool(d.get("stereo", d["kind"] != "se")),
-                              d.get("fade_in", 0.0), d.get("fade_out", 0.0), d.get("crossfade", 0.5))
+                              d.get("fade_in", 0.0), d.get("fade_out", 0.0), d.get("crossfade", 0.5), float(d.get("lufs_offset", 0.0)))
     path = os.path.join(OUT, d["kind"], d["id"] + ".ogg")
     master.write_ogg(path, y, d["kind"])
     if check and d.get("loop", d["kind"] != "se"):
         master.write_wav(os.path.join(CHECK, d["id"] + "_x3.wav"), np.concatenate([y, y, y]))
     entry = {"id": d["id"], "kind": d["kind"], "path": os.path.relpath(path, ROOT), "loop": bool(d.get("loop", d["kind"] != "se")),
-             "stereo": y.ndim == 2, "seconds": round(info["seconds"], 3), "lufs": round(info["lufs"], 2), "peak_dbfs": round(info["peak_dbfs"], 2),
+             "stereo": y.ndim == 2, "seconds": round(info["seconds"], 3), "lufs": round(info["lufs"], 2), "target_lufs": round(info["target_lufs"], 2), "peak_dbfs": round(info["peak_dbfs"], 2),
              "bytes": os.path.getsize(path), "seed": seed_of(d), "module": d["module"], "note": d.get("note", ""), "use": d.get("use", ""),
              "render_sec": round(time.time() - t0, 2)}
     for k in ("allow_silence", "field", "time_of_day", "layer", "material", "status"):
