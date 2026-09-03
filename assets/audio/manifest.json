@@ -1,0 +1,26 @@
+{
+ "files": [
+  {
+   "id": "test_wind",
+   "kind": "ambience",
+   "path": "assets/audio/ambience/test_wind.ogg",
+   "loop": true,
+   "stereo": true,
+   "seconds": 19.5,
+   "lufs": -28.0,
+   "peak_dbfs": -14.17,
+   "bytes": 189368,
+   "seed": 1953719668,
+   "module": "test_probe",
+   "note": "動作確認用の風（削除予定）",
+   "use": "",
+   "render_sec": 5.76
+  }
+ ],
+ "sample_rate": 44100,
+ "targets": {
+  "ambience": -28.0,
+  "bgm": -20.0,
+  "se": -16.0
+ }
+}

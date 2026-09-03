@@ -52,6 +52,10 @@ DEFS = [{"id": "amb_example", "kind": "ambience", "loop": True, "stereo": True, 
 - 単発の SE は `loop: False`、`fade_out` 秒を指定できる
 - 意図した無音が多い音は `allow_silence: True` を付ける（verify の無音検査を緩める）
 
+## Git での扱い
+
+`*.ogg` は **通常の git で管理** する（`.gitattributes` で binary 指定）。Git LFS は、開発環境から `lfs.github.com` に到達できず push が通らないため有効化していない。LFS へ移す場合は到達できる環境で `.gitattributes` の LFS 行を有効にし、`git lfs migrate import --include="*.ogg"` で移行する（履歴の書き換えを伴うので合意の上で 1 回だけ）。
+
 ## 方針（要約）
 
 恐怖は静けさで作る。生活音の残留。蝉は日ごとに減る。安心の音が終盤で最も不吉に響く。ジャンプスケア・悲鳴・苦痛の音・自死を想起させる物音は作らない。生楽器の模倣はしない（減衰する共鳴体として抽象化する）。詳細は `docs/AUDIO_SPEC.md`。
