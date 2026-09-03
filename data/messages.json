@@ -438,6 +438,76 @@
       "text": "面"
     },
     {
+      "id": "ui_title_ura",
+      "speaker": "system",
+      "text": "裏面から"
+    },
+    {
+      "id": "ui_notice_title_after_ending",
+      "speaker": "system",
+      "text": "おわりに"
+    },
+    {
+      "id": "ui_notice_body_after_ending",
+      "speaker": "system",
+      "text": "ここまで遊んでくださって、ありがとうございます。\n\nこの物語は、残された人の側から書きました。\n\nつらいときは、話せる場所があります。\n［お住まいの地域の相談窓口をここに表示します］"
+    },
+    {
+      "id": "ui_credits_01",
+      "speaker": "system",
+      "text": "磐戸町奇譚"
+    },
+    {
+      "id": "ui_credits_02",
+      "speaker": "system",
+      "text": "　"
+    },
+    {
+      "id": "ui_credits_03",
+      "speaker": "system",
+      "text": "企画・脚本・実装"
+    },
+    {
+      "id": "ui_credits_04",
+      "speaker": "system",
+      "text": "（クレジットは公開前に確定）"
+    },
+    {
+      "id": "ui_credits_05",
+      "speaker": "system",
+      "text": "　"
+    },
+    {
+      "id": "ui_credits_06",
+      "speaker": "system",
+      "text": "フォント　PixelMplus（配置後に表記）"
+    },
+    {
+      "id": "ui_credits_07",
+      "speaker": "system",
+      "text": "Made with Godot Engine"
+    },
+    {
+      "id": "ui_credits_08",
+      "speaker": "system",
+      "text": "　"
+    },
+    {
+      "id": "ui_credits_09",
+      "speaker": "system",
+      "text": "この物語に登場する町・人物・団体は、すべて架空のものです。"
+    },
+    {
+      "id": "ui_credits_10",
+      "speaker": "system",
+      "text": "　"
+    },
+    {
+      "id": "ui_credits_11",
+      "speaker": "system",
+      "text": "おわり"
+    },
+    {
       "id": "evd_shoe_mud_title",
       "speaker": "",
       "text": "靴の泥"

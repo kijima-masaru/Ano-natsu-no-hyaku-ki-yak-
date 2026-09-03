@@ -64,7 +64,7 @@
 | `add_points` | `amount` | 調査ポイント |
 | `wait` | `seconds` | 待機 |
 | `run_event` | `id` | 別イベントを待ち行列に追加 |
-| `end_game` | `ending` | クリア記録してタイトルへ（ステップ5で本実装） |
+| `end_game` | `ending` | 終幕。`SaveManager.record_cleared_ending` でクリア記録（到達 ED・回数・初回日時）→ `ending_reached` と `ending` のフラグ → 相談窓口案内（`content_notice` の `after_ending`）→ スタッフロール（`staff_roll`）→ 暗転してタイトルへ。直前の `fade` で黒にしておく前提（案内は自前の黒地を持ち、幕を上げてから読ませる） |
 
 他 autoload が `EventSystem.register_action(type, handler)` で追加するもの（予定）：
 

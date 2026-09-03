@@ -26,6 +26,11 @@ var _last_day: Dictionary = {}
 func _ready() -> void:
 	load_file(ANOMALIES_PATH)
 	SaveManager.register_section("anomalies", to_dict, from_dict)
+	# はじめから（周回を含む）では前の周の発生回数を持ち越さない
+	GameState.state_reset.connect(func() -> void:
+		_counts.clear()
+		_last_day.clear()
+		last_triggered_id = "")
 	SceneRouter.field_entered.connect(func(_id: String, _from: String) -> void: _recheck_conditions())
 	Calendar.time_of_day_changed.connect(func(_t: String, _p: String) -> void: _recheck_conditions())
 	Calendar.day_advanced.connect(func(_d: int, _p: int) -> void: _recheck_conditions())
