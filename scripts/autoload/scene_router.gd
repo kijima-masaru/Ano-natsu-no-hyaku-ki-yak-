@@ -271,28 +271,13 @@ func _push_back_from_exit(exit: ExitData) -> void:
 
 
 func _build_fade_layer() -> void:
-	var layer: CanvasLayer = CanvasLayer.new()
-	layer.name = "FadeLayer"
-	layer.layer = FADE_CANVAS_LAYER
-	add_child(layer)
-	_fade = ColorRect.new()
-	_fade.name = "Fade"
-	_fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_fade.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_fade.color = Palette.with_alpha(Palette.FADE_BLACK, 0.0)
-	layer.add_child(_fade)
+	_fade = ScreenFade.build(self, FADE_CANVAS_LAYER)
 
 
 ## 画面の暗転を明示的に行う（fade アクション。終幕の間の取り方に使う）
 func fade_screen(alpha: float, seconds: float) -> void:
-	if _fade == null:
-		return
-	var tween: Tween = create_tween()
-	tween.tween_property(_fade, "color:a", clampf(alpha, 0.0, 1.0), maxf(0.0, seconds))
-	await tween.finished
+	await ScreenFade.fade(self, _fade, alpha, seconds)
 
 
 func _fade_to(alpha: float) -> void:
-	var tween: Tween = create_tween()
-	tween.tween_property(_fade, "color:a", alpha, FADE_DURATION)
-	await tween.finished
+	await ScreenFade.fade(self, _fade, alpha, FADE_DURATION)
