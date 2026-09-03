@@ -13,11 +13,12 @@
 | 4 | feat/d31-endings | **済（PR #47）**。8/31 は澪を操作（`pov_mio`）。F05 → F01 → F12 → F13 → F15。橋の悠に「行かせない」。ED-A/B/C の分岐（FLAGS の条件）、暗転、翌朝の事後（新しいバリケード、揃えられた靴、トキの言葉）、`end_game` |
 | 5 | feat/natsu-final | **済（PR #48）**。13 台詞＋労わり 5 件の通し読み（表層は一貫して優しく、真相は一貫して最悪）、真相版の話者色、8/5 の 003 流用を気配に変更、`entity_intro_done` の確認 |
 | 6 | feat/end-game-flow | **済（PR #49）**。`end_game` の本実装：`user://system.json` にクリア記録（到達 ED 一覧・回数・初回日時・最後の ED・ED 別回数）→ 相談窓口案内 → スタッフロール → タイトル。周回「裏面から」（下記）。はじめから時に接近度と怪異回数を初期化 |
-| 7 | feat/content-notice | **PR 済・承認待ち**。起動時警告の文言確定（必須表示・決定で閉じる・0.8 秒の入力待ち）、相談窓口の読み込み口（`data/locale/ja/support.json`、案内画面の下段に最大 3 件）、`docs/STORE_PAGE.md`。**窓口の掲載は確認待ち**（`docs/CONTENT_NOTICE.md` §5） |
-| 8〜13 | chore/full-playtest 以降 | 未着手 |
+| 7 | feat/content-notice | **済（PR #50）**。起動時警告の文言確定（必須表示・決定で閉じる・0.8 秒の入力待ち）、相談窓口の読み込み口（`data/locale/ja/support.json`、案内画面の下段に最大 3 件）、`docs/STORE_PAGE.md`。**窓口の掲載は確認待ち**（`docs/CONTENT_NOTICE.md` §5） |
+| 8 | chore/full-playtest | **PR 済・承認待ち**。全 ED 到達・validate 0 件・セーブ復元・二層 118 件・隠蔽 17 件の提示・フラグ棚卸し・操作系・可読性・起動時間・推定プレイ時間を docs/PLAYTEST_LOG.md「通しプレイ」に記録。問題 10 件を一覧化（修正はタスク9） |
+| 9〜13 | fix/playtest-issues 以降 | 未着手 |
 
 ### 次に何をすべきか
-- タスク7 の PR をレビュー・マージ → `chore/full-playtest`（実機通しプレイ。不具合は直さず一覧化してタスク9 へ）。
+- タスク8 の PR をレビュー・マージ → `fix/playtest-issues`（docs/PLAYTEST_LOG.md「見つかった問題の一覧」を優先度順に。#1 の接近度は設計判断を含むのでタスク10 と分担）。
 - 相談窓口：候補の一覧を提示済み。確認が取れたものだけ `data/locale/ja/support.json` に記入し、`meta.verified_at` を書く。
 - **タスク6 の判断**：
   - 2 周目は軽い形で実装した。クリア後にタイトルへ「裏面から」が増え、8/1 から `truth_revealed` を立てて始める（二層 118 対がすべて真相版。イベント・日程・ED 条件は表と同じ）。題字の下にクリア数だけ「面」を並べる。追加テキストや新イベントは作らない（重ければ「裏面から」をメニューから外すだけで戻せる）。
