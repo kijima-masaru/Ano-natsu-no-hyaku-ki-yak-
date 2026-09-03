@@ -5,6 +5,7 @@ extends Node
 
 func _ready() -> void:
 	await get_tree().process_frame
+	print("startup: %d ms（エンジン起動からドライバ開始まで）" % Time.get_ticks_msec())
 	print("== autoloads ==")
 	for n: String in ["Palette","GameState","MessageResolver","FieldRegistry","Calendar","SceneRouter","SaveManager","EventSystem","Suspicion","EvidenceRegistry","AudioManager","Lighting","AttachedEntity","AnomalySystem","SteamBridge"]:
 		print("  %s: %s" % [n, "ok" if get_tree().root.get_node_or_null(n) != null else "MISSING"])
