@@ -405,7 +405,7 @@
     {
       "id": "ui_notice_body",
       "speaker": "system",
-      "text": "本作には、自死とその喪失を扱う描写、追跡される恐怖、\n心理的な操作の描写が含まれます。\n具体的な方法は描写しません。\n\nつらいときは、話せる場所があります。\n［お住まいの地域の相談窓口をここに表示します］\n\nこのお知らせは「設定」からいつでも見直せます。"
+      "text": "本作には、自死とその喪失にふれる描写、追われる怖さ、\n心を操られる描写が含まれます。\n死の場面や具体的な方法は描きません。"
     },
     {
       "id": "ui_placeholder_unimplemented",
@@ -450,7 +450,27 @@
     {
       "id": "ui_notice_body_after_ending",
       "speaker": "system",
-      "text": "ここまで遊んでくださって、ありがとうございます。\n\nこの物語は、残された人の側から書きました。\n\nつらいときは、話せる場所があります。\n［お住まいの地域の相談窓口をここに表示します］"
+      "text": "ここまで遊んでくださって、ありがとうございます。\n\nこの物語は、残された人の側から書きました。\n町も人も、すべて架空のものです。"
+    },
+    {
+      "id": "ui_notice_note_settings",
+      "speaker": "system",
+      "text": "このお知らせは「設定」からいつでも見直せます。"
+    },
+    {
+      "id": "ui_notice_support_lead",
+      "speaker": "system",
+      "text": "つらいときは、話せる場所があります。"
+    },
+    {
+      "id": "ui_notice_support_pending",
+      "speaker": "system",
+      "text": "（相談窓口は、配信地域が決まってから掲載します）"
+    },
+    {
+      "id": "ui_notice_support_entry",
+      "speaker": "system",
+      "text": "・%s　%s　%s"
     },
     {
       "id": "ui_credits_01",
