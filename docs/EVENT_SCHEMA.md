@@ -73,7 +73,9 @@
 | `conceal_evidence` | EvidenceRegistry | `evidence`（澪が近ければ失敗。表示は `shown_id` か `msg_conceal_witnessed`） |
 | `show_concealment_reveal` | EvidenceRegistry | なし（8/30 の提示画面） |
 | `autosave` | EventActions | なし |
-| `play_sound` | AudioManager（タスク6） | `id` |
+| `play_sound` | AudioManager | `id` |
+| `play_bgm` / `stop_bgm` | AudioManager | `id`／なし |
+| `set_ambience` | AudioManager | `id`（環境音を差し替える。空文字で無音。次のフィールドに入るまで有効。8/30 の裂け目の口と、封印後の F01 に使う） |
 | `set_companion` | EventActions → SceneRouter | `on`（ヒロインの同行 ON/OFF。`companion_on` フラグと同期） |
 | `entity_speak` | AttachedEntity | `id`（ナツの台詞。二層は messages.json の truth_id） |
 | `entity_comfort` | AttachedEntity | `context`（after_anomaly / after_stalker / night_walk / yakushi_gate / heroine_near） |

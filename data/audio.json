@@ -406,6 +406,19 @@
         "loop": true,
         "bpm": 62.0
       }
+    },
+    {
+      "id": "amb_valley_inner",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "synth": {
+        "type": "hum",
+        "seconds": 6.0,
+        "gain": 0.12,
+        "loop": true,
+        "freq": 55.0
+      }
     }
   ]
 }

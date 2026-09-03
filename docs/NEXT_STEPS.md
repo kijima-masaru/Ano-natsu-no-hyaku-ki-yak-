@@ -7,11 +7,12 @@
 | # | ブランチ | 状態 |
 |---|---|---|
 | 0 | fix/runtime-verification | **済（PR #43）**。Godot 4.7.stable で起動〜8/29 を通し、不具合 7 件を修正（docs/PLAYTEST_LOG.md「実機検証」） |
-| 1 | feat/d29-shige | **PR 済・承認待ち**。8/29 F14 でシゲが澪に封石の戻し方を教える（`baba_told_seal`、任意到達） |
-| 2〜13 | feat/d30-seal 以降 | 未着手 |
+| 1 | feat/d29-shige | **済（PR #44）**。8/29 F14 でシゲが澪に封石の戻し方を教える（`baba_told_seal`、任意到達） |
+| 2 | feat/d30-seal | **PR 済・承認待ち**。8/30 の封印：F16 奥の裂け目の口（落石が崩れる）、面を一枚ずつ四つの台座へ戻す配置パズル、封石を二人で押して `seal_restored`、`msg_natsu_008`、環境音の差し替え（`set_ambience`）、F01 の静まり返り |
+| 3〜13 | feat/truth-reveal 以降 | 未着手。**タスク3 はシーン構成案と提示の演出案を先に提示して承認を得る** |
 
 ### 次に何をすべきか
-- タスク1 の PR をレビュー・マージ → `feat/d30-seal`（8/30 封印。F16 奥の領域、配置パズル、`seal_restored`、`msg_natsu_008`）。
+- タスク2 の PR をレビュー・マージ → `feat/truth-reveal`（8/30 夜、F12 自宅前での対決 → `show_concealment_reveal` → `truth_revealed` → `msg_natsu_009`。構成案を先に提示）。8/30 の `advance_condition` は `truth_revealed` なので、タスク2 の時点では 8/30 を終えられない（意図どおり）。
 - **判断済み**（ユーザー委任）：イベント中は澪を止め目撃半径を追従距離より短くした（#43）／検証ドライバと `.gd.uid` は残す。**未解決**：接近度の加算・閾値（最短経路でも 8/21 に 100。ED-B・C に届かない）と屋内の暗さはタスク10で扱う。
 - **実機で判明した不具合の一覧**：docs/PLAYTEST_LOG.md「見つかった不具合と対処」6 件（すべて修正済み）。未修正はフォント代替時の `content_notice` の行重なり、全体図の凡例の暗さ、終了時のリーク警告 2 件。
 
