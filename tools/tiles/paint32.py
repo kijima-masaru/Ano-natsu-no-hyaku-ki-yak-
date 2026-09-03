@@ -598,115 +598,226 @@ PALETTE_TO_GROUND = {0: "night", 1: "night", 2: "asphalt", 3: "asphalt", 4: "con
                      9: "soil", 10: "soil", 11: "sand", 12: "conc", 13: "asphalt", 14: "asphalt", 15: "asphalt"}
 
 
-# ═══════════════════════════ 背の高い部品（32×64） ═══════════════════════════
+# ═══════════════════════════ 背の高い部品（幅 w × 高さ h マス） ═══════════════════════════
+# 縮尺：1 マス ≈ 1.7 m（人の身長 ≈ 1 マス）。木 5〜7 m（3〜4 マス）、街灯 5 m（3）、電柱 8.5 m（5）、塔 8〜10 m（5〜6）。
+# 底辺の中央のマスが本体（種別名・当たり）。それ以外のマスは Overhead 層の部品（<種別>#part）になる。
+# 底辺の行では中央のマス以外に描かない（隣のマスの地面に物がはみ出さない）。
 
-def tree_round(c: Canvas, p, ground=None, canopy=None, fruit=None, blossom=None):
-    """広葉樹。下半分に幹と影、上半分に樹冠。c は 32×64"""
+def tall_ground(c: Canvas, p, ground, w: int, h: int):
+    """底辺の中央のマスに地面を敷く。戻り値 (g, bx, by)：地面キャンバスと、そのマスの左上"""
+    bx, by = (w // 2) * S, (h - 1) * S
     g = Canvas(S, S, c.seed)
     ground_tile(g, p, ground)
-    c.paste(g, 0, 32)
+    c.paste(g, bx, by)
+    return g, bx, by
+
+
+def outline_tall(c: Canvas, g: Canvas, bx: int, by: int, color=None):
+    """地面と違う画素（＝物）の外側に輪郭。底辺のマスの外は描いた画素すべてが物"""
+    color = C["sumi"] if color is None else color
+
+    def is_obj(x, y):
+        v = c.get(x, y)
+        if v is None:
+            return False
+        if bx <= x < bx + S and by <= y < by + S:
+            return v != g.get(x - bx, y - by)
+        return True
+    c.outline(is_obj, color)
+
+
+def leaf_noise(c: Canvas, g: Canvas, bx: int, by: int, y_to: int, colors, amount=0.22, k=3):
+    for y in range(0, y_to):
+        for x in range(c.w):
+            col = c.get(x, y)
+            if col is None or col not in colors:
+                continue
+            if c.rand(x, y, k) < amount:
+                c.px(x, y, shade(col, (c.rand(x, y, k + 1) - 0.5) * 0.5))
+
+
+def tree_round(c: Canvas, p, ground=None, canopy=None, fruit=None, blossom=None, w=3, h=3):
+    """広葉樹。幹は底辺の中央、樹冠は上の行に w マス幅で広がる"""
+    g, bx, by = tall_ground(c, p, ground, w, h)
     canopy = C["leaf"] if canopy is None else canopy
-    c.shadow_ellipse(16, 58, 12, 4, 0.5)
-    # 幹
-    c.gradient_h(13, 40, 6, 20, C["wood_l"], C["wood_d"])
-    c.vline(13, 40, 59, C["wood_d"])
-    c.vline(18, 40, 59, C["wood_dd"])
-    c.line(12, 59, 10, 61, C["wood_d"])
-    c.line(19, 59, 21, 61, C["wood_d"])
-    # 樹冠（房を重ねる）
-    lumps = [(16, 26, 14, 0.0), (9, 30, 9, -0.1), (23, 31, 9, -0.05), (16, 18, 11, 0.12), (8, 20, 7, 0.05), (24, 21, 7, 0.02), (16, 11, 8, 0.25), (11, 13, 6, 0.2)]
+    cx = c.w // 2
+    trunk_top = by - S // 2
+    c.shadow_ellipse(cx, by + 27, 13, 4, 0.5)
+    # 幹（根元が広がる）
+    c.gradient_h(cx - 4, trunk_top, 8, by + 28 - trunk_top, C["wood_l"], C["wood_d"])
+    c.vline(cx - 4, trunk_top, by + 27, C["wood_d"])
+    c.vline(cx + 3, trunk_top, by + 27, C["wood_dd"])
+    c.line(cx - 5, by + 24, cx - 8, by + 29, C["wood_d"])
+    c.line(cx + 4, by + 24, cx + 7, by + 29, C["wood_d"])
+    c.line(cx, trunk_top + 10, cx - 12, trunk_top - 6, C["wood_d"])     # 枝
+    c.line(cx + 1, trunk_top + 8, cx + 13, trunk_top - 8, C["wood_d"])
+    # 樹冠：楕円の房を重ねる。全体の楕円は幅 w マスの 90%、高さ h-1 マス
+    rx, ry = int(c.w * 0.45), int((by + 6) * 0.5)
+    cy = ry + 2
+    lumps = []
+    for i in range(14):
+        ang = i * 2.399
+        rr = 0.35 + 0.55 * c.rand(i, 0, 11)
+        lx = cx + int(math.cos(ang) * rx * 0.62 * rr)
+        ly = cy + int(math.sin(ang) * ry * 0.62 * rr)
+        r = int(min(rx, ry) * (0.42 + 0.2 * c.rand(i, 1, 11)))
+        lumps.append((lx, ly, r, (ly - cy) / max(1, ry) * -0.28))
+    lumps.sort(key=lambda t: t[1], reverse=True)
     for (lx, ly, r, k) in lumps:
         c.disc(lx, ly, r, shade(canopy, k - 0.35))
     for (lx, ly, r, k) in lumps:
         c.disc(lx - 1, ly - 1, r - 2, shade(canopy, k))
-        c.disc(lx - 2, ly - 3, max(1, r - 4), shade(canopy, k + 0.25))
-    # 葉のむら
-    for y in range(0, 42):
-        for x in range(S):
-            col = c.get(x, y)
-            if col is not None and col != g.get(x, y - 32) and c.rand(x, y, 3) < 0.22:
-                c.px(x, y, shade(col, (c.rand(x, y, 4) - 0.5) * 0.5))
+        c.disc(lx - r // 3, ly - r // 2, max(1, r - 5), shade(canopy, k + 0.25))
+    leaf_noise(c, g, bx, by, by + 4, {shade(canopy, k + d) for (_, _, _, k) in lumps for d in (-0.35, 0.0, 0.25)})
     if fruit is not None:
-        for (x, y) in [(8, 22), (20, 14), (25, 27), (12, 30), (17, 24)]:
-            c.disc(x, y, 1.5, fruit)
-            c.px(x - 1, y - 1, shade(fruit, 0.4))
+        for i in range(10):
+            fx = cx + int((c.rand(i, 5, 12) - 0.5) * rx * 1.4)
+            fy = cy + int((c.rand(i, 6, 12) - 0.5) * ry * 1.3)
+            if c.get(fx, fy) is not None:
+                c.disc(fx, fy, 1.6, fruit)
+                c.px(fx - 1, fy - 1, shade(fruit, 0.4))
     if blossom is not None:
-        for y in range(0, 40):
-            for x in range(S):
-                if c.get(x, y) is not None and c.rand(x, y, 9) < 0.28 and y < 38:
+        for y in range(0, by + 4):
+            for x in range(c.w):
+                if c.get(x, y) is not None and c.rand(x, y, 9) < 0.3:
                     c.px(x, y, mix(blossom, canopy, c.rand(x, y, 10) * 0.4))
-    c.outline(lambda x, y: y < 42 and c.get(x, y) is not None and c.get(x, y) != g.get(x, y - 32) and (y < 32 or c.get(x, y) not in (None,)), C["sumi"])
+    outline_tall(c, g, bx, by)
 
 
-def tree_conifer(c: Canvas, p, ground=None, leaf=None, hi=None):
+def small_tree(c: Canvas, p, ground=None, canopy=None):
+    """植栽：1 マス幅、2 マス高の若木"""
+    g, bx, by = tall_ground(c, p, ground, 1, 2)
+    canopy = C["leaf"] if canopy is None else canopy
+    c.shadow_ellipse(16, by + 27, 9, 3, 0.45)
+    c.gradient_h(14, by - 2, 5, 30, C["wood_l"], C["wood_d"])
+    c.vline(18, by - 2, by + 27, C["wood_dd"])
+    for (lx, ly, r, k) in [(16, 20, 12, -0.3), (11, 22, 8, -0.05), (21, 21, 8, -0.1), (16, 12, 9, 0.1), (12, 14, 6, 0.25)]:
+        c.disc(lx, ly, r, shade(canopy, k))
+    leaf_noise(c, g, bx, by, by + 2, {shade(canopy, k) for k in (-0.3, -0.05, -0.1, 0.1, 0.25)})
+    outline_tall(c, g, bx, by)
+
+
+def bush(c: Canvas, p, ground=None, canopy=None):
+    """植栽（低木）：1 マス。丸い刈り込み"""
     g = Canvas(S, S, c.seed)
     ground_tile(g, p, ground)
-    c.paste(g, 0, 32)
+    c.paste(g, 0, 0)
+    canopy = C["leaf"] if canopy is None else canopy
+    c.shadow_ellipse(16, 27, 13, 4, 0.4)
+    for (lx, ly, rx, ry, k) in [(16, 17, 13, 9, -0.3), (14, 15, 10, 7, 0.0), (11, 12, 5, 4, 0.25)]:
+        c.ellipse(lx, ly, rx, ry, shade(canopy, k))
+    leaf_noise(c, g, 0, 0, S, {shade(canopy, k) for k in (-0.3, 0.0, 0.25)})
+    outline_tall(c, g, 0, 0)
+
+
+def tree_conifer(c: Canvas, p, ground=None, leaf=None, hi=None, h=3):
+    """針葉樹（杉）。1 マス幅、h マス高。林の中では上の木の梢が下の木に重なる"""
+    g, bx, by = tall_ground(c, p, ground, 1, h)
     leaf = C["pine"] if leaf is None else leaf
     hi = C["pine_l"] if hi is None else hi
-    c.shadow_ellipse(16, 59, 10, 3, 0.5)
-    c.rect(14, 50, 4, 10, C["wood_d"])
-    c.vline(14, 50, 59, C["wood"])
-    for tier, (y, half) in enumerate([(2, 2), (12, 6), (22, 9), (32, 12), (42, 14)]):
-        for yy in range(y, y + 12):
-            w = half + int((yy - y) * 0.9)
+    c.shadow_ellipse(16, by + 27, 10, 3, 0.5)
+    c.rect(14, by + 12, 4, 16, C["wood_d"])
+    c.vline(14, by + 12, by + 27, C["wood"])
+    total = by + 14
+    tiers = 6 + (h - 3) * 2
+    for tier in range(tiers):
+        y = int(total * tier / tiers)
+        y1 = int(total * (tier + 1) / tiers) + 3
+        half0 = 1 + int(7 * tier / max(1, tiers - 1))
+        for yy in range(y, y1):
+            w = half0 + int((yy - y) * 0.55)
+            w = min(w, 13)
             c.hline(yy, 16 - w, 15 + w, leaf)
             c.px(16 - w, yy, hi)
             c.px(16 - w + 1, yy, shade(hi, -0.1))
             c.px(15 + w, yy, C["pine_d"])
             c.px(14 + w, yy, C["pine_d"])
-        c.hline(y + 11, 16 - half - 10, 15 + half + 10, C["pine_d"])
-    for y in range(0, 54):
-        for x in range(S):
-            col = c.get(x, y)
-            if col in (leaf, hi, C["pine_d"]) and c.rand(x, y, 3) < 0.2:
-                c.px(x, y, shade(col, (c.rand(x, y, 4) - 0.5) * 0.4))
-    c.outline(lambda x, y: y < 54 and c.get(x, y) is not None and c.get(x, y) != g.get(x, y - 32), C["sumi"])
+        c.hline(y1 - 1, 16 - half0 - 6, 15 + half0 + 6, C["pine_d"])   # 段の下端の影
+    leaf_noise(c, g, bx, by, by + 12, {leaf, hi, C["pine_d"]}, 0.2)
+    outline_tall(c, g, bx, by)
 
 
-def tree_bare(c: Canvas, p, ground=None, blossom=None):
-    g = Canvas(S, S, c.seed)
-    ground_tile(g, p, ground)
-    c.paste(g, 0, 32)
-    c.shadow_ellipse(16, 59, 9, 3, 0.45)
-    wood, wood_d = C["wood"], C["wood_d"]
-    c.gradient_h(14, 30, 5, 30, C["wood_l"], wood_d)
-    c.vline(18, 30, 59, C["wood_dd"])
-    branches = [(16, 30, 8, 14), (16, 30, 24, 12), (15, 22, 6, 6), (17, 22, 26, 4), (8, 14, 3, 6), (24, 12, 29, 4), (16, 24, 16, 6), (10, 18, 12, 9), (22, 16, 20, 8)]
-    for (x0, y0, x1, y1) in branches:
-        c.line(x0, y0, x1, y1, wood)
-        c.line(x0 + 1, y0, x1 + 1, y1, wood_d)
-    for (x0, y0, x1, y1) in [(6, 6, 4, 2), (26, 4, 28, 1), (16, 6, 15, 1), (12, 9, 9, 4), (20, 8, 23, 3)]:
-        c.line(x0, y0, x1, y1, wood_d)
-    c.outline(lambda x, y: y < 60 and c.get(x, y) in (wood, wood_d, C["wood_l"], C["wood_dd"]) and y < 58, C["sumi"])
-    if blossom is not None:
-        for y in range(0, 30):
+def conifer_mass(c: Canvas, p, mask=0, ground=None, leaf=None, hi=None):
+    """林の 1 マス（オートタイル）。上に同じ林が続く内側のマスは梢を上から見た繁み、林の上端のマスは幹のある木の根元
+    （その上に TALL の梢が 2 マス立ち上がる）。下端（南に林が無い）は幹の影で暗く落とす"""
+    leaf = C["pine"] if leaf is None else leaf
+    hi = C["pine_l"] if hi is None else hi
+    if not (mask & N):
+        tmp = Canvas(S, S * 3, c.seed)
+        tree_conifer(tmp, p, ground, leaf, hi, 3)
+        for y in range(S):
             for x in range(S):
-                if c.rand(x, y, 5) < 0.12 and c.noise2(x, y, 6.0, 6) > 0.45:
+                c.p[y][x] = tmp.p[S * 2 + y][x]
+        return
+    dark = C["pine_d"]
+    c.texture(0, 0, S, S, leaf, 0.14, 5.0, k=1, dark=shade(dark, -0.15), light=shade(leaf, 0.05))
+    # 梢の房：小さな三角の重なり
+    for i in range(9):
+        x = int(c.rand(i, 0, 21) * S)
+        y = int(c.rand(i, 1, 21) * S)
+        r = 4 + int(c.rand(i, 2, 21) * 4)
+        for yy in range(y - r, y + r):
+            w = max(0, r - abs(yy - y) // 1)
+            c.hline(yy, x - w // 2, x + w // 2, shade(leaf, -0.2 if yy > y else 0.05))
+        c.px(x, y - r + 1, hi)
+        c.px(x - 1, y - r + 2, shade(hi, -0.1))
+    c.noise(shade(dark, -0.2), 0.12, k=3)
+    c.noise(hi, 0.05, k=4)
+    if not (mask & SO):
+        c.gradient_v(0, S - 8, S, 8, shade(dark, -0.1), shade(C["sumi"], 0.1))
+        for x in range(2, S, 8):
+            c.rect(x + int(c.rand(x, 0, 5) * 3), S - 6, 2, 6, C["wood_dd"])
+    if not (mask & W):
+        c.vline(0, 0, S - 1, shade(dark, -0.3))
+    if not (mask & E):
+        c.vline(S - 1, 0, S - 1, shade(dark, -0.3))
+
+
+def tree_bare(c: Canvas, p, ground=None, blossom=None, w=3, h=3):
+    """落葉した木（桜・梅）。枝が w マス幅に広がる"""
+    g, bx, by = tall_ground(c, p, ground, w, h)
+    cx = c.w // 2
+    c.shadow_ellipse(cx, by + 27, 10, 3, 0.45)
+    wood, wood_d = C["wood"], C["wood_d"]
+    top = by - 6
+    c.gradient_h(cx - 3, top, 6, by + 28 - top, C["wood_l"], wood_d)
+    c.vline(cx + 2, top, by + 27, C["wood_dd"])
+    sx, sy = c.w / 32.0, (by + 8) / 32.0
+    branches = [(16, 30, 8, 14), (16, 30, 24, 12), (15, 22, 6, 6), (17, 22, 26, 4), (8, 14, 3, 6), (24, 12, 29, 4), (16, 24, 16, 6), (10, 18, 12, 9), (22, 16, 20, 8),
+                (12, 14, 4, 12), (20, 12, 30, 9), (8, 8, 2, 3), (26, 8, 31, 5), (14, 10, 10, 2), (18, 9, 22, 1)]
+    for (x0, y0, x1, y1) in branches:
+        X0, Y0, X1, Y1 = int(x0 * sx), int(y0 * sy), int(x1 * sx), int(y1 * sy)
+        c.line(X0, Y0, X1, Y1, wood)
+        c.line(X0 + 1, Y0, X1 + 1, Y1, wood_d)
+        if abs(X1 - X0) + abs(Y1 - Y0) > 20:
+            c.line(X0, Y0 + 1, X1, Y1 + 1, wood_d)
+    outline_tall(c, g, bx, by)
+    if blossom is not None:
+        for y in range(0, by + 6):
+            for x in range(c.w):
+                if c.rand(x, y, 5) < 0.14 and c.noise2(x, y, 7.0, 6) > 0.42 and (c.get(x, y) is not None or c.noise2(x, y, 4.0, 8) > 0.55):
                     c.px(x, y, mix(blossom, C["conc"], c.rand(x, y, 7) * 0.3))
                     c.px(x + 1, y, shade(blossom, -0.15))
 
 
-def streetlamp(c: Canvas, p, ground=None, glow=None):
-    """街灯 32×64：長い柱、腕、傘。灯の周囲ににじみ"""
-    g = Canvas(S, S, c.seed)
-    ground_tile(g, p, ground)
-    c.paste(g, 0, 32)
+def streetlamp(c: Canvas, p, ground=None, glow=None, h=3):
+    """街灯：h マス高。長い柱、腕、傘。灯の周囲ににじみ"""
+    g, bx, by = tall_ground(c, p, ground, 1, h)
     glow = C["glow"] if glow is None else glow
-    for y in range(S):
+    for y in range(0, S):
         for x in range(S):
             d = math.hypot((x - 19) * 1.0, (y - 8) * 1.4)
-            if d < 14:
-                c.blend(x, y, mix(glow, C["ochre"], 0.5), (1 - d / 14) ** 1.8 * 0.55)
-    for y in range(32, 64):
+            if d < 15:
+                c.blend(x, y, mix(glow, C["ochre"], 0.5), (1 - d / 15) ** 1.8 * 0.55)
+    for y in range(by, by + S):
         for x in range(S):
-            d = math.hypot((x - 19) * 1.2, (y - 58) * 1.0)
+            d = math.hypot((x - 19) * 1.2, (y - by - 26) * 1.0)
             if d < 13:
                 c.blend(x, y, C["ochre"], (1 - d / 13) ** 1.6 * 0.35)
-    c.gradient_h(13, 12, 4, 50, C["metal_l"], C["metal_d"])
-    c.rect(11, 60, 8, 3, C["metal_d"])
-    c.hline(60, 11, 18, C["metal"])
-    c.rect(10, 63, 10, 1, C["sumi"])
+    c.gradient_h(13, 12, 4, by + 16, C["metal_l"], C["metal_d"])
+    c.rect(11, by + 28, 8, 3, C["metal_d"])
+    c.hline(by + 28, 11, 18, C["metal"])
+    c.rect(10, by + 31, 10, 1, C["sumi"])
     c.rect(15, 8, 8, 2, C["metal"])          # 腕
     c.line(16, 12, 20, 10, C["metal_d"])
     c.rect(17, 3, 10, 5, glow)               # 傘と灯
@@ -715,30 +826,36 @@ def streetlamp(c: Canvas, p, ground=None, glow=None):
     c.rect(18, 8, 8, 1, C["bone"])
     c.px(17, 5, C["ochre"])
     c.px(26, 5, C["ochre"])
-    c.outline(lambda x, y: c.get(x, y) in (C["metal_l"], C["metal"], C["metal_d"], glow, C["bone"]) and y < 62, C["sumi"])
+    for y in range(by + 4, by + 26, 8):     # 柱の継ぎ目
+        c.hline(y, 13, 16, C["metal_d"])
+    c.outline(lambda x, y: c.get(x, y) in (C["metal_l"], C["metal"], C["metal_d"], glow, C["bone"]) and y < by + 30, C["sumi"])
 
 
-def utility_pole(c: Canvas, p, ground=None):
-    g = Canvas(S, S, c.seed)
-    ground_tile(g, p, ground)
-    c.paste(g, 0, 32)
+def utility_pole(c: Canvas, p, ground=None, h=5):
+    """電柱：h マス高。腕金と碍子、電線は最上段を横切る"""
+    g, bx, by = tall_ground(c, p, ground, 1, h)
     c.hline(0, 0, S - 1, C["sumi"])
     c.hline(3, 0, S - 1, C["sumi"])
     c.hline(6, 0, S - 1, C["night"])
-    c.gradient_h(14, 0, 5, 62, C["conc"], C["fog"])
-    c.vline(14, 0, 61, C["stone_l"])
-    c.vline(18, 0, 61, C["stone_d"])
-    c.rect(12, 62, 9, 2, C["sumi"])
+    c.gradient_h(14, 0, 5, by + 30, C["conc"], C["fog"])
+    c.vline(14, 0, by + 29, C["stone_l"])
+    c.vline(18, 0, by + 29, C["stone_d"])
+    c.rect(12, by + 30, 9, 2, C["sumi"])
     c.rect(4, 6, 24, 2, C["metal_d"])         # 腕金
     c.hline(6, 4, 27, C["metal"])
     for x in (6, 12, 20, 26):
         c.rect(x, 3, 2, 3, C["bone"])
         c.px(x, 3, C["conc"])
-    c.rect(12, 14, 8, 2, C["metal_d"])        # 足場ボルト
-    c.rect(12, 20, 8, 2, C["metal_d"])
-    c.rect(13, 26, 6, 4, C["ochre"])          # 番号札
-    c.px(15, 27, C["sumi"])
-    c.px(16, 28, C["sumi"])
+    c.rect(4, 20, 24, 2, C["metal_d"])        # 2 段目の腕金（通信線）
+    c.hline(20, 0, S - 1, C["night"])
+    c.rect(10, 34, 12, 3, C["metal_d"])       # 変圧器
+    c.rect(11, 30, 10, 12, C["metal"]); c.frame(11, 30, 10, 12, C["metal_d"])
+    for y in range(by - 14, by + 20, 8):      # 足場ボルト
+        c.rect(12, y, 8, 2, C["metal_d"])
+    c.rect(13, by + 6, 6, 4, C["ochre"])      # 番号札
+    c.px(15, by + 7, C["sumi"])
+    c.px(16, by + 8, C["sumi"])
+    outline_tall(c, g, bx, by)
 
 
 # ═══════════════════════════ 登録 ═══════════════════════════
@@ -773,25 +890,30 @@ AUTOTILE = {
     "ゴミ集積所ネット": lambda c, p, m: hedge(c, p, m),
     "展望所の柵": lambda c, p, m: fence_wood(c, p, m, "grass"),
     "玉垣": lambda c, p, m: fence_wood(c, p, m, "grass"),
+    # 林（TALL と併用：内側は繁み、上端の木だけ梢が立ち上がる）
+    "杉林": lambda c, p, m: conifer_mass(c, p, m, "moss"),
+    "杉林（暗）": lambda c, p, m: conifer_mass(c, p, m, "night", C["pine_d"], C["pine"]),
+    "山の斜面（樹林）": lambda c, p, m: conifer_mass(c, p, m, "moss", C["pine"], C["leaf_l"]),
+    "樹林（暗）": lambda c, p, m: conifer_mass(c, p, m, "moss", C["pine_d"], C["pine"]),
+    "谷の斜面（暗い樹林）": lambda c, p, m: conifer_mass(c, p, m, "night", C["pine_d"], C["pine"]),
 }
 
-# 背の高い部品（32×64）：種別名 → 描画関数
+# 背の高い部品：種別名 → (描画関数, 幅マス, 高さマス)
 TALL = {
-    "イチョウ（大木）": lambda c, p: tree_round(c, p, "asphalt", C["straw"]),
-    "柿の木（実あり）": lambda c, p: tree_round(c, p, "soil", C["leaf"], C["rust_l"]),
-    "栗の木": lambda c, p: tree_round(c, p, "moss", C["leaf_d"]),
-    "植栽": lambda c, p: tree_round(c, p, "conc", C["leaf"]),
-    "植栽（低木）": lambda c, p: tree_round(c, p, "conc", C["leaf"]),
-    "杉林": lambda c, p: tree_conifer(c, p, "moss"),
-    "杉林（暗）": lambda c, p: tree_conifer(c, p, "night", C["pine_d"], C["pine"]),
-    "山の斜面（樹林）": lambda c, p: tree_conifer(c, p, "moss", C["pine"], C["leaf_l"]),
-    "樹林（暗）": lambda c, p: tree_conifer(c, p, "moss", C["pine_d"], C["pine"]),
-    "谷の斜面（暗い樹林）": lambda c, p: tree_conifer(c, p, "night", C["pine_d"], C["pine"]),
-    "桜（葉・裸）": lambda c, p: tree_bare(c, p, "asphalt"),
-    "梅の木（開花・裸）": lambda c, p: tree_bare(c, p, "grass", C["bone"]),
-    "街灯（柱・光源）": lambda c, p: streetlamp(c, p, "asphalt"),
-    "街灯（均等）": lambda c, p: streetlamp(c, p, "asphalt"),
-    "電柱・電線": lambda c, p: utility_pole(c, p, "asphalt"),
+    "イチョウ（大木）": (lambda c, p: tree_round(c, p, "asphalt", C["straw"], None, None, 3, 4), 3, 4),
+    "柿の木（実あり）": (lambda c, p: tree_round(c, p, "soil", C["leaf"], C["rust_l"], None, 3, 3), 3, 3),
+    "栗の木": (lambda c, p: tree_round(c, p, "moss", C["leaf_d"], None, None, 3, 3), 3, 3),
+    "植栽": (lambda c, p: small_tree(c, p, "conc", C["leaf"]), 1, 2),
+    "杉林": (lambda c, p: tree_conifer(c, p, "moss"), 1, 3),
+    "杉林（暗）": (lambda c, p: tree_conifer(c, p, "night", C["pine_d"], C["pine"]), 1, 3),
+    "山の斜面（樹林）": (lambda c, p: tree_conifer(c, p, "moss", C["pine"], C["leaf_l"]), 1, 3),
+    "樹林（暗）": (lambda c, p: tree_conifer(c, p, "moss", C["pine_d"], C["pine"]), 1, 3),
+    "谷の斜面（暗い樹林）": (lambda c, p: tree_conifer(c, p, "night", C["pine_d"], C["pine"]), 1, 3),
+    "桜（葉・裸）": (lambda c, p: tree_bare(c, p, "asphalt", None, 3, 3), 3, 3),
+    "梅の木（開花・裸）": (lambda c, p: tree_bare(c, p, "grass", C["bone"], 3, 3), 3, 3),
+    "街灯（柱・光源）": (lambda c, p: streetlamp(c, p, "asphalt"), 1, 3),
+    "街灯（均等）": (lambda c, p: streetlamp(c, p, "asphalt"), 1, 3),
+    "電柱・電線": (lambda c, p: utility_pole(c, p, "asphalt"), 1, 5),
 }
 
 # 1 マスの地面・面：種別名 → 描画関数（引数は catalog の args）
@@ -839,6 +961,7 @@ FLAT = {
     "崖（通行不能）": lambda c, p: cliff(c, p, C["soil_d"], C["wood_dd"], C["soil"]),
     "空堀（底・壁）": lambda c, p: moat(c, p),
     "霧（半透明オーバーレイ）": lambda c, p: fog_tile(c, p),
+    "植栽（低木）": lambda c, p: bush(c, p, "conc", C["leaf"]),
 }
 
 
@@ -856,6 +979,7 @@ def load_extra() -> None:
     import props32b
     FLAT.update(props32a.FLAT2)
     FLAT.update(props32b.FLAT3)
+    TALL.update(props32a.TALL2)
     TALL.update(props32b.TALL3)
 
 
@@ -863,9 +987,19 @@ def paint(name: str, entry: dict, mask: int | None = None):
     """種別名を描く。オートタイルは mask 付き。背の高い部品は 32×64 を返す"""
     load_extra()
     seed = seed_of(name)
+    if mask is not None and name in AUTOTILE:
+        c = Canvas(S, S, seed)
+        AUTOTILE[name](c, entry.get("args", {}), mask)
+        return c
     if name in TALL:
-        c = Canvas(S, S * 2, seed)
-        TALL[name](c, entry.get("args", {}))
+        fn, w, h = TALL[name]
+        c = Canvas(S * w, S * h, seed)
+        fn(c, entry.get("args", {}))
+        # 底辺の行は中央のマスだけ（影や輪郭が隣の地面にはみ出さない）
+        for y in range((h - 1) * S, h * S):
+            for x in range(c.w):
+                if not ((w // 2) * S <= x < (w // 2 + 1) * S):
+                    c.p[y][x] = None
         return c
     c = Canvas(S, S, seed)
     if name in AUTOTILE:
@@ -930,36 +1064,47 @@ def main() -> int:
     for name in names:
         if name in AUTOTILE:
             for m in range(16):
-                if m == 15:
-                    continue
+                if m == 15 and name not in TALL:
+                    continue   # 四方が同じ（m15）は本体と同じ絵。林は本体が木の根元なので m15（繁み）も別に持つ
                 place(paint(name, catalog[name], m), name, "m%d" % m, 1, 1)
     row += 1
     col = 0
     for name in names:
         if name in TALL:
             c = paint(name, catalog[name])
-            # 上下 2 段：下半分が本体（種別名）、上半分が Overhead 用（<name>#top）
-            top, bottom = Canvas(S, S, c.seed), Canvas(S, S, c.seed)
-            for y in range(S):
-                for x in range(S):
-                    top.p[y][x] = c.p[y][x]
-                    bottom.p[y][x] = c.p[y + S][x]
-            if col + 1 > COLUMNS:
-                col = 0
-                row += 2
-            entries.append({"name": name, "variant": "top", "x": col, "y": row, "w": 1, "h": 1})
-            tiles.append((top, col, row))
-            entries.append({"name": name, "variant": "", "x": col, "y": row + 1, "w": 1, "h": 1})
-            tiles.append((bottom, col, row + 1))
-            col += 1
-    rows = row + 2
+            _, w, h = TALL[name]
+            cx = w // 2
+            # マスごとに切り出す。底辺の中央が本体（種別名）、それ以外は Overhead 用の部品（<name>#part、dx/dy 付き）
+            for ty in range(h):
+                for tx in range(w):
+                    piece = Canvas(S, S, c.seed)
+                    used = False
+                    for y in range(S):
+                        for x in range(S):
+                            v = c.p[ty * S + y][tx * S + x]
+                            piece.p[y][x] = v
+                            used = used or (v is not None and v[1] > 0)
+                    is_base = (tx == cx and ty == h - 1)
+                    if not used and not is_base:
+                        continue
+                    if ty == h - 1 and not is_base:
+                        print(f"警告: {name} の底辺の行で中央以外のマス (dx={tx - cx}) に描かれている。隣の地面にはみ出すので無視する")
+                        continue
+                    if col + 1 > COLUMNS:
+                        col = 0
+                        row += 1
+                    entries.append({"name": name, "variant": "" if is_base else "part", "x": col, "y": row, "w": 1, "h": 1,
+                                    "dx": tx - cx, "dy": ty - (h - 1)})
+                    tiles.append((piece, col, row))
+                    col += 1
+    rows = row + 1
     atlas = Image.new("RGBA", (COLUMNS * S, rows * S), (0, 0, 0, 0))
     for canvas, x, y in tiles:
         atlas.paste(canvas.to_image(), (x * S, y * S))
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     atlas.save(a.out)
     layout = {"tile_size": S, "columns": COLUMNS, "rows": rows, "entries": entries,
-              "autotile": sorted(AUTOTILE.keys()), "tall": sorted(TALL.keys()), "legacy": legacy}
+              "autotile": sorted(AUTOTILE.keys()), "tall": {k: {"w": v[1], "h": v[2]} for k, v in sorted(TALL.items())}, "legacy": legacy}
     json.dump(layout, open(a.layout, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"{a.out}: {atlas.width}x{atlas.height}, entries={len(entries)}, autotile={len(AUTOTILE)}, tall={len(TALL)}, legacy(16px 拡大)={len(legacy)}")
     if a.preview:

@@ -1,11 +1,11 @@
 """32 px の部品（その 2）：石物・社寺・門・窓・塔。paint32.py の FLAT / TALL に登録する。
 
-背の高い部品（TALL3）は 32×64 で描き、下半分が本体（通行不可）、上半分が Overhead 層に載る。
+背の高い部品（TALL3）は幅 w × 高さ h マスで描き、底辺の中央が本体（通行不可）、それ以外のマスが Overhead 層に載る（paint32.tall_ground / outline_tall）。
 """
 import math
 
 from px32 import C, Canvas, S, mix, shade
-from paint32 import concrete, ground_tile, grass, moss, planks, water
+from paint32 import concrete, ground_tile, grass, moss, outline_tall, planks, tall_ground, water
 from props32a import glow_spot, outline_non_ground, with_ground
 
 SUMI = C["sumi"]
@@ -322,65 +322,71 @@ def torii_flat(c: Canvas, p, wood=None, shrine=False):
 
 
 def torii_tall(c: Canvas, p):
-    g = with_ground(c, p, "gravel")
+    """鳥居：幅 3 × 高さ 3 マス（5 m）。柱は底辺の中央のマスに、笠木と貫は上の行で左右のマスへ広がる"""
+    g, bx, by = tall_ground(c, p, "gravel", 3, 3)
     col = VERMILION
-    c.shadow_ellipse(16, 61, 12, 3, 0.4)
-    for x in (5, 24):
-        c.gradient_h(x, 10, 3, 51, shade(col, 0.2), shade(col, -0.25))
-        c.vline(x, 10, 60, shade(col, 0.15))
-        c.rect(x - 1, 59, 5, 3, STONE_D)
-        c.hline(59, x - 1, x + 3, STONE)
-    c.rect(1, 3, 30, 4, shade(col, -0.1))             # 笠木（反り）
-    c.line(0, 4, 3, 2, shade(col, -0.1)); c.line(31, 4, 28, 2, shade(col, -0.1))
-    c.hline(3, 3, 28, shade(col, 0.2))
-    c.rect(2, 7, 28, 2, SUMI)                         # 島木の影
-    c.rect(4, 14, 24, 3, shade(col, -0.05))           # 貫
-    c.rect(13, 9, 6, 5, shade(C["bone"], -0.1))       # 額束
-    c.frame(13, 9, 6, 5, SUMI)
-    c.px(15, 11, SUMI)
-    for y in range(20, 58, 12):                       # 柱の節・注連縄
-        c.hline(y, 5, 7, shade(col, -0.3)); c.hline(y, 24, 26, shade(col, -0.3))
-    c.rect(4, 19, 24, 2, C["straw"])                  # 注連縄
-    for x in range(6, 26, 4):
-        c.rect(x, 21, 1, 3, C["bone"])
-    c.outline(lambda x, y: y < 62 and c.get(x, y) is not None and c.get(x, y) != g.get(x, y - 32), SUMI)
+    cx = bx + 16
+    c.shadow_ellipse(cx, by + 29, 13, 3, 0.4)
+    for x in (bx + 4, bx + 25):                         # 柱
+        c.gradient_h(x, 14, 3, by + 16, shade(col, 0.2), shade(col, -0.25))
+        c.vline(x, 14, by + 29, shade(col, 0.15))
+        c.rect(x - 1, by + 27, 5, 3, STONE_D)
+        c.hline(by + 27, x - 1, x + 3, STONE)
+        for y in range(by - 10, by + 24, 12):
+            c.hline(y, x, x + 2, shade(col, -0.3))
+    c.rect(cx - 30, 4, 60, 5, shade(col, -0.1))           # 笠木（反り）
+    c.line(cx - 33, 6, cx - 30, 3, shade(col, -0.1)); c.line(cx + 32, 6, cx + 29, 3, shade(col, -0.1))
+    c.hline(4, cx - 29, cx + 28, shade(col, 0.2))
+    c.rect(cx - 28, 9, 56, 3, SUMI)                       # 島木
+    c.rect(cx - 24, 20, 48, 4, shade(col, -0.05))         # 貫
+    c.rect(cx - 3, 12, 7, 8, shade(C["bone"], -0.1))      # 額束
+    c.frame(cx - 3, 12, 7, 8, SUMI)
+    c.px(cx, 15, SUMI)
+    c.rect(bx + 4, 27, 24, 2, C["straw"])                 # 注連縄
+    for x in range(bx + 6, bx + 26, 5):
+        c.rect(x, 29, 1, 3, C["bone"])
+    outline_tall(c, g, bx, by)
 
 
 def temple_gate(c: Canvas, p, wooden=False):
-    """山門 32×64：瓦屋根、太い柱、扉の奥に境内"""
-    g = with_ground(c, p, "stone")
-    c.shadow_ellipse(16, 61, 14, 3, 0.45)
-    # 屋根
+    """山門：幅 3 × 高さ 3 マス。瓦屋根が上の行で左右へ張り出し、柱と扉は中央のマス"""
+    g, bx, by = tall_ground(c, p, "stone", 3, 3)
+    cx = bx + 16
+    c.shadow_ellipse(cx, by + 29, 14, 3, 0.45)
     roof, roof_l, roof_d = C["tile_roof"], C["tile_roof_l"], C["tile_roof_d"]
-    c.poly([(0, 16), (16, 2), (31, 16)], roof_d)
-    c.poly([(2, 15), (16, 4), (30, 15)], roof)
-    for y in range(6, 16, 2):
-        c.hline(y, 16 - (y - 4), 16 + (y - 4), shade(roof, 0.12) if (y // 2) % 2 else shade(roof, -0.1))
-    c.hline(16, 0, 31, roof_l)
-    c.hline(17, 0, 31, roof_d)
-    c.hline(4, 12, 20, roof_l)                        # 棟
-    c.line(0, 16, 1, 13, roof_l); c.line(31, 16, 30, 13, roof_l)
-    c.rect(1, 18, 30, 3, C["plaster_d"])              # 軒下
-    c.rect(1, 21, 30, 2, WOOD_DD)                     # 梁
-    # 柱
+    # 屋根（反り）
+    c.poly([(cx - 46, 30), (cx - 20, 6), (cx + 19, 6), (cx + 45, 30)], roof_d)
+    c.poly([(cx - 42, 29), (cx - 19, 8), (cx + 18, 8), (cx + 41, 29)], roof)
+    for y in range(9, 29, 2):
+        half = 19 + int((y - 8) * 1.1)
+        c.hline(y, cx - half, cx + half - 1, shade(roof, 0.12) if (y // 2) % 2 else shade(roof, -0.1))
+    c.hline(30, cx - 46, cx + 45, roof_l)
+    c.hline(31, cx - 46, cx + 45, roof_d)
+    c.rect(cx - 20, 5, 40, 2, roof_l)                     # 棟
+    c.rect(cx - 22, 3, 4, 3, roof_d); c.rect(cx + 17, 3, 4, 3, roof_d)   # 鬼瓦
+    c.rect(cx - 40, 32, 80, 3, C["plaster_d"])             # 軒下
+    c.rect(cx - 40, 35, 80, 2, WOOD_DD)                    # 梁
+    for x in range(cx - 36, cx + 36, 12):                  # 垂木
+        c.rect(x, 32, 2, 3, WOOD_D)
+    # 柱（中央のマスの中に 2 本）
     pole = WOOD_D if wooden else WOOD
-    for x in (2, 27):
-        c.gradient_h(x, 21, 4, 40, shade(pole, 0.25), shade(pole, -0.25))
-        c.rect(x - 1, 59, 6, 3, STONE_D)
-    for x in (9, 20):
-        c.gradient_h(x, 23, 3, 38, shade(pole, 0.15), shade(pole, -0.3))
+    for x in (bx + 2, bx + 27):
+        c.gradient_h(x, 36, 3, by + 24 - 36, shade(pole, 0.25), shade(pole, -0.25))
+        c.rect(x - 1, by + 27, 5, 3, STONE_D)
+    for x in (bx + 9, bx + 21):
+        c.gradient_h(x, 37, 2, by + 22 - 37, shade(pole, 0.15), shade(pole, -0.3))
     # 扉と奥
-    c.rect(12, 23, 8, 38, (14, 16, 26))
-    c.gradient_v(12, 23, 8, 38, (14, 16, 26), shade(C["conc"], -0.3))
-    c.rect(12, 50, 8, 11, mix(STONE, (14, 16, 26), 0.5))    # 奥の石畳
-    c.rect(5, 26, 4, 30, shade(WOOD_D, -0.1)); c.rect(23, 26, 4, 30, shade(WOOD_D, -0.1))   # 開いた扉
-    for y in range(30, 56, 6):
-        c.hline(y, 5, 8, WOOD_DD); c.hline(y, 23, 26, WOOD_DD)
-    c.px(7, 40, C["ochre"]); c.px(24, 40, C["ochre"])
-    c.rect(12, 18, 8, 5, C["bone"])                   # 扁額
-    c.frame(12, 18, 8, 5, WOOD_DD)
-    c.px(15, 20, SUMI); c.px(16, 20, SUMI)
-    c.outline(lambda x, y: y < 62 and c.get(x, y) is not None and c.get(x, y) != g.get(x, y - 32), SUMI)
+    c.rect(bx + 11, 37, 10, by + 22 - 37, (14, 16, 26))
+    c.gradient_v(bx + 11, 37, 10, by + 22 - 37, (14, 16, 26), shade(C["conc"], -0.3))
+    c.rect(bx + 11, by + 14, 10, 8, mix(STONE, (14, 16, 26), 0.5))
+    c.rect(bx + 5, 40, 4, by + 16 - 40, shade(WOOD_D, -0.1)); c.rect(bx + 23, 40, 4, by + 16 - 40, shade(WOOD_D, -0.1))
+    for y in range(44, by + 14, 8):
+        c.hline(y, bx + 5, bx + 8, WOOD_DD); c.hline(y, bx + 23, bx + 26, WOOD_DD)
+    c.px(bx + 7, by, C["ochre"]); c.px(bx + 24, by, C["ochre"])
+    c.rect(bx + 11, 37, 10, 6, C["bone"])                  # 扁額
+    c.frame(bx + 11, 37, 10, 6, WOOD_DD)
+    c.px(bx + 15, 39, SUMI); c.px(bx + 16, 40, SUMI)
+    outline_tall(c, g, bx, by)
 
 
 def iron_gate(c: Canvas, p, school=True):
@@ -694,103 +700,107 @@ def bridge(c: Canvas, p):
 
 # ─────────────── 塔（32×64） ───────────────
 
-def tower_base(c: Canvas, p, ground="conc"):
-    g = with_ground(c, p, ground)
-    c.shadow_ellipse(16, 61, 12, 3, 0.45)
-    return g
+def tower_base(c: Canvas, p, ground="conc", w=1, h=5):
+    g, bx, by = tall_ground(c, p, ground, w, h)
+    c.shadow_ellipse(bx + 16, by + 29, 12, 3, 0.45)
+    return g, bx, by
 
 
 def clock_tower(c: Canvas, p):
-    g = tower_base(c, p, "conc")
+    """時計塔：高さ 5 マス（8.5 m）"""
+    g, bx, by = tower_base(c, p, "conc", 1, 5)
     body = C["plaster"]
-    c.gradient_h(8, 12, 16, 50, shade(body, 0.1), shade(body, -0.25))
-    c.rect(6, 58, 20, 4, STONE_D); c.hline(58, 6, 25, STONE)
-    c.hline(12, 8, 23, shade(body, 0.3))
-    for y in range(16, 56, 6):
+    c.gradient_h(8, 16, 16, by + 12, shade(body, 0.1), shade(body, -0.25))
+    c.rect(6, by + 26, 20, 4, STONE_D); c.hline(by + 26, 6, 25, STONE)
+    c.hline(16, 8, 23, shade(body, 0.3))
+    for y in range(22, by + 24, 8):
         c.hline(y, 9, 22, shade(body, -0.15))
-    c.rect(13, 36, 6, 8, (24, 30, 48)); c.frame(12, 35, 8, 10, MD)   # 窓
-    c.rect(13, 50, 6, 8, (24, 30, 48)); c.frame(12, 49, 8, 10, MD)
-    # 屋根
-    c.poly([(4, 12), (16, 2), (28, 12)], C["tile_roof_d"])
-    c.poly([(6, 12), (16, 4), (26, 12)], C["tile_roof"])
-    c.hline(12, 4, 27, C["tile_roof_l"])
-    c.vline(16, 0, 2, M); c.px(16, 0, ML)
-    # 時計盤
-    c.disc(16, 24, 6, C["glow"])
-    c.disc(16, 24, 5, mix(C["glow"], C["bone"], 0.6))
-    c.line(16, 24, 16, 20, SUMI); c.line(16, 24, 19, 25, SUMI)
-    for (x, y) in [(16, 19), (21, 24), (16, 29), (11, 24)]:
+    for y in range(48, by + 12, 28):                         # 窓
+        c.rect(13, y, 6, 10, (24, 30, 48)); c.frame(12, y - 1, 8, 12, MD)
+    c.rect(11, by + 10, 10, 16, WOOD_DD); c.rect(12, by + 11, 8, 15, WOOD_D)   # 扉
+    c.poly([(4, 16), (16, 4), (28, 16)], C["tile_roof_d"])
+    c.poly([(6, 16), (16, 6), (26, 16)], C["tile_roof"])
+    c.hline(16, 4, 27, C["tile_roof_l"])
+    c.vline(16, 0, 4, M); c.px(16, 0, ML)
+    c.disc(16, 30, 7, C["glow"])                              # 時計盤
+    c.disc(16, 30, 6, mix(C["glow"], C["bone"], 0.6))
+    c.line(16, 30, 16, 25, SUMI); c.line(16, 30, 20, 31, SUMI)
+    for (x, y) in [(16, 24), (22, 30), (16, 36), (10, 30)]:
         c.px(x, y, SUMI)
-    c.outline(lambda x, y: (x - 16) ** 2 + (y - 24) ** 2 <= 36, MD)
-    c.outline(lambda x, y: y < 62 and c.get(x, y) is not None and c.get(x, y) != g.get(x, y - 32), SUMI)
-    glow_spot(c, 16, 24, 12, C["glow"], 0.3)
+    c.outline(lambda x, y: (x - 16) ** 2 + (y - 30) ** 2 <= 49, MD)
+    outline_tall(c, g, bx, by)
+    glow_spot(c, 16, 30, 13, C["glow"], 0.3)
 
 
 def fire_tower(c: Canvas, p):
-    g = tower_base(c, p, "asphalt")
+    """火の見櫓：高さ 5 マス。鉄骨の脚が末広がり"""
+    g, bx, by = tower_base(c, p, "asphalt", 1, 5)
     steel = MD
-    for x in (5, 26):                                   # 脚（末広がり）
-        c.line(x, 62, 10 if x < 16 else 21, 12, steel)
-        c.line(x + 1, 62, 11 if x < 16 else 22, 12, ML if x < 16 else shade(steel, -0.3))
-    for y in range(18, 62, 8):
-        k = (y - 12) / 50
-        xl, xr = int(10 - 5 * k), int(21 + 5 * k)
+    bottom = by + 30
+    for x in (4, 27):
+        c.line(x, bottom, 10 if x < 16 else 21, 16, steel)
+        c.line(x + 1, bottom, 11 if x < 16 else 22, 16, ML if x < 16 else shade(steel, -0.3))
+    for y in range(22, bottom, 12):
+        k = (y - 16) / (bottom - 16)
+        xl, xr = int(10 - 6 * k), int(21 + 6 * k)
         c.hline(y, xl, xr, steel)
-        c.line(xl, y, xr, y + 8, shade(steel, -0.2))     # 筋交い
-        c.line(xr, y, xl, y + 8, shade(steel, -0.2))
-    c.rect(8, 4, 16, 3, ML); c.hline(4, 8, 23, C["stone_l"])      # 屋根
-    c.rect(9, 7, 14, 6, STONE_D)                                   # 見張り台
-    c.hline(7, 9, 22, STONE)
-    c.rect(10, 8, 12, 4, (24, 30, 48))
-    c.rect(13, 3, 6, 1, M)
-    c.rect(15, 0, 2, 4, C["red"]); c.px(15, 0, shade(C["red"], 0.4))    # 半鐘
-    c.rect(6, 13, 20, 2, steel); c.hline(13, 6, 25, ML)
-    c.outline(lambda x, y: y < 62 and c.get(x, y) is not None and c.get(x, y) != g.get(x, y - 32), SUMI)
+        c.line(xl, y, xr, y + 12, shade(steel, -0.2))
+        c.line(xr, y, xl, y + 12, shade(steel, -0.2))
+    c.rect(8, 6, 16, 3, ML); c.hline(6, 8, 23, C["stone_l"])      # 屋根
+    c.rect(9, 9, 14, 7, STONE_D)                                   # 見張り台
+    c.hline(9, 9, 22, STONE)
+    c.rect(10, 10, 12, 5, (24, 30, 48))
+    c.rect(13, 5, 6, 1, M)
+    c.rect(15, 1, 2, 5, C["red"]); c.px(15, 1, shade(C["red"], 0.4))    # 半鐘
+    c.rect(6, 16, 20, 2, steel); c.hline(16, 6, 25, ML)
+    outline_tall(c, g, bx, by)
 
 
 def light_tower(c: Canvas, p):
-    g = tower_base(c, p, "soil")
-    c.gradient_h(14, 10, 4, 52, ML, MD)
-    c.rect(12, 60, 8, 3, MD)
-    for y in range(16, 60, 10):
+    """照明塔：高さ 6 マス（10 m）"""
+    g, bx, by = tower_base(c, p, "soil", 1, 6)
+    c.gradient_h(14, 12, 4, by + 18, ML, MD)
+    c.rect(12, by + 28, 8, 3, MD)
+    for y in range(20, by + 26, 12):
         c.hline(y, 13, 18, shade(MD, -0.2))
-    c.rect(4, 4, 24, 8, MD); c.frame(4, 4, 24, 8, M)
+    c.rect(4, 4, 24, 10, MD); c.frame(4, 4, 24, 10, M)
     for x in range(6, 26, 4):
-        c.rect(x, 5, 3, 3, C["glow"])
-        c.rect(x, 9, 3, 2, mix(C["glow"], C["bone"], 0.5))
+        c.rect(x, 5, 3, 4, C["glow"])
+        c.rect(x, 10, 3, 3, mix(C["glow"], C["bone"], 0.5))
         c.px(x, 5, C["bone"])
-    c.rect(14, 12, 4, 2, M)
-    c.outline(lambda x, y: y < 62 and c.get(x, y) is not None and c.get(x, y) != g.get(x, y - 32), SUMI)
+    c.rect(14, 14, 4, 2, M)
+    outline_tall(c, g, bx, by)
     for x in range(6, 26, 4):
-        glow_spot(c, x + 1, 7, 10, C["glow"], 0.25)
-    for y in range(32, 64):
+        glow_spot(c, x + 1, 8, 11, C["glow"], 0.25)
+    for y in range(by, by + 32):
         for x in range(S):
-            d = math.hypot((x - 16) / 16, (y - 60) / 20)
+            d = math.hypot((x - 16) / 16, (y - by - 28) / 20)
             if d < 1.0:
                 c.blend(x, y, C["glow"], (1 - d) * 0.15)
 
 
 def water_tower(c: Canvas, p):
-    g = tower_base(c, p, "conc")
+    """給水塔：幅 3 × 高さ 5 マス。タンクが上の 2 段で左右へ張り出す"""
+    g, bx, by = tower_base(c, p, "conc", 3, 5)
+    cx = bx + 16
     steel = MD
-    for x in (7, 24):
-        c.rect(x, 26, 2, 36, steel)
-        c.vline(x, 26, 61, ML if x < 16 else shade(steel, -0.3))
-    for y in range(32, 60, 9):
-        c.line(8, y, 24, y + 9, shade(steel, -0.2)); c.line(24, y, 8, y + 9, shade(steel, -0.2))
-    c.rect(6, 24, 20, 3, steel)
-    # タンク
+    for x in (bx + 6, bx + 24):
+        c.rect(x, 62, 2, by + 30 - 62, steel)
+        c.vline(x, 62, by + 29, ML if x < cx else shade(steel, -0.3))
+    for y in range(68, by + 24, 14):
+        c.line(bx + 7, y, bx + 25, y + 14, shade(steel, -0.2)); c.line(bx + 25, y, bx + 7, y + 14, shade(steel, -0.2))
+    c.rect(bx + 4, 60, 24, 3, steel)
     body = C["conc"]
-    c.rect(4, 6, 24, 18, body)
-    c.gradient_h(4, 6, 24, 18, shade(body, 0.2), shade(body, -0.35))
-    c.ellipse(16, 6, 12, 3, shade(body, 0.3))
-    c.ellipse(16, 24, 12, 3, shade(body, -0.25))
-    for y in (11, 17):
-        c.hline(y, 4, 27, shade(body, -0.3))
-    c.noise(C["rust"], 0.05, 4, 10, 24, 14, k=4)
-    c.rect(15, 1, 2, 5, MD); c.px(15, 0, C["red"])   # 航空障害灯
-    c.rect(15, 26, 2, 36, mix(steel, C["water_l"], 0.4))   # 配管
-    c.outline(lambda x, y: y < 62 and c.get(x, y) is not None and c.get(x, y) != g.get(x, y - 32), SUMI)
+    c.rect(cx - 30, 14, 60, 44, body)                          # タンク
+    c.gradient_h(cx - 30, 14, 60, 44, shade(body, 0.2), shade(body, -0.35))
+    c.ellipse(cx, 14, 30, 6, shade(body, 0.3))
+    c.ellipse(cx, 58, 30, 6, shade(body, -0.25))
+    for y in (26, 40):
+        c.hline(y, cx - 30, cx + 29, shade(body, -0.3))
+    c.noise(C["rust"], 0.05, cx - 30, 20, 60, 36, k=4)
+    c.rect(cx - 1, 4, 2, 10, MD); c.px(cx - 1, 3, C["red"]); c.px(cx, 3, C["red"])   # 航空障害灯
+    c.rect(cx - 1, 62, 2, by + 30 - 62, mix(steel, C["water_l"], 0.4))              # 配管
+    outline_tall(c, g, bx, by)
 
 
 # ─────────────── 登録 ───────────────
@@ -834,11 +844,11 @@ FLAT3 = {
 }
 
 TALL3 = {
-    "寺の山門": lambda c, p: temple_gate(c, p, False),
-    "山門（木・瓦）": lambda c, p: temple_gate(c, p, True),
-    "時計塔": clock_tower,
-    "火の見櫓": fire_tower,
-    "照明塔": light_tower,
-    "給水塔": water_tower,
-    "鳥居": torii_tall,
+    "寺の山門": (lambda c, p: temple_gate(c, p, False), 3, 3),
+    "山門（木・瓦）": (lambda c, p: temple_gate(c, p, True), 3, 3),
+    "時計塔": (clock_tower, 1, 5),
+    "火の見櫓": (fire_tower, 1, 5),
+    "照明塔": (light_tower, 1, 6),
+    "給水塔": (water_tower, 3, 5),
+    "鳥居": (torii_tall, 3, 3),
 }

@@ -1,9 +1,12 @@
-"""アクターのスプライトシート（32×48、4 方向 × 2 フレーム）を自由な色数で描く。
+"""アクターのスプライトシート（枠 32×48、4 方向 × 2 フレーム）を自由な色数で描く。
+
+縮尺：1 マス（32 px）≈ 1.7 m ＝ 人の身長。人物は枠の下 32 px に収め（頭頂 y≈15、足元 y=46）、幅は 14 px ほど。
+追跡者だけ一回り大きい（36 px）。木・電柱・建物との比率が現実に近くなる。
 
 出力：resources/actors/<kind>.png（64×192。列＝フレーム 0/1、行＝下・上・左・右）。
 ActorSpriteGenerator がこの PNG を優先して読み、無ければ従来の生成に戻る。
 種別：player（篝悠）、heroine（澪）、stalker（追跡者。顔を描かない）、toki（駄菓子屋の老婆）、shige（朝和の老婆）。
-光は左上、輪郭は墨。足元は y=44〜46（Sprite の offset (-16,-44) で原点＝足元）。決定論的。
+光は左上、輪郭は墨。Sprite の offset (-16,-44) で原点＝足元。決定論的。
 
 使い方: python3 tools/actors/paint_actors.py [--preview build/actors_x4.png]
 """
@@ -21,6 +24,8 @@ from px32 import C, Canvas, mix, rgb, shade  # noqa: E402
 W, H = 32, 48
 DIRS = ["down", "up", "left", "right"]
 OUT_DIR = os.path.join(ROOT, "resources", "actors")
+FOOT = 46            # 足元の y
+CX = 16              # 体の中心 x
 
 SUMI = C["sumi"]
 SKIN = rgb("#d8b89a")
@@ -32,298 +37,279 @@ def outline(c: Canvas):
     c.outline(lambda x, y: c.get(x, y) is not None, SUMI)
 
 
-def shadow(c: Canvas):
-    for y in range(43, 47):
-        for x in range(6, 26):
-            d = ((x - 15.5) / 10.0) ** 2 + ((y - 45) / 2.0) ** 2
+def shadow(c: Canvas, rx=7):
+    for y in range(FOOT - 2, FOOT + 2):
+        for x in range(CX - rx - 1, CX + rx + 1):
+            d = ((x + 0.5 - CX) / rx) ** 2 + ((y + 0.5 - FOOT) / 1.6) ** 2
             if d <= 1.0:
-                c.px(x, y, SUMI, int(120 * (1 - d * 0.6)))
+                c.px(x, y, SUMI, int(110 * (1 - d * 0.6)))
 
 
-def legs(c: Canvas, frame, color, dark, y0=32, x_l=10, x_r=18, w=4, h=12, facing="down"):
-    """脚。frame 1 は片足を前へ（横向きは前後にずらす）"""
-    if facing in ("left", "right"):
-        back, front = (x_l, x_r) if facing == "right" else (x_r, x_l)
-        off = 2 if frame else 0
-        c.rect(back, y0, w, h - off, dark)
-        c.rect(front, y0, w, h, color)
-        if frame:
-            c.rect(front + (2 if facing == "right" else -2), y0 + 4, w, h - 4, color)
-        c.hline(y0 + h - 1, front, front + w - 1, dark)
+def side(facing):
+    return facing in ("left", "right")
+
+
+def legs(c: Canvas, frame, color, dark, y0, h, facing, gap=1, w=3, shoe=None):
+    """脚。frame 1 は片足を前へ。横向きは前後にずらす"""
+    xl, xr = CX - gap - w, CX + gap
+    if side(facing):
+        back, front = (xl, xr) if facing == "right" else (xr, xl)
+        c.rect(back, y0, w, h - (1 if frame else 0), dark)
+        fx = front + ((1 if facing == "right" else -1) if frame else 0)
+        c.rect(fx, y0, w, h, color)
+        c.hline(y0 + h - 1, fx, fx + w - 1, dark)
+        if shoe is not None:
+            c.rect(fx - (0 if facing == "right" else 1), y0 + h - 2, w + 1, 2, shoe)
+            c.rect(back, y0 + h - 3 + (0 if frame else 1), w, 2, shoe)
     else:
-        lo = (0, 0) if not frame else (-1, 1)
-        c.rect(x_l, y0, w, h + lo[0], color)
-        c.rect(x_r, y0, w, h + lo[1], color)
-        c.vline(x_l + w - 1, y0, y0 + h + lo[0] - 1, dark)
-        c.vline(x_r + w - 1, y0, y0 + h + lo[1] - 1, dark)
-        c.hline(y0 + h + lo[0] - 1, x_l, x_l + w - 1, dark)
-        c.hline(y0 + h + lo[1] - 1, x_r, x_r + w - 1, dark)
+        dl, dr = (0, 0) if not frame else (-1, 1)
+        c.rect(xl, y0, w, h + dl, color)
+        c.rect(xr, y0, w, h + dr, color)
+        c.vline(xl + w - 1, y0, y0 + h + dl - 1, dark)
+        c.vline(xr + w - 1, y0, y0 + h + dr - 1, dark)
+        if shoe is not None:
+            c.rect(xl, y0 + h + dl - 2, w, 2, shoe)
+            c.rect(xr, y0 + h + dr - 2, w, 2, shoe)
 
 
-def head(c: Canvas, facing, skin, hair, hair_d, x0=10, y0=6, w=12, h=12, long_hair=False, bangs=True, eyes=True):
-    """頭。向きで髪と目の見え方を変える"""
-    c.rect(x0, y0, w, h, skin)
-    c.gradient_h(x0, y0, 3, h, shade(skin, 0.12), skin)
-    c.vline(x0 + w - 1, y0 + 2, y0 + h - 1, SKIN_D if skin != SKIN_OLD else shade(skin, -0.25))
-    # 髪の帽子部
-    c.rect(x0 - 1, y0 - 2, w + 2, 5, hair)
-    c.hline(y0 - 2, x0, x0 + w - 1, shade(hair, 0.25))
-    c.rect(x0 - 1, y0 - 1, 2, 7 if not long_hair else 14, hair)
-    c.rect(x0 + w - 1, y0 - 1, 2, 7 if not long_hair else 14, hair)
+def head(c: Canvas, facing, skin, hair, hair_d, y0, w=8, h=8, long_hair=False, bangs=True, eyes=True, cap=None):
+    """頭。y0 は頭頂（髪込み）。w×h の顔に髪をかぶせ、向きで髪・目の見え方を変える"""
+    x0 = CX - w // 2
+    c.rect(x0, y0 + 1, w, h, skin)
+    c.gradient_h(x0, y0 + 1, 2, h, shade(skin, 0.12), skin)
+    c.vline(x0 + w - 1, y0 + 2, y0 + h, shade(skin, -0.25))
+    cap_col = hair if cap is None else cap
+    c.rect(x0 - 1, y0, w + 2, 3, cap_col)               # 髪の帽子部
+    c.hline(y0, x0, x0 + w - 1, shade(cap_col, 0.25))
+    tail = 5 if not long_hair else h + 3
+    c.rect(x0 - 1, y0 + 1, 1, tail, hair)
+    c.rect(x0 + w, y0 + 1, 1, tail, hair)
     if facing == "up":
-        c.rect(x0 - 1, y0 - 2, w + 2, h + 1, hair)
-        c.hline(y0 - 2, x0, x0 + w - 1, shade(hair, 0.25))
-        c.vline(x0 - 1, y0 - 1, y0 + h - 2, shade(hair, 0.12))
-        c.vline(x0 + w, y0 - 1, y0 + h - 2, hair_d)
+        c.rect(x0 - 1, y0, w + 2, h + 1, hair)
+        c.hline(y0, x0, x0 + w - 1, shade(hair, 0.25))
+        c.vline(x0 - 1, y0 + 1, y0 + h - 1, shade(hair, 0.12))
+        c.vline(x0 + w, y0 + 1, y0 + h - 1, hair_d)
         if long_hair:
-            c.rect(x0 - 1, y0 + h - 1, w + 2, 8, hair)
-            c.rect(x0 + 1, y0 + h + 3, w - 2, 4, hair_d)
+            c.rect(x0 - 1, y0 + h, w + 2, 5, hair)
+            c.rect(x0 + 1, y0 + h + 3, w - 2, 2, hair_d)
+        if cap is not None:
+            c.rect(x0 - 1, y0, w + 2, 3, cap_col)
         return
     if facing == "down":
         if bangs:
-            for i, x in enumerate(range(x0, x0 + w, 3)):
-                c.rect(x, y0 + 3, 2, 2 + (i % 2), hair)
+            for i, x in enumerate(range(x0, x0 + w, 2)):
+                c.rect(x, y0 + 3, 1, 1 + (i % 2), hair)
         if eyes:
-            c.rect(x0 + 3, y0 + 7, 2, 2, SUMI)
-            c.rect(x0 + w - 5, y0 + 7, 2, 2, SUMI)
-            c.px(x0 + 3, y0 + 7, mix(SUMI, C["bone"], 0.35))
-            c.px(x0 + w - 5, y0 + 7, mix(SUMI, C["bone"], 0.35))
-        c.hline(y0 + h - 2, x0 + 4, x0 + w - 5, shade(skin, -0.3))  # 口
+            c.px(x0 + 2, y0 + 5, SUMI)
+            c.px(x0 + w - 3, y0 + 5, SUMI)
+        c.hline(y0 + h - 1, x0 + 3, x0 + w - 4, shade(skin, -0.3))   # 口
         return
-    # 横向き：片側が髪
+    # 横向き：後ろ側が髪、前側に目
     if facing == "left":
-        c.rect(x0 + 5, y0 - 2, w - 4, h - 1, hair)
-        c.vline(x0 + w, y0 - 1, y0 + h - 2, hair_d)
+        c.rect(x0 + 3, y0, w - 2, h - 1, hair)
+        c.vline(x0 + w, y0 + 1, y0 + h - 1, hair_d)
         if long_hair:
-            c.rect(x0 + 6, y0 + h - 2, 6, 6, hair)
-            c.vline(x0 + 11, y0 + h - 2, y0 + h + 3, hair_d)
+            c.rect(x0 + 4, y0 + h - 1, w - 3, 4, hair)
         if bangs:
-            c.rect(x0, y0 + 3, 3, 2, hair)
+            c.rect(x0, y0 + 3, 2, 1, hair)
         if eyes:
-            c.rect(x0 + 2, y0 + 7, 2, 2, SUMI)
-            c.px(x0 + 2, y0 + 7, mix(SUMI, C["bone"], 0.35))
-        c.px(x0, y0 + 9, shade(skin, -0.3))
+            c.px(x0 + 1, y0 + 5, SUMI)
+        c.px(x0 - 1, y0 + 6, shade(skin, -0.2))                      # 鼻
     else:
-        c.rect(x0 - 1, y0 - 2, w - 4, h - 1, hair)
-        c.vline(x0 - 1, y0 - 1, y0 + h - 2, shade(hair, 0.12))
+        c.rect(x0 - 1, y0, w - 2, h - 1, hair)
+        c.vline(x0 - 1, y0 + 1, y0 + h - 1, shade(hair, 0.12))
         if long_hair:
-            c.rect(x0, y0 + h - 2, 6, 6, hair)
-            c.vline(x0, y0 + h - 2, y0 + h + 3, shade(hair, 0.1))
+            c.rect(x0 - 1, y0 + h - 1, w - 3, 4, hair)
         if bangs:
-            c.rect(x0 + w - 3, y0 + 3, 3, 2, hair)
+            c.rect(x0 + w - 2, y0 + 3, 2, 1, hair)
         if eyes:
-            c.rect(x0 + w - 4, y0 + 7, 2, 2, SUMI)
-            c.px(x0 + w - 4, y0 + 7, mix(SUMI, C["bone"], 0.35))
-        c.px(x0 + w - 1, y0 + 9, shade(skin, -0.3))
+            c.px(x0 + w - 2, y0 + 5, SUMI)
+        c.px(x0 + w, y0 + 6, shade(skin, -0.2))
+    if cap is not None:
+        c.rect(x0 - 1, y0, w + 2, 3, cap_col)
+        c.hline(y0, x0, x0 + w - 1, shade(cap_col, 0.25))
 
 
 # ─────────────── 各キャラクター ───────────────
 
 def player(c: Canvas, facing, frame):
-    """篝悠：暗いコート、肩掛けの鞄。顔は青白い"""
+    """篝悠：暗いコート、肩掛けの鞄。顔は青白い。身長 ≈ 1 マス"""
     coat = rgb("#2f3f5f"); coat_d = rgb("#1c2740"); coat_l = rgb("#46587c")
     hair = rgb("#141622"); hair_d = rgb("#0b0d14")
     bag = rgb("#5a3a26"); bag_l = rgb("#7a5236")
     pants = rgb("#232a3f")
     shadow(c)
-    legs(c, frame, pants, shade(pants, -0.4), 34, 10, 18, 4, 10, facing)
+    legs(c, frame, pants, shade(pants, -0.4), 36, 10, facing, 1, 3, shade(pants, -0.6))
     # 胴（コート、裾がやや広がる）
-    c.poly([(8, 18), (23, 18), (25, 35), (6, 35)], coat)
-    c.gradient_h(8, 18, 4, 17, coat_l, coat)
-    c.vline(24, 20, 34, coat_d)
-    c.hline(34, 7, 24, coat_d)
-    # 腕
+    c.poly([(CX - 5, 24), (CX + 5, 24), (CX + 6, 37), (CX - 6, 37)], coat)
+    c.gradient_h(CX - 5, 24, 3, 13, coat_l, coat)
+    c.vline(CX + 5, 26, 36, coat_d)
+    c.hline(36, CX - 5, CX + 5, coat_d)
     if facing == "down":
-        c.rect(5, 19, 3, 12, coat); c.vline(5, 19, 30, coat_l); c.rect(5, 31, 3, 2, SKIN_D)
-        c.rect(24, 19, 3, 12, coat_d); c.rect(24, 31, 3, 2, SKIN_D)
-        c.vline(15, 19, 33, coat_d)                                 # 前立て
-        c.rect(12, 18, 8, 2, shade(coat_l, 0.2))                    # 襟
-        c.line(9, 18, 21, 30, bag_l); c.line(10, 18, 22, 30, bag)   # 鞄のベルト
+        c.rect(CX - 8, 25, 2, 9, coat); c.vline(CX - 8, 25, 33, coat_l); c.rect(CX - 8, 34, 2, 2, SKIN_D)
+        c.rect(CX + 6, 25, 2, 9, coat_d); c.rect(CX + 6, 34, 2, 2, SKIN_D)
+        c.vline(CX, 25, 36, coat_d)                                 # 前立て
+        c.rect(CX - 2, 24, 4, 1, shade(coat_l, 0.2))                # 襟
+        c.line(CX - 4, 24, CX + 4, 33, bag_l)                       # 鞄のベルト
     elif facing == "up":
-        c.rect(5, 19, 3, 12, coat_d); c.rect(24, 19, 3, 12, coat)
-        c.rect(12, 18, 8, 2, coat_d)
-        c.rect(9, 22, 11, 9, bag); c.rect(9, 22, 11, 2, bag_l); c.frame(9, 22, 11, 9, shade(bag, -0.4))
+        c.rect(CX - 8, 25, 2, 9, coat_d); c.rect(CX + 6, 25, 2, 9, coat)
+        c.rect(CX - 4, 27, 8, 7, bag); c.rect(CX - 4, 27, 8, 1, bag_l); c.frame(CX - 4, 27, 8, 7, shade(bag, -0.4))
     elif facing == "left":
-        c.rect(12, 20, 4, 12, coat_d if frame else coat)            # 腕（前）
-        c.rect(12, 32, 4, 2, SKIN_D)
-        c.rect(19, 21, 6, 10, bag); c.rect(19, 21, 6, 2, bag_l); c.frame(19, 21, 6, 10, shade(bag, -0.4))
-        c.line(19, 19, 17, 21, bag_l)
+        c.rect(CX - 2, 26, 3, 9, coat_d if frame else coat); c.rect(CX - 2, 35, 3, 1, SKIN_D)
+        c.rect(CX + 2, 27, 4, 7, bag); c.rect(CX + 2, 27, 4, 1, bag_l); c.frame(CX + 2, 27, 4, 7, shade(bag, -0.4))
     else:
-        c.rect(16, 20, 4, 12, coat_d if frame else coat)
-        c.rect(16, 32, 4, 2, SKIN_D)
-        c.rect(7, 21, 6, 10, bag); c.rect(7, 21, 6, 2, bag_l); c.frame(7, 21, 6, 10, shade(bag, -0.4))
-        c.line(12, 19, 14, 21, bag_l)
-    c.rect(13, 17, 6, 3, SKIN_D)                                    # 首
-    head(c, facing, SKIN, hair, hair_d, 10, 6, 12, 12)
+        c.rect(CX - 1, 26, 3, 9, coat_d if frame else coat); c.rect(CX - 1, 35, 3, 1, SKIN_D)
+        c.rect(CX - 6, 27, 4, 7, bag); c.rect(CX - 6, 27, 4, 1, bag_l); c.frame(CX - 6, 27, 4, 7, shade(bag, -0.4))
+    c.rect(CX - 2, 23, 4, 2, SKIN_D)                                # 首
+    head(c, facing, SKIN, hair, hair_d, 15, 8, 8)
     outline(c)
 
 
 def heroine(c: Canvas, facing, frame):
-    """澪：枯れ黄土のカーディガン、暗いスカート、赤茶の長い髪、ノート"""
+    """澪：枯れ黄土のカーディガン、暗いスカート、赤茶の長い髪、ノート。悠よりわずかに小柄"""
     top = rgb("#b58d5a"); top_d = rgb("#7e6140"); top_l = rgb("#d0ac78")
     skirt = rgb("#2b3550"); skirt_d = rgb("#1a2138")
     hair = rgb("#5a3428"); hair_d = rgb("#3a2019")
     book = rgb("#d9d2c0")
-    shadow(c)
-    legs(c, frame, SKIN, SKIN_D, 36, 11, 17, 4, 8, facing)
-    c.rect(11, 42 if not frame else 41, 4, 3, rgb("#3a2a22")); c.rect(17, 42, 4, 3, rgb("#3a2a22"))   # 靴
-    # スカート
-    c.poly([(9, 28), (22, 28), (25, 38), (6, 38)], skirt)
-    for x in range(8, 24, 3):
-        c.vline(x, 30, 37, skirt_d)
-    c.hline(37, 7, 24, skirt_d)
-    # カーディガン
-    c.rect(8, 18, 16, 11, top)
-    c.gradient_h(8, 18, 4, 11, top_l, top)
-    c.vline(23, 19, 28, top_d)
+    shadow(c, 6)
+    legs(c, frame, SKIN, SKIN_D, 38, 8, facing, 1, 3, rgb("#3a2a22"))
+    c.poly([(CX - 5, 31), (CX + 5, 31), (CX + 6, 39), (CX - 6, 39)], skirt)   # スカート
+    for x in range(CX - 4, CX + 5, 3):
+        c.vline(x, 33, 38, skirt_d)
+    c.hline(38, CX - 5, CX + 5, skirt_d)
+    c.rect(CX - 5, 25, 10, 7, top)                                  # カーディガン
+    c.gradient_h(CX - 5, 25, 3, 7, top_l, top)
+    c.vline(CX + 4, 26, 31, top_d)
     if facing == "down":
-        c.rect(5, 19, 3, 11, top); c.vline(5, 19, 29, top_l); c.rect(5, 30, 3, 2, SKIN)
-        c.rect(24, 19, 3, 11, top_d); c.rect(24, 30, 3, 2, SKIN)
-        c.rect(13, 18, 6, 2, C["bone"])                            # 襟元のブラウス
-        c.vline(15, 20, 27, top_d)
-        c.rect(11, 24, 10, 6, book); c.frame(11, 24, 10, 6, shade(book, -0.4)); c.hline(26, 12, 19, C["fog"])
+        c.rect(CX - 7, 26, 2, 7, top); c.vline(CX - 7, 26, 32, top_l); c.rect(CX - 7, 33, 2, 1, SKIN)
+        c.rect(CX + 5, 26, 2, 7, top_d); c.rect(CX + 5, 33, 2, 1, SKIN)
+        c.rect(CX - 1, 25, 2, 1, C["bone"])                          # 襟元
+        c.rect(CX - 3, 29, 6, 4, book); c.frame(CX - 3, 29, 6, 4, shade(book, -0.4))
     elif facing == "up":
-        c.rect(5, 19, 3, 11, top_d); c.rect(24, 19, 3, 11, top)
+        c.rect(CX - 7, 26, 2, 7, top_d); c.rect(CX + 5, 26, 2, 7, top)
     elif facing == "left":
-        c.rect(11, 20, 4, 10, top_d if frame else top); c.rect(11, 30, 4, 2, SKIN)
-        c.rect(6, 23, 7, 6, book); c.frame(6, 23, 7, 6, shade(book, -0.4))
+        c.rect(CX - 2, 27, 3, 6, top_d if frame else top); c.rect(CX - 2, 33, 3, 1, SKIN)
+        c.rect(CX - 5, 29, 4, 4, book); c.frame(CX - 5, 29, 4, 4, shade(book, -0.4))
     else:
-        c.rect(17, 20, 4, 10, top_d if frame else top); c.rect(17, 30, 4, 2, SKIN)
-        c.rect(19, 23, 7, 6, book); c.frame(19, 23, 7, 6, shade(book, -0.4))
-    c.rect(13, 17, 6, 2, SKIN_D)
-    head(c, facing, SKIN, hair, hair_d, 10, 5, 12, 12, long_hair=True)
+        c.rect(CX - 1, 27, 3, 6, top_d if frame else top); c.rect(CX - 1, 33, 3, 1, SKIN)
+        c.rect(CX + 1, 29, 4, 4, book); c.frame(CX + 1, 29, 4, 4, shade(book, -0.4))
+    c.rect(CX - 2, 24, 4, 1, SKIN_D)
+    head(c, facing, SKIN, hair, hair_d, 16, 8, 8, long_hair=True)
     outline(c)
 
 
-def stalker(c: Canvas, facing, frame):
-    """追跡者：顔の無い暗い人影。輪郭だけ僅かに明るく、向きは肩の傾きと歩幅で示す。血や傷は描かない"""
+def stalker(c: Canvas, frame_facing, frame):
+    """追跡者：顔の無い暗い人影。人より一回り大きい（36 px）。輪郭だけ僅かに明るく、血や傷は描かない"""
+    facing = frame_facing
     body = rgb("#0b0d14"); edge = rgb("#1f2a44"); edge_l = rgb("#2b3856")
-    shadow(c)
-    # 脚（長め）
-    if facing in ("left", "right"):
-        fx = 15 if facing == "right" else 13
-        c.rect(fx - 3, 32, 4, 12 - (2 if frame else 0), body)
-        c.rect(fx + (3 if frame else 1), 32, 4, 12, body)
+    shadow(c, 8)
+    if side(facing):
+        fx = CX + (1 if facing == "right" else -1)
+        c.rect(fx - 4, 33, 3, 13 - (1 if frame else 0), body)
+        c.rect(fx + (2 if frame else 1), 33, 3, 13, body)
     else:
-        c.rect(10, 32, 4, 12 + (1 if frame else 0), body)
-        c.rect(18, 32, 4, 12 - (1 if frame else 0), body)
-    # 胴（肩が広く、頭が低い）
-    c.poly([(6, 16), (26, 16), (25, 34), (7, 34)], body)
+        c.rect(CX - 5, 33, 4, 13 + (1 if frame else 0), body)
+        c.rect(CX + 1, 33, 4, 13 - (1 if frame else 0), body)
+    c.poly([(CX - 8, 20), (CX + 8, 20), (CX + 7, 34), (CX - 7, 34)], body)   # 胴（肩が広い）
     tilt = {"down": 0, "up": 0, "left": -1, "right": 1}[facing]
-    c.hline(16, 6 + max(0, tilt), 25 + min(0, tilt), edge)
-    c.px(6, 16, edge_l if tilt <= 0 else body); c.px(25, 16, edge_l if tilt >= 0 else body)
+    c.hline(20, CX - 8 + max(0, tilt), CX + 7 + min(0, tilt), edge)
     if facing == "down":
-        c.vline(6, 17, 30, edge); c.vline(25, 17, 30, edge)
-        c.vline(4, 20, 33, body); c.vline(27, 20, 33, body)     # 長い腕
+        c.vline(CX - 8, 21, 31, edge); c.vline(CX + 7, 21, 31, edge)
+        c.vline(CX - 10, 23, 36, body); c.vline(CX + 9, 23, 36, body)     # 長い腕
     elif facing == "up":
-        c.vline(6, 17, 31, edge); c.vline(25, 17, 31, edge)
-        c.rect(6, 18, 20, 3, edge)
+        c.vline(CX - 8, 21, 32, edge); c.vline(CX + 7, 21, 32, edge)
+        c.rect(CX - 7, 22, 14, 2, edge)
     elif facing == "left":
-        c.vline(6, 17, 33, edge_l); c.vline(25, 20, 30, edge)
-        c.rect(3, 20, 3, 14, body)
+        c.vline(CX - 8, 21, 34, edge_l); c.vline(CX + 7, 24, 31, edge)
+        c.rect(CX - 11, 23, 2, 12, body)
     else:
-        c.vline(25, 17, 33, edge_l); c.vline(6, 20, 30, edge)
-        c.rect(26, 20, 3, 14, body)
-    # 頭（首が無い）
-    c.rect(11, 4, 10, 13, body)
-    c.hline(4, 12, 19, edge)
+        c.vline(CX + 7, 21, 34, edge_l); c.vline(CX - 8, 24, 31, edge)
+        c.rect(CX + 9, 23, 2, 12, body)
+    c.rect(CX - 4, 10, 8, 11, body)                                  # 頭（首が無い）
+    c.hline(10, CX - 3, CX + 2, edge)
     if facing == "left":
-        c.vline(11, 5, 14, edge)
+        c.vline(CX - 4, 11, 18, edge)
     elif facing == "right":
-        c.vline(20, 5, 14, edge)
+        c.vline(CX + 3, 11, 18, edge)
     elif facing == "up":
-        c.rect(12, 5, 8, 9, mix(body, edge, 0.5))
-    # 輪郭は本体より僅かに明るい（暗所に溶ける）
+        c.rect(CX - 3, 11, 6, 7, mix(body, edge, 0.5))
     c.outline(lambda x, y: c.get(x, y) is not None, mix(body, edge, 0.45))
 
 
 def toki(c: Canvas, facing, frame):
-    """トキ：小柄、白髪をまとめ、藍の着物に白い前掛け"""
+    """トキ：小柄（28 px）、白髪をまとめ、藍の着物に白い前掛け"""
     kimono = rgb("#2b3550"); kimono_d = rgb("#1a2138"); kimono_l = rgb("#3c4a6c")
     apron = rgb("#d9d2c0"); apron_d = rgb("#a9a290")
     hair = rgb("#c8c4bc"); hair_d = rgb("#8f8b84")
-    shadow(c)
+    shadow(c, 6)
     sway = 1 if frame else 0
-    # 着物（足元まで）
-    c.poly([(9, 20), (23, 20), (25, 44), (7, 44)], kimono)
-    c.gradient_h(9, 20, 3, 24, kimono_l, kimono)
-    c.vline(24, 22, 43, kimono_d)
-    c.hline(43, 8, 24, kimono_d)
-    c.rect(10, 44, 4, 2, SKIN_D); c.rect(18, 44, 4, 2, SKIN_D)     # 足袋
+    c.poly([(CX - 5, 27), (CX + 5, 27), (CX + 6, 45), (CX - 6, 45)], kimono)      # 着物
+    c.gradient_h(CX - 5, 27, 2, 18, kimono_l, kimono)
+    c.vline(CX + 5, 29, 44, kimono_d)
+    c.hline(44, CX - 5, CX + 5, kimono_d)
+    c.rect(CX - 4, 45, 3, 1, SKIN_D); c.rect(CX + 1, 45, 3, 1, SKIN_D)              # 足袋
     if facing != "up":
-        c.rect(11, 26, 11, 15, apron)
-        c.gradient_v(11, 26, 11, 3, shade(apron, 0.1), apron)
-        c.vline(21, 27, 40, apron_d); c.hline(40, 12, 21, apron_d)
-        c.rect(12, 24, 9, 2, rgb("#8a4a3a"))                        # 帯
+        c.rect(CX - 3, 32, 7, 11, apron)
+        c.vline(CX + 3, 33, 42, apron_d); c.hline(42, CX - 3, CX + 3, apron_d)
+        c.rect(CX - 4, 30, 8, 2, rgb("#8a4a3a"))                                     # 帯
     else:
-        c.rect(12, 24, 9, 3, rgb("#8a4a3a")); c.rect(14, 22, 5, 6, rgb("#6e3a2e"))   # 帯結び
-    # 袖（手を前で組む）
+        c.rect(CX - 4, 30, 8, 2, rgb("#8a4a3a")); c.rect(CX - 2, 29, 4, 5, rgb("#6e3a2e"))   # 帯結び
     if facing == "down":
-        c.rect(6, 22, 4, 10, kimono_l); c.rect(22, 22, 4, 10, kimono_d)
-        c.rect(12, 30, 8, 3, SKIN_OLD)
+        c.rect(CX - 8, 29, 3, 7, kimono_l); c.rect(CX + 5, 29, 3, 7, kimono_d)      # 袖
+        c.rect(CX - 2, 35, 4, 2, SKIN_OLD)                                            # 組んだ手
     elif facing == "up":
-        c.rect(6, 22, 4, 10, kimono_d); c.rect(22, 22, 4, 10, kimono)
+        c.rect(CX - 8, 29, 3, 7, kimono_d); c.rect(CX + 5, 29, 3, 7, kimono)
     elif facing == "left":
-        c.rect(9, 22, 5, 10, kimono_l); c.rect(9, 31, 4, 2, SKIN_OLD)
+        c.rect(CX - 4, 29, 4, 7, kimono_l); c.rect(CX - 4, 36, 3, 1, SKIN_OLD)
     else:
-        c.rect(18, 22, 5, 10, kimono_d); c.rect(19, 31, 4, 2, SKIN_OLD)
-    c.rect(13, 19, 6, 2, shade(SKIN_OLD, -0.2))
-    head(c, facing, SKIN_OLD, hair, hair_d, 10 + sway, 8, 12, 11, bangs=False)
-    # まとめ髪
+        c.rect(CX, 29, 4, 7, kimono_d); c.rect(CX + 1, 36, 3, 1, SKIN_OLD)
+    c.rect(CX - 2, 26, 4, 1, shade(SKIN_OLD, -0.2))
+    head(c, facing, SKIN_OLD, hair, hair_d, 18, 8, 7, bangs=False)
     if facing != "down":
-        c.disc(16 + sway, 8, 3, hair); c.px(15 + sway, 7, shade(hair, 0.3))
-    # しわ
+        c.disc(CX + sway, 18, 2, hair); c.px(CX + sway - 1, 17, shade(hair, 0.3))   # まとめ髪
     if facing == "down":
-        c.hline(13, 12 + sway, 14 + sway, shade(SKIN_OLD, -0.25)); c.hline(13, 18 + sway, 20 + sway, shade(SKIN_OLD, -0.25))
+        c.px(CX - 3 + sway, 23, shade(SKIN_OLD, -0.25)); c.px(CX + 2 + sway, 23, shade(SKIN_OLD, -0.25))   # しわ
     outline(c)
 
 
 def shige(c: Canvas, facing, frame):
-    """シゲ：朝和の老婆。濃い野良着（もんぺ）、手拭いを被る。前かがみ。トキと色で見分ける"""
+    """シゲ：朝和の老婆（28 px）。濃い野良着（絣）ともんぺ、手拭いを被る。前かがみ。トキと色で見分ける"""
     cloth = rgb("#3a4a3a"); cloth_d = rgb("#243024"); cloth_l = rgb("#526552")
     monpe = rgb("#2a2e3a"); monpe_d = rgb("#1a1d26")
     towel = rgb("#c9c3b0"); towel_d = rgb("#948f80"); towel_pat = rgb("#4a5a78")
-    shadow(c)
+    shadow(c, 6)
     sway = 1 if frame else 0
-    # もんぺ（太い脚）
-    c.rect(9, 32, 6, 12, monpe); c.rect(17, 32, 6, 12, monpe)
-    c.vline(14, 32, 43, monpe_d); c.vline(22, 32, 43, monpe_d)
-    c.rect(9, 44, 5, 2, rgb("#3a2a22")); c.rect(18, 44, 5, 2, rgb("#3a2a22"))
-    # 上着（前かがみで胴が前へ）
-    c.poly([(8, 20), (24, 20), (25, 33), (7, 33)], cloth)
-    c.gradient_h(8, 20, 4, 13, cloth_l, cloth)
-    c.vline(24, 21, 32, cloth_d)
-    c.hline(32, 8, 24, cloth_d)
-    for y in range(22, 32, 3):                                    # 絣の点
-        for x in range(10, 24, 4):
+    c.rect(CX - 6, 36, 5, 9, monpe); c.rect(CX + 1, 36, 5, 9, monpe)               # もんぺ（太い脚）
+    c.vline(CX - 2, 36, 44, monpe_d); c.vline(CX + 5, 36, 44, monpe_d)
+    c.rect(CX - 6, 45, 4, 1, rgb("#3a2a22")); c.rect(CX + 2, 45, 4, 1, rgb("#3a2a22"))
+    c.poly([(CX - 6, 27), (CX + 6, 27), (CX + 7, 37), (CX - 7, 37)], cloth)        # 上着
+    c.gradient_h(CX - 6, 27, 3, 10, cloth_l, cloth)
+    c.vline(CX + 6, 28, 36, cloth_d)
+    c.hline(36, CX - 6, CX + 6, cloth_d)
+    for y in range(29, 36, 3):                                                      # 絣の点
+        for x in range(CX - 5, CX + 6, 3):
             c.px(x + (y % 2), y, cloth_d)
     if facing == "down":
-        c.rect(5, 21, 3, 11, cloth_l); c.rect(24, 21, 3, 11, cloth_d)
-        c.rect(5, 31, 3, 2, SKIN_OLD); c.rect(24, 31, 3, 2, SKIN_OLD)
-        c.vline(16, 20, 31, cloth_d)
-        c.rect(13, 20, 6, 2, towel)                                 # 襟元
-        c.rect(6, 33, 4, 4, rgb("#5a3a26"))                         # 手にした鎌の柄（刃は描かない）
+        c.rect(CX - 9, 28, 3, 8, cloth_l); c.rect(CX + 6, 28, 3, 8, cloth_d)
+        c.rect(CX - 9, 36, 3, 1, SKIN_OLD); c.rect(CX + 6, 36, 3, 1, SKIN_OLD)
+        c.vline(CX, 27, 35, cloth_d)
+        c.rect(CX - 2, 27, 4, 1, towel)
     elif facing == "up":
-        c.rect(5, 21, 3, 11, cloth_d); c.rect(24, 21, 3, 11, cloth)
-        c.rect(12, 21, 8, 6, towel_d)                               # 手拭いの垂れ
+        c.rect(CX - 9, 28, 3, 8, cloth_d); c.rect(CX + 6, 28, 3, 8, cloth)
+        c.rect(CX - 3, 27, 6, 4, towel_d)                                           # 手拭いの垂れ
     elif facing == "left":
-        c.rect(10, 22, 4, 10, cloth_d if frame else cloth); c.rect(10, 32, 4, 2, SKIN_OLD)
+        c.rect(CX - 3, 29, 3, 7, cloth_d if frame else cloth); c.rect(CX - 3, 36, 3, 1, SKIN_OLD)
     else:
-        c.rect(18, 22, 4, 10, cloth_d if frame else cloth); c.rect(18, 32, 4, 2, SKIN_OLD)
-    c.rect(13, 19, 6, 2, shade(SKIN_OLD, -0.2))
-    # 頭（前かがみで低い）
-    head(c, facing, SKIN_OLD, towel, towel_d, 10 + sway, 9, 12, 11, bangs=False)
-    # 手拭い（頭を覆う）
-    c.rect(9 + sway, 6, 14, 6, towel)
-    c.hline(6, 10 + sway, 22 + sway, shade(towel, 0.25))
-    c.hline(11, 9 + sway, 22 + sway, towel_d)
-    for x in range(10 + sway, 22 + sway, 3):
-        c.px(x, 8, towel_pat); c.px(x + 1, 9, towel_pat)
-    if facing in ("left", "right"):
-        tx = 9 + sway if facing == "left" else 21 + sway
-        c.rect(tx, 10, 2, 8, towel); c.vline(tx + (1 if facing == "left" else 0), 10, 17, towel_d)   # 結び目の垂れ
+        c.rect(CX, 29, 3, 7, cloth_d if frame else cloth); c.rect(CX, 36, 3, 1, SKIN_OLD)
+    c.rect(CX - 2, 26, 4, 1, shade(SKIN_OLD, -0.2))
+    head(c, facing, SKIN_OLD, towel, towel_d, 18, 8, 7, bangs=False, cap=towel)   # 頭（前かがみで低い）
+    for x in range(CX - 4 + sway, CX + 4 + sway, 3):                                # 手拭いの柄
+        c.px(x, 19, towel_pat)
+    if side(facing):
+        tx = CX - 5 + sway if facing == "left" else CX + 4 + sway
+        c.rect(tx, 21, 2, 5, towel); c.vline(tx + (1 if facing == "left" else 0), 21, 25, towel_d)   # 結び目の垂れ
     if facing == "down":
-        c.hline(14, 12 + sway, 14 + sway, shade(SKIN_OLD, -0.25)); c.hline(14, 18 + sway, 20 + sway, shade(SKIN_OLD, -0.25))
+        c.px(CX - 3 + sway, 24, shade(SKIN_OLD, -0.25)); c.px(CX + 2 + sway, 24, shade(SKIN_OLD, -0.25))
     outline(c)
 
 

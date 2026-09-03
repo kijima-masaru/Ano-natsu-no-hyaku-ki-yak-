@@ -1,6 +1,6 @@
 class_name ActorSpriteGenerator
 extends RefCounted
-## アクターのスプライト（32×48、4 方向 × 2 フレーム）を返す。
+## アクターのスプライト（枠 32×48、4 方向 × 2 フレーム。人物は下 32 px ≈ 1 マス ＝ 身長 1.7 m の縮尺）を返す。
 ## resources/actors/<kind>.png（tools/actors/paint_actors.py が描くシート。列＝フレーム、行＝下・上・左・右）があればそれを切り出し、
 ## 無ければ 16×24 の仮スプライトをプロシージャル生成して拡大する（tile_generator と同じ方針の保険）。
 

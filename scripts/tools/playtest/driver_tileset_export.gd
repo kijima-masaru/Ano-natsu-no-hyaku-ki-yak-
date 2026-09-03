@@ -99,11 +99,13 @@ func _build_from_layout(names: PackedStringArray) -> TileSet:
 			continue
 		source.create_tile(coords)
 		var data: TileData = source.get_tile_data(coords, 0)
-		if variant == "top":
-			# 木の梢など。Overhead 層に置く。通行判定に関わらないよう種別名は空、当たりも無し
+		if variant == "part":
+			# 木の梢・電柱の上部など。Overhead 層に置く。通行判定に関わらないよう種別名は空、当たりも無し
 			data.set_custom_data(TileGenerator.CUSTOM_TILE_TYPE, "")
 			data.set_custom_data(TileGenerator.CUSTOM_INTERACTABLE, false)
-			tall[name] = coords
+			if not tall.has(name):
+				tall[name] = []
+			(tall[name] as Array).append({"offset": Vector2i(int(e.get("dx", 0)), int(e.get("dy", -1))), "coords": coords})
 			continue
 		data.set_custom_data(TileGenerator.CUSTOM_TILE_TYPE, name)
 		data.set_custom_data(TileGenerator.CUSTOM_INTERACTABLE, TileGenerator.is_interactable(name))

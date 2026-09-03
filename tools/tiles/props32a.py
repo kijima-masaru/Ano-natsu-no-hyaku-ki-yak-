@@ -161,23 +161,30 @@ def fence_locked(c: Canvas, p):
 
 
 def parking_car(c: Canvas, p):
-    with_ground(c, p, "asphalt")
-    c.shadow_ellipse(16, 17, 15, 14, 0.5)
+    """駐車車両：1 マス幅、2 マス長（3.4 m）。上のマスは Overhead に載る"""
+    from paint32 import tall_ground, outline_tall
+    g, bx, by = tall_ground(c, p, "asphalt", 1, 2)
+    c.shadow_ellipse(16, 34, 15, 30, 0.45)
     body = C["deep"]
-    c.rect(4, 2, 24, 28, body)
-    c.gradient_h(4, 2, 24, 28, shade(body, 0.1), shade(body, -0.15))
-    c.rect(6, 8, 20, 6, C["night"])          # 前ガラス
-    c.gradient_v(6, 8, 20, 6, shade(C["night"], 0.3), C["night"])
-    c.rect(6, 22, 20, 4, C["night"])         # 後ガラス
-    c.rect(7, 14, 18, 8, shade(body, 0.05))  # 屋根
-    c.gradient_v(7, 14, 18, 3, shade(body, 0.25), shade(body, 0.05))
-    c.rect(6, 3, 20, 2, shade(body, 0.15))   # ボンネット
-    c.px(5, 4, C["ochre"]); c.px(6, 4, C["ochre"]); c.px(25, 4, C["ochre"]); c.px(26, 4, C["ochre"])
-    c.rect(5, 27, 2, 2, C["red"]); c.rect(25, 27, 2, 2, C["red"])
-    c.rect(2, 8, 2, 8, SUMI); c.rect(28, 8, 2, 8, SUMI)    # タイヤ
-    c.rect(2, 20, 2, 8, SUMI); c.rect(28, 20, 2, 8, SUMI)
-    c.rect(6, 14, 1, 8, ML); c.rect(25, 14, 1, 8, MD)     # ミラー/ドア線
-    c.frame(4, 2, 24, 28, SUMI)
+    c.rect(4, 6, 24, 54, body)
+    c.gradient_h(4, 6, 24, 54, shade(body, 0.12), shade(body, -0.15))
+    c.rect(6, 6, 20, 5, shade(body, 0.15))   # ボンネット
+    c.gradient_v(6, 7, 20, 8, shade(body, 0.2), body)
+    c.rect(6, 16, 20, 9, C["night"])          # 前ガラス
+    c.gradient_v(6, 16, 20, 9, shade(C["night"], 0.35), C["night"])
+    c.rect(7, 25, 18, 18, shade(body, 0.06))  # 屋根
+    c.gradient_v(7, 25, 18, 4, shade(body, 0.28), shade(body, 0.06))
+    c.rect(6, 43, 20, 7, C["night"])          # 後ガラス
+    c.gradient_v(6, 43, 20, 7, C["night"], shade(C["night"], 0.2))
+    c.rect(6, 52, 20, 6, shade(body, -0.05))  # トランク
+    c.px(5, 8, C["ochre"]); c.px(6, 8, C["ochre"]); c.px(25, 8, C["ochre"]); c.px(26, 8, C["ochre"])   # ヘッドライト
+    c.rect(5, 56, 3, 2, C["red"]); c.rect(24, 56, 3, 2, C["red"])                                     # テールランプ
+    for y in (12, 44):                          # タイヤ
+        c.rect(2, y, 2, 10, SUMI); c.rect(28, y, 2, 10, SUMI)
+    c.rect(6, 25, 1, 18, ML); c.rect(25, 25, 1, 18, MD)    # ドア線
+    c.hline(34, 7, 24, shade(body, -0.25))                   # 前後ドアの境
+    c.rect(3, 22, 2, 3, ML); c.rect(27, 22, 2, 3, MD)        # ミラー
+    c.frame(4, 6, 24, 54, SUMI)
 
 
 def bike_shed(c: Canvas, p):
@@ -545,11 +552,15 @@ FLAT2 = {
     "白線（停止線）": lambda c, p: line_paint(c, p, True, 6, 12),
     "駐車場ライン": lambda c, p: line_paint(c, p, False, 2, 0),
     "狭い歩道（縁石）": curb, "側溝": lambda c, p: drain(c, p), "側溝・グレーチング": grating,
-    "ガードレール": guardrail, "バリケード": barricade, "フェンス（施錠）": fence_locked, "駐車車両（暗）": parking_car,
+    "ガードレール": guardrail, "バリケード": barricade, "フェンス（施錠）": fence_locked,
     "自転車置き場": bike_shed, "掲示板": bulletin, "看板（地図）": map_board, "案内板": info_board,
     "商店の看板（褪せ）": shop_sign, "店舗看板（無地）": plain_sign, "時刻表看板": timetable,
     "蛍光灯": fluorescent, "蛍光灯（バス停）": fluorescent, "非常灯": emergency_light, "交番の赤色灯": police_light,
     "自販機正面": vending, "公衆電話ボックス": phone_booth, "集合ポスト": postboxes, "教室の机・椅子": desk_chair, "黒板": blackboard,
     "百葉箱": weather_box, "朝礼台": platform, "ダッグアウト": dugout, "ベランダ": veranda, "物干し": laundry, "ブランコ・砂場": sandbox_swing,
     "飼育小屋（金網）": hen_house, "ゴミ集積所ネット": garbage_net, "バックネット（金網）": backnet, "縞鋼板の歩道橋": footbridge,
+}
+
+TALL2 = {
+    "駐車車両（暗）": (parking_car, 1, 2),
 }
