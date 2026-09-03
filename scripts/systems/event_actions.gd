@@ -18,7 +18,8 @@ static func register_all(es: Node) -> void:
 	es.register_action("remove_item", func(a: Dictionary, _c: Dictionary) -> void: GameState.remove_item(str(a.get("item", ""))))
 	es.register_action("unlock_field", func(a: Dictionary, c: Dictionary) -> void: _unlock_field(es, a, c))
 	es.register_action("move_player", func(a: Dictionary, _c: Dictionary) -> void: await _move_player(a))
-	es.register_action("advance_day", func(_a: Dictionary, _c: Dictionary) -> void: Calendar.advance_day())
+	es.register_action("advance_day", func(_a: Dictionary, _c: Dictionary) -> void: _advance_day_deferred(es))
+	es.register_action("branch", func(a: Dictionary, c: Dictionary) -> void: await _branch(es, a, c))
 	es.register_action("set_time", func(a: Dictionary, _c: Dictionary) -> void: Calendar.set_time_of_day(str(a.get("time_of_day", ""))))
 	es.register_action("add_points", func(a: Dictionary, _c: Dictionary) -> void: Calendar.add_investigation_points(int(a.get("amount", 1))))
 	es.register_action("wait", func(a: Dictionary, _c: Dictionary) -> void:
@@ -63,7 +64,8 @@ static func _move_player(a: Dictionary) -> void:
 		SceneRouter.player.place_at_tile(Vector2i(int((tile as Array)[0]), int((tile as Array)[1])), facing)
 
 
-## choice: {prompt_id?, options:[{text_id, set_flag?, run_event?}]}
+## choice: {prompt_id?, options:[{text_id, set_flag?, actions?, run_event?}]}。
+## actions はその場で順に実行する（返答など）。run_event は待ち行列に入るので、現在のイベントの後に走る
 static func _choice(es: Node, a: Dictionary, c: Dictionary) -> void:
 	var options: Variant = a.get("options", [])
 	if not options is Array or (options as Array).is_empty():
@@ -80,6 +82,8 @@ static func _choice(es: Node, a: Dictionary, c: Dictionary) -> void:
 	var chosen: Dictionary = (options as Array)[index]
 	if chosen.has("set_flag"):
 		GameState.raise_flag(str(chosen["set_flag"]))
+	if chosen.get("actions", null) is Array:
+		await es.run_actions_inline(str(c["event_id"]), chosen["actions"])
 	if chosen.has("run_event"):
 		es.run_event(str(chosen["run_event"]))
 
@@ -99,6 +103,27 @@ static func _start_stalker(es: Node, a: Dictionary, c: Dictionary) -> void:
 		tile = Vector2i(int((tile_value as Array)[0]), int((tile_value as Array)[1]))
 	field.spawn_stalker(tile, str(a.get("retreat_to", "F01")))
 	GameState.raise_flag("stalker_met")
+
+
+## advance_day: 自宅以外で日を送る（8/30 の夜など）。sleep と同じく、日送りはイベント終了後に行い
+## 翌日の開始メッセージと現在のイベントの表示が重ならないようにする
+static func _advance_day_deferred(es: Node) -> void:
+	if not Calendar.can_advance():
+		es.emit_action_failed("advance_day", {}, "進行条件未達")
+		return
+	es.event_finished.connect(func(_id: String) -> void: Calendar.advance_day(), Object.CONNECT_ONE_SHOT | Object.CONNECT_DEFERRED)
+
+
+## branch: {conditions, then:[actions], else:[actions]}。条件をすべて満たせば then、さもなくば else をその場で実行する。
+## run_event は条件を見ないので、イベントの途中で状態により分かれる箇所（真相の部分到達など）はこれを使う
+static func _branch(es: Node, a: Dictionary, c: Dictionary) -> void:
+	var conditions: Array[Dictionary] = []
+	for v: Variant in a.get("conditions", []) as Array:
+		if v is Dictionary:
+			conditions.append(v)
+	var taken: Variant = a.get("then", []) if ConditionEvaluator.evaluate_all(conditions) else a.get("else", [])
+	if taken is Array:
+		await es.run_actions_inline(str(c["event_id"]), taken)
 
 
 ## end_game: {ending}。クリア記録を残しタイトルへ（本実装はステップ5）
