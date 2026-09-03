@@ -122,17 +122,19 @@ def fade_edges(x: np.ndarray, fade_in: float, fade_out: float) -> np.ndarray:
     return fade(x, fade_in, fade_out)
 
 
-def finalize(x: np.ndarray, kind: str, loop: bool, stereo: bool, fade_in: float = 0.0, fade_out: float = 0.0, crossfade_sec: float = 0.5) -> tuple[np.ndarray, dict]:
-    """共通の仕上げ。戻り値は (波形, 記録用の辞書)"""
+def finalize(x: np.ndarray, kind: str, loop: bool, stereo: bool, fade_in: float = 0.0, fade_out: float = 0.0, crossfade_sec: float = 0.5,
+             lufs_offset: float = 0.0) -> tuple[np.ndarray, dict]:
+    """共通の仕上げ。戻り値は (波形, 記録用の辞書)。lufs_offset は系統の目標からの意図的なずれ（静かな場所は負）"""
     y = to_stereo(x) if stereo else (x if x.ndim == 1 else x.mean(axis=1)).astype(np.float32)
     y = remove_dc(y)
     if loop:
         y = seamless_loop(y, crossfade_sec)
     else:
         y = fade_edges(y, fade_in, fade_out)
-    y = normalize_lufs(y, TARGET_LUFS[kind])
+    target = TARGET_LUFS[kind] + lufs_offset
+    y = normalize_lufs(y, target)
     y, reduced = limit_peak(y)
-    info = {"lufs": loudness_lufs(y), "peak_dbfs": peak_dbfs(y), "gain_reduced_db": reduced, "seconds": len(y) / SR}
+    info = {"lufs": loudness_lufs(y), "peak_dbfs": peak_dbfs(y), "gain_reduced_db": reduced, "seconds": len(y) / SR, "target_lufs": target}
     return y, info
 
 

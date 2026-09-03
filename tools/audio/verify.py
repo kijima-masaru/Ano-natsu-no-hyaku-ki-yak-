@@ -32,22 +32,38 @@ def load_manifest(root: str) -> dict:
 
 
 def loop_seam_score(x: np.ndarray) -> float:
-    """3 周連結し、継ぎ目前後 20 ms の RMS 差（dB）と、継ぎ目のサンプル段差から「継ぎ目の目立ちやすさ」を出す。小さいほど良い"""
-    m = x if x.ndim == 1 else x.mean(axis=1)
-    x3 = np.concatenate([m, m, m])
+    """3 周連結し、継ぎ目の不連続を測る。
+    不連続＝(a) 継ぎ目のサンプル段差を、その前後 20 ms の平均段差で割った比（連続なら 1 前後）＋ (b) 前後 5 ms の RMS 差（dB）。
+    同じ音の「音がある位置」200 箇所で同じ量を測り、その 95 パーセンタイルで割った比を返す。
+    1 以下なら継ぎ目は他の場所と区別がつかない。まばらな音（虫・物音）でも、粒が継ぎ目をまたいで連続していれば小さくなる"""
+    m = (x if x.ndim == 1 else x.mean(axis=1)).astype(np.float64)
     n = len(m)
     w = n_samples(0.02)
-    scores = []
-    for seam in (n, 2 * n):
-        before = x3[seam - w:seam]
-        after = x3[seam:seam + w]
+    w5 = n_samples(0.005)
+    if n < 4 * w:
+        return 0.0
+    x3 = np.concatenate([m, m, m])
+    d3 = np.abs(np.diff(x3))
+
+    def jump(pos):
+        local = d3[pos - w:pos + w].mean() + 1e-9
+        step = d3[pos - 1] / local
+        before, after = x3[pos - w5:pos], x3[pos:pos + w5]
         rb, ra = np.sqrt(np.mean(before ** 2) + 1e-12), np.sqrt(np.mean(after ** 2) + 1e-12)
-        level_jump = abs(20 * np.log10(rb / ra))
-        # 継ぎ目の段差を、信号の通常の隣接差（中央値）と比べる。ノイズ系でも連続なら 1 前後になる
-        typical = np.median(np.abs(np.diff(m))) + 1e-9
-        step_ratio = abs(float(x3[seam] - x3[seam - 1])) / typical
-        scores.append(level_jump + max(0.0, step_ratio - 4.0) * 0.5)
-    return float(max(scores))
+        return max(0.0, step - 3.0) + abs(20 * np.log10(rb / ra))
+
+    rng = np.random.default_rng(0)
+    active = []
+    tries = 0
+    while len(active) < 200 and tries < 4000:
+        p = int(rng.integers(w, n - w)) + n
+        tries += 1
+        if np.sqrt(np.mean(x3[p - w5:p + w5] ** 2)) > 1e-4:
+            active.append(jump(p))
+    if len(active) < 20:
+        return 0.0  # ほぼ無音の素材は継ぎ目を問わない
+    p95 = float(np.percentile(active, 95)) + 0.5
+    return float(max(jump(n), jump(2 * n)) / p95)
 
 
 def silence_fraction(x: np.ndarray, thresh_db: float = -70.0) -> float:
@@ -79,7 +95,7 @@ def check_file(path: str, manifest: dict, strict: bool) -> dict:
     if pk > PEAK_DBFS + 0.05:
         problems.append(f"ピーク {pk:.1f} dBFS > {PEAK_DBFS}")
     lufs = loudness_lufs(x)
-    target = TARGET_LUFS[kind]
+    target = float(meta.get("target_lufs", TARGET_LUFS[kind]))
     if np.isfinite(lufs) and abs(lufs - target) > LUFS_TOLERANCE:
         problems.append(f"ラウドネス {lufs:.1f} LUFS（目標 {target}）")
     dc = float(np.abs(x.mean(axis=0)).max())
@@ -93,9 +109,9 @@ def check_file(path: str, manifest: dict, strict: bool) -> dict:
     seam = None
     if loop:
         seam = loop_seam_score(x)
-        if seam > 4.0:
-            problems.append(f"ループの継ぎ目 {seam:.1f}")
-        elif seam > 2.5:
+        if seam > 2.0:
+            problems.append(f"ループの継ぎ目 {seam:.1f}（他所の 95%点比）")
+        elif seam > 1.2:
             warnings.append(f"継ぎ目 {seam:.1f}")
     size = os.path.getsize(path)
     if size > SIZE_LIMIT[kind]:
