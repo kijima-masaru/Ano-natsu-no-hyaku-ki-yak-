@@ -516,6 +516,82 @@ def roof(c: Canvas, p, mask=0, base=None, dark=None, hi=None, bark=False):
         c.vline(S - 2, 0, S - 1, dark)
 
 
+def facade(c: Canvas, p, mask=0, d=0, F=2, kind="plaster", base=None):
+    """建物の正面（1 行 ≈ 1.7 m ≈ 1 階の 6 割）。d は下端からの行数（0 が地面の行）、F は正面の行数。
+    kind：plaster（住宅の漆喰）/ conc（コンクリート）/ tile（タイル）/ plank（下見板）/ metal（トタン）/ wood（板壁）"""
+    if kind == "conc":
+        base = C["conc"] if base is None else base
+        concrete(c, p, base, 0.25)
+    elif kind == "tile":
+        base = C["conc"] if base is None else base
+        tile_wall(c, p, 15, base)
+    elif kind == "plank":
+        base = C["wood"] if base is None else base
+        planks(c, p, 15, base, shade(base, -0.5), 4, False, True)
+    elif kind == "metal":
+        base = C["metal"] if base is None else base
+        planks(c, p, 15, base, C["metal_d"], 4, True)
+    elif kind == "wood":
+        base = C["wood_d"] if base is None else base
+        planks(c, p, 15, base, C["sumi"], 8, True)
+    else:
+        base = C["plaster"] if base is None else base
+        c.texture(0, 0, S, S, base, 0.08, 6.0, k=1)
+        c.noise(shade(base, -0.25), 0.03, k=2)
+    glass, frame = (22, 28, 46), shade(base, -0.45)
+    # 窓：各行に 2 つ。地面の行は小さめ（腰高）
+    win_y, win_h = (12, 12) if d == 0 else (8, 14)
+    for x0 in (4, 19):
+        c.rect(x0, win_y, 9, win_h, glass)
+        c.line(x0 + 1, win_y + win_h - 2, x0 + 7, win_y + 1, mix(glass, C["conc"], 0.3))
+        c.frame(x0 - 1, win_y - 1, 11, win_h + 2, frame)
+        c.hline(win_y + win_h + 1, x0 - 1, x0 + 9, shade(base, 0.25))   # 窓台
+        c.vline(x0 + 4, win_y, win_y + win_h - 1, frame)
+    if d == 0:
+        c.rect(0, S - 4, S, 4, shade(base, -0.35))                     # 基礎
+        c.hline(S - 4, 0, S - 1, shade(base, -0.5))
+        c.hline(S - 1, 0, S - 1, C["sumi"])
+    if d == F - 1 or not (mask & N):
+        c.gradient_v(0, 0, S, 4, shade(C["sumi"], 0.15), shade(base, -0.2))   # 軒の影
+        c.hline(0, 0, S - 1, C["sumi"])
+    if not (mask & W):
+        c.vline(0, 0, S - 1, shade(base, 0.25))
+        c.vline(1, 0, S - 1, shade(base, 0.1))
+    if not (mask & E):
+        c.vline(S - 1, 0, S - 1, C["sumi"])
+        c.vline(S - 2, 0, S - 1, shade(base, -0.35))
+
+
+def flat_roof(c: Canvas, p, mask=0, base=None):
+    """陸屋根（コンクリート・タイルの建物の上）。パラペットと砂利、雨染み"""
+    base = shade(C["conc"], -0.2) if base is None else base
+    c.texture(0, 0, S, S, base, 0.1, 7.0, k=3)
+    c.noise(shade(base, 0.2), 0.08, k=4)
+    c.noise(shade(base, -0.3), 0.05, k=5)
+    if not (mask & N):
+        c.rect(0, 0, S, 4, shade(base, 0.25))
+        c.hline(0, 0, S - 1, shade(base, 0.45))
+        c.hline(4, 0, S - 1, shade(base, -0.4))
+    if not (mask & SO):
+        c.rect(0, S - 4, S, 4, shade(base, 0.2))
+        c.hline(S - 4, 0, S - 1, shade(base, 0.4))
+        c.hline(S - 1, 0, S - 1, C["sumi"])
+    if not (mask & W):
+        c.rect(0, 0, 3, S, shade(base, 0.2))
+        c.vline(0, 0, S - 1, shade(base, 0.4))
+    if not (mask & E):
+        c.rect(S - 3, 0, 3, S, shade(base, 0.05))
+        c.vline(S - 1, 0, S - 1, C["sumi"])
+
+
+def building(c: Canvas, p, mask, d, F, kind, roof_fn, base=None):
+    """建物のオートタイル：下端から F 行は正面（facade）、その上は屋根。d は TileVariants が渡す下端からの行数（F 以上で屋根）"""
+    if d >= F:
+        roof_fn(c, p, mask)
+    else:
+        facade(c, p, mask, d, F, kind, base)
+
+
 def hedge(c: Canvas, p, mask=0):
     base = C["leaf_d"]
     c.texture(0, 0, S, S, base, 0.15, 4.0, k=1, dark=C["leaf_dd"], light=C["leaf"])
@@ -864,26 +940,26 @@ def utility_pole(c: Canvas, p, ground=None, h=5):
 AUTOTILE = {
     "ブロック塀": lambda c, p, m: block_wall(c, p, m, C["conc"]),
     "土塀（漆喰・崩れ）": lambda c, p, m: block_wall(c, p, m, C["plaster"], C["plaster_d"], 32, 10),
-    "団地 外壁（コンクリート・雨染み）": lambda c, p, m: concrete_wall(c, p, m, C["conc"], 0.5),
-    "体育館の壁": lambda c, p, m: concrete_wall(c, p, m, C["fog"], 0.15),
+    "団地 外壁（コンクリート・雨染み）": lambda c, p, m, d: building(c, p, m, d, 3, "conc", lambda c, p, m: flat_roof(c, p, m)),
+    "体育館の壁": lambda c, p, m, d: building(c, p, m, d, 6, "conc", lambda c, p, m: flat_roof(c, p, m)),
     "防音壁": lambda c, p, m: concrete_wall(c, p, m, C["fog"], 0.2),
     "防音壁（遠景）": lambda c, p, m: concrete_wall(c, p, m, C["dusk"], 0.2),
     "隧道内壁（湿）": lambda c, p, m: concrete_wall(c, p, m, C["dusk"], 0.6),
     "高架橋脚": lambda c, p, m: concrete_wall(c, p, m, C["conc"], 0.4),
-    "公共建築の壁（タイル）": lambda c, p, m: tile_wall(c, p, m, C["conc"]),
-    "支所の壁（タイル）": lambda c, p, m: tile_wall(c, p, m, C["fog"]),
-    "新校舎 外壁（タイル）": lambda c, p, m: tile_wall(c, p, m, C["stone"]),
-    "旧校舎 外壁（下見板）": lambda c, p, m: planks(c, p, m, C["wood"], None, 8, False, True),
-    "庵の板壁と瓦": lambda c, p, m: planks(c, p, m, C["wood_d"], C["sumi"], 8, True),
-    "廃寺の壁・屋根（崩落）": lambda c, p, m: planks(c, p, m, C["wood_d"], C["sumi"], 8, True, True),
-    "観音堂の板壁・格子・屋根": lambda c, p, m: planks(c, p, m, C["wood_d"], C["sumi"], 4, True),
-    "倉庫（トタン）": lambda c, p, m: planks(c, p, m, C["metal"], C["metal_d"], 4, True),
-    "農機具小屋（トタン・板）": lambda c, p, m: planks(c, p, m, C["wood"], C["wood_d"], 6, False),
-    "建売住宅の壁・屋根（瓦）": lambda c, p, m: roof(c, p, m),
+    "公共建築の壁（タイル）": lambda c, p, m, d: building(c, p, m, d, 5, "tile", lambda c, p, m: flat_roof(c, p, m)),
+    "支所の壁（タイル）": lambda c, p, m, d: building(c, p, m, d, 3, "tile", lambda c, p, m: flat_roof(c, p, m)),
+    "新校舎 外壁（タイル）": lambda c, p, m, d: building(c, p, m, d, 5, "tile", lambda c, p, m: flat_roof(c, p, m)),
+    "旧校舎 外壁（下見板）": lambda c, p, m, d: building(c, p, m, d, 4, "plank", lambda c, p, m: roof(c, p, m), C["ochre_d"]),
+    "庵の板壁と瓦": lambda c, p, m, d: building(c, p, m, d, 2, "wood", lambda c, p, m: roof(c, p, m)),
+    "廃寺の壁・屋根（崩落）": lambda c, p, m, d: building(c, p, m, d, 2, "wood", lambda c, p, m: roof(c, p, m)),
+    "観音堂の板壁・格子・屋根": lambda c, p, m, d: building(c, p, m, d, 2, "wood", lambda c, p, m: roof(c, p, m)),
+    "倉庫（トタン）": lambda c, p, m, d: building(c, p, m, d, 2, "metal", lambda c, p, m: roof(c, p, m, C["metal"], C["metal_d"], C["metal_l"])),
+    "農機具小屋（トタン・板）": lambda c, p, m, d: building(c, p, m, d, 1, "plank", lambda c, p, m: roof(c, p, m, C["metal"], C["metal_d"], C["metal_l"])),
+    "建売住宅の壁・屋根（瓦）": lambda c, p, m, d: building(c, p, m, d, 3, "plaster", lambda c, p, m: roof(c, p, m)),
     "瓦屋根（連続）": lambda c, p, m: roof(c, p, m),
-    "同型住宅の壁・屋根（3色差分）": lambda c, p, m: roof(c, p, m, C["dusk"], C["night"], C["fog"]),
-    "農家の壁・瓦": lambda c, p, m: roof(c, p, m, C["wood_d"], C["wood_dd"], C["wood"]),
-    "社殿の壁・屋根（檜皮）": lambda c, p, m: roof(c, p, m, C["wood_d"], C["wood_dd"], C["wood"], True),
+    "同型住宅の壁・屋根（3色差分）": lambda c, p, m, d: building(c, p, m, d, 3, "plaster", lambda c, p, m: roof(c, p, m, C["dusk"], C["night"], C["fog"])),
+    "農家の壁・瓦": lambda c, p, m, d: building(c, p, m, d, 2, "plank", lambda c, p, m: roof(c, p, m, C["wood_d"], C["wood_dd"], C["wood"]), C["wood"]),
+    "社殿の壁・屋根（檜皮）": lambda c, p, m, d: building(c, p, m, d, 2, "wood", lambda c, p, m: roof(c, p, m, C["wood_d"], C["wood_dd"], C["wood"], True)),
     "カーポート": lambda c, p, m: roof(c, p, m, C["fog"], C["dusk"], C["conc"]),
     "駐輪場の屋根": lambda c, p, m: roof(c, p, m, C["fog"], C["dusk"], C["conc"]),
     "生垣": lambda c, p, m: hedge(c, p, m),
@@ -897,6 +973,28 @@ AUTOTILE = {
     "樹林（暗）": lambda c, p, m: conifer_mass(c, p, m, "moss", C["pine_d"], C["pine"]),
     "谷の斜面（暗い樹林）": lambda c, p, m: conifer_mass(c, p, m, "night", C["pine_d"], C["pine"]),
 }
+
+# 建物：種別名 → 正面の行数 F（下端から F 行は正面、その上は屋根。1 行 ≈ 1.7 m）
+FACADE = {
+    "団地 外壁（コンクリート・雨染み）": 3,
+    "体育館の壁": 6,
+    "公共建築の壁（タイル）": 5,
+    "支所の壁（タイル）": 3,
+    "新校舎 外壁（タイル）": 5,
+    "旧校舎 外壁（下見板）": 4,
+    "倉庫（トタン）": 2,
+    "農機具小屋（トタン・板）": 1,
+    "庵の板壁と瓦": 2,
+    "廃寺の壁・屋根（崩落）": 2,
+    "観音堂の板壁・格子・屋根": 2,
+    "建売住宅の壁・屋根（瓦）": 3,
+    "同型住宅の壁・屋根（3色差分）": 3,
+    "農家の壁・瓦": 2,
+    "社殿の壁・屋根（檜皮）": 2,
+}
+
+# 建物の屋根の最小行数。団地は上にベランダの行が載るので屋根の行を要らない（列の高さがすべて正面になる）
+MIN_ROOF = {"団地 外壁（コンクリート・雨染み）": 0}
 
 # 背の高い部品：種別名 → (描画関数, 幅マス, 高さマス)
 TALL = {
@@ -983,13 +1081,20 @@ def load_extra() -> None:
     TALL.update(props32b.TALL3)
 
 
-def paint(name: str, entry: dict, mask: int | None = None):
-    """種別名を描く。オートタイルは mask 付き。背の高い部品は 32×64 を返す"""
+def _autotile(name: str, c: Canvas, args: dict, mask: int, dist: int | None):
+    if name in FACADE:
+        AUTOTILE[name](c, args, mask, FACADE[name] if dist is None else dist)
+    else:
+        AUTOTILE[name](c, args, mask)
+
+
+def paint(name: str, entry: dict, mask: int | None = None, dist: int | None = None):
+    """種別名を描く。オートタイルは mask（建物は下端からの行数 dist も）付き。背の高い部品は w×h マスを返す"""
     load_extra()
     seed = seed_of(name)
     if mask is not None and name in AUTOTILE:
         c = Canvas(S, S, seed)
-        AUTOTILE[name](c, entry.get("args", {}), mask)
+        _autotile(name, c, entry.get("args", {}), mask, dist)
         return c
     if name in TALL:
         fn, w, h = TALL[name]
@@ -1003,7 +1108,7 @@ def paint(name: str, entry: dict, mask: int | None = None):
         return c
     c = Canvas(S, S, seed)
     if name in AUTOTILE:
-        AUTOTILE[name](c, entry.get("args", {}), 15 if mask is None else mask)
+        _autotile(name, c, entry.get("args", {}), 15 if mask is None else mask, dist)
         return c
     if name in FLAT:
         FLAT[name](c, entry.get("args", {}))
@@ -1063,6 +1168,15 @@ def main() -> int:
     col = 0
     for name in names:
         if name in AUTOTILE:
+            if name in FACADE:
+                # 建物：mask 16 通り × 下端からの行数 d（0..F。F は屋根）。本体は m15・屋根
+                F = FACADE[name]
+                for d in range(F + 1):
+                    for m in range(16):
+                        if m == 15 and d == F:
+                            continue
+                        place(paint(name, catalog[name], m, d), name, "m%d" % (m + 16 * d), 1, 1)
+                continue
             for m in range(16):
                 if m == 15 and name not in TALL:
                     continue   # 四方が同じ（m15）は本体と同じ絵。林は本体が木の根元なので m15（繁み）も別に持つ
@@ -1104,7 +1218,7 @@ def main() -> int:
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     atlas.save(a.out)
     layout = {"tile_size": S, "columns": COLUMNS, "rows": rows, "entries": entries,
-              "autotile": sorted(AUTOTILE.keys()), "tall": {k: {"w": v[1], "h": v[2]} for k, v in sorted(TALL.items())}, "legacy": legacy}
+              "autotile": sorted(AUTOTILE.keys()), "facade": {k: {"rows": v, "min_roof": MIN_ROOF.get(k, 1)} for k, v in FACADE.items()}, "tall": {k: {"w": v[1], "h": v[2]} for k, v in sorted(TALL.items())}, "legacy": legacy}
     json.dump(layout, open(a.layout, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"{a.out}: {atlas.width}x{atlas.height}, entries={len(entries)}, autotile={len(AUTOTILE)}, tall={len(TALL)}, legacy(16px 拡大)={len(legacy)}")
     if a.preview:

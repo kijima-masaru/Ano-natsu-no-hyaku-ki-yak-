@@ -130,7 +130,12 @@ func _build_from_layout(names: PackedStringArray) -> TileSet:
 	tile_set.set_meta(TileGenerator.META_COORDS, coords_by_name)
 	tile_set.set_meta(TileVariants.META_VARIANTS, variants)
 	tile_set.set_meta(TileVariants.META_TALL, tall)
-	print("layout: 種別 %d、オートタイル %d、背の高い部品 %d" % [coords_by_name.size(), variants.size(), tall.size()])
+	var facade: Dictionary = {}
+	for k: Variant in (layout.get("facade", {}) as Dictionary).keys():
+		var spec: Dictionary = (layout["facade"] as Dictionary)[k]
+		facade[str(k)] = {"rows": int(spec.get("rows", 1)), "min_roof": int(spec.get("min_roof", 1))}
+	tile_set.set_meta(TileVariants.META_FACADE, facade)
+	print("layout: 種別 %d、オートタイル %d、建物 %d、背の高い部品 %d" % [coords_by_name.size(), variants.size(), facade.size(), tall.size()])
 	return tile_set
 
 

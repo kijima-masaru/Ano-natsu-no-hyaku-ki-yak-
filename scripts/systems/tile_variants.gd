@@ -8,6 +8,10 @@ extends RefCounted
 
 const META_VARIANTS: StringName = &"tile_variants"
 const META_TALL: StringName = &"tile_tall"
+## 建物：種別名 → {rows: 正面の行数 F, min_roof: 屋根の最小行数}。変種の鍵は mask + 16 × d（d は下端からの行数、F 以上は屋根）
+const META_FACADE: StringName = &"tile_facade"
+## 同じ種別の連なりを数える上限
+const RUN_CAP: int = 16
 
 
 static func apply(field: FieldBase) -> void:
@@ -16,13 +20,14 @@ static func apply(field: FieldBase) -> void:
 		return
 	var variants: Dictionary = tile_set.get_meta(META_VARIANTS, {})
 	var tall: Dictionary = tile_set.get_meta(META_TALL, {})
+	var facade: Dictionary = tile_set.get_meta(META_FACADE, {})
 	if variants.is_empty() and tall.is_empty():
 		return
 	for layer: TileMapLayer in [field.ground, field.objects]:
-		_apply_layer(field, layer, variants, tall)
+		_apply_layer(field, layer, variants, tall, facade)
 
 
-static func _apply_layer(field: FieldBase, layer: TileMapLayer, variants: Dictionary, tall: Dictionary) -> void:
+static func _apply_layer(field: FieldBase, layer: TileMapLayer, variants: Dictionary, tall: Dictionary, facade: Dictionary) -> void:
 	var cells: Array[Vector2i] = layer.get_used_cells()
 	var types: Dictionary = {}
 	for cell: Vector2i in cells:
@@ -42,7 +47,19 @@ static func _apply_layer(field: FieldBase, layer: TileMapLayer, variants: Dictio
 			if _same(types, cell + Vector2i.LEFT, type_name, layer):
 				mask |= 8
 			var table: Dictionary = variants[type_name]
-			if table.has(mask):
+			var key: int = mask
+			if facade.has(type_name):
+				# 建物：下端から F 行は正面、その上は屋根。列の高さが F 以下なら最上段だけ屋根
+				var spec: Dictionary = facade[type_name]
+				var f_rows: int = int(spec.get("rows", 1))
+				var dist_s: int = _run(types, cell, Vector2i.DOWN, type_name, layer)
+				var dist_n: int = _run(types, cell, Vector2i.UP, type_name, layer)
+				var facade_rows: int = mini(f_rows, dist_n + dist_s + 1 - int(spec.get("min_roof", 1)))
+				var d: int = dist_s if dist_s < facade_rows else f_rows
+				key = mask + 16 * d
+			if table.has(key):
+				layer.set_cell(cell, TileGenerator.SOURCE_ID, table[key])
+			elif table.has(mask):
 				layer.set_cell(cell, TileGenerator.SOURCE_ID, table[mask])
 		if tall.has(type_name) and not _same(types, cell + Vector2i.UP, type_name, layer):
 			# 上に同じ種別が続く（杉林などの林の内側）なら部品を置かない。内側は本体の絵（梢を上から見た繁み）だけになり、
@@ -52,6 +69,16 @@ static func _apply_layer(field: FieldBase, layer: TileMapLayer, variants: Dictio
 				var target: Vector2i = cell + (piece["offset"] as Vector2i)
 				if field.overhead.get_cell_source_id(target) == -1:
 					field.overhead.set_cell(target, TileGenerator.SOURCE_ID, piece["coords"])
+
+
+## cell から dir 方向に同じ種別が何マス続くか（上限 RUN_CAP。地図の外は続くとみなす）
+static func _run(types: Dictionary, cell: Vector2i, dir: Vector2i, type_name: String, layer: TileMapLayer) -> int:
+	var n: int = 0
+	var cur: Vector2i = cell + dir
+	while n < RUN_CAP and _same(types, cur, type_name, layer):
+		n += 1
+		cur += dir
+	return n
 
 
 ## 隣が同じ種別か。地図の外は「同じ」とみなし、端で切れ目を出さない（林は地図の外へ続く）
