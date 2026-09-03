@@ -68,7 +68,9 @@ $G --headless --path . $D -- --runner=$R/driver_tileset_export.gd     # common.t
 xvfb-run ... --runner=$R/driver_shots.gd --out=DIR                    # 画面で確認
 ```
 
-`TileCatalog` に種別を足したら `--catalog` で catalog.json を更新し、`paint_atlas.py` に該当ペインタがあることを確認する（無ければ `PAINTERS` に追加）。生成ペインタ（`tile_painters_*.gd`）はフォールバックとして残す。
+`paint_atlas.py` は汎用ペインタ（地面・壁・木など。`PAINTERS`）と、種別名ごとの専用描画（`tools/tiles/special.py` の `SPECIAL`。自販機・街灯・時計塔・墓石など 90 種）の 2 段で、専用描画があればそちらを使う。物は 1 種ずつ描くのが基本で、汎用ペインタは引数だけ違う地面・壁の類に限る。
+
+`TileCatalog` に種別を足したら `--catalog` で catalog.json を更新し、`special.py` に専用描画を書く（地面・壁なら `PAINTERS` の該当ペインタで足りる）。生成ペインタ（`tile_painters_*.gd`）はフォールバックとして残す。
 
 ## 手描き PNG への差し替え手順
 

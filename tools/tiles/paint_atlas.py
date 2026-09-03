@@ -171,7 +171,7 @@ def PB(p, k, d):
 # ─────────────────────────── 地面 ───────────────────────────
 
 def ground(t: Tile, p):
-    """平らな地面。粒は散らばりでなく、小さな塊で置く（アスファルトの荒れ、土の凹凸）"""
+    """平らな地面。粒は塊で置き、ときどき亀裂・補修の跡・小石を足す（アスファルトの荒れ、土の凹凸）"""
     base = P(p, "base", DUSK)
     speck = P(p, "speck", FOG)
     density = PF(p, "density", 0.08)
@@ -186,6 +186,25 @@ def ground(t: Tile, p):
                     t.px(x + 1, y, speck)
     # 影側の粒（少しだけ暗い色）
     t.noise(dk(base), density * 0.35, k=2)
+    # 大きな明暗のむら（2 か所まで）：踏み固め・補修・湿り
+    for i in range(2):
+        if t.rand(i, 99, 5) < 0.55:
+            cx, cy = int(t.rand(i, 1, 5) * S), int(t.rand(i, 2, 5) * S)
+            rx, ry = 3 + int(t.rand(i, 3, 5) * 4), 2 + int(t.rand(i, 4, 5) * 3)
+            c = lt(base) if t.rand(i, 6, 5) < 0.5 else dk(base)
+            for y in range(S):
+                for x in range(S):
+                    if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1.0 and t.rand(x, y, 6 + i) < 0.45:
+                        t.px(x, y, c if c != BONE else base)
+    # 亀裂：1 本、折れ曲がる細い線
+    if t.rand(7, 7, 8) < 0.5:
+        x, y = int(t.rand(8, 8, 8) * S), 0
+        while y < S:
+            t.px(x, y, dk(base) if dk(base) != base else SUMI)
+            x = max(0, min(S - 1, x + (1 if t.rand(x, y, 9) > 0.6 else (-1 if t.rand(y, x, 9) > 0.6 else 0))))
+            y += 1 if t.rand(x, y, 10) < 0.8 else 2
+            if t.rand(x, y, 11) < 0.15:
+                break
 
 
 def gravel(t: Tile, p):
@@ -211,14 +230,20 @@ def gravel(t: Tile, p):
 
 
 def grass(t: Tile, p):
-    """草地：房ごとに「小さな V」。tall で背が高く影が付く"""
+    """草地：房ごとに「小さな V」。tall で背が高く影が付く。踏み跡と小さな花"""
     base = P(p, "base", GREEN)
     blade = P(p, "blade", GREEN_L)
     tall = PB(p, "tall", False)
     shadow = P(p, "shadow", MOSS)
     t.fill(base)
-    # 影の斑（地面の凹凸）
+    # 影の斑（地面の凹凸）と、踏み跡の明るい筋
     t.noise(dk(base), 0.08, k=3)
+    if t.rand(3, 3, 12) < 0.4:
+        cx, cy = int(t.rand(1, 1, 12) * S), int(t.rand(2, 2, 12) * S)
+        for y in range(S):
+            for x in range(S):
+                if ((x - cx) / 5.0) ** 2 + ((y - cy) / 3.0) ** 2 <= 1.0 and t.rand(x, y, 13) < 0.4:
+                    t.px(x, y, dk(base))
     step = 3 if tall else 4
     for gy in range(0, S, step):
         for gx in range(0, S, step):
@@ -232,6 +257,12 @@ def grass(t: Tile, p):
                 if tall:
                     t.px(x, y + 1, shadow)
                     t.px(x + 1, y + 1, shadow)
+                elif t.rand(x, y, 14) < 0.3:
+                    t.px(x - 1, y, dk(base))
+    # 小さな花・枯れ草（ごくまれ）
+    for i in range(2):
+        if t.rand(i, 20, 15) < 0.25:
+            t.px(int(t.rand(i, 21, 15) * S), int(t.rand(i, 22, 15) * S), BONE if blade != OCHRE else OCHRE)
 
 
 def soil_rows(t: Tile, p):
@@ -1290,6 +1321,10 @@ def seed_of(name: str) -> int:
 
 def paint_tile(name: str, entry: dict) -> Tile:
     t = Tile(seed_of(name))
+    from special import SPECIAL  # 種別名ごとの専用描画（循環 import を避けるためここで読む）
+    if name in SPECIAL:
+        SPECIAL[name](t, entry.get("args", {}))
+        return t
     painter = PAINTERS.get(entry.get("painter", "fallback"), fallback)
     painter(t, entry.get("args", {}))
     return t
