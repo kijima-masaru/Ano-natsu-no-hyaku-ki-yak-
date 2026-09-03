@@ -12,6 +12,9 @@ const CELL: Vector2i = Vector2i(40, 26)
 const GRID_ORIGIN: Vector2i = Vector2i(72, 26)
 const GRID_COLS: int = 6
 const GRID_ROWS: int = 6
+## 凡例は下段右側（左側は現在地の名前）
+const LEGEND_X: float = 220.0
+const LEGEND_SPACING: float = 76.0
 const LOCAL_SCALE: int = 2
 const LOCAL_ORIGIN: Vector2i = Vector2i(64, 30)
 ## 標高 0〜5 → 塗り（西＝低く明るい、東＝高く暗い）

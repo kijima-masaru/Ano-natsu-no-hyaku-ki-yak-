@@ -16,14 +16,15 @@ const DETAIL_CHARS: int = 26
 
 
 func _ready() -> void:
-	_panel.color = Palette.with_alpha(Palette.UI_PANEL, 0.96)
+	_panel.color = Palette.get_color(Palette.UI_PANEL)
 	for label: Label in [_title, _detail, _hint]:
 		label.add_theme_font_size_override("font_size", FONT_SIZE)
 	_title.add_theme_color_override("font_color", Palette.get_color(Palette.UI_ACCENT))
 	_detail.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT))
 	_hint.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT_DIM))
 	_title.text = MessageResolver.text("ui_notebook_title")
-	_hint.text = MessageResolver.text("ui_notebook_hint")
+	_hint.text = InputDevice.hint("ui_notebook_hint")
+	InputDevice.device_changed.connect(func(_pad: bool) -> void: _hint.text = InputDevice.hint("ui_notebook_hint"))
 	_list.selection_changed.connect(func(_i: int, id: String) -> void: _show_detail(id))
 	_list.cancelled.connect(func() -> void: closed.emit())
 	_list.activated.connect(func(_i: int, id: String) -> void: _show_detail(id))

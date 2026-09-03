@@ -50,7 +50,7 @@ func _ready() -> void:
 	_action.add_theme_color_override("font_color", Palette.get_color(TRUTH_COLOR))
 	_hint.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT_DIM))
 	_title.text = MessageResolver.text("ui_reveal_title")
-	_hint.text = MessageResolver.text("ui_reveal_hint")
+	_hint.text = InputDevice.hint("ui_reveal_hint")
 	_hint.visible = false
 	_skip_allowed = not (SaveManager.system.get("cleared_endings", []) as Array).is_empty()
 	_build_items()

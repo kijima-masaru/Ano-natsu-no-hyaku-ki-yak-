@@ -40,7 +40,8 @@ func _ready() -> void:
 	# 「設定から見直せる」はエンディング後には出さない（そこから設定へは戻れない）
 	_note.text = MessageResolver.text("ui_notice_note_settings")
 	_note.visible = mode != "after_ending"
-	_hint.text = MessageResolver.text("ui_hint_close")
+	_hint.text = InputDevice.hint("ui_hint_close")
+	InputDevice.device_changed.connect(func(_pad: bool) -> void: _hint.text = InputDevice.hint("ui_hint_close"))
 
 
 ## 「話せる場所があります」＋窓口の一覧（最大 MAX_SUPPORT_ENTRIES 件）。一覧が空なら未掲載の一行

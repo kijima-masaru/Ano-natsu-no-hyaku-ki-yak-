@@ -283,9 +283,19 @@
       "text": "Z/決定　X/戻る"
     },
     {
+      "id": "ui_hint_confirm_back_pad",
+      "speaker": "system",
+      "text": "A/決定　B/戻る"
+    },
+    {
       "id": "ui_hint_close",
       "speaker": "system",
       "text": "Z で閉じる"
+    },
+    {
+      "id": "ui_hint_close_pad",
+      "speaker": "system",
+      "text": "A で閉じる"
     },
     {
       "id": "ui_slot_save_title",
@@ -856,6 +866,11 @@
       "text": "↑↓/選ぶ　X/閉じる"
     },
     {
+      "id": "ui_notebook_hint_pad",
+      "speaker": "system",
+      "text": "↑↓/選ぶ　B/閉じる"
+    },
+    {
       "id": "ui_reveal_title",
       "speaker": "system",
       "text": "あなたが調べたもの"
@@ -876,6 +891,11 @@
       "text": "Z/次へ"
     },
     {
+      "id": "ui_reveal_hint_pad",
+      "speaker": "system",
+      "text": "A/次へ"
+    },
+    {
       "id": "ui_map_world",
       "speaker": "system",
       "text": "磐戸町 全体図"
@@ -889,6 +909,11 @@
       "id": "ui_map_hint",
       "speaker": "system",
       "text": "←→/切替　X/閉じる"
+    },
+    {
+      "id": "ui_map_hint_pad",
+      "speaker": "system",
+      "text": "←→/切替　B/閉じる"
     },
     {
       "id": "ui_map_legend_visited",

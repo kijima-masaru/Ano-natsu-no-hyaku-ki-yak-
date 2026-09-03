@@ -69,6 +69,7 @@ func find_exit(to_id):
 | `SceneRouter` | フィールド遷移とプレイヤー配置 |
 | `GameState` | フラグ・所持品・セーブデータ |
 | `SteamBridge` | GodotSteam への空実装インターフェース（実績・クラウドセーブのフック） |
+| `InputDevice` | 最後に使った入力装置（キーボード／ゲームパッド）と、操作案内 `ui_hint_*` の装置別の文言（`hint(id)`） |
 
 - autoload はシーンツリーのノードを **保持しない**（参照は遷移で無効になる）。必要ならシグナルで受け渡す。
 - autoload 同士の依存は一方向にする：`Palette` ← `GameState` ← `FieldRegistry` ← `SceneRouter`。逆方向の参照は禁止。
