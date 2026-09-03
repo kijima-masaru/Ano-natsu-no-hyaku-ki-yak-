@@ -41,12 +41,16 @@ def silence(sec: float, stereo: bool = False) -> np.ndarray:
 
 def to_stereo(x: np.ndarray) -> np.ndarray:
     if x.ndim == 2:
+        if x.shape[1] == 1:
+            return np.repeat(x, 2, axis=1)
         return x
     return np.stack([x, x], axis=1)
 
 
 def to_mono(x: np.ndarray) -> np.ndarray:
-    return x if x.ndim == 1 else x.mean(axis=1)
+    if x.ndim == 1:
+        return x
+    return x[:, 0] if x.shape[1] == 1 else x.mean(axis=1)
 
 
 def fit(x: np.ndarray, n: int) -> np.ndarray:
