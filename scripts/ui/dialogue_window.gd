@@ -61,11 +61,27 @@ func show_entry(entry: MessageEntry) -> void:
 	_open(entry.speaker_name, entry.text, entry.color_index, entry.speed)
 
 
-## 選択肢を出す。閉じると choice_made(index) を発火（本文が開いていれば先に読み終えてから）
+## 選択肢を出す。閉じると choice_made(index) を発火（本文が開いていれば先に読み終えてから）。
+## 本文が閉じているときは空の本文でウィンドウを開いてから出す（閉じたままだと選択肢パネルが見えず、入力待ちで止まる）
 func show_choice(options: PackedStringArray) -> void:
 	_pending_choices = options.duplicate()
 	if not is_open:
+		_open_empty()
 		_present_choices()
+
+
+## 本文なしでウィンドウを開く（選択肢だけを出すとき）
+func _open_empty() -> void:
+	_pages = PackedStringArray([""])
+	_page_index = 0
+	_name_box.visible = false
+	_body.text = ""
+	_body.visible_characters = -1
+	_hint.visible = false
+	is_open = true
+	show()
+	set_process(false)
+	opened.emit()
 
 
 func close() -> void:
