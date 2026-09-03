@@ -176,16 +176,19 @@ def ground(t: Tile, p):
     speck = P(p, "speck", FOG)
     density = PF(p, "density", 0.08)
     t.fill(base)
+    # 暖色の粒（錆・土）を寒色の地面に撒くと目立ちすぎるので、量を半分にして残りは一段暗い色にする
+    warm_on_cold = speck in (RUST_D, RUST, OCHRE) and base in (NIGHT, DEEP, DUSK, FOG, CONC)
+    speck_rate = density * (0.3 if warm_on_cold else 0.6)
     # 塊：2〜3px の横並び
     for y in range(S):
         for x in range(S):
             r = t.rand(x, y)
-            if r < density * 0.6:
+            if r < speck_rate:
                 t.px(x, y, speck)
                 if t.rand(x, y, 1) < 0.5:
                     t.px(x + 1, y, speck)
     # 影側の粒（少しだけ暗い色）
-    t.noise(dk(base), density * 0.35, k=2)
+    t.noise(dk(base), density * (0.6 if warm_on_cold else 0.35), k=2)
     # 大きな明暗のむら（2 か所まで）：踏み固め・補修・湿り
     for i in range(2):
         if t.rand(i, 99, 5) < 0.55:
