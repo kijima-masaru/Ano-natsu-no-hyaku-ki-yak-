@@ -97,11 +97,10 @@ $G --headless --path . --export-release "Windows" build/windows/iwato.exe
 - GodotSteam（`SteamBridge` は空実装）、実績、Steam Deck の実機確認、ストアの画像
 - 人手による通しプレイの実測（時間・ED の分布・追跡者の難度）
 - Windows 実機での起動確認、アイコン・署名
-- `v0.1.0`〜`v0.3.0` タグのリモートへの反映（`v0.4.0` は反映済み。下記 6）
 
 ## 6. 手作業が必要な項目（環境の制約で未実施）
 
-- 過去のタグのプッシュ：`v0.4.0` は反映済み（858d09b）。`v0.1.0`（6b10e7c）`v0.2.0`（dbf8df4）`v0.3.0`（b9312ea）は未反映。この環境からはプロキシに落とされるので、手元のクローンから HTTPS で `git tag -a <tag> <commit> -m <tag>` → `git push origin <tag>`
+- タグ：`v0.1.0`（6b10e7c）`v0.2.0`（dbf8df4）`v0.3.0`（b9312ea）`v0.4.0`（858d09b）はすべてリモートに反映済み。以後のタグは、この環境からはプロキシに落とされるので、手元のクローンから HTTPS で `git push origin <tag>` する
 - GitHub の既定ブランチを `main` に切り替える（現在は `claude/iwato-field-design-vfrev4`）
 - マージ済みリモートブランチの削除（`git push origin --delete <branch>` は 403）
 - PixelMplus12 の配置（`resources/fonts/README.md`）
