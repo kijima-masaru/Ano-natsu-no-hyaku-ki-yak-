@@ -2,7 +2,7 @@
 
 題材：国道 281 号と高架、夜（docs/ASSETS_NEEDED.md §6f）。文字は入れない。
 構図：画面の右下へ抜ける国道、上を横切る高速の高架、左に自販機の灯り、街灯が奥へ並ぶ。
-左上〜中央左（題字とメニューが載る）は暗く保つ。決定論的。
+左上〜中央左（題字とメニューが載る。x<250）には橋脚も自販機も置かず暗く保つ。決定論的。
 
 使い方: python3 tools/ui/paint_title_bg.py [--out resources/ui/title_bg.png] [--preview build/title_x3.png]
 """
@@ -199,7 +199,7 @@ def paint() -> Canvas:
         c.vline(x + 5, 50, 61, DEEP)
     c.hline(50, 0, W - 1, FOG)
     # 橋脚
-    for (px0, w) in [(60, 22), (196, 20), (300, 22)]:
+    for (px0, w) in [(262, 20), (346, 22)]:
         c.rect(px0, 82, w, 60, FOG)
         c.vline(px0, 82, 141, CONC)
         c.vline(px0 + w - 1, 82, 141, DEEP)
@@ -228,7 +228,7 @@ def paint() -> Canvas:
         c.rect(x - 1, y, 4, 2, SUMI)
 
     # ── 自販機：左下、歩道の上。唯一の「安全な明かり」 ──
-    vxm, vym = 46, 150
+    vxm, vym = 296, 128
     c.glow(vxm + 12, vym + 22, 34, k=20)
     c.rect(vxm, vym, 24, 44, FOG)
     c.vline(vxm, vym, vym + 43, CONC)
