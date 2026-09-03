@@ -60,16 +60,26 @@ func find_exit(to_id):
 ## 5. autoload（シングルトン）
 
 - autoload は `scripts/autoload/` に置き、`project.godot` の `[autoload]` に登録する。登録名は PascalCase。
-- 追加できるのは **横断的な状態・サービス**のみ。現時点で予定しているもの：
+- 追加できるのは **横断的な状態・サービス**のみ。現在の 16 個（`project.godot` の順）：
 
 | 名前 | 役割 |
 |---|---|
 | `Palette` | 16 色パレットの唯一の定義 |
-| `FieldRegistry` | `data/fields.json` の読み込み・スキーマ検証と `FieldData` / `ExitData` の提供 |
-| `SceneRouter` | フィールド遷移とプレイヤー配置 |
-| `GameState` | フラグ・所持品・セーブデータ |
-| `SteamBridge` | GodotSteam への空実装インターフェース（実績・クラウドセーブのフック） |
+| `GameState` | フラグ・所持品・証拠・隠蔽の記録・訪問・プレイ時間。`reset()` で `state_reset` を出し、各 autoload が周の値を初期化する |
+| `MessageResolver` | `data/messages.json` と相談窓口。**二層テキストの分岐はここだけ**（`resolve`） |
 | `InputDevice` | 最後に使った入力装置（キーボード／ゲームパッド）と、操作案内 `ui_hint_*` の装置別の文言（`hint(id)`） |
+| `FieldRegistry` | `data/fields.json` の読み込み・スキーマ検証と `FieldData` / `ExitData` の提供 |
+| `Calendar` | 日付・時間帯・調査ポイント・就寝・日程（`ScheduleLoader`） |
+| `SceneRouter` | フィールド遷移・プレイヤーと澪の配置・暗転（`ScreenFade`） |
+| `SaveManager` | スロット保存とシステム保存（設定・既読・クリア記録）。各 autoload の `register_section` |
+| `EventSystem` | `data/events.json` の待ち行列と実行（読み込みは `EventLoader`、組み込みアクションは `EventActions`） |
+| `Suspicion` | 澪の接近度（数値は非表示） |
+| `EvidenceRegistry` | 証拠と隠蔽（`data/evidence.json`）、8/30 の提示画面 |
+| `AudioManager` | BGM・環境音・SE と直近の音源（配線は `AudioMixer`、合成音は `SoundSynth`） |
+| `Lighting` | 時間帯の色調・タイル光源・月光・懐中電灯 |
+| `AttachedEntity` | ナツ（憑いた怪異）。労わり・幸運・気配 |
+| `AnomalySystem` | 怪異（`data/anomalies.json`） |
+| `SteamBridge` | GodotSteam への空実装インターフェース（実績・クラウドセーブのフック） |
 
 - autoload はシーンツリーのノードを **保持しない**（参照は遷移で無効になる）。必要ならシグナルで受け渡す。
 - autoload 同士の依存は一方向にする：`Palette` ← `GameState` ← `FieldRegistry` ← `SceneRouter`。逆方向の参照は禁止。

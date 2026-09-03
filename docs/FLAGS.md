@@ -93,6 +93,22 @@
 - 証拠入手 +4〜+6、隠蔽の目撃 +15〜+25（証拠ごと）、フィールド初訪問 +1、怪異は **初回の発生だけ** `suspicion_delta`、8/14 シゲ +6（最低 30 へ強制）、8/29 シゲ +5。
 - 目安（ドライバ実走、8/30 朝）：最短 52、全消費 75（目撃 1）、澪が隣で目撃を重ねると 100。ED-C は探索を絞って目撃を避けた周回で届く（docs/PLAYTEST_LOG.md「閾値の確定」）。
 
+## 立つが参照されないフラグ（記録用。ステップ5 タスク12 で決定）
+
+`docs/tools/flag_usage.py` が「立つが参照なし」と報告する 10 件は **削除しない**。進行には効かないが、周回のノート・実績（ステップ6）・デバッグの手掛かりとして意味を持つ。参照を足すときはこの表から外す。
+
+| フラグ | 立つ場所 | 残す理由 |
+|---|---|---|
+| `d01_told` | 8/1 `ev_d01_open` | 報せを受けた印。実績「8 月 1 日」の候補 |
+| `heard_testimony` | 8/2 `ev_f02_wake` | 通夜で証言を聞いた印（`heard_testimony_direct` と対） |
+| `saw_notifications` | 8/3 `ev_f12_office_first` | 支所の届を見た印 |
+| `saw_first_missing` | 8/5 `ev_f06_bulletin_d05` | 最初の行方不明の紙を見た印 |
+| `key_old_school` / `old_school_opened` | 8/19 F11 | 旧校舎の鍵と開錠の印（進行は `ev_done_*` で見る） |
+| `found_odd_house` | F13 `ev_f13_odd_house` | 増えた一軒に気づいた印。実績候補 |
+| `learned_seal` | 8/23 `ev_f04_journal_seal` | 封石の話を知った印（`ev_seal_lore` と対） |
+| `bridge_steps` | 8/26 `ev_f15_bridge_d26` | 橋の足音を聞いた印 |
+| `slept_at_home` | 就寝のたび | 一度でも自宅で寝た印 |
+
 ## 数値・その他（`GameState`）
 
 | 項目 | 型 | 意味 |
