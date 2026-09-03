@@ -30,6 +30,7 @@ func _ready() -> void:
 	Calendar.time_of_day_changed.connect(func(_t: String, _p: String) -> void: _recheck_conditions())
 	Calendar.day_advanced.connect(func(_d: int, _p: int) -> void: _recheck_conditions())
 	EventSystem.event_finished.connect(func(_id: String) -> void: _recheck_conditions())
+	EventSystem.register_defined_flags(_defined_flags())
 	validate.call_deferred()
 
 
@@ -81,8 +82,22 @@ func validate() -> void:
 			pseudo[e.id] = e
 		if not a.comfort.is_empty() and not AttachedEntity.COMFORT_CONTEXTS.has(a.comfort):
 			push_error("AnomalySystem: %s の comfort '%s' は未定義です" % [a.id, a.comfort])
-	for msg: String in EventValidator.validate(pseudo, EventSystem.known_actions(), EventSystem.get_item_ids()):
+	for msg: String in EventValidator.validate(pseudo, EventSystem.known_actions(), EventSystem.get_item_ids(), EventSystem.defined_flags()):
 		push_error("AnomalySystem: " + msg)
+
+
+## 怪異が立てるフラグ（全段階の set_flag）。EventSystem の検証に渡す
+func _defined_flags() -> PackedStringArray:
+	var out: PackedStringArray = PackedStringArray()
+	for a: AnomalyData in _anomalies.values():
+		var lists: Array = [a.actions]
+		for s: Dictionary in a.stages:
+			lists.append(s.get("actions", []))
+		for actions: Variant in lists:
+			for action: Variant in actions as Array:
+				if action is Dictionary and str((action as Dictionary).get("type", "")) == "set_flag":
+					out.append(str((action as Dictionary).get("flag", "")))
+	return out
 
 
 func has_anomaly(id: String) -> bool:

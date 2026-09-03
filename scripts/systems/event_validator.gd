@@ -7,12 +7,15 @@ const DYNAMIC_FLAG_PREFIXES: PackedStringArray = ["visited_", "ev_", "hid_", "hi
 ## コードや他システムが立てる、データに現れないフラグ
 const CODE_FLAGS: PackedStringArray = ["truth_revealed", "ending_reached", "ending_a", "ending_b", "ending_c",
 	"truth_partial_walk", "truth_partial_entity", "companion_on", "notebook_unlocked", "flag_minimap_unlocked",
-	"key_tunnel_fence", "key_old_school", "flag_yakushi_open", "entity_intro_done", "slept_at_home"]
+	"key_tunnel_fence", "key_old_school", "flag_yakushi_open", "entity_intro_done", "slept_at_home",
+	"stalker_met"]
 
 
-static func validate(events: Dictionary, known_actions: PackedStringArray, item_ids: PackedStringArray) -> PackedStringArray:
+## extra_defined は他のデータ（怪異など）が立てるフラグ。EventSystem と AnomalySystem が互いの分を渡す
+static func validate(events: Dictionary, known_actions: PackedStringArray, item_ids: PackedStringArray, extra_defined: Dictionary = {}) -> PackedStringArray:
 	var errors: PackedStringArray = PackedStringArray()
-	var defined_flags: Dictionary = _collect_defined_flags(events)
+	var defined_flags: Dictionary = defined_flags_of(events)
+	defined_flags.merge(extra_defined)
 	for id: String in events.keys():
 		var e: EventData = events[id]
 		var flags: PackedStringArray = PackedStringArray()
@@ -68,7 +71,8 @@ static func validate(events: Dictionary, known_actions: PackedStringArray, item_
 	return errors
 
 
-static func _collect_defined_flags(events: Dictionary) -> Dictionary:
+## events が立てるフラグ（set_flag / clear_flag / 選択肢の set_flag）＋ schedule ＋ 鍵 ＋ コード既知
+static func defined_flags_of(events: Dictionary) -> Dictionary:
 	var defined: Dictionary = {}
 	for f: String in CODE_FLAGS:
 		defined[f] = true

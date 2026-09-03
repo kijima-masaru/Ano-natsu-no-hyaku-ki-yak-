@@ -62,7 +62,12 @@ func refresh() -> void:
 		_modulate.color = tint_for(Calendar.time_of_day) if darkness_override < 0.0 else tint_for_darkness(darkness_override)
 	if _moon != null:
 		_moon.energy = MOON_ENERGY_MAX * darkness
-	_lights = _lights.filter(func(l: PointLight2D) -> bool: return is_instance_valid(l))
+	# 解放済みの光源を外す（filter は型付き配列を返さず、解放済みの要素は PointLight2D に変換できない）
+	var alive: Array[PointLight2D] = []
+	for l: Variant in _lights:
+		if is_instance_valid(l):
+			alive.append(l as PointLight2D)
+	_lights = alive
 	for light: PointLight2D in _lights:
 		_apply_energy(light)
 	if _flashlight != null:

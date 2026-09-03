@@ -1,7 +1,27 @@
-# ステップ5への申し送り（v0.3.0 時点）
+# ステップ5の進捗と申し送り（v0.3.0 → タスク0 実機検証まで）
 
-ステップ4「残り 11 フィールド、光源と夜、怪異演出、第一幕・第二幕の日程」の完了時点でのまとめ（PR #25〜#42）。
-ステップ5は終幕（8/30〜31：封印・提示画面・`truth_revealed`・エンディング分岐・タイトルへの帰還）と仕上げが中心になる想定。指示が来るまで着手しない。
+ステップ4「残り 11 フィールド、光源と夜、怪異演出、第一幕・第二幕の日程」の完了時点（PR #25〜#42）に、ステップ5 タスク0（実機検証）の結果を追記したもの。
+
+## ステップ5の進捗
+
+| # | ブランチ | 状態 |
+|---|---|---|
+| 0 | fix/runtime-verification | **PR 済・承認待ち**。Godot 4.7.stable で起動〜8/29 を通し、不具合 6 件を修正（docs/PLAYTEST_LOG.md「実機検証」） |
+| 1〜13 | feat/d29-shige 以降 | 未着手（タスク0 のマージ後に順に） |
+
+### 次に何をすべきか
+- タスク0 の PR をレビュー・マージ → `feat/d29-shige`（8/29 F14 シゲ → `baba_told_seal`、任意到達）。
+- **未解決の判断事項**（docs/PLAYTEST_LOG.md「実機で分かった設計上の論点」）：(1) イベント実行中に澪を止めるか、(2) 接近度の加算・閾値（最短経路でも 8/21 に 100）、(3) 屋内の暗さ、(4) 検証ドライバを残すか。
+- **実機で判明した不具合の一覧**：docs/PLAYTEST_LOG.md「見つかった不具合と対処」6 件（すべて修正済み）。未修正はフォント代替時の `content_notice` の行重なり、全体図の凡例の暗さ、終了時のリーク警告 2 件。
+
+## Godot の用意（この環境）
+
+`godot` コマンドは無いが、GitHub Releases から公式バイナリを取得して実行できる（プロキシ経由で 75 MB）。エクスポートテンプレート（タスク13）は同様に `Godot_v4.7-stable_export_templates.tpz` を取得する。
+```
+curl -sSL -o godot.zip https://github.com/godotengine/godot/releases/download/4.7-stable/Godot_v4.7-stable_linux.x86_64.zip
+unzip godot.zip && ./Godot_v4.7-stable_linux.x86_64 --headless --path . --import
+```
+描画確認は `xvfb-run -a -s "-screen 0 1152x648x24" ./Godot_v4.7-stable_linux.x86_64 --path . ...`（Mesa llvmpipe）。音声デバイスは無く dummy driver になる。
 
 ## 現状（何が動くか）
 
@@ -18,15 +38,10 @@
 | セーブ | セクション：game_state / calendar / suspicion / anomalies / attached_entity。オートセーブ 9 箇所。位置は保存しない（ロードは屋外の既定位置） |
 | 進行 | タイトル → 8/1 → 8/29 終了まで机上で通る。実機は未確認 |
 
-## 未検証事項（最優先）
+## 実機検証の状況
 
-この環境には Godot 4.7 の実行ファイルが無く、**ステップ2〜4 の全コードは目視レビューのみ**。ステップ5の最初に Godot エディタで `docs/PLAYTEST_LOG.md`「実機で確認すること」の 8 項目を確認し、問題は `fix/` ブランチで直す。特に：
-
-1. autoload 15 個の起動順と `_ready` の相互参照（`Lighting` → `AnomalySystem` → `AttachedEntity`）
-2. `FieldMapBuilder.build()` が 16 フィールドの `get_script_constant_map()` を読めること（`FLOORS` を持つ F11 を含む）
-3. `daily` イベントの翌日再発生、`switch_floor` 後の `on_enter` 再発火、`sleep` の遅延日送り
-4. `PointLight2D` の枚数（F01・F13 で街灯が多い）と GL Compatibility での描画負荷
-5. プレイ時間の実測（机上見積もり 1 時間 50 分〜2 時間 30 分）と閾値の確定
+タスク0 で Godot 4.7.stable により以下を確認済み（docs/PLAYTEST_LOG.md「実機検証」）：autoload 15 個の起動、16 フィールドの組み立てと F11 の階切替、8/1 → 8/29 の通し（最短・全消費の 2 経路）、daily の再発生、switch_floor 後の on_enter、sleep の遅延日送り、追跡者の捕獲と庇護、二層 102 対の切り替え、セーブ／ロードの往復、描画（Xvfb）。
+**未実測**：人手によるプレイ時間（推定 2 時間 20 分〜3 時間 40 分）、GPU での描画負荷、ゲームパッド操作、Steam Deck。
 
 ## ステップ5で作るもの（想定。指示で上書きする）
 
@@ -67,6 +82,7 @@
 
 ## 既知の設計判断（変えるなら早めに）
 
+- **タスク0 で見つかった設計上の論点**（判断待ち）：イベント中も澪が歩き続けるため同行中の隠蔽がほぼ失敗する／接近度が 8/21 までに 100 に達し ED-B・C に届かない／屋内の暗さが夜より明るい。docs/PLAYTEST_LOG.md 参照。
 - 位置はセーブしない（ロードは常に屋外の既定位置）。屋内でのオートセーブ後にロードすると屋外に出る。位置を保存するなら `SceneRouter` にセクションを足し、`current_floor` も含める。
 - 初訪問 +1 P は `Main` に直書き（`GameConstants` へ移す候補）。
 - 支所の「閉庁」文は 8/1・8/2 のみ。曜日条件（`weekday`）は未実装。

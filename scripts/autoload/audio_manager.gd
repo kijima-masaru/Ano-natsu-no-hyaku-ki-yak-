@@ -51,6 +51,15 @@ func _ready() -> void:
 	EventSystem.register_action("stop_bgm", func(_a: Dictionary, _c: Dictionary) -> void: stop_bgm())
 
 
+## 終了時に再生を止め、static の合成音キャッシュを空にする（残すと AudioStreamWAV と再生が終了時にリークする。Godot 4.7 で実機確認）
+func _exit_tree() -> void:
+	for p: AudioStreamPlayer in _bgm + _ambience + _se_pool + [_heartbeat]:
+		if p != null:
+			p.stop()
+			p.stream = null
+	SoundSynth.clear_cache()
+
+
 # ── 初期化 ──
 
 func _setup_buses() -> void:
