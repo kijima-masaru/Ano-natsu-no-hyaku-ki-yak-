@@ -163,9 +163,66 @@ ID は `se_step_<材質>_<1..5>`、忍び足は `se_step_<材質>_sneak_<1..3>`�
 
 「8 月が終わっていく」は BGM ではなく、`se_day_advance` の区切りと蝉の減衰（§4）で示す。
 
-## 9. 怪異・ストーカーの SE（タスク5）
+## 9. 怪異・追跡者の SE（タスク5）
 
-（未着手）
+モノ、`tools/audio/defs/se_anomaly.py`、40 本・約 510 KB。
+
+原則：
+- 起きたことを音で説明しない。**生活音が一つ欠ける・一つ増える・一つ遅れる** だけで作る
+- 大きくしない（多くは -26〜-32 LUFS）。ジャンプスケア、叫び、呻き、断末魔は使わない
+- 環境音の切替（`amb_road_still` / `amb_paddy_still`）で表す怪異は、音はごく短い「切れ目」だけ
+- 具体的な事故・自死を思わせる物音は作らない（落下音、水没音、ロープ、椅子の類は一切無い）
+- 声は使わない（`an_f16_count` の「数える」は石の打音三つ）
+- 既存のチャイム（ウェストミンスター）は再現しない。`an_f11_chime` は独自の 4 音の鐘状 FM 音で、3 音目の途中で切れる
+
+怪異は 1 件 1 音、ID は `se_<anomaly_id>`。すべて `allow_silence`（間の多さは意図）。
+
+| ID | 長さ | 目標 LUFS | 狙い・合成 | 使いどころ |
+|---|---|---|---|---|
+| `se_an_f01_silence` | 3.01 s | -28 | 国道の音が消える。走行音が閉じ、自販機のハムだけ残る | 怪異 an_f01_silence（統合案：actions の play_sound） |
+| `se_an_f02_laundry` | 2.01 s | -28 | 竿だけが揺れている。竿の 2 打と湿った布 | 怪異 an_f02_laundry（統合案：actions の play_sound） |
+| `se_an_f03_bus_nobody` | 4.51 s | -24 | バスが来て扉が開閉、誰も降りない。チャイム無し | 怪異 an_f03_bus_nobody（統合案：actions の play_sound） |
+| `se_an_f03_tunnel_light` | 1.81 s | -28 | 隧道を抜ける圧の抜け。ローパスが開く | 怪異 an_f03_tunnel_light（統合案：actions の play_sound） |
+| `se_an_f04_bulb` | 3.01 s | -30 | フィラメントの「チン」と細いハム | 怪異 an_f04_bulb（統合案：actions の play_sound） |
+| `se_an_f04_loop` | 2.51 s | -28 | 方向感の失われる圧の揺れとトタン | 怪異 an_f04_loop（統合案：actions の play_sound） |
+| `se_an_f05_fresh_goods` | 1.01 s | -32 | 新しい駄菓子。セロファンが一度鳴る | 怪異 an_f05_fresh_goods（統合案：actions の play_sound） |
+| `se_an_f06_board_night` | 1.61 s | -28 | 紙が一枚だけ風で鳴り、画鋲が板を打つ | 怪異 an_f06_board_night（統合案：actions の play_sound） |
+| `se_an_f07_gaze` | 2.21 s | -28 | 格子が鳴り、布が擦れる。堂内の反響 | 怪異 an_f07_gaze（統合案：actions の play_sound） |
+| `se_an_f07_lamps` | 2.51 s | -32 | 灯明の炎と芯の弾け | 怪異 an_f07_lamps（統合案：actions の play_sound） |
+| `se_an_f08_lookout_lights` | 2.51 s | -34 | 遠くの電気的な唸りが膨らむだけ | 怪異 an_f08_lookout_lights（統合案：actions の play_sound） |
+| `se_an_f08_plum_steps` | 4.01 s | -26 | 枝の折れる音が 3 回、近づく | 怪異 an_f08_plum_steps（統合案：actions の play_sound） |
+| `se_an_f09_bridge_gone` | 3.01 s | -28 | 土が空堀へこぼれる。樹林の風 | 怪異 an_f09_bridge_gone（統合案：actions の play_sound） |
+| `se_an_f09_map_drift` | 2.01 s | -30 | 案内板のアクリルが軋み、枠に当たる | 怪異 an_f09_map_drift（統合案：actions の play_sound） |
+| `se_an_f10_light` | 4.01 s | -24 | 照明塔が一灯点く。遮断器と放電灯の点火 | 怪異 an_f10_light（統合案：actions の play_sound） |
+| `se_an_f10_line` | 2.51 s | -28 | 堤防の風と、河原の石が転がる | 怪異 an_f10_line（統合案：actions の play_sound） |
+| `se_an_f11_chime` | 5.01 s | -22 | 独自の 4 音の鐘状の音、遠く、3 音目で切れる | 怪異 an_f11_chime（統合案：actions の play_sound） |
+| `se_an_f11_desks` | 2.01 s | -28 | 机の脚が一度床に当たる。教室の反響 | 怪異 an_f11_desks（統合案：actions の play_sound） |
+| `se_an_f11_upstairs` | 5.01 s | -26 | 二階で机を引きずる音、二回 | 怪異 an_f11_upstairs（統合案：actions の play_sound） |
+| `se_an_f12_stairwell_blink` | 4.01 s | -26 | 灯りが消え、三階だけ点く。リレー・ハム停止・安定器の点き始め | 怪異 an_f12_stairwell_blink（統合案：actions の play_sound） |
+| `se_an_f13_house_count` | 2.51 s | -30 | 遠くの玄関扉が一度だけ閉まる。街灯のハム | 怪異 an_f13_house_count（統合案：actions の play_sound） |
+| `se_an_f14_frogs` | 4.01 s | -26 | 草が順に倒れていく 5 回。足音は無い | 怪異 an_f14_frogs（統合案：actions の play_sound） |
+| `se_an_f14_moon` | 2.51 s | -30 | 水面が一度だけ鳴る | 怪異 an_f14_moon（統合案：actions の play_sound） |
+| `se_an_f15_fog` | 3.51 s | -28 | 川の音が霧に閉じていく | 怪異 an_f15_fog（統合案：actions の play_sound） |
+| `se_an_f15_footsteps` | 3.51 s | -24 | 向こう岸から橋の板の足音 4 歩、同じ歩調で | 怪異 an_f15_footsteps（統合案：actions の play_sound） |
+| `se_an_f16_count` | 4.51 s | -24 | 石の鈍い打音が三つ、三つ目で止まる。声は無い | 怪異 an_f16_count（統合案：actions の play_sound） |
+| `se_an_f16_nothing` | 4.01 s | -38 | ほぼ無音。微かな風と小石一つ | 怪異 an_f16_nothing（統合案：actions の play_sound） |
+| `se_heartbeat` | 3.871 s | -24 | 既存 ID。心拍 62 bpm、4 拍ちょうどのループ。60–110 Hz、鈍く | AudioManager.set_tension（現行コード） |
+| `se_heroine_step_1` | 0.13 s | -24 | 澪の足音。軽く高い | Heroine の歩行（統合案：乱択） |
+| `se_heroine_step_2` | 0.13 s | -24 | 澪の足音 | 同上 |
+| `se_heroine_step_3` | 0.13 s | -24 | 澪の足音 | 同上 |
+| `se_seal_stone` | 2.41 s | -20 | 封石を押し戻す。石が擦れて動き、低く据わって止まる | 8/30 封印（統合案：amb_valley_inner をここで止める） |
+| `se_stalker_chase_loop` | 8.0 s | -28 | 追跡中の 8 秒ループ。呼吸の速さでうねる低いノイズと 40 Hz の圧。心拍の帯域を避ける | Stalker CHASE 中（統合案：bgm_tension の代替または併用） |
+| `se_stalker_far` | 2.01 s | -32 | 遠くの気配。砂利の足音 2 歩が遠く | Stalker SUSPICIOUS への遷移（統合案） |
+| `se_stalker_lost` | 2.51 s | -30 | 見失った。圧が抜けて環境が戻る | Stalker SEARCH → RETREAT（統合案） |
+| `se_stalker_notice` | 2.01 s | -26 | 気付かれた。低い圧が膨らんで抜ける | Stalker CHASE への遷移（統合案） |
+| `se_stalker_step_boards_1` | 0.19 s | -20 | 追跡者の足音（板） | 同上 |
+| `se_stalker_step_boards_2` | 0.19 s | -20 | 追跡者の足音（板） | 同上 |
+| `se_stalker_step_gravel_1` | 0.23 s | -20 | 追跡者の足音（砂利） | Stalker の歩行（統合案：材質で選び乱択） |
+| `se_stalker_step_gravel_2` | 0.23 s | -20 | 追跡者の足音（砂利） | 同上 |
+
+追跡者の音は「発見が大きい」を避け、**遠くの気配 → 気付き（圧が膨らむ） → 足音（主人公より遅く重い） → 追跡ループ（呼吸の速さのうねり） → 見失う（圧が抜ける）** の順で段階を作る。追跡ループは心拍（60–110 Hz）の帯域を避け、250–900 Hz のうねりと 45 Hz 以下の圧だけで構成する。心拍 `se_heartbeat` は 62 bpm・4 拍ちょうどの 3.871 秒ループで、拍が継ぎ目に掛からないよう末尾を無音にしている。
+
+イベント側の暫定指定（`an_f03_bus_nobody` の `se_door`、`an_f15_footsteps` の `se_footstep`、`an_f11_chime` の `se_menu_ok`）は、それぞれ `se_an_f03_bus_nobody` / `se_an_f15_footsteps` / `se_an_f11_chime` への差し替えを §12 で提案する（data/ は変更していない）。
 
 ## 10. ナツの音（タスク6）
 
@@ -190,4 +247,5 @@ ID は `se_step_<材質>_<1..5>`、忍び足は `se_step_<材質>_sneak_<1..3>`�
 | 1 屋外の環境音 | PR #61 |
 | 2 屋内・特殊空間 | PR #62 |
 | 3 プレイヤーの SE | PR #63 |
-| 4 UI の SE | 作業中 |
+| 4 UI の SE | PR #64 |
+| 5 怪異・追跡者の SE | 作業中 |
