@@ -21,7 +21,8 @@
       "natsu": {
         "name": "ナツ",
         "color": "FOG_INDIGO",
-        "speed": 0.8
+        "speed": 0.8,
+        "truth_color": "OCHRE"
       },
       "toki": {
         "name": "トキ",
