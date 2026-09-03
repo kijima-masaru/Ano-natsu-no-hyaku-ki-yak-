@@ -201,8 +201,9 @@
     },
     {
       "id": "msg_d30_open",
-      "speaker": "system",
-      "text": "8月30日。封印。\n（この日のイベントは後のタスクで実装）"
+      "speaker": "yu",
+      "text": "8月30日。朝。\n澪は団地の下に立っていた。「行こう」。それだけだった。",
+      "truth_id": "msg_d30_open_t"
     },
     {
       "id": "msg_d31_open",
@@ -3253,6 +3254,233 @@
       "id": "msg_f16_zushi_again",
       "speaker": "yu",
       "text": "厨子。扉は開いたまま。中は空。"
+    },
+    {
+      "id": "ui_f16_seal_stone",
+      "speaker": "system",
+      "text": "封石"
+    },
+    {
+      "id": "ui_f16_pedestal_e",
+      "speaker": "system",
+      "text": "東の台座"
+    },
+    {
+      "id": "ui_f16_pedestal_s",
+      "speaker": "system",
+      "text": "南の台座"
+    },
+    {
+      "id": "ui_f16_pedestal_w",
+      "speaker": "system",
+      "text": "西の台座"
+    },
+    {
+      "id": "ui_f16_pedestal_n",
+      "speaker": "system",
+      "text": "北の台座"
+    },
+    {
+      "id": "msg_d30_open_t",
+      "speaker": "yu",
+      "text": "8月30日。朝。\n澪は団地の下に立っていた。「行こう」。俺の名前は、呼ばなかった。"
+    },
+    {
+      "id": "msg_d30_start_told",
+      "speaker": "mio",
+      "text": "「シゲさんの並び、覚えてる。\n東に翁、南に鬼、西に姥、北に童。最後の石は、二人で」"
+    },
+    {
+      "id": "msg_d30_start_untold",
+      "speaker": "mio",
+      "text": "「戻し方は……行けば分かる。\n分からなくても、やる」"
+    },
+    {
+      "id": "msg_f16_d30_enter",
+      "speaker": "yu",
+      "text": "堂の裏の落石が、崩れている。\n昨日までは無かった道が、霧の中へ続いている。",
+      "truth_id": "msg_f16_d30_enter_t"
+    },
+    {
+      "id": "msg_f16_d30_enter_t",
+      "speaker": "yu",
+      "text": "堂の裏の落石が、崩れている。\n六月の夜と同じ道だ。あの夜は、崩れる前だった。"
+    },
+    {
+      "id": "msg_f16_d30_gate",
+      "speaker": "yu",
+      "text": "岩の隙間を抜ける。霧が濃い。\n耳の奥で、低い音が鳴り始めた。"
+    },
+    {
+      "id": "msg_f16_stone_first",
+      "speaker": "yu",
+      "text": "裂け目の口。\n石が、人ひとり分だけずれている。周りに四つの台座。どれも空だ。",
+      "truth_id": "msg_f16_stone_first_t"
+    },
+    {
+      "id": "msg_f16_stone_first_t",
+      "speaker": "yu",
+      "text": "裂け目の口。\n石が、人ひとり分だけずれている。俺の肩幅だ。"
+    },
+    {
+      "id": "msg_f16_stone_told",
+      "speaker": "mio",
+      "text": "「台座に面を戻して、最後に石。\nシゲさんの並びで。東に翁、南に鬼、西に姥、北に童」"
+    },
+    {
+      "id": "msg_f16_stone_untold",
+      "speaker": "mio",
+      "text": "「台座に何か彫ってある。\n読めるところだけでも、読んで」"
+    },
+    {
+      "id": "msg_f16_stone_wait",
+      "speaker": "yu",
+      "text": "石は動かない。面が揃うまで、動かない気がする。"
+    },
+    {
+      "id": "msg_f16_stone_after",
+      "speaker": "yu",
+      "text": "封石は元の位置にある。\n裂け目は、ただの岩の割れ目に見える。"
+    },
+    {
+      "id": "msg_f16_pile_holding",
+      "speaker": "yu",
+      "text": "手の中の面を、先に置く。"
+    },
+    {
+      "id": "msg_f16_pile_done",
+      "speaker": "yu",
+      "text": "面は全て、台座に戻った。\n積まれていた場所には、何も残っていない。",
+      "truth_id": "msg_f16_pile_done_t"
+    },
+    {
+      "id": "msg_f16_pile_done_t",
+      "speaker": "yu",
+      "text": "面は全て、台座に戻った。\n積まれていた場所には、何も残っていない。最初から一枚足りないまま。"
+    },
+    {
+      "id": "msg_f16_pile_take_okina",
+      "speaker": "yu",
+      "text": "翁の面を取った。\n白い髭の彫りが、指に引っかかる。"
+    },
+    {
+      "id": "msg_f16_pile_take_uba",
+      "speaker": "yu",
+      "text": "姥の面を取った。\n口が、少しだけ開いている。"
+    },
+    {
+      "id": "msg_f16_pile_take_oni",
+      "speaker": "yu",
+      "text": "鬼の面を取った。\n天神社の七枚と、同じ彫りだ。"
+    },
+    {
+      "id": "msg_f16_pile_take_warabe",
+      "speaker": "yu",
+      "text": "童の面を取った。\n一番小さい。一番軽い。"
+    },
+    {
+      "id": "msg_f16_ped_e",
+      "speaker": "yu",
+      "text": "東の台座。『日の出る方に、老いたる者』と彫ってある。"
+    },
+    {
+      "id": "msg_f16_ped_s",
+      "speaker": "yu",
+      "text": "南の台座。『鬼』。それだけ。"
+    },
+    {
+      "id": "msg_f16_ped_w",
+      "speaker": "yu",
+      "text": "西の台座。『日の沈む方に、老いたる女』。"
+    },
+    {
+      "id": "msg_f16_ped_n",
+      "speaker": "yu",
+      "text": "北の台座。裂け目に一番近い。\n文字は削れて読めない。"
+    },
+    {
+      "id": "msg_f16_ped_wrong",
+      "speaker": "yu",
+      "text": "面が台座に合わない。彫りの形が違う。"
+    },
+    {
+      "id": "msg_f16_ped_has",
+      "speaker": "yu",
+      "text": "面が置かれている。動かさないほうがいい。"
+    },
+    {
+      "id": "msg_f16_ped_placed_okina",
+      "speaker": "yu",
+      "text": "翁の面を東の台座に置いた。\n目の穴が、裂け目の方を向いた。"
+    },
+    {
+      "id": "msg_f16_ped_placed_uba",
+      "speaker": "yu",
+      "text": "姥の面を西の台座に置いた。\n開いた口が、風も無いのに鳴った気がした。"
+    },
+    {
+      "id": "msg_f16_ped_placed_oni",
+      "speaker": "yu",
+      "text": "鬼の面を南の台座に置いた。\n節分の夜、これを被った誰かが谷を向いて立っていた。"
+    },
+    {
+      "id": "msg_f16_ped_placed_warabe",
+      "speaker": "yu",
+      "text": "童の面を北の台座に置いた。\n裂け目に一番近い台座に、一番小さい面。",
+      "truth_id": "msg_f16_ped_placed_warabe_t"
+    },
+    {
+      "id": "msg_f16_ped_placed_warabe_t",
+      "speaker": "yu",
+      "text": "童の面を北の台座に置いた。\n七歳の夏、俺が迷い込んだのはここだ。"
+    },
+    {
+      "id": "msg_f16_seal_1",
+      "speaker": "mio",
+      "text": "「押すよ。三つで」"
+    },
+    {
+      "id": "msg_f16_seal_2",
+      "speaker": "yu",
+      "text": "一、二、三。\n石は動かない。もう一度。……動いた。"
+    },
+    {
+      "id": "msg_f16_seal_3",
+      "speaker": "yu",
+      "text": "耳の奥で鳴り続けていた音が、止まった。\n霧が、下がっていく。"
+    },
+    {
+      "id": "msg_f16_seal_4",
+      "speaker": "yu",
+      "text": "町の方角の空が、暗くなった気がした。\n終わった。",
+      "truth_id": "msg_f16_seal_4_t"
+    },
+    {
+      "id": "msg_f16_seal_4_t",
+      "speaker": "yu",
+      "text": "町の方角の空が、暗くなった。\n町のものは、谷へ戻った。隣のものは、戻らない。"
+    },
+    {
+      "id": "msg_f16_seal_5",
+      "speaker": "yu",
+      "text": "澪は何も言わなかった。帰ろう、とも。\n先に石段を降りていく背中を、追った。",
+      "truth_id": "msg_f16_seal_5_t"
+    },
+    {
+      "id": "msg_f16_seal_5_t",
+      "speaker": "yu",
+      "text": "澪は何も言わなかった。\n降りる前に一度だけ、俺を見た。俺の隣を見た。"
+    },
+    {
+      "id": "msg_f01_d30_silence",
+      "speaker": "yu",
+      "text": "国道に、車がいない。\n自販機の光だけが残っている。町が、静かになった。",
+      "truth_id": "msg_f01_d30_silence_t"
+    },
+    {
+      "id": "msg_f01_d30_silence_t",
+      "speaker": "yu",
+      "text": "国道に、車がいない。\n町のものは戻った。自販機の光は、いつもより強い。"
     },
     {
       "id": "msg_an_f16_nothing",
