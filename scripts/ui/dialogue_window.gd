@@ -188,14 +188,10 @@ func _on_choice_activated(index: int, _id: String) -> void:
 
 
 func _setup_font() -> void:
+	if UiFont.font != null:
+		_font = UiFont.font
+		return
 	if ResourceLoader.exists(FONT_PATH):
-		var font_file: FontFile = load(FONT_PATH) as FontFile
-		if font_file != null:
-			font_file.antialiasing = TextServer.FONT_ANTIALIASING_NONE
-			font_file.hinting = TextServer.HINTING_NONE
-			font_file.subpixel_positioning = TextServer.SUBPIXEL_POSITIONING_DISABLED
-			_font = font_file
-			return
 		push_error("DialogueWindow: %s を FontFile として読み込めません" % FONT_PATH)
 	else:
 		push_warning("DialogueWindow: PixelMplus12 が %s に無いため代替フォントで表示します（resources/fonts/README.md）" % FONT_PATH)
