@@ -36,15 +36,14 @@ func _ready() -> void:
 ## 相談窓口の一覧を読む。要素は {name, contact, hours?, note?}。name と contact の無い要素は捨てる
 func load_support(path: String) -> bool:
 	_support_entries.clear()
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		push_warning("MessageResolver: %s を開けません（%s）。相談窓口は未掲載として扱います" % [path, error_string(FileAccess.get_open_error())])
+	if not FileAccess.file_exists(path):
+		push_warning("MessageResolver: %s が無いため、相談窓口は未掲載として扱います" % path)
 		return false
-	var json: JSON = JSON.new()
-	if json.parse(file.get_as_text()) != OK or not json.data is Dictionary:
-		push_error("MessageResolver: %s: JSON 構文エラー 行 %d: %s" % [path, json.get_error_line(), json.get_error_message()])
+	var read_errors: PackedStringArray = PackedStringArray()
+	var root: Dictionary = JsonFile.read_dict(path, read_errors)
+	if root.is_empty():
+		push_error("MessageResolver: " + read_errors[0])
 		return false
-	var root: Dictionary = json.data
 	var list: Variant = root.get("entries", [])
 	if not list is Array:
 		push_error("MessageResolver: %s: 'entries' は配列である必要があります" % path)
@@ -71,15 +70,10 @@ func load_file(path: String) -> bool:
 	_speakers.clear()
 	load_errors.clear()
 	is_loaded = false
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		return _fail("%s を開けません（%s）" % [path, error_string(FileAccess.get_open_error())])
-	var json: JSON = JSON.new()
-	if json.parse(file.get_as_text()) != OK:
-		return _fail("%s: JSON 構文エラー 行 %d: %s" % [path, json.get_error_line(), json.get_error_message()])
-	if not json.data is Dictionary:
-		return _fail("%s: トップレベルは辞書である必要があります" % path)
-	var root: Dictionary = json.data
+	var read_errors: PackedStringArray = PackedStringArray()
+	var root: Dictionary = JsonFile.read_dict(path, read_errors)
+	if root.is_empty():
+		return _fail(read_errors[0])
 	var meta: Dictionary = root.get("meta", {}) if root.get("meta", {}) is Dictionary else {}
 	if meta.get("speakers", {}) is Dictionary:
 		_speakers = meta.get("speakers", {})

@@ -68,22 +68,7 @@ func load_from_file(path: String) -> bool:
 
 ## ファイルを開いて JSON を解析し、トップレベル辞書を返す。失敗は空辞書＋load_errors
 func _read_root(path: String) -> Dictionary:
-	if not FileAccess.file_exists(path):
-		load_errors.append("%s が見つかりません" % path)
-		return {}
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		load_errors.append("%s を開けません（%s）" % [path, error_string(FileAccess.get_open_error())])
-		return {}
-	var json: JSON = JSON.new()
-	var err: Error = json.parse(file.get_as_text())
-	if err != OK:
-		load_errors.append("%s: JSON 構文エラー 行 %d: %s" % [path, json.get_error_line(), json.get_error_message()])
-		return {}
-	if not json.data is Dictionary:
-		load_errors.append("%s: トップレベルは辞書である必要があります" % path)
-		return {}
-	return json.data
+	return JsonFile.read_dict(path, load_errors, true)
 
 
 func _palette_hex() -> PackedStringArray:

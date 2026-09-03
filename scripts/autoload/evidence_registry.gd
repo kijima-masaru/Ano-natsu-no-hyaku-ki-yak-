@@ -30,15 +30,13 @@ func load_file(path: String) -> bool:
 	_entries.clear()
 	load_errors.clear()
 	is_loaded = false
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		return _fail("%s を開けません（%s）" % [path, error_string(FileAccess.get_open_error())])
-	var json: JSON = JSON.new()
-	if json.parse(file.get_as_text()) != OK:
-		return _fail("%s: JSON 構文エラー 行 %d: %s" % [path, json.get_error_line(), json.get_error_message()])
-	if not json.data is Dictionary or not (json.data as Dictionary).get("evidence", null) is Array:
+	var read_errors: PackedStringArray = PackedStringArray()
+	var root: Dictionary = JsonFile.read_dict(path, read_errors)
+	if root.is_empty():
+		return _fail(read_errors[0])
+	if not root.get("evidence", null) is Array:
 		return _fail("%s: 'evidence' 配列がありません" % path)
-	for item: Variant in (json.data as Dictionary)["evidence"] as Array:
+	for item: Variant in root["evidence"] as Array:
 		if not item is Dictionary:
 			load_errors.append("evidence の要素が辞書ではありません")
 			continue

@@ -198,27 +198,11 @@ func has_cleared() -> bool:
 # ── I/O ──
 
 func _read_json(path: String, errors: PackedStringArray) -> Dictionary:
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		errors.append("開けません（%s）" % error_string(FileAccess.get_open_error()))
-		return {}
-	var json: JSON = JSON.new()
-	if json.parse(file.get_as_text()) != OK:
-		errors.append("JSON 構文エラー 行 %d: %s" % [json.get_error_line(), json.get_error_message()])
-		return {}
-	if not json.data is Dictionary:
-		errors.append("トップレベルが辞書ではありません")
-		return {}
-	return json.data
+	return JsonFile.read_dict(path, errors)
 
 
 func _write_json(path: String, data: Dictionary) -> Error:
-	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
-	if file == null:
-		return FileAccess.get_open_error()
-	file.store_string(JSON.stringify(data, "  "))
-	file.close()
-	return OK
+	return JsonFile.write_dict(path, data)
 
 
 func _fail_save(slot: int, reason: String) -> Error:
