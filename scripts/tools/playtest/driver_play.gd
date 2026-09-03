@@ -223,7 +223,10 @@ func _interact(id: String) -> void:
 		_est_walk += _walk_seconds(SceneRouter.player.global_position, dest)
 		SceneRouter.player.global_position = dest
 		if SceneRouter.heroine != null and SceneRouter.heroine.is_inside_tree():
-			SceneRouter.heroine.global_position = SceneRouter.player.global_position + (Vector2(GameConstants.TILE_SIZE, 0) if _witness else Vector2(GameConstants.TILE_SIZE * 12, GameConstants.TILE_SIZE * 12))
+			# 既定：追従距離（段階ごとのタイル数）だけ後ろ。--witness：1 タイル隣（遷移直後と同じ）
+			var follow: PackedInt32Array = SceneRouter.heroine.get_script().get_script_constant_map()["FOLLOW_TILES"]
+			var back: int = follow[clampi(Suspicion.get_stage(), 0, follow.size() - 1)] if not _witness else 1
+			SceneRouter.heroine.global_position = SceneRouter.player.global_position + Vector2(GameConstants.TILE_SIZE * back, 0)
 	it.interact(SceneRouter.player)
 	await _settle()
 

@@ -67,7 +67,7 @@
 |---|---|---|---|
 | `ev_<evidence_id>` | 証拠 `<evidence_id>` をノートに記録した | `give_evidence` アクション | ノート、接近度 |
 | `hid_<evidence_id>` | 証拠 `<evidence_id>` を隠蔽した（成功） | `conceal_evidence` アクション、澪が近くにいない | 隠蔽リスト提示、ED 判定 |
-| `hid_fail_<evidence_id>` | 隠蔽が澪に目撃された | `conceal_evidence`、澪が半径 `HEROINE_WITNESS_RADIUS` 内 | 接近度 +20、ED-A 条件 |
+| `hid_fail_<evidence_id>` | 隠蔽が澪に目撃された | `conceal_evidence`、澪が目撃半径（`Heroine.WITNESS_RADIUS_BY_STAGE`、段階で 24〜72px）内 | 接近度 +20、ED-A 条件 |
 | `seen_<message_id>` | 二層テキストの表層版を一度見た | `MessageResolver` | 真相到達時の「あなたが読んだ嘘」一覧 |
 
 ## 憑いた怪異（ナツ）系
