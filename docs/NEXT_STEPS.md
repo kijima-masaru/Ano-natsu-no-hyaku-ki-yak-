@@ -10,11 +10,12 @@
 | 1 | feat/d29-shige | **済（PR #44）**。8/29 F14 でシゲが澪に封石の戻し方を教える（`baba_told_seal`、任意到達） |
 | 2 | feat/d30-seal | **済（PR #45）**。8/30 の封印：F16 奥の裂け目の口（落石が崩れる）、面を一枚ずつ四つの台座へ戻す配置パズル、封石を二人で押して `seal_restored`、`msg_natsu_008`、環境音の差し替え（`set_ambience`）、F01 の静まり返り |
 | 3 | feat/truth-reveal | **済（PR #46）**。8/30 夜：帰路の余韻 → F12 自宅前で澪が事実を並べる（選択肢 2 回、結末不変）→ 提示画面（1 件ずつ、暗転と無音、初回スキップ不可）→ `truth_revealed` → ナツ `msg_natsu_009` → 澪が去る → 真相版の町を歩き F01 で 8/30 が終わる |
-| 4 | feat/d31-endings | **PR 済・承認待ち**。8/31 は澪を操作（`pov_mio`）。F05 → F01 → F12 → F13 → F15。橋の悠に「行かせない」。ED-A/B/C の分岐（FLAGS の条件）、暗転、翌朝の事後（新しいバリケード、揃えられた靴、トキの言葉）、`end_game` |
-| 5〜13 | feat/natsu-final 以降 | 未着手 |
+| 4 | feat/d31-endings | **済（PR #47）**。8/31 は澪を操作（`pov_mio`）。F05 → F01 → F12 → F13 → F15。橋の悠に「行かせない」。ED-A/B/C の分岐（FLAGS の条件）、暗転、翌朝の事後（新しいバリケード、揃えられた靴、トキの言葉）、`end_game` |
+| 5 | feat/natsu-final | **PR 済・承認待ち**。13 台詞＋労わり 5 件の通し読み（表層は一貫して優しく、真相は一貫して最悪）、真相版の話者色、8/5 の 003 流用を気配に変更、`entity_intro_done` の確認 |
+| 6〜13 | feat/end-game-flow 以降 | 未着手 |
 
 ### 次に何をすべきか
-- タスク4 の PR をレビュー・マージ → `feat/natsu-final`（ナツの全台詞の通し読みと整合、`entity_intro_done` は 8/1 で既に立っている）。
+- タスク5 の PR をレビュー・マージ → `feat/end-game-flow`（`end_game` の本実装：クリア記録の詳細、スタッフロール、タイトル帰還、2 周目案の提示、セーブスロットの扱い）。
 - **判断済み**（ユーザー委任）：イベント中は澪を止め目撃半径を追従距離より短くした（#43）／検証ドライバと `.gd.uid` は残す。**未解決**：接近度の加算・閾値（最短経路でも 8/21 に 100。ED-B・C に届かない）と屋内の暗さはタスク10で扱う。
 - **実機で判明した不具合の一覧**：docs/PLAYTEST_LOG.md「見つかった不具合と対処」6 件（すべて修正済み）。未修正はフォント代替時の `content_notice` の行重なり、全体図の凡例の暗さ、終了時のリーク警告 2 件。
 
@@ -51,7 +52,7 @@ unzip godot.zip && ./Godot_v4.7-stable_linux.x86_64 --headless --path . --import
 
 - 8/30：`ev_d30_open` の本実装。封印の場（F16）、`seal_restored`、`show_concealment_reveal`、`truth_revealed` → 以後の二層テキストが真相版に切り替わる
 - 8/31：`ev_d31_open`、御渡橋（F15）、`ending_reached` と分岐（`ending_a` ほか。`truth_partial_walk` `truth_partial_entity` は接近度と `baba_told_seal` で決まる。`docs/FLAGS.md`）、`end_game` アクションの本実装（クリア記録 → タイトル）
-- ナツの残り：`msg_natsu_008`（8/30 前夜）`msg_natsu_009`（提示画面の末尾、真相版）`msg_natsu_010`（8/31）を流すイベント。`entity_intro_done` を 8/1 の初台詞で立てる
+- ナツの残り：済（8/30 封印 008、提示画面直後 009、8/31 ED-A 010。`entity_intro_done` は 8/1 で立つ）
 - コンテンツ警告と相談窓口案内（`docs/CONTENT_NOTICE.md`）をタイトルとエンディング後に出す
 - 素材差し替え（`docs/ASSETS_NEEDED.md` の優先順位どおり）と Steam 向けの設定（`SteamBridge` は空実装）
 
@@ -79,7 +80,7 @@ unzip godot.zip && ./Godot_v4.7-stable_linux.x86_64 --headless --path . --import
 
 ## フラグの棚卸し
 
-- **定義済みでまだ立たない**（ステップ5で立てる）：`seal_restored`（8/30 封印）、`truth_revealed`（8/30）、`truth_partial_walk` `truth_partial_entity`、`ending_reached` `ending_a`、`baba_told_seal`（8/29 シゲが澪に封石の戻し方を教える。現状の 8/29 は F16 のみで F14 のイベントが無い）、`entity_intro_done`（8/1 の初台詞で立てる予定だったが未使用）。
+- **タスク1〜4 で立つようになった**：`baba_told_seal`（8/29）、`seal_restored`（8/30）、`truth_revealed` `truth_partial_walk` `truth_partial_entity`（8/30 夜）、`ending_reached` `ending_a/b/c`（8/31）、`pov_mio`（8/31）。`entity_intro_done` は 8/1 で立つ。定義済みで立たないフラグは無い。
 - **立つが参照されない**：`d01_told` `found_odd_house` `saw_notifications`（振り返り用に残す。消すなら `docs/FLAGS.md` も）。
 - **動的接頭辞**：`visited_ ev_done_ ev_day_ hid_ hid_fail_ seen_ day_ luck_ an_done_`。`luck_<n>` は追跡者に捕まった回数で立つ（最大 3。日付固定ではない）。
 - `investigation_points_today` は `docs/FLAGS.md` に載っているが数値（`Calendar`）であってフラグではない。

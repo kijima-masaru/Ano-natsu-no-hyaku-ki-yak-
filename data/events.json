@@ -7949,8 +7949,8 @@
           "flag": "saw_first_missing"
         },
         {
-          "type": "entity_speak",
-          "id": "msg_natsu_003"
+          "type": "entity_pulse",
+          "strength": 0.5
         },
         {
           "type": "add_points",

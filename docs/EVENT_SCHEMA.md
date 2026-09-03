@@ -90,7 +90,7 @@
 
 ## 二層テキスト
 
-`messages.json` の各 entry は `{id, speaker, text, truth_id?}`。`truth_id` があり `truth_revealed` が立っていれば `MessageResolver.resolve()` が真相版を返す。
+`messages.json` の各 entry は `{id, speaker, text, truth_id?}`。`truth_id` があり `truth_revealed` が立っていれば `MessageResolver.resolve()` が真相版を返す。話者定義（`meta.speakers`）に `truth_color` があれば、真相版はその色で表示される（ナツ：枯れ黄土）。
 表層版を返した時点で `seen_<id>` が立つ。**テキストの取得は必ず `MessageResolver.resolve / text` を通す。** GDScript に日本語を直書きしない。
 
 ## 検証（起動時、全 autoload の `_ready` 後）

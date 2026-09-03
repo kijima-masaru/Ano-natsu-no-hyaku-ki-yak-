@@ -36,7 +36,7 @@ func _ready() -> void:
 	var t0: int = Time.get_ticks_msec()
 	await _it("home_door")
 	print("confront: truth=%s partial_walk=%s partial_entity=%s companion=%s reveal_pages=%d elapsed=%.1fs(x8)" % [GameState.has_flag("truth_revealed"), GameState.has_flag("truth_partial_walk"), GameState.has_flag("truth_partial_entity"), GameState.has_flag("companion_on"), _reveal_pages, (Time.get_ticks_msec() - t0) / 1000.0])
-	print("resolve check: natsu_009 is_truth=%s recall_a is_truth=%s" % [MessageResolver.resolve("msg_natsu_009").is_truth, MessageResolver.resolve("msg_recall_0731_a").is_truth])
+	print("resolve check: natsu_009 is_truth=%s color=%d(ochre=%d) recall_a is_truth=%s yu color=%d" % [MessageResolver.resolve("msg_natsu_009").is_truth, MessageResolver.resolve("msg_natsu_009").color_index, Palette.OCHRE, MessageResolver.resolve("msg_recall_0731_a").is_truth, MessageResolver.resolve("msg_recall_0731_a").color_index])
 	await _it("home_door")
 	print("door again: day=%d" % Calendar.day)
 	SceneRouter.go_to("F01")

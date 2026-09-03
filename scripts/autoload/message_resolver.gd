@@ -113,6 +113,10 @@ func resolve(id: String, args: Array = []) -> MessageEntry:
 		var truth: MessageEntry = _build(truth_id, _messages[truth_id], args)
 		truth.is_truth = true
 		truth.truth_id = truth_id
+		# 話者に truth_color があれば真相版はその色（ナツ：文言が同じでも色だけ変わる。docs/DECEPTION_MAP.md §D）
+		var truth_color: String = str(get_speaker(truth.speaker).get("truth_color", ""))
+		if COLOR_NAMES.has(truth_color):
+			truth.color_index = COLOR_NAMES[truth_color]
 		return truth
 	if not truth_id.is_empty():
 		GameState.raise_flag("seen_%s" % id)
