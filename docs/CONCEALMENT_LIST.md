@@ -34,9 +34,31 @@
 | C-16 `cairn_stone` | F15 渡し場跡の石碑の台座に悠が六月の夜に積んだ小石（町の境を確かめて戻った印） | F15 石碑 | 8/26〜 | 「石碑の台座を見た。」 | 自分が積んだ小石を崩した。澪が近いと「石、崩れちゃった……？」 |
 | C-17 `capsule_letter` | **本作最大の隠蔽対象。** F11 旧校舎 1 階の図工室、タイムカプセルの木箱の中の、蓮が二十歳の悠に書いた手紙 | F11 図工室の作品棚 | 8/20〜 | 「手紙の束を見た。宛名は全部、二十歳の自分たち。」 | 蓮の手紙を抜き、読まずにポケットへ。木箱は元の位置に。澪が近いと「今、何か取った？　蓮の字だったよね」（接近度 +25） |
 
-## ステップ3の実装範囲
+## 実装状況（v0.3.0）
 
-C-01（8/1 F12）、C-09（8/1〜 F01）、C-04（8/3 F05）、C-03（8/4 F06 北端）の 4 件に加え、F02 実装時に C-02（8/8 蓮の机）と C-05（8/8 蓮の端末）のイベントも先行して置いた。8/5 以降の日程に組み込むのはステップ4。
+17 件すべてに `conceal_evidence` イベントがある。形は「隠蔽＋`add_points` の `once` イベント（優先度 5〜10）」＋「再表示用 `_after`（優先度 0、表示文だけ）」の 2 本。日付より前は `_early`（表層文のみ）。
+
+| ID | イベント | 場所（interaction_id） | 実装 PR |
+|---|---|---|---|
+| C-01 `shoe_mud` | `ev_f12_shoes`（`ev_f12_home_d1_choice` の選択肢から） | F12 `home_door` | #22 |
+| C-02 `ren_memo` | `ev_f02_room_desk`（`ev_f02_room` から） | F02 蓮の部屋 `room_desk` | #22 |
+| C-03 `timetable_pass` | `ev_f06_slope_notice` / `_after` | F06 `slope_notice` | #23 |
+| C-04 `storefront_note` | `ev_f05_calendar_conceal` / `_after` | F05 `calendar` | #23 |
+| C-05 `phone_reply` | `ev_f02_room_phone` | F02 `room_phone` | #22 |
+| C-06 `salt_bag` | `ev_f16_salt_conceal` / `_after`（8/29〜） | F16 `salt_spot` | #38 |
+| C-07 `journal_page` | `ev_f04_journal_conceal` / `_after`（8/13〜22） | F04 `shed_door` | #36 |
+| C-08 `library_book` | `ev_f06_library_book`（8/9〜。再訪は毎日 +1 P の `ev_f06_library_again`） | F06 `library` | #42（机上確認で未実装が判明し追加） |
+| C-09 `store_receipt` | `ev_f01_receipt`（`once: false`。2 回目以降は表示文のみ） | F01 `receipt_box` | #22 |
+| C-10 `flashlight_box` | `ev_f13_trash_conceal` / `_after` / `_early`（8/19〜） | F13 `trash_station` | #29 |
+| C-11 `dugout_note` | `ev_f10_dugout_conceal` / `_after` / `_early`（8/19〜） | F10 `dugout` | #30 |
+| C-12 `water_bottle` | `ev_f07_muen_conceal` / `_after` / `_early`（8/15〜） | F07 `muen_grave` | #31 |
+| C-13 `ema_wish` | `ev_f08_ema_conceal` / `_after` / `_early`（8/16〜） | F08 `ema` | #32 |
+| C-14 `path_marker` | `ev_f09_marker_conceal` / `_after`（F09 解放後は常時） | F09 `bridge_marker` | #33 |
+| C-15 `visitor_book` | `ev_f14_book_conceal` / `_after` / `_early`（8/14〜） | F14 `visitor_book` | #34 |
+| C-16 `cairn_stone` | `ev_f15_stele_conceal` / `_after` / `_early`（8/26〜） | F15 `stele` | #35 |
+| C-17 `capsule_letter` | `ev_f11_art_shelf_conceal` / `_after`（旧校舎 1 階、8/20〜） | F11 `art_shelf` | #37 |
+
+イベント ID と interaction_id は `data/events.json` を正とする（表は検索の手掛かり）。8/30 の提示画面は `ConcealmentReveal`（`scripts/ui/concealment_reveal.gd`）に実装済みで、`show_concealment_reveal` アクションから呼ぶ（ステップ5で 8/30 の日程に組み込む）。
 
 ## 提示画面（8/30 夜）の構成
 
