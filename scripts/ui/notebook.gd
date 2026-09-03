@@ -27,7 +27,9 @@ func _ready() -> void:
 	InputDevice.device_changed.connect(func(_pad: bool) -> void: _hint.text = InputDevice.hint("ui_notebook_hint"))
 	_list.selection_changed.connect(func(_i: int, id: String) -> void: _show_detail(id))
 	_list.cancelled.connect(func() -> void: closed.emit())
-	_list.activated.connect(func(_i: int, id: String) -> void: _show_detail(id))
+	_list.activated.connect(func(_i: int, id: String) -> void:
+		AudioManager.play_se("se_notebook_page")
+		_show_detail(id))
 	_rebuild()
 
 

@@ -120,7 +120,9 @@ func _open_notebook() -> void:
 	SceneRouter.player.input_enabled = false
 	_notebook = NOTEBOOK_SCENE.instantiate() as Control
 	ui.add_child(_notebook)
+	AudioManager.play_se("se_notebook_open")
 	_notebook.closed.connect(func() -> void:
+		AudioManager.play_se("se_notebook_close")
 		_notebook.queue_free()
 		_notebook = null
 		_on_message_closed())
@@ -186,6 +188,7 @@ func _run_day_start(day: int) -> void:
 	if not _pending_compressed_text.is_empty():
 		await EventSystem.show_entry(MessageResolver.resolve(_pending_compressed_text))
 		_pending_compressed_text = ""
+	AudioManager.play_se("se_day_advance")
 	await EventSystem.show_entry(MessageResolver.resolve("msg_day_start", [Calendar.format_date(day), Calendar.time_label()]))
 	var schedule: DaySchedule = Calendar.get_schedule(day)
 	if schedule != null and not schedule.opening_event.is_empty():

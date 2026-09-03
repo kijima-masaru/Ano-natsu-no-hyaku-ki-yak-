@@ -6149,8 +6149,15 @@
           "seconds": 1.5
         },
         {
+          "type": "play_sound",
+          "id": "se_seal_stone"
+        },
+        {
           "type": "set_ambience",
           "id": ""
+        },
+        {
+          "type": "stop_bgm"
         },
         {
           "type": "set_flag",
@@ -6230,6 +6237,10 @@
           "id": "amb_valley_inner"
         },
         {
+          "type": "play_bgm",
+          "id": "bgm_seal"
+        },
+        {
           "type": "message",
           "id": "msg_f16_stone_first"
         },
@@ -6264,6 +6275,10 @@
         {
           "type": "set_ambience",
           "id": "amb_valley_inner"
+        },
+        {
+          "type": "play_bgm",
+          "id": "bgm_seal"
         },
         {
           "type": "message",
@@ -7174,6 +7189,10 @@
           "seconds": 1.2
         },
         {
+          "type": "play_bgm",
+          "id": "bgm_truth"
+        },
+        {
           "type": "show_concealment_reveal",
           "hold": true
         },
@@ -7203,6 +7222,9 @@
         {
           "type": "message",
           "id": "msg_mio_d30_6"
+        },
+        {
+          "type": "stop_bgm"
         },
         {
           "type": "set_companion",
@@ -7584,6 +7606,42 @@
           ]
         },
         {
+          "type": "branch",
+          "conditions": [
+            {
+              "flag": "ending_a"
+            }
+          ],
+          "then": [
+            {
+              "type": "play_bgm",
+              "id": "bgm_ending_a"
+            }
+          ],
+          "else": [
+            {
+              "type": "branch",
+              "conditions": [
+                {
+                  "flag": "ending_b"
+                }
+              ],
+              "then": [
+                {
+                  "type": "play_bgm",
+                  "id": "bgm_ending"
+                }
+              ],
+              "else": [
+                {
+                  "type": "play_bgm",
+                  "id": "bgm_ending_c"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "type": "message",
           "id": "msg_d31_b_end"
         },
@@ -7695,6 +7753,9 @@
         {
           "type": "wait",
           "seconds": 1.0
+        },
+        {
+          "type": "stop_bgm"
         },
         {
           "type": "fade",

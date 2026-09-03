@@ -176,6 +176,8 @@ func attach_flashlight(owner: Node2D) -> PointLight2D:
 
 
 func set_flashlight(on: bool) -> void:
+	if on != flashlight_on:
+		AudioManager.play_se("se_flashlight_on" if on else "se_flashlight_off")
 	flashlight_on = on
 	if _flashlight != null and is_instance_valid(_flashlight):
 		_flashlight.visible = on

@@ -38,6 +38,7 @@ static func switch(field: FieldBase, floor_id: String, spawn_tile: Vector2i, fac
 			str(spec.get("default_ground", "")), spec.get("overhead", []), spec.get("interactables", []))
 		field.set_floor_size(Vector2i(rows[0].length() if not rows.is_empty() else 0, rows.size()))
 		Lighting.set_darkness_override(float(spec.get("darkness", INDOOR_DARKNESS)))
+	_play_transition_sound(field.current_floor, floor_id)
 	field.current_floor = floor_id
 	_set_exit_triggers_enabled(field, floor_id == OUTSIDE)
 	var player: Node = SceneRouter.player
@@ -50,6 +51,16 @@ static func switch(field: FieldBase, floor_id: String, spawn_tile: Vector2i, fac
 	Lighting.refresh()
 	field.floor_changed.emit(floor_id)
 	return true
+
+
+## 階の移動音。屋外との出入りは戸、階同士は階段（"1f" < "2f" の並びで上り下りを決める）
+static func _play_transition_sound(previous: String, next: String) -> void:
+	if previous == next:
+		return
+	if previous == OUTSIDE or next == OUTSIDE:
+		AudioManager.play_se("se_door")
+	else:
+		AudioManager.play_se("se_stairs_up" if next > previous else "se_stairs_down")
 
 
 static func _floors_of(field: FieldBase) -> Dictionary:

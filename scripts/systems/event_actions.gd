@@ -124,6 +124,7 @@ static func _advance_day_deferred(es: Node) -> void:
 	if not Calendar.can_advance():
 		es.emit_action_failed("advance_day", {}, "進行条件未達")
 		return
+	AudioManager.play_se("se_sleep")
 	es.event_finished.connect(func(_id: String) -> void: Calendar.advance_day(), Object.CONNECT_ONE_SHOT | Object.CONNECT_DEFERRED)
 
 
@@ -159,6 +160,7 @@ static func _end_game(es: Node, a: Dictionary) -> void:
 		var roll: Control = _mount_fullscreen(es, ui, "res://scenes/ui/staff_roll.tscn", {})
 		if roll != null:
 			await Signal(roll, "finished")
+		AudioManager.stop_bgm(END_FADE_SECONDS)
 		await SceneRouter.fade_screen(1.0, END_FADE_SECONDS)
 	else:
 		push_error("EventActions: UI 層が無いため案内とスタッフロールを飛ばします")
@@ -191,6 +193,7 @@ static func _sleep(es: Node) -> void:
 		return
 	GameState.raise_flag("slept_at_home")
 	await es.show_entry(MessageResolver.resolve("msg_bed_sleep"))
+	AudioManager.play_se("se_sleep")
 	es.event_finished.connect(func(_id: String) -> void: Calendar.try_sleep(field_id), Object.CONNECT_ONE_SHOT | Object.CONNECT_DEFERRED)
 
 

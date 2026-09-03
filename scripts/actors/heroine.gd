@@ -26,6 +26,8 @@ const AHEAD_CHANCE: PackedFloat32Array = [0.0, 0.0, 0.3, 0.5]
 const LOOK_INTERVAL: PackedFloat32Array = [0.0, 6.0, 3.0, 1.5]
 const LOOK_HOLD: float = 1.0
 const ANIM_FRAME_TIME: float = 0.18
+## 足音の間隔（秒）。主人公より軽く少し速い
+const STEP_INTERVAL: float = 0.34
 
 var facing: Vector2i = Vector2i.DOWN
 var is_active: bool = true
@@ -39,6 +41,7 @@ var _look_hold: float = 0.0
 var _ahead_target: Vector2 = Vector2.INF
 var _anim_timer: float = 0.0
 var _anim_frame: int = 0
+var _step_timer: float = 0.0
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 @onready var _sprite: Sprite2D = $Sprite
@@ -89,6 +92,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, ACCEL * delta)
 	move_and_slide()
+	_tick_footsteps(delta)
 	_check_lost(player, target, delta)
 	_update_facing(player, stage, delta)
 	_tick_animation(delta)
@@ -156,6 +160,16 @@ func _face_toward(point: Vector2) -> void:
 	if new_facing != Vector2i.ZERO and new_facing != facing:
 		facing = new_facing
 		_update_sprite()
+
+
+func _tick_footsteps(delta: float) -> void:
+	if velocity.length() < 4.0:
+		_step_timer = 0.0
+		return
+	_step_timer += delta
+	if _step_timer >= STEP_INTERVAL:
+		_step_timer -= STEP_INTERVAL
+		AudioManager.play_heroine_footstep()
 
 
 func _tick_animation(delta: float) -> void:

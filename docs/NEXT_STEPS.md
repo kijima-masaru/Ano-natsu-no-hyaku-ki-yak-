@@ -15,7 +15,7 @@
 
 | # | 作業 | 参照 | 備考 |
 |---|---|---|---|
-| 1 | **素材の差し替え**（フォント → アクター 5 種 → タイル 163 種 → 音 → 光源 → タイトル背景） | `docs/ASSETS_NEEDED.md` §7 の順 | 差し替え境界は §1。納品ごとに `driver_shots` で描画確認 |
+| 1 | **素材の差し替え**（フォント → アクター 5 種 → タイル 163 種 → 光源 → タイトル背景。**音は自作 215 件を統合済み**） | `docs/ASSETS_NEEDED.md` §7 の順、音は `docs/AUDIO_SPEC.md` | 差し替え境界は §1。納品ごとに `driver_shots` で描画確認 |
 | 2 | **GodotSteam** の組み込み（`SteamBridge` は空実装） | `scripts/autoload/steam_bridge.gd` | 起動時の初期化、オーバーレイ、クラウドセーブ（`user://saves/` と `system.json`）。Steam 未接続でも今どおり動くこと |
 | 3 | **実績**（候補：8 月 1 日、各 ED、裏面クリア、隠蔽 17 件全提示、目撃 0、全フィールド訪問、面 4 枚を一度も間違えない） | `docs/FLAGS.md`「記録用」、`system.json` の `clears_by_ending` | フラグは全部残してある。`SteamBridge.unlock(id)` の口を足す |
 | 4 | **Steam Deck**（1280×800、整数 3 倍で 1152×648 ＋ 余白、ゲームパッド専用、Proton）| `docs/PLAYTEST_LOG.md`「操作系」 | 操作案内は `InputDevice` で A/B 表記に切り替わる。文字サイズ 12px の読みやすさを実機で見る |

@@ -36,11 +36,15 @@ const PATROL_WAIT: float = 1.5
 ## 退却の直後は対象を見ても追い直さない猶予（秒）。無いと庇護で見失った次のフレームに再捕獲し、幸運を一度に使い切る
 const RETREAT_GRACE_SECONDS: float = 3.0
 const ANIM_FRAME_TIME: float = 0.22
+## 足音の間隔（秒）。主人公より遅く重い。追跡中は速く
+const STEP_INTERVAL_WALK: float = 0.55
+const STEP_INTERVAL_CHASE: float = 0.36
 const PUSHBACK_DEFAULT_FIELD: String = "F01"
 
 ## 照明系が設定する暗さ（0 明るい〜1 暗い）
 var darkness: float = 0.0
 var state: int = State.IDLE
+var _step_timer: float = 0.0
 var facing: Vector2i = Vector2i.DOWN
 var home_position: Vector2 = Vector2.ZERO
 var retreat_field_id: String = PUSHBACK_DEFAULT_FIELD
@@ -141,9 +145,14 @@ func _set_state(new_state: int) -> void:
 	_timer = 0.0
 	_lost_timer = 0.0
 	if state == State.CHASE:
+		AudioManager.play_se("se_stalker_notice")
 		AudioManager.set_tension(true)
 	elif previous == State.CHASE:
 		AudioManager.set_tension(false)
+	if state == State.SUSPICIOUS:
+		AudioManager.play_se("se_stalker_far")
+	elif state == State.RETREAT and previous == State.SEARCH:
+		AudioManager.play_se("se_stalker_lost")
 	if state == State.PATROL:
 		_patrol_point = Vector2.INF
 	state_changed.emit(state, previous)
@@ -189,6 +198,7 @@ func _physics_process(delta: float) -> void:
 				if _arrived(home_position):
 					_set_state(State.IDLE)
 	move_and_slide()
+	_tick_footsteps(delta)
 	_tick_animation(delta)
 
 
@@ -224,6 +234,18 @@ func _do_patrol() -> void:
 		var offset: Vector2 = Vector2(_rng.randf_range(-1.0, 1.0), _rng.randf_range(-1.0, 1.0)) * PATROL_RADIUS_TILES * GameConstants.TILE_SIZE
 		_patrol_point = home_position + offset
 	_move_to(_patrol_point, WALK_SPEED, get_physics_process_delta_time())
+
+
+## 足音。動いている間だけ、速さに応じた間隔で材質別の音を鳴らす
+func _tick_footsteps(delta: float) -> void:
+	if velocity.length() < 4.0:
+		_step_timer = 0.0
+		return
+	_step_timer += delta
+	var interval: float = STEP_INTERVAL_CHASE if state == State.CHASE else STEP_INTERVAL_WALK
+	if _step_timer >= interval:
+		_step_timer -= interval
+		AudioManager.play_stalker_footstep(global_position)
 
 
 func _move_to(point: Vector2, speed: float, delta: float) -> void:
