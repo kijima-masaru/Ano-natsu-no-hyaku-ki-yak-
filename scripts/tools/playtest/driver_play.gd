@@ -121,6 +121,7 @@ func _check_two_layer() -> void:
 ## セーブ → 状態を壊す → ロード → 復元されるか
 func _check_save_load() -> void:
 	var before: Dictionary = {"gs": GameState.to_dict(), "cal": Calendar.to_dict(), "sus": Suspicion.to_dict(), "an": AnomalySystem.to_dict(), "ent": AttachedEntity.to_dict()}
+	var had_slot: bool = SaveManager.has_save(1)
 	var err: Error = SaveManager.save_game(1)
 	print("save_game(1) -> %s" % error_string(err))
 	GameState.reset()
@@ -128,6 +129,8 @@ func _check_save_load() -> void:
 	await get_tree().process_frame
 	err = SaveManager.load_game(1)
 	print("load_game(1) -> %s" % error_string(err))
+	if not had_slot:
+		SaveManager.delete_save(1)  # 検証で作ったスロットを残さない
 	var after: Dictionary = {"gs": GameState.to_dict(), "cal": Calendar.to_dict(), "sus": Suspicion.to_dict(), "an": AnomalySystem.to_dict(), "ent": AttachedEntity.to_dict()}
 	for k: String in before.keys():
 		var a: String = JSON.stringify(before[k], "", true)
