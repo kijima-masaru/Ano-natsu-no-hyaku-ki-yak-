@@ -1,0 +1,1445 @@
+{
+  "アスファルト": {
+    "args": {
+      "base": 3,
+      "speck": 4
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "イチョウ（大木）": {
+    "args": {
+      "canopy": 11,
+      "shade": 10,
+      "trunk": 9
+    },
+    "interactable": true,
+    "painter": "tree",
+    "walkable": false
+  },
+  "カーポート": {
+    "args": {
+      "base": 4,
+      "dark": 3,
+      "hi": 5
+    },
+    "interactable": false,
+    "painter": "roof",
+    "walkable": false
+  },
+  "ガラス扉（点灯）": {
+    "args": {
+      "glow": 13,
+      "lit": true
+    },
+    "interactable": false,
+    "painter": "glass",
+    "walkable": false
+  },
+  "ガードレール": {
+    "args": {
+      "bar": 5,
+      "double": false
+    },
+    "interactable": false,
+    "painter": "rail",
+    "walkable": false
+  },
+  "ゴミ集積所ネット": {
+    "args": {
+      "ground": 5,
+      "wire": 7
+    },
+    "interactable": false,
+    "painter": "mesh",
+    "walkable": false
+  },
+  "シャッター（下・半開き）": {
+    "args": {
+      "half": true
+    },
+    "interactable": false,
+    "painter": "shutter",
+    "walkable": false
+  },
+  "ダッグアウト": {
+    "args": {
+      "body": 3,
+      "h": 14,
+      "hi": 4,
+      "w": 14,
+      "x": 1,
+      "y": 1
+    },
+    "interactable": true,
+    "painter": "box",
+    "walkable": false
+  },
+  "バックネット（金網）": {
+    "args": {
+      "ground": 10,
+      "wire": 5
+    },
+    "interactable": false,
+    "painter": "mesh",
+    "walkable": false
+  },
+  "バリケード": {
+    "args": {},
+    "interactable": true,
+    "painter": "barricade",
+    "walkable": false
+  },
+  "フェンス（施錠）": {
+    "args": {
+      "locked": true
+    },
+    "interactable": true,
+    "painter": "fence",
+    "walkable": false
+  },
+  "ブランコ・砂場": {
+    "args": {
+      "bar": 4,
+      "double": false,
+      "ground": 11
+    },
+    "interactable": true,
+    "painter": "rail",
+    "walkable": false
+  },
+  "ブロック塀": {
+    "args": {
+      "base": 4,
+      "mortar": 3
+    },
+    "interactable": false,
+    "painter": "block_wall",
+    "walkable": false
+  },
+  "ベランダ": {
+    "args": {
+      "bar": 5,
+      "ground": 4
+    },
+    "interactable": false,
+    "painter": "rail",
+    "walkable": false
+  },
+  "ベンチ": {
+    "args": {},
+    "interactable": true,
+    "painter": "bench",
+    "walkable": false
+  },
+  "下草": {
+    "args": {
+      "base": 6,
+      "blade": 7
+    },
+    "interactable": false,
+    "painter": "grass",
+    "walkable": true
+  },
+  "下草（丈高）": {
+    "args": {
+      "base": 6,
+      "blade": 7,
+      "tall": true
+    },
+    "interactable": false,
+    "painter": "grass",
+    "walkable": true
+  },
+  "交番の赤色灯": {
+    "args": {
+      "glow": 14,
+      "small": true
+    },
+    "interactable": false,
+    "painter": "light_bar",
+    "walkable": false
+  },
+  "体育館の壁": {
+    "args": {
+      "base": 4,
+      "stain": 0.15
+    },
+    "interactable": false,
+    "painter": "concrete_wall",
+    "walkable": false
+  },
+  "倉庫（トタン）": {
+    "args": {
+      "base": 4,
+      "gap": 3,
+      "width": 3
+    },
+    "interactable": true,
+    "painter": "plank_h",
+    "walkable": false
+  },
+  "側溝": {
+    "args": {
+      "base": 3
+    },
+    "interactable": false,
+    "painter": "grating",
+    "walkable": true
+  },
+  "側溝・グレーチング": {
+    "args": {
+      "base": 4
+    },
+    "interactable": false,
+    "painter": "grating",
+    "walkable": true
+  },
+  "公共建築の壁（タイル）": {
+    "args": {},
+    "interactable": false,
+    "painter": "tile_wall",
+    "walkable": false
+  },
+  "公園の砂地": {
+    "args": {
+      "base": 11,
+      "density": 0.08,
+      "speck": 5
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "公衆電話ボックス": {
+    "args": {
+      "accent": 15,
+      "accent_h": 6,
+      "body": 4
+    },
+    "interactable": true,
+    "painter": "box",
+    "walkable": false
+  },
+  "区画道路アスファルト": {
+    "args": {
+      "base": 3,
+      "density": 0.04,
+      "speck": 5
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "厨子": {
+    "args": {
+      "accent": 11,
+      "body": 9,
+      "ground": 1,
+      "hi": 10
+    },
+    "interactable": true,
+    "painter": "box",
+    "walkable": false
+  },
+  "古墳（盛土・石室口）": {
+    "args": {},
+    "interactable": true,
+    "painter": "mound",
+    "walkable": false
+  },
+  "同型住宅の壁・屋根（3色差分）": {
+    "args": {
+      "base": 3,
+      "dark": 1,
+      "hi": 5
+    },
+    "interactable": false,
+    "painter": "roof",
+    "walkable": false
+  },
+  "商店の看板（褪せ）": {
+    "args": {
+      "board": 11,
+      "ink": 9
+    },
+    "interactable": false,
+    "painter": "sign",
+    "walkable": false
+  },
+  "団地 外壁（コンクリート・雨染み）": {
+    "args": {
+      "stain": 0.5
+    },
+    "interactable": false,
+    "painter": "concrete_wall",
+    "walkable": false
+  },
+  "土のグラウンド": {
+    "args": {
+      "base": 10,
+      "density": 0.08,
+      "speck": 11
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "土塀（漆喰・崩れ）": {
+    "args": {
+      "base": 11,
+      "bh": 5,
+      "bw": 16,
+      "mortar": 9,
+      "stain": 9,
+      "stain_density": 0.15
+    },
+    "interactable": false,
+    "painter": "block_wall",
+    "walkable": false
+  },
+  "土塁（斜面・上面）": {
+    "args": {
+      "base": 7,
+      "line": 9
+    },
+    "interactable": false,
+    "painter": "slope",
+    "walkable": true
+  },
+  "土橋": {
+    "args": {
+      "base": 10,
+      "density": 0.1,
+      "speck": 11
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "堤防斜面": {
+    "args": {
+      "base": 7,
+      "line": 6
+    },
+    "interactable": false,
+    "painter": "slope",
+    "walkable": true
+  },
+  "堤防斜面（草）": {
+    "args": {
+      "base": 7,
+      "line": 6
+    },
+    "interactable": false,
+    "painter": "slope",
+    "walkable": true
+  },
+  "堤防道路": {
+    "args": {
+      "base": 3,
+      "density": 0.06,
+      "speck": 5
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "境内の砂利": {
+    "args": {
+      "base": 4
+    },
+    "interactable": false,
+    "painter": "gravel",
+    "walkable": true
+  },
+  "墓石（複数形）": {
+    "args": {
+      "moss_density": 0.1,
+      "w": 4
+    },
+    "interactable": false,
+    "painter": "slab",
+    "walkable": false
+  },
+  "売地の草": {
+    "args": {
+      "base": 7,
+      "blade": 11,
+      "tall": true
+    },
+    "interactable": false,
+    "painter": "grass",
+    "walkable": true
+  },
+  "寺の山門": {
+    "args": {},
+    "interactable": false,
+    "painter": "gate",
+    "walkable": false
+  },
+  "展望所の柵": {
+    "args": {
+      "bar": 4,
+      "ground": 1
+    },
+    "interactable": true,
+    "painter": "rail",
+    "walkable": false
+  },
+  "山の斜面（樹林）": {
+    "args": {
+      "ground": 6,
+      "hi": 8,
+      "leaf": 7
+    },
+    "interactable": false,
+    "painter": "conifer",
+    "walkable": false
+  },
+  "山門（木・瓦）": {
+    "args": {},
+    "interactable": false,
+    "painter": "gate",
+    "walkable": false
+  },
+  "崖（通行不能）": {
+    "args": {
+      "base": 9,
+      "dark": 0,
+      "hi": 10
+    },
+    "interactable": false,
+    "painter": "cliff",
+    "walkable": false
+  },
+  "崩れた石段": {
+    "args": {
+      "base": 4,
+      "broken": true
+    },
+    "interactable": false,
+    "painter": "stairs",
+    "walkable": true
+  },
+  "常夜灯": {
+    "args": {
+      "stone": true
+    },
+    "interactable": false,
+    "painter": "lamp",
+    "walkable": false
+  },
+  "広場の敷石（インターロッキング）": {
+    "args": {
+      "a": 5,
+      "b": 4,
+      "gap": 3
+    },
+    "interactable": false,
+    "painter": "interlock",
+    "walkable": true
+  },
+  "店舗の木製戸": {
+    "args": {},
+    "interactable": false,
+    "painter": "door",
+    "walkable": false
+  },
+  "店舗ガラス面（点灯）": {
+    "args": {
+      "lit": true
+    },
+    "interactable": false,
+    "painter": "glass",
+    "walkable": false
+  },
+  "店舗看板（無地）": {
+    "args": {
+      "board": 5,
+      "ink": 4
+    },
+    "interactable": false,
+    "painter": "sign",
+    "walkable": false
+  },
+  "庵の板壁と瓦": {
+    "args": {
+      "base": 9,
+      "gap": 0
+    },
+    "interactable": false,
+    "painter": "plank_v",
+    "walkable": false
+  },
+  "廃寺の壁・屋根（崩落）": {
+    "args": {
+      "base": 9,
+      "gap": 0,
+      "worn": true
+    },
+    "interactable": false,
+    "painter": "plank_v",
+    "walkable": false
+  },
+  "建売住宅の壁・屋根（瓦）": {
+    "args": {},
+    "interactable": false,
+    "painter": "roof",
+    "walkable": false
+  },
+  "式内社の社殿・鳥居": {
+    "args": {
+      "wood": 9
+    },
+    "interactable": true,
+    "painter": "torii",
+    "walkable": false
+  },
+  "待合ベンチ": {
+    "args": {
+      "wood": 4
+    },
+    "interactable": true,
+    "painter": "bench",
+    "walkable": false
+  },
+  "掲示板": {
+    "args": {
+      "board": 11,
+      "ink": 0
+    },
+    "interactable": true,
+    "painter": "sign",
+    "walkable": false
+  },
+  "支所の壁（タイル）": {
+    "args": {
+      "base": 4,
+      "grout": 3
+    },
+    "interactable": false,
+    "painter": "tile_wall",
+    "walkable": false
+  },
+  "教室の机・椅子": {
+    "args": {
+      "body": 9,
+      "ground": 11,
+      "h": 6,
+      "hi": 11,
+      "w": 12,
+      "x": 2,
+      "y": 3
+    },
+    "interactable": true,
+    "painter": "box",
+    "walkable": false
+  },
+  "新校舎 外壁（タイル）": {
+    "args": {
+      "base": 5,
+      "grout": 3
+    },
+    "interactable": false,
+    "painter": "tile_wall",
+    "walkable": false
+  },
+  "旧校舎 外壁（下見板）": {
+    "args": {
+      "base": 10,
+      "gap": 9,
+      "worn": true
+    },
+    "interactable": false,
+    "painter": "plank_h",
+    "walkable": false
+  },
+  "旧校舎 廊下床（板）": {
+    "args": {
+      "base": 11,
+      "gap": 10,
+      "width": 4,
+      "worn": true
+    },
+    "interactable": false,
+    "painter": "plank_h",
+    "walkable": true
+  },
+  "旧校舎 窓（木枠）": {
+    "args": {
+      "frame": 9,
+      "wall": 10
+    },
+    "interactable": true,
+    "painter": "window",
+    "walkable": false
+  },
+  "旧街道アスファルト（狭）": {
+    "args": {
+      "base": 3,
+      "density": 0.1,
+      "speck": 9
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "時刻表看板": {
+    "args": {
+      "board": 12,
+      "ink": 0
+    },
+    "interactable": true,
+    "painter": "sign",
+    "walkable": false
+  },
+  "時計塔": {
+    "args": {
+      "glow": 13,
+      "top": 5
+    },
+    "interactable": false,
+    "painter": "tower",
+    "walkable": false
+  },
+  "朝礼台": {
+    "args": {
+      "body": 5,
+      "ground": 10,
+      "h": 8,
+      "w": 12,
+      "x": 2,
+      "y": 6
+    },
+    "interactable": false,
+    "painter": "box",
+    "walkable": false
+  },
+  "杉林": {
+    "args": {},
+    "interactable": false,
+    "painter": "conifer",
+    "walkable": false
+  },
+  "杉林（暗）": {
+    "args": {
+      "ground": 0,
+      "hi": 6,
+      "leaf": 6
+    },
+    "interactable": false,
+    "painter": "conifer",
+    "walkable": false
+  },
+  "林道の砂利": {
+    "args": {
+      "base": 9,
+      "dark": 10,
+      "light": 11
+    },
+    "interactable": false,
+    "painter": "gravel",
+    "walkable": true
+  },
+  "柿の木（実あり）": {
+    "args": {
+      "fruit": 10
+    },
+    "interactable": true,
+    "painter": "tree",
+    "walkable": false
+  },
+  "栗の木": {
+    "args": {
+      "canopy": 6,
+      "fruit": 11,
+      "shade": 1
+    },
+    "interactable": false,
+    "painter": "tree",
+    "walkable": false
+  },
+  "校庭の土": {
+    "args": {
+      "base": 10,
+      "density": 0.1,
+      "speck": 11
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "校門（鉄）": {
+    "args": {
+      "bar": 5,
+      "post": 4,
+      "roof": false
+    },
+    "interactable": false,
+    "painter": "gate",
+    "walkable": false
+  },
+  "案内板": {
+    "args": {
+      "board": 5,
+      "ink": 0
+    },
+    "interactable": true,
+    "painter": "sign",
+    "walkable": false
+  },
+  "桜（葉・裸）": {
+    "args": {
+      "ground": 3
+    },
+    "interactable": false,
+    "painter": "bare_tree",
+    "walkable": false
+  },
+  "梅の木（開花・裸）": {
+    "args": {
+      "blossom": 12
+    },
+    "interactable": false,
+    "painter": "bare_tree",
+    "walkable": false
+  },
+  "植栽": {
+    "args": {
+      "canopy": 7,
+      "ground": 5
+    },
+    "interactable": false,
+    "painter": "tree",
+    "walkable": false
+  },
+  "植栽（低木）": {
+    "args": {
+      "canopy": 7,
+      "ground": 5
+    },
+    "interactable": false,
+    "painter": "tree",
+    "walkable": false
+  },
+  "樹林（暗）": {
+    "args": {
+      "hi": 7,
+      "leaf": 6
+    },
+    "interactable": false,
+    "painter": "conifer",
+    "walkable": false
+  },
+  "橋（桁・欄干・橋灯）": {
+    "args": {
+      "glow": 13
+    },
+    "interactable": false,
+    "painter": "bridge",
+    "walkable": true
+  },
+  "歩道タイル": {
+    "args": {
+      "a": 5,
+      "b": 4
+    },
+    "interactable": false,
+    "painter": "interlock",
+    "walkable": true
+  },
+  "水位標": {
+    "args": {
+      "stone": 12,
+      "w": 3
+    },
+    "interactable": true,
+    "painter": "slab",
+    "walkable": false
+  },
+  "水田（水面・稲）": {
+    "args": {},
+    "interactable": false,
+    "painter": "paddy",
+    "walkable": false
+  },
+  "水面（流れ）": {
+    "args": {
+      "flow": true
+    },
+    "interactable": false,
+    "painter": "water",
+    "walkable": false
+  },
+  "河原の石": {
+    "args": {
+      "base": 4,
+      "dark": 3,
+      "light": 5
+    },
+    "interactable": false,
+    "painter": "gravel",
+    "walkable": true
+  },
+  "法面コンクリート（格子）": {
+    "args": {
+      "concrete": true
+    },
+    "interactable": false,
+    "painter": "slope",
+    "walkable": false
+  },
+  "法面階段": {
+    "args": {
+      "base": 5
+    },
+    "interactable": false,
+    "painter": "stairs",
+    "walkable": true
+  },
+  "湧水（水面・小）": {
+    "args": {},
+    "interactable": true,
+    "painter": "spring",
+    "walkable": false
+  },
+  "火の見櫓": {
+    "args": {
+      "frame": 9,
+      "top": 10
+    },
+    "interactable": true,
+    "painter": "tower",
+    "walkable": false
+  },
+  "照明塔": {
+    "args": {
+      "glow": 13
+    },
+    "interactable": true,
+    "painter": "tower",
+    "walkable": false
+  },
+  "物干し": {
+    "args": {
+      "bar": 5,
+      "double": false,
+      "post": 4
+    },
+    "interactable": true,
+    "painter": "rail",
+    "walkable": false
+  },
+  "狭い歩道（縁石）": {
+    "args": {},
+    "interactable": false,
+    "painter": "curb",
+    "walkable": true
+  },
+  "獣道": {
+    "args": {
+      "dirt": 9,
+      "grass": 6
+    },
+    "interactable": false,
+    "painter": "path",
+    "walkable": true
+  },
+  "獣道（踏み分け）": {
+    "args": {
+      "dirt": 9,
+      "grass": 6
+    },
+    "interactable": false,
+    "painter": "path",
+    "walkable": true
+  },
+  "玉垣": {
+    "args": {
+      "bar": 5,
+      "ground": 7,
+      "post": 5
+    },
+    "interactable": false,
+    "painter": "rail",
+    "walkable": false
+  },
+  "瓦屋根（連続）": {
+    "args": {},
+    "interactable": false,
+    "painter": "roof",
+    "walkable": false
+  },
+  "生垣": {
+    "args": {
+      "base": 6,
+      "blade": 8,
+      "tall": true
+    },
+    "interactable": false,
+    "painter": "grass",
+    "walkable": false
+  },
+  "生活道路アスファルト（細）": {
+    "args": {
+      "base": 3,
+      "density": 0.05,
+      "speck": 4
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "用水路（水面・コンクリート）": {
+    "args": {
+      "flow": true,
+      "ripple": 4
+    },
+    "interactable": false,
+    "painter": "water",
+    "walkable": false
+  },
+  "畑の土（畝）": {
+    "args": {},
+    "interactable": false,
+    "painter": "soil_rows",
+    "walkable": true
+  },
+  "畦道": {
+    "args": {
+      "dirt": 11,
+      "grass": 7,
+      "vertical": false
+    },
+    "interactable": false,
+    "painter": "path",
+    "walkable": true
+  },
+  "白線（停止線）": {
+    "args": {
+      "base": 3,
+      "line": 12,
+      "pos": 6,
+      "thick": 3
+    },
+    "interactable": false,
+    "painter": "line_h",
+    "walkable": true
+  },
+  "白線（土用）": {
+    "args": {
+      "base": 9,
+      "line": 12,
+      "speck": 10,
+      "thick": 1
+    },
+    "interactable": false,
+    "painter": "line_h",
+    "walkable": true
+  },
+  "白線（実線・破線）": {
+    "args": {
+      "base": 3,
+      "line": 12,
+      "thick": 2
+    },
+    "interactable": false,
+    "painter": "line_h",
+    "walkable": true
+  },
+  "百葉箱": {
+    "args": {
+      "body": 12,
+      "ground": 7,
+      "h": 10,
+      "slots": true,
+      "w": 8,
+      "x": 4,
+      "y": 2
+    },
+    "interactable": true,
+    "painter": "box",
+    "walkable": false
+  },
+  "看板（地図）": {
+    "args": {
+      "board": 12,
+      "ink": 3
+    },
+    "interactable": true,
+    "painter": "sign",
+    "walkable": false
+  },
+  "石の道標": {
+    "args": {
+      "w": 4
+    },
+    "interactable": true,
+    "painter": "slab",
+    "walkable": false
+  },
+  "石像（牛）": {
+    "args": {
+      "cow": true,
+      "marks": false,
+      "stone": 4
+    },
+    "interactable": true,
+    "painter": "slab",
+    "walkable": false
+  },
+  "石柱": {
+    "args": {
+      "stone": 4,
+      "w": 4
+    },
+    "interactable": true,
+    "painter": "slab",
+    "walkable": false
+  },
+  "石段（登り口）": {
+    "args": {
+      "base": 5,
+      "hi": 12
+    },
+    "interactable": false,
+    "painter": "stairs",
+    "walkable": true
+  },
+  "石段（長・手すり）": {
+    "args": {
+      "base": 5,
+      "rail": true
+    },
+    "interactable": false,
+    "painter": "stairs",
+    "walkable": true
+  },
+  "石畳": {
+    "args": {
+      "gap": 3,
+      "stone": 5
+    },
+    "interactable": false,
+    "painter": "paving",
+    "walkable": true
+  },
+  "石碑": {
+    "args": {
+      "w": 6
+    },
+    "interactable": true,
+    "painter": "slab",
+    "walkable": false
+  },
+  "礎石": {
+    "args": {
+      "gap": 6,
+      "moss": 0.15,
+      "stone": 4
+    },
+    "interactable": true,
+    "painter": "paving",
+    "walkable": true
+  },
+  "社殿の壁・屋根（檜皮）": {
+    "args": {
+      "bark": true,
+      "base": 9,
+      "dark": 0
+    },
+    "interactable": false,
+    "painter": "roof",
+    "walkable": false
+  },
+  "積まれた面": {
+    "args": {},
+    "interactable": true,
+    "painter": "masks",
+    "walkable": false
+  },
+  "空堀（底・壁）": {
+    "args": {},
+    "interactable": false,
+    "painter": "moat",
+    "walkable": true
+  },
+  "窓（消灯・点灯）": {
+    "args": {},
+    "interactable": false,
+    "painter": "window",
+    "walkable": false
+  },
+  "給水塔": {
+    "args": {
+      "top": 5
+    },
+    "interactable": true,
+    "painter": "tower",
+    "walkable": false
+  },
+  "絵馬掛け": {
+    "args": {
+      "bar": 10,
+      "post": 9
+    },
+    "interactable": true,
+    "painter": "rail",
+    "walkable": false
+  },
+  "縞鋼板の歩道橋": {
+    "args": {
+      "ground": 4,
+      "wire": 5
+    },
+    "interactable": false,
+    "painter": "mesh",
+    "walkable": true
+  },
+  "自販機正面": {
+    "args": {},
+    "interactable": true,
+    "painter": "vending",
+    "walkable": false
+  },
+  "自転車置き場": {
+    "args": {
+      "bar": 4
+    },
+    "interactable": false,
+    "painter": "rail",
+    "walkable": false
+  },
+  "苔": {
+    "args": {
+      "base": 6,
+      "density": 0.15,
+      "speck": 8
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "苔むした石": {
+    "args": {
+      "base": 7,
+      "ground": 6,
+      "hi": 8,
+      "shade": 6
+    },
+    "interactable": false,
+    "painter": "rock",
+    "walkable": false
+  },
+  "草地（丈高・低）": {
+    "args": {},
+    "interactable": false,
+    "painter": "grass",
+    "walkable": true
+  },
+  "落石（岩）": {
+    "args": {},
+    "interactable": true,
+    "painter": "rock",
+    "walkable": false
+  },
+  "蛍光灯": {
+    "args": {},
+    "interactable": false,
+    "painter": "light_bar",
+    "walkable": false
+  },
+  "蛍光灯（バス停）": {
+    "args": {},
+    "interactable": false,
+    "painter": "light_bar",
+    "walkable": false
+  },
+  "街灯（均等）": {
+    "args": {},
+    "interactable": false,
+    "painter": "lamp",
+    "walkable": false
+  },
+  "街灯（柱・光源）": {
+    "args": {},
+    "interactable": false,
+    "painter": "lamp",
+    "walkable": false
+  },
+  "裂け目（暗）": {
+    "args": {},
+    "interactable": true,
+    "painter": "crack",
+    "walkable": false
+  },
+  "観音堂の板壁・格子・屋根": {
+    "args": {
+      "base": 9,
+      "gap": 0,
+      "width": 2
+    },
+    "interactable": true,
+    "painter": "plank_v",
+    "walkable": false
+  },
+  "記念碑": {
+    "args": {
+      "w": 8
+    },
+    "interactable": true,
+    "painter": "slab",
+    "walkable": false
+  },
+  "調整池（水面・柵）": {
+    "args": {
+      "ripple": 3
+    },
+    "interactable": false,
+    "painter": "water",
+    "walkable": false
+  },
+  "谷の岩壁": {
+    "args": {},
+    "interactable": false,
+    "painter": "cliff",
+    "walkable": false
+  },
+  "谷の斜面（暗い樹林）": {
+    "args": {
+      "ground": 1,
+      "hi": 7,
+      "leaf": 6
+    },
+    "interactable": false,
+    "painter": "conifer",
+    "walkable": false
+  },
+  "象の滑り台": {
+    "args": {},
+    "interactable": true,
+    "painter": "slide",
+    "walkable": false
+  },
+  "農家の壁・瓦": {
+    "args": {
+      "base": 9,
+      "dark": 0,
+      "hi": 10
+    },
+    "interactable": false,
+    "painter": "roof",
+    "walkable": false
+  },
+  "農機具小屋（トタン・板）": {
+    "args": {
+      "base": 10,
+      "gap": 9,
+      "width": 3
+    },
+    "interactable": true,
+    "painter": "plank_h",
+    "walkable": false
+  },
+  "農道の砂利": {
+    "args": {
+      "base": 9,
+      "dark": 10,
+      "light": 11
+    },
+    "interactable": false,
+    "painter": "gravel",
+    "walkable": true
+  },
+  "門扉": {
+    "args": {
+      "roof": false
+    },
+    "interactable": false,
+    "painter": "gate",
+    "walkable": false
+  },
+  "防音壁": {
+    "args": {
+      "base": 4,
+      "stain": 0.2
+    },
+    "interactable": false,
+    "painter": "concrete_wall",
+    "walkable": false
+  },
+  "防音壁（遠景）": {
+    "args": {
+      "base": 3,
+      "stain": 0.2
+    },
+    "interactable": false,
+    "painter": "concrete_wall",
+    "walkable": false
+  },
+  "階段室（消灯）": {
+    "args": {
+      "lit": false,
+      "wall": 5
+    },
+    "interactable": true,
+    "painter": "window",
+    "walkable": false
+  },
+  "階段室（点灯・消灯）": {
+    "args": {
+      "glow": 15,
+      "lit": true,
+      "wall": 5
+    },
+    "interactable": true,
+    "painter": "window",
+    "walkable": false
+  },
+  "隧道アーチ": {
+    "args": {
+      "ground": 0,
+      "post": 5,
+      "roof_color": 4
+    },
+    "interactable": false,
+    "painter": "gate",
+    "walkable": false
+  },
+  "隧道内壁（湿）": {
+    "args": {
+      "base": 3,
+      "stain": 0.6
+    },
+    "interactable": false,
+    "painter": "concrete_wall",
+    "walkable": false
+  },
+  "集合ポスト": {
+    "args": {
+      "body": 4,
+      "slots": true
+    },
+    "interactable": true,
+    "painter": "box",
+    "walkable": false
+  },
+  "電柱・電線": {
+    "args": {},
+    "interactable": false,
+    "painter": "pole",
+    "walkable": false
+  },
+  "電気柵ポール": {
+    "args": {
+      "ground": 7,
+      "pole": 9
+    },
+    "interactable": true,
+    "painter": "pole",
+    "walkable": false
+  },
+  "霧（半透明オーバーレイ）": {
+    "args": {},
+    "interactable": false,
+    "painter": "fog",
+    "walkable": true
+  },
+  "非常灯": {
+    "args": {
+      "glow": 15,
+      "small": true
+    },
+    "interactable": false,
+    "painter": "light_bar",
+    "walkable": false
+  },
+  "飼育小屋（金網）": {
+    "args": {
+      "ground": 9,
+      "wire": 5
+    },
+    "interactable": true,
+    "painter": "mesh",
+    "walkable": false
+  },
+  "駄菓子屋の店先（点灯）": {
+    "args": {
+      "glow": 13,
+      "lit": true,
+      "wall": 10
+    },
+    "interactable": true,
+    "painter": "window",
+    "walkable": false
+  },
+  "駐車場ライン": {
+    "args": {
+      "base": 3,
+      "line": 12,
+      "pos": 0,
+      "thick": 1
+    },
+    "interactable": false,
+    "painter": "line_v",
+    "walkable": true
+  },
+  "駐車車両（暗）": {
+    "args": {},
+    "interactable": true,
+    "painter": "car",
+    "walkable": false
+  },
+  "駐輪場の屋根": {
+    "args": {
+      "base": 4,
+      "dark": 3,
+      "hi": 5
+    },
+    "interactable": false,
+    "painter": "roof",
+    "walkable": false
+  },
+  "高架床版（影）": {
+    "args": {
+      "base": 1,
+      "density": 0.1,
+      "speck": 0
+    },
+    "interactable": false,
+    "painter": "ground",
+    "walkable": true
+  },
+  "高架橋脚": {
+    "args": {
+      "base": 5,
+      "stain": 0.4
+    },
+    "interactable": false,
+    "painter": "concrete_wall",
+    "walkable": false
+  },
+  "鳥居": {
+    "args": {},
+    "interactable": false,
+    "painter": "torii",
+    "walkable": false
+  },
+  "黒板": {
+    "args": {
+      "body": 6,
+      "edge": 9,
+      "ground": 10,
+      "h": 9,
+      "hi": 7,
+      "w": 14,
+      "x": 1,
+      "y": 2
+    },
+    "interactable": true,
+    "painter": "box",
+    "walkable": false
+  }
+}
