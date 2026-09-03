@@ -43,10 +43,14 @@ func _build_menu() -> void:
 			has_any = true
 	var items: Array[Dictionary] = [
 		{"id": "new", "text": MessageResolver.text("ui_title_new")},
-		{"id": "continue", "text": MessageResolver.text("ui_title_continue"), "disabled": not has_any},
+		{"id": "continue", "text": MessageResolver.text("ui_title_continue"), "disabled": not has_any},]
+	if SaveManager.has_cleared():
+		# 周回：初回から truth_revealed を立てて始める「裏面」（docs/SCENARIO.md §7）
+		items.append({"id": "ura", "text": MessageResolver.text("ui_title_ura")})
+	items.append_array([
 		{"id": "settings", "text": MessageResolver.text("ui_title_settings")},
 		{"id": "quit", "text": MessageResolver.text("ui_title_quit")},
-	]
+	])
 	_list.set_items(items)
 
 
@@ -58,7 +62,9 @@ func _cleared_marks() -> String:
 func _on_activated(_index: int, id: String) -> void:
 	match id:
 		"new":
-			_start_new_game()
+			_start_new_game(false)
+		"ura":
+			_start_new_game(true)
 		"continue":
 			_open_slots()
 		"settings":
@@ -67,8 +73,17 @@ func _on_activated(_index: int, id: String) -> void:
 			get_tree().quit()
 
 
-func _start_new_game() -> void:
+## 裏面（ura）は真相版のテキストで最初から。警告は裏面でも省略しない（docs/CONTENT_NOTICE.md §3）
+func _start_new_game(ura: bool) -> void:
+	if ura:
+		var notice: Control = NOTICE_SCENE.instantiate() as Control
+		notice.set("mode", "replay")
+		add_child(notice)
+		_list.visible = false
+		await Signal(notice, "acknowledged")
 	GameState.reset()
+	if ura:
+		GameState.raise_flag(MessageResolver.TRUTH_FLAG)
 	Calendar.set_day(1)
 	_change_to_game()
 
