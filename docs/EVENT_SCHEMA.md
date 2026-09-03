@@ -58,6 +58,7 @@
 | `unlock_field` | `field` | そのフィールドの `unlock_flag` を立てる |
 | `move_player` | `field?`, `tile`, `facing?` | 別フィールドなら遷移してから配置 |
 | `advance_day` | | 自宅以外で日を送る（進行条件を満たしている必要あり）。`sleep` と同じくイベント終了後に日送りする（8/30 の夜、F01 で朝を待つ） |
+| `fade` | `to`（0〜1）, `seconds` | 画面の暗転・明転（SceneRouter の暗転層）。終幕の間の取り方に使う |
 | `branch` | `conditions`, `then`, `else` | 条件をすべて満たせば `then` の、さもなくば `else` のアクション列をその場で実行する。`run_event` は条件を見ないので、イベントの途中で状態により分かれる箇所に使う（8/30 の `truth_partial_*`） |
 | `set_time` | `time_of_day` | 時間帯 |
 | `add_points` | `amount` | 調査ポイント |
