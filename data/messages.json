@@ -1247,6 +1247,16 @@
       "text": "夏祭りの張り紙と、迷い猫のチラシ。\n尋ね人の紙は、まだ一枚も無い。"
     },
     {
+      "id": "msg_f01_bulletin_r1",
+      "speaker": "",
+      "text": "夏祭りの張り紙の隅が、めくれている。\n誰かが押さえ直した跡はない。"
+    },
+    {
+      "id": "msg_f01_bulletin_r2",
+      "speaker": "",
+      "text": "迷い猫のチラシが一枚、減っている。\n見つかったのだと思うことにする。"
+    },
+    {
       "id": "msg_f01_trash",
       "speaker": "yu",
       "text": "店先のゴミ箱。いつも通り、満杯に近い。",
@@ -1385,6 +1395,16 @@
       "id": "msg_f05_toki_again",
       "speaker": "toki",
       "text": "「今日も来たね。飴でも持っていきなさい」"
+    },
+    {
+      "id": "msg_f05_toki_again_r1",
+      "speaker": "toki",
+      "text": "「今日も来たね。暑いだろう、少し座っていきなさい」"
+    },
+    {
+      "id": "msg_f05_toki_again_r2",
+      "speaker": "toki",
+      "text": "「今日も来たね。……昨日も、ここにいたかね」"
     },
     {
       "id": "msg_f05_shop",
@@ -1686,6 +1706,16 @@
       "text": "B-201 の封筒が、また増えている。\n誰も取りに来ない。"
     },
     {
+      "id": "msg_f12_post_later_r1",
+      "speaker": "yu",
+      "text": "B-201 の郵便受け。今日は何も増えていない。\nそれが、かえって落ち着かない。"
+    },
+    {
+      "id": "msg_f12_post_later_r2",
+      "speaker": "yu",
+      "text": "B-201 の封筒の束に、雨の跡。\n誰も取りに来ない。"
+    },
+    {
       "id": "msg_f12_office_closed",
       "speaker": "yu",
       "text": "支所は閉まっている。休みの日だ。\nガラス越しに、受付台の届出用紙の束が見える。"
@@ -1704,6 +1734,16 @@
       "id": "msg_f12_office_repeat",
       "speaker": "yu",
       "text": "受付台。行方不明者届の束は、昨日より薄い気がする。\n数える気にはなれなかった。"
+    },
+    {
+      "id": "msg_f12_office_repeat_r1",
+      "speaker": "yu",
+      "text": "受付台。今日は誰も並んでいない。\n呼び鈴を押す気にはなれなかった。"
+    },
+    {
+      "id": "msg_f12_office_repeat_r2",
+      "speaker": "yu",
+      "text": "受付台。届の用紙が、束から一枚はみ出している。\n誰かが書きかけて、やめた。"
     },
     {
       "id": "msg_f12_office_board",
@@ -1766,6 +1806,16 @@
       "id": "msg_f06_library_again",
       "speaker": "",
       "text": "図書室。郷土資料の棚の、抜けた跡。\n今日は司書もいない。"
+    },
+    {
+      "id": "msg_f06_library_again_r1",
+      "speaker": "",
+      "text": "図書室。返却箱に、貸出票の無い本が一冊。\n表紙は日に焼けている。"
+    },
+    {
+      "id": "msg_f06_library_again_r2",
+      "speaker": "",
+      "text": "図書室。郷土資料の棚は、まだ抜けたまま。\n司書は今日もいない。"
     },
     {
       "id": "msg_f12_office_d4",
@@ -1880,6 +1930,16 @@
       "id": "msg_f03_vending",
       "speaker": "yu",
       "text": "自販機。『故障中』の紙が貼られている。\n返却口に、誰かの十円玉が一枚。"
+    },
+    {
+      "id": "msg_f03_vending_r1",
+      "speaker": "yu",
+      "text": "自販機。『故障中』の紙は、まだ剥がされていない。\n取り出し口に、蜘蛛の糸。"
+    },
+    {
+      "id": "msg_f03_vending_r2",
+      "speaker": "yu",
+      "text": "自販機の灯りが、昼でも点いている。\n中の缶は、去年の柄だった。"
     },
     {
       "id": "msg_f03_graffiti",

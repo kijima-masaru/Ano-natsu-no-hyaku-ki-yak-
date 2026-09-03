@@ -10,7 +10,7 @@ extends RefCounted
 const OUTSIDE: String = "outside"
 const KEY_FLOORS: String = "FLOORS"
 ## 屋内の暗さ（0 明るい〜1 暗い）。時間帯に関係なく適用する
-const INDOOR_DARKNESS: float = 0.8
+const INDOOR_DARKNESS: float = 0.85
 
 
 ## 定義済みの階か

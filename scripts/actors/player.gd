@@ -8,7 +8,7 @@ signal noise_emitted(radius: float)
 signal interaction_requested(target: Node)
 signal facing_changed(facing: Vector2i)
 
-const WALK_SPEED: float = 56.0
+const WALK_SPEED: float = 64.0
 const SNEAK_SPEED: float = 26.0
 const ACCELERATION: float = 320.0
 const DECELERATION: float = 480.0

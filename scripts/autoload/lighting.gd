@@ -85,10 +85,10 @@ func tint_for(time_of_day: String) -> Color:
 	return Color(maxf(tint.r, MIN_CHANNEL), maxf(tint.g, MIN_CHANNEL), maxf(tint.b, MIN_CHANNEL), 1.0)
 
 
-## 暗さの値から直接色調を作る（屋内用。夜の色調と白の補間）
+## 暗さの値から直接色調を作る（屋内用）。夜のパレット色と白を暗さで直接補間するので、
+## 暗さ 0.82 で屋外の夜と同じ色調になり、それ以上なら夜より暗い（懐中電灯が要る）
 func tint_for_darkness(value: float) -> Color:
-	var night: Color = Color.WHITE.lerp(Palette.get_color(int(TINT_BY_TIME["night"]["color"])), float(TINT_BY_TIME["night"]["mix"]))
-	var tint: Color = Color.WHITE.lerp(night, clampf(value, 0.0, 1.0))
+	var tint: Color = Color.WHITE.lerp(Palette.get_color(int(TINT_BY_TIME["night"]["color"])), clampf(value, 0.0, 1.0))
 	var brightness: float = float(SaveManager.get_setting("brightness"))
 	tint = tint.lerp(Color.WHITE, (brightness - BRIGHTNESS_DEFAULT) * BRIGHTNESS_LIFT_MAX + BRIGHTNESS_LIFT_MAX * 0.5)
 	return Color(maxf(tint.r, MIN_CHANNEL), maxf(tint.g, MIN_CHANNEL), maxf(tint.b, MIN_CHANNEL), 1.0)

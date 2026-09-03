@@ -121,7 +121,11 @@ static func _check_action(report: DataReport, id: String, a: Dictionary, ctx: Di
 		report.error("events", "%s: アクション種別 '%s' は未登録です" % [id, type])
 	match type:
 		"message", "entity_speak":
-			_need_message(report, id, str(a.get("id", "")), ctx)
+			if a.get("rotate", null) is Array and not (a["rotate"] as Array).is_empty():
+				for mid: Variant in a["rotate"] as Array:
+					_need_message(report, id, str(mid), ctx)
+			else:
+				_need_message(report, id, str(a.get("id", "")), ctx)
 		"entity_comfort":
 			_need_message(report, id, "msg_natsu_comfort_%s" % str(a.get("context", "")), ctx)
 		"give_item", "remove_item":

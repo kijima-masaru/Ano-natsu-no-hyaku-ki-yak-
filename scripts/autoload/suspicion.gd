@@ -1,7 +1,7 @@
 extends Node
 ## ヒロイン・澪の真相接近度（0〜100）。プレイヤーには数値を一切見せない。
 ## 段階：無自覚 0–24 ／ 違和感 25–49 ／ 疑念 50–74 ／ 確信 75–100（docs/FLAGS.md）
-## 8/14 の baba_rage まで上限 24、baba_rage で最低 30 に強制。日付が進むだけでも上昇する。
+## 8/14 の baba_rage まで上限 24、baba_rage で最低 30 に強制。日付経過では上がらない（タスク10 で 0 に。docs/PLAYTEST_LOG.md「閾値の確定」）。
 
 signal changed(value: int, delta: int, reason: String)
 signal stage_changed(stage: int, previous: int)
@@ -13,10 +13,10 @@ const MAX_VALUE: int = 100
 const PRE_BABA_CAP: int = 24
 const BABA_FORCED_MIN: int = 30
 const BABA_FLAG: String = "baba_rage"
-const DAILY_DRIFT_EARLY: int = 1
-const DAILY_DRIFT_LATE: int = 2
+const DAILY_DRIFT_EARLY: int = 0
+const DAILY_DRIFT_LATE: int = 0
 const DRIFT_SWITCH_DAY: int = 15
-const FIELD_VISIT_DELTA: int = 2
+const FIELD_VISIT_DELTA: int = 1
 
 var value: int = 0
 

@@ -359,7 +359,7 @@
       "title": "調査 7 日目",
       "opening_event": null,
       "advance_condition": {
-        "points": 5
+        "points": 4
       },
       "set_flags_on_start": [
         "companion_on"
@@ -388,7 +388,7 @@
       "title": "調査 8 日目",
       "opening_event": null,
       "advance_condition": {
-        "points": 5
+        "points": 4
       },
       "available_fields": [
         "F12",
@@ -471,7 +471,7 @@
       "title": "調査 9 日目",
       "opening_event": null,
       "advance_condition": {
-        "points": 5
+        "points": 4
       },
       "available_fields": [
         "F12",
@@ -501,7 +501,7 @@
       "title": "調査 10 日目",
       "opening_event": null,
       "advance_condition": {
-        "points": 5
+        "points": 4
       },
       "available_fields": [
         "F12",
@@ -531,7 +531,7 @@
       "title": "調査 11 日目",
       "opening_event": null,
       "advance_condition": {
-        "points": 5
+        "points": 4
       },
       "available_fields": [
         "F12",
@@ -680,7 +680,7 @@
       "title": "調査 12 日目",
       "opening_event": null,
       "advance_condition": {
-        "points": 5
+        "points": 4
       },
       "available_fields": [
         "F12",
@@ -711,7 +711,7 @@
       "title": "調査 13 日目",
       "opening_event": null,
       "advance_condition": {
-        "points": 5
+        "points": 4
       },
       "set_flags_on_end": [
         "flag_yakushi_open"

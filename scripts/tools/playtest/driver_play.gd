@@ -5,6 +5,7 @@ extends Node
 ## 進行不能（can_advance にならない）日を BLOCKER として記録する。移動は瞬間移動（SceneRouter.go_to）で代替する。
 
 const MAIN_SCENE: String = "res://scenes/main.tscn"
+const PLAYER_SCRIPT: Script = preload("res://scripts/actors/player.gd")
 const MAX_INTERACTIONS_PER_ID: int = 3
 const MAX_SWEEPS_PER_DAY: int = 3
 const SETTLE_FRAMES_MAX: int = 2400
@@ -236,7 +237,7 @@ func _interact(id: String) -> void:
 
 func _walk_seconds(from: Vector2, to: Vector2) -> float:
 	var d: float = absf(to.x - from.x) + absf(to.y - from.y)
-	return d / 56.0
+	return d / PLAYER_SCRIPT.WALK_SPEED
 
 
 func _sleep_home(day: int) -> void:
