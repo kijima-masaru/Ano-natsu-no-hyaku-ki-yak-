@@ -22,6 +22,10 @@ const OBJECT_LEGEND: Dictionary = {
 	"R": "苔むした石",
 }
 const FOG_TYPE: String = "霧（半透明オーバーレイ）"
+## 8/31：バリケードは脇へ寄せられ、橋の中ほどに悠が立っている（澪を操作する日）
+const FINAL_DAY: int = 31
+const BARRICADE_TILES: Array = [Vector2i(30, 16), Vector2i(31, 16), Vector2i(32, 16), Vector2i(33, 16)]
+const YU_TILE: Vector2i = Vector2i(31, 20)
 ## 対岸の霧：常に橋の向こう（y ≥ FOG_FROM_Y）を覆う。夜と 8/26 以降は手前まで来る
 const FOG_FROM_Y: int = 18
 const FOG_NEAR_Y: int = 14
@@ -89,5 +93,11 @@ func _apply_time_of_day(time_of_day: String) -> void:
 				overhead.erase_cell(Vector2i(x, y))
 
 
-func _apply_day(_day: int) -> void:
+func _apply_day(day: int) -> void:
 	_apply_time_of_day(Calendar.time_of_day)
+	var final_day: bool = day >= FINAL_DAY
+	if final_day:
+		for tile: Vector2i in BARRICADE_TILES:
+			objects.erase_cell(tile)
+			set_tile(ground, tile, GROUND_LEGEND["B"])
+	set_npc_present("yu_npc", final_day and not GameState.has_flag("ending_reached"), YU_TILE, "player", Vector2i.DOWN)
