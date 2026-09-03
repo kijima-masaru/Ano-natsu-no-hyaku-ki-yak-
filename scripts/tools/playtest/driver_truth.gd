@@ -1,7 +1,7 @@
 extends Node
 ## 使い方：godot --headless --path . res://scenes/debug/playtest_driver.tscn -- --runner=res://scripts/tools/playtest/driver_truth.gd [--low]
 ## 8/30 の夜：帰路 → 自宅前の対決 → 提示画面 → truth_revealed → 澪が去る → F01 で日が終わる、を確かめる。
-## --low は接近度が低く証拠の無い経路（truth_partial_* が立たない）
+## --low は接近度が低く証拠の無い経路（truth_partial_* が立たない）。--all は隠蔽 17 件すべてを成功させ、提示画面に全件出ることを確かめる
 
 var _w: Control = null
 
@@ -14,12 +14,20 @@ func _ready() -> void:
 	Calendar.ignore_availability = true
 	for f: String in ["companion_on", "seal_restored", "baba_told_seal", "entered_yakushi"]:
 		GameState.raise_flag(f)
-	# 隠蔽の履歴を作る：成功 5 件・目撃 2 件
-	for id: String in ["shoe_mud", "store_receipt", "storefront_note", "journal_page", "capsule_letter"]:
-		GameState.record_concealment(id, false)
-	for id: String in ["ren_memo", "timetable_pass"]:
-		GameState.record_concealment(id, true)
-		GameState.add_evidence(id)
+	# 隠蔽の履歴を作る：成功 5 件・目撃 2 件（--all なら evidence.json の隠蔽をすべて成功）
+	if OS.get_cmdline_user_args().has("--all"):
+		var all_ids: PackedStringArray = PackedStringArray()
+		for id: String in EvidenceRegistry.get_ids():
+			if EvidenceRegistry.get_evidence(id).kind == "concealable":
+				all_ids.append(id)
+				GameState.record_concealment(id, false)
+		print("conceal all: %d 件" % all_ids.size())
+	else:
+		for id: String in ["shoe_mud", "store_receipt", "storefront_note", "journal_page", "capsule_letter"]:
+			GameState.record_concealment(id, false)
+		for id: String in ["ren_memo", "timetable_pass"]:
+			GameState.record_concealment(id, true)
+			GameState.add_evidence(id)
 	if not low:
 		GameState.raise_flag("baba_rage")
 		Suspicion.add(80, "probe")
