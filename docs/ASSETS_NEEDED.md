@@ -24,6 +24,8 @@
 | 音 | `scripts/tools/sound_synth.gd`（OGG が無い ID だけ） | `assets/audio/<kind>/<id>.ogg`（**配置済み** 215 件。`tools/audio/` で合成） | `audio.json` の id と同名の OGG があれば `AudioManager` が優先。ループは `audio.json` の `loop` を正とする |
 | フォント | 代替フォント | `resources/fonts/PixelMplus12-Regular.ttf`（**配置済み**。Bold も） | `UiFont` autoload が読み込み時にアンチエイリアス無しを強制し、全 Control の既定フォントにする |
 | 光源テクスチャ | `scripts/tools/light_texture_generator.gd`（フォールバック） | `resources/lights/radial.png` / `cone.png`（**配置済み**） | `LightTextureGenerator` が PNG を優先（大きさが違えば生成に戻る） |
+| 粒子テクスチャ | なし | `resources/fx/leaf.png` / `leaf_dry.png` / `dust.png` / `firefly.png`（**配置済み**。`tools/fx/paint_particles.py` で描く） | `ScreenFx` が読む |
+| 画面効果シェーダ | なし | `resources/shaders/post_fx.gdshader`（にじみ・上下端のぼかし・周辺減光） | `ScreenFx` が最前面の矩形に付ける |
 
 ## 2. タイル（164 種、16 フィールド。**配置済み**）
 

@@ -2,13 +2,1355 @@
 
 [ext_resource type="Texture2D" path="res://resources/tilesets/common_atlas.png" id="1_oin5l"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_401t7"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_401t7"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jcfoh"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h8tv1"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_of221"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nb3rc"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_do5pt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tlt1h"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_802ub"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_24uj0"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h7aq2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ycjkk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d1xx1"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jnx07"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wxr3r"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bo2qq"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bsd3w"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h8js6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r2ehy"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ealt5"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qkgyp"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d254f"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_py22v"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i3oo0"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f8im0"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d6ljw"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rbws1"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bdhsw"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ywah0"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_468a6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sfp3c"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_orhmt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_utugk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p8l6a"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xxjl4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2uyxf"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vhxnd"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xvkfs"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rcsan"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q07wr"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6e8cg"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yjciw"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tvflt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hmd2m"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_c1dd2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_si60m"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1atdv"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_v6mt0"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2o0h4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i7tys"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_npv26"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r55se"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2vjhv"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xbhgs"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bvfn3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cl1la"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o1twt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ln83u"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6f42y"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g5kom"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yib8y"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d1dq6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i3vtj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dt1xs"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w8k5s"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ps74p"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u37cc"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7awpj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s1ueh"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_c27gu"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f0dtx"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gpisw"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_m8pw2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_slfia"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ykx7k"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qbxhn"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eo2ty"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wggfe"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ruvac"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wnf7j"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aiu77"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g0ss1"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vr1wh"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rdj4w"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_74aaj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4odhw"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0lho7"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hhrfo"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ckuda"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fhbid"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hga23"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_stxjp"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_alrek"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6gh36"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yly6h"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_m4wp8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fru8r"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nk4nr"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oe1c3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_moc5r"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_juj45"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r1s6d"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oibhe"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ksc1p"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f0oa8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rj6jj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2m4rf"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0njt6"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0yo3l"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3pisn"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f21wk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1acq8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a4l0p"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_op5hx"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_57wv0"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fdt32"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hiosc"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kcg30"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f2w5k"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xp68p"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0bvxg"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8csw2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vl2yb"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f7cat"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a0bv5"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sm2ly"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qpmfm"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kvkp7"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a4f1c"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7b8kt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nx0vr"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hwgvm"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_224hr"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y1kx2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vi4tv"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yyw13"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aphwb"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ti5hi"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yypus"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j8qgd"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xvbyr"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0kpwj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_13hhr"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_el1to"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5l52n"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_siljc"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ownf4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5yyg4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4d4fb"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jjcjp"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w84vo"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uooth"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xr4v4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jglee"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wjuyb"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aya2a"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g7o8w"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3s3fk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yitec"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xmv3g"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mswfo"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j4582"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vg5md"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bubh8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ygwfj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yx8fx"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3c4e3"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u34hy"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6oyny"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_daop7"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xf5bd"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2ak4n"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6asrt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fnlvd"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_be26t"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2s1a6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bh7yj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0jtf4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5jqak"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qc53f"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_coi34"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t6ovm"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y41xp"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3c7p4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x03tg"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3o1tc"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_78jq4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5gtsj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y8m66"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lxw62"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k17r6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ib5s6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d7k8j"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_45m47"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_au5dn"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1nv6n"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a6y85"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ktc7w"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jcuv2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6v3p3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rix5g"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d5cgk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uo2uk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2oyqv"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nt1sr"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uipwd"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x82nk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e86u3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_46dyk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0hded"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3g0f6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_147gm"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oyv1m"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_14ifb"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pwoht"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ccmmx"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1xues"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7bier"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ubvdb"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pbeit"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_28rcn"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lan63"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dgpec"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vlov8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tyhdo"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_df35b"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_twghj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_siwpc"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_skct5"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gj4dh"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8dbee"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6ulb3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_knvj1"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rdihv"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7e5o6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aqkyy"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d8xe5"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_52wmo"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vvfdt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pikk2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dbi3v"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qaikk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sdtpn"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b7wgu"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gm1ea"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3rdug"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_45e85"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kqba4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_37jy8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4c4iw"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qx57o"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cbvg6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6d4xl"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_50pyh"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w1v88"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yrgq6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hjkx0"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_el4e3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2utkm"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ylibw"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lv5iy"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k63mo"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mcnm4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hml1o"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qhydl"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kp07l"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1x6ls"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gryti"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3woel"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vn7ll"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yiaaj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7pn0y"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4d2ln"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_436wc"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ntl3h"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f52rl"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_crrb6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rljks"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7uwy8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s70x2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y258y"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uwkbt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s0s52"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_krqi0"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_33rql"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bdwq1"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jewd6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e2orp"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cxdtm"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h1gq8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_80sst"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y8udj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ptvat"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ubawj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f1awh"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5rcrq"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a4ydn"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_087p4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1ckjq"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j51bd"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5ue4a"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wkqyq"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bwmr4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pkqmc"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7r8d"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bg0f3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_er0ij"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tr132"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hrfhr"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kmrbw"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1hmwm"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k00ld"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rjued"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eb24n"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cxk7j"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2kb25"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0nr3t"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nfn0g"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j07y5"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_df38p"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hjx77"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4w3tj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aw2pl"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_06fso"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3ksp5"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s2smh"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hy45p"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qdhim"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dbevo"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fgnpg"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bxs8q"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6bj4q"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7ptq6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hcxjl"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o0ua8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_06e2v"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_an5sa"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d6h01"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3stft"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wrds8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ff68a"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nr3k6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q5nlx"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fjcku"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vtcs5"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dbofj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_051ni"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8ynj0"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gaeiq"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_egcu1"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ygjsl"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sflb7"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5rogg"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_483ql"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ur1dr"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fn7rs"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_egdox"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aa3bt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xtold"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6lp01"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1j0vt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2q6hq"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rdhaj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_n664q"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_v8hm8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_au6r7"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3q0ie"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ygrtq"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bp8mf"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r48uf"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u0egp"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7gr2g"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hhgon"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p0sjd"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_chf83"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_12e6k"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s56wk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8aoy4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e8sio"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ky4et"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yfy50"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4kcmq"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mnvsb"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_517xg"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jpe4g"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ape6s"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mdqlu"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vj0im"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b0s02"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0r50x"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3g862"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lkaof"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vdede"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pc26l"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yn4ur"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4f2xa"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_22vlc"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qc6gy"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g7xbk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g3ry3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8hpku"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ad7ri"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wf6s5"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7wyb8"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qm6ki"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xm31d"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e41h1"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ljgj3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bgcxy"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j3fdj"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0rca6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_45bsb"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qwapm"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ygy5p"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_emv48"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p2kvn"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fjk8n"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_52lcb"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x8eu3"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b2ev5"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g7jbk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cxa3g"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h6dlk"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_koqrp"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_abihb"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4phh6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ybucg"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_n5axx"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4e5st"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rsxpt"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_htfjw"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ofwin"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_na1j2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_38jok"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_80eya"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_awtol"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e85rn"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e3hvo"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xm7e2"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_iocws"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_m4h6p"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4vmq6"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_c580a"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fikay"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bpgw6"]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 16, -4, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rb3yh"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_822w4"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ttd0p"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_guaia"]
 resource_name = "painted_atlas"
 texture = ExtResource("1_oin5l")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "アスファルト"
 1:0/0 = 0
+1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1nv6n")
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0/custom_data_0 = "カーポート"
 2:0/0 = 0
@@ -21,9 +1363,11 @@ texture_region_size = Vector2i(32, 32)
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:0/0/custom_data_0 = "ゴミ集積所ネット"
 5:0/0 = 0
+5:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1hmwm")
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:0/0/custom_data_0 = "シャッター（下・半開き）"
 6:0/0 = 0
+6:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d6h01")
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:0/0/custom_data_0 = "ダッグアウト"
 6:0/0/custom_data_1 = true
@@ -35,6 +1379,7 @@ texture_region_size = Vector2i(32, 32)
 8:0/0/custom_data_0 = "バリケード"
 8:0/0/custom_data_1 = true
 9:0/0 = 0
+9:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_x8eu3")
 9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:0/0/custom_data_0 = "フェンス（施錠）"
 9:0/0/custom_data_1 = true
@@ -43,6 +1388,7 @@ texture_region_size = Vector2i(32, 32)
 10:0/0/custom_data_0 = "ブランコ・砂場"
 10:0/0/custom_data_1 = true
 11:0/0 = 0
+11:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_o1twt")
 11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:0/0/custom_data_0 = "ブロック塀"
 12:0/0 = 0
@@ -60,9 +1406,11 @@ texture_region_size = Vector2i(32, 32)
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:1/0/custom_data_0 = "交番の赤色灯"
 1:1/0 = 0
+1:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_a6y85")
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:1/0/custom_data_0 = "体育館の壁"
 2:1/0 = 0
+2:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_twghj")
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:1/0/custom_data_0 = "倉庫（トタン）"
 2:1/0/custom_data_1 = true
@@ -71,6 +1419,7 @@ texture_region_size = Vector2i(32, 32)
 4:1/0 = 0
 4:1/0/custom_data_0 = "側溝・グレーチング"
 5:1/0 = 0
+5:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_k00ld")
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:1/0/custom_data_0 = "公共建築の壁（タイル）"
 6:1/0 = 0
@@ -82,25 +1431,30 @@ texture_region_size = Vector2i(32, 32)
 8:1/0 = 0
 8:1/0/custom_data_0 = "区画道路アスファルト"
 9:1/0 = 0
+9:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_b2ev5")
 9:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:1/0/custom_data_0 = "厨子"
 9:1/0/custom_data_1 = true
 10:1/0 = 0
+10:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_468a6")
 10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:1/0/custom_data_0 = "古墳（盛土・石室口）"
 10:1/0/custom_data_1 = true
 11:1/0 = 0
+11:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ln83u")
 11:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:1/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 12:1/0 = 0
 12:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:1/0/custom_data_0 = "商店の看板（褪せ）"
 13:1/0 = 0
+13:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1acq8")
 13:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:1/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 14:1/0 = 0
 14:1/0/custom_data_0 = "土のグラウンド"
 15:1/0 = 0
+15:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_daop7")
 15:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:1/0/custom_data_0 = "土塀（漆喰・崩れ）"
 0:2/0 = 0
@@ -116,6 +1470,7 @@ texture_region_size = Vector2i(32, 32)
 5:2/0 = 0
 5:2/0/custom_data_0 = "境内の砂利"
 6:2/0 = 0
+6:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_8ynj0")
 6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:2/0/custom_data_0 = "墓石（複数形）"
 7:2/0 = 0
@@ -125,6 +1480,7 @@ texture_region_size = Vector2i(32, 32)
 8:2/0/custom_data_0 = "展望所の柵"
 8:2/0/custom_data_1 = true
 9:2/0 = 0
+9:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4e5st")
 9:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:2/0/custom_data_0 = "崖（通行不能）"
 10:2/0 = 0
@@ -135,6 +1491,7 @@ texture_region_size = Vector2i(32, 32)
 12:2/0 = 0
 12:2/0/custom_data_0 = "広場の敷石（インターロッキング）"
 13:2/0 = 0
+13:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0bvxg")
 13:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:2/0/custom_data_0 = "店舗の木製戸"
 14:2/0 = 0
@@ -144,12 +1501,15 @@ texture_region_size = Vector2i(32, 32)
 15:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:2/0/custom_data_0 = "店舗看板（無地）"
 0:3/0 = 0
+0:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_r2ehy")
 0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:3/0/custom_data_0 = "庵の板壁と瓦"
 1:3/0 = 0
+1:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_pwoht")
 1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:3/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 2:3/0 = 0
+2:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_gm1ea")
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:3/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 3:3/0 = 0
@@ -165,21 +1525,26 @@ texture_region_size = Vector2i(32, 32)
 5:3/0/custom_data_0 = "掲示板"
 5:3/0/custom_data_1 = true
 6:3/0 = 0
+6:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_aa3bt")
 6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:3/0/custom_data_0 = "支所の壁（タイル）"
 7:3/0 = 0
+7:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_517xg")
 7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:3/0/custom_data_0 = "教室の机・椅子"
 7:3/0/custom_data_1 = true
 8:3/0 = 0
+8:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_j3fdj")
 8:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:3/0/custom_data_0 = "新校舎 外壁（タイル）"
 9:3/0 = 0
+9:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xm7e2")
 9:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:3/0/custom_data_0 = "旧校舎 外壁（下見板）"
 10:3/0 = 0
 10:3/0/custom_data_0 = "旧校舎 廊下床（板）"
 11:3/0 = 0
+11:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qbxhn")
 11:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:3/0/custom_data_0 = "旧校舎 窓（木枠）"
 11:3/0/custom_data_1 = true
@@ -190,6 +1555,7 @@ texture_region_size = Vector2i(32, 32)
 13:3/0/custom_data_0 = "時刻表看板"
 13:3/0/custom_data_1 = true
 14:3/0 = 0
+14:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xmv3g")
 14:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:3/0/custom_data_0 = "朝礼台"
 15:3/0 = 0
@@ -197,6 +1563,7 @@ texture_region_size = Vector2i(32, 32)
 0:4/0 = 0
 0:4/0/custom_data_0 = "校庭の土"
 1:4/0 = 0
+1:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_dgpec")
 1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:4/0/custom_data_0 = "校門（鉄）"
 2:4/0 = 0
@@ -208,6 +1575,7 @@ texture_region_size = Vector2i(32, 32)
 4:4/0 = 0
 4:4/0/custom_data_0 = "歩道タイル"
 5:4/0 = 0
+5:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_06e2v")
 5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:4/0/custom_data_0 = "水位標"
 5:4/0/custom_data_1 = true
@@ -242,9 +1610,11 @@ texture_region_size = Vector2i(32, 32)
 0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:5/0/custom_data_0 = "玉垣"
 1:5/0 = 0
+1:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vlov8")
 1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:5/0/custom_data_0 = "瓦屋根（連続）"
 2:5/0 = 0
+2:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6d4xl")
 2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:5/0/custom_data_0 = "生垣"
 3:5/0 = 0
@@ -263,6 +1633,7 @@ texture_region_size = Vector2i(32, 32)
 9:5/0 = 0
 9:5/0/custom_data_0 = "白線（実線・破線）"
 10:5/0 = 0
+10:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xbhgs")
 10:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:5/0/custom_data_0 = "百葉箱"
 10:5/0/custom_data_1 = true
@@ -271,14 +1642,17 @@ texture_region_size = Vector2i(32, 32)
 11:5/0/custom_data_0 = "看板（地図）"
 11:5/0/custom_data_1 = true
 12:5/0 = 0
+12:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0njt6")
 12:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:5/0/custom_data_0 = "石の道標"
 12:5/0/custom_data_1 = true
 13:5/0 = 0
+13:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_aphwb")
 13:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:5/0/custom_data_0 = "石像（牛）"
 13:5/0/custom_data_1 = true
 14:5/0 = 0
+14:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3c4e3")
 14:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:5/0/custom_data_0 = "石柱"
 14:5/0/custom_data_1 = true
@@ -289,6 +1663,7 @@ texture_region_size = Vector2i(32, 32)
 1:6/0 = 0
 1:6/0/custom_data_0 = "石畳"
 2:6/0 = 0
+2:6/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_50pyh")
 2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:6/0/custom_data_0 = "石碑"
 2:6/0/custom_data_1 = true
@@ -296,6 +1671,7 @@ texture_region_size = Vector2i(32, 32)
 3:6/0/custom_data_0 = "礎石"
 3:6/0/custom_data_1 = true
 4:6/0 = 0
+4:6/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tr132")
 4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:6/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 5:6/0 = 0
@@ -305,6 +1681,7 @@ texture_region_size = Vector2i(32, 32)
 6:6/0 = 0
 6:6/0/custom_data_0 = "空堀（底・壁）"
 7:6/0 = 0
+7:6/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3g862")
 7:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:6/0/custom_data_0 = "窓（消灯・点灯）"
 8:6/0 = 0
@@ -323,11 +1700,13 @@ texture_region_size = Vector2i(32, 32)
 12:6/0 = 0
 12:6/0/custom_data_0 = "苔"
 13:6/0 = 0
+13:6/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ti5hi")
 13:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:6/0/custom_data_0 = "苔むした石"
 14:6/0 = 0
 14:6/0/custom_data_0 = "草地（丈高・低）"
 15:6/0 = 0
+15:6/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_au5dn")
 15:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:6/0/custom_data_0 = "落石（岩）"
 15:6/0/custom_data_1 = true
@@ -342,10 +1721,12 @@ texture_region_size = Vector2i(32, 32)
 2:7/0/custom_data_0 = "裂け目（暗）"
 2:7/0/custom_data_1 = true
 3:7/0 = 0
+3:7/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_uwkbt")
 3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:7/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 3:7/0/custom_data_1 = true
 4:7/0 = 0
+4:7/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hrfhr")
 4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:7/0/custom_data_0 = "記念碑"
 4:7/0/custom_data_1 = true
@@ -353,6 +1734,7 @@ texture_region_size = Vector2i(32, 32)
 5:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:7/0/custom_data_0 = "調整池（水面・柵）"
 6:7/0 = 0
+6:7/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_v8hm8")
 6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:7/0/custom_data_0 = "谷の岩壁"
 7:7/0 = 0
@@ -360,24 +1742,30 @@ texture_region_size = Vector2i(32, 32)
 7:7/0/custom_data_0 = "象の滑り台"
 7:7/0/custom_data_1 = true
 8:7/0 = 0
+8:7/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fjk8n")
 8:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:7/0/custom_data_0 = "農家の壁・瓦"
 9:7/0 = 0
+9:7/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rb3yh")
 9:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:7/0/custom_data_0 = "農機具小屋（トタン・板）"
 9:7/0/custom_data_1 = true
 10:7/0 = 0
 10:7/0/custom_data_0 = "農道の砂利"
 11:7/0 = 0
+11:7/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vr1wh")
 11:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:7/0/custom_data_0 = "門扉"
 12:7/0 = 0
+12:7/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0yo3l")
 12:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:7/0/custom_data_0 = "防音壁"
 13:7/0 = 0
+13:7/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yypus")
 13:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:7/0/custom_data_0 = "防音壁（遠景）"
 14:7/0 = 0
+14:7/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_u34hy")
 14:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:7/0/custom_data_0 = "階段室（消灯）"
 14:7/0/custom_data_1 = true
@@ -386,16 +1774,20 @@ texture_region_size = Vector2i(32, 32)
 15:7/0/custom_data_0 = "階段室（点灯・消灯）"
 15:7/0/custom_data_1 = true
 0:8/0 = 0
+0:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bdhsw")
 0:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:8/0/custom_data_0 = "隧道アーチ"
 1:8/0 = 0
+1:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tyhdo")
 1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:8/0/custom_data_0 = "隧道内壁（湿）"
 2:8/0 = 0
+2:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_w1v88")
 2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:8/0/custom_data_0 = "集合ポスト"
 2:8/0/custom_data_1 = true
 3:8/0 = 0
+3:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_s0s52")
 3:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:8/0/custom_data_0 = "電気柵ポール"
 3:8/0/custom_data_1 = true
@@ -415,64 +1807,83 @@ texture_region_size = Vector2i(32, 32)
 8:8/0 = 0
 8:8/0/custom_data_0 = "駐車場ライン"
 9:8/0 = 0
+9:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_822w4")
 9:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:8/0/custom_data_0 = "駐車車両（暗）"
 9:8/0/custom_data_1 = true
 10:8/0 = 0
+10:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bvfn3")
 10:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:8/0/custom_data_0 = "駐輪場の屋根"
 11:8/0 = 0
 11:8/0/custom_data_0 = "高架床版（影）"
 12:8/0 = 0
+12:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3pisn")
 12:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:8/0/custom_data_0 = "高架橋脚"
 13:8/0 = 0
+13:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_j8qgd")
 13:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:8/0/custom_data_0 = "黒板"
 13:8/0/custom_data_1 = true
 0:9/0 = 0
+0:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ywah0")
 0:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:9/0/custom_data_0 = "カーポート"
 1:9/0 = 0
+1:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_df35b")
 1:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:9/0/custom_data_0 = "カーポート"
 2:9/0 = 0
+2:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yrgq6")
 2:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:9/0/custom_data_0 = "カーポート"
 3:9/0 = 0
+3:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_krqi0")
 3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:9/0/custom_data_0 = "カーポート"
 4:9/0 = 0
+4:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_kmrbw")
 4:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:9/0/custom_data_0 = "カーポート"
 5:9/0 = 0
+5:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_an5sa")
 5:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:9/0/custom_data_0 = "カーポート"
 6:9/0 = 0
+6:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_au6r7")
 6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:9/0/custom_data_0 = "カーポート"
 7:9/0 = 0
+7:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_lkaof")
 7:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:9/0/custom_data_0 = "カーポート"
 8:9/0 = 0
+8:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_52lcb")
 8:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:9/0/custom_data_0 = "カーポート"
 9:9/0 = 0
+9:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ttd0p")
 9:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:9/0/custom_data_0 = "カーポート"
 10:9/0 = 0
+10:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_cl1la")
 10:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:9/0/custom_data_0 = "カーポート"
 11:9/0 = 0
+11:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rdj4w")
 11:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:9/0/custom_data_0 = "カーポート"
 12:9/0 = 0
+12:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f21wk")
 12:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:9/0/custom_data_0 = "カーポート"
 13:9/0 = 0
+13:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xvbyr")
 13:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:9/0/custom_data_0 = "カーポート"
 14:9/0 = 0
+14:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6oyny")
 14:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:9/0/custom_data_0 = "カーポート"
 15:9/0 = 0
@@ -521,333 +1932,438 @@ texture_region_size = Vector2i(32, 32)
 13:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:10/0/custom_data_0 = "ゴミ集積所ネット"
 14:10/0 = 0
+14:10/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0kpwj")
 14:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:10/0/custom_data_0 = "ブロック塀"
 15:10/0 = 0
+15:10/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xf5bd")
 15:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:10/0/custom_data_0 = "ブロック塀"
 0:11/0 = 0
+0:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_401t7")
 0:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:11/0/custom_data_0 = "ブロック塀"
 1:11/0 = 0
+1:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ktc7w")
 1:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:11/0/custom_data_0 = "ブロック塀"
 2:11/0 = 0
+2:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_siwpc")
 2:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:11/0/custom_data_0 = "ブロック塀"
 3:11/0 = 0
+3:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hjkx0")
 3:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:11/0/custom_data_0 = "ブロック塀"
 4:11/0 = 0
+4:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_33rql")
 4:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:11/0/custom_data_0 = "ブロック塀"
 5:11/0 = 0
+5:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rjued")
 5:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:11/0/custom_data_0 = "ブロック塀"
 6:11/0 = 0
+6:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3stft")
 6:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:11/0/custom_data_0 = "ブロック塀"
 7:11/0 = 0
+7:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3q0ie")
 7:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:11/0/custom_data_0 = "ブロック塀"
 8:11/0 = 0
+8:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vdede")
 8:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:11/0/custom_data_0 = "ブロック塀"
 9:11/0 = 0
+9:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_g7jbk")
 9:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:11/0/custom_data_0 = "ブロック塀"
 10:11/0 = 0
+10:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_sfp3c")
 10:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:11/0/custom_data_0 = "ブロック塀"
 11:11/0 = 0
+11:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6f42y")
 11:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:11/0/custom_data_0 = "ブロック塀"
 12:11/0 = 0
+12:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_74aaj")
 12:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:11/0/custom_data_0 = "ブロック塀"
 13:11/0 = 0
+13:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_a4l0p")
 13:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:11/0/custom_data_0 = "体育館の壁"
 14:11/0 = 0
+14:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_13hhr")
 14:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:11/0/custom_data_0 = "体育館の壁"
 15:11/0 = 0
+15:11/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2ak4n")
 15:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:11/0/custom_data_0 = "体育館の壁"
 0:12/0 = 0
+0:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_jcfoh")
 0:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:12/0/custom_data_0 = "体育館の壁"
 1:12/0 = 0
+1:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_jcuv2")
 1:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:12/0/custom_data_0 = "体育館の壁"
 2:12/0 = 0
+2:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_skct5")
 2:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:12/0/custom_data_0 = "体育館の壁"
 3:12/0 = 0
+3:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_el4e3")
 3:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:12/0/custom_data_0 = "体育館の壁"
 4:12/0 = 0
+4:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bdwq1")
 4:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:12/0/custom_data_0 = "体育館の壁"
 5:12/0 = 0
+5:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_eb24n")
 5:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:12/0/custom_data_0 = "体育館の壁"
 6:12/0 = 0
+6:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wrds8")
 6:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:12/0/custom_data_0 = "体育館の壁"
 7:12/0 = 0
+7:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ygrtq")
 7:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:12/0/custom_data_0 = "体育館の壁"
 8:12/0 = 0
+8:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_pc26l")
 8:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:12/0/custom_data_0 = "体育館の壁"
 9:12/0 = 0
+9:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_cxa3g")
 9:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:12/0/custom_data_0 = "体育館の壁"
 10:12/0 = 0
+10:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_orhmt")
 10:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:12/0/custom_data_0 = "体育館の壁"
 11:12/0 = 0
+11:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_g5kom")
 11:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:12/0/custom_data_0 = "体育館の壁"
 12:12/0 = 0
+12:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4odhw")
 12:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:12/0/custom_data_0 = "倉庫（トタン）"
 12:12/0/custom_data_1 = true
 13:12/0 = 0
+13:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op5hx")
 13:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:12/0/custom_data_0 = "倉庫（トタン）"
 13:12/0/custom_data_1 = true
 14:12/0 = 0
+14:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_el1to")
 14:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:12/0/custom_data_0 = "倉庫（トタン）"
 14:12/0/custom_data_1 = true
 15:12/0 = 0
+15:12/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6asrt")
 15:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:12/0/custom_data_0 = "倉庫（トタン）"
 15:12/0/custom_data_1 = true
 0:13/0 = 0
+0:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_h8tv1")
 0:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:13/0/custom_data_0 = "倉庫（トタン）"
 0:13/0/custom_data_1 = true
 1:13/0 = 0
+1:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6v3p3")
 1:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:13/0/custom_data_0 = "倉庫（トタン）"
 1:13/0/custom_data_1 = true
 2:13/0 = 0
+2:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_gj4dh")
 2:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:13/0/custom_data_0 = "倉庫（トタン）"
 2:13/0/custom_data_1 = true
 3:13/0 = 0
+3:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2utkm")
 3:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:13/0/custom_data_0 = "倉庫（トタン）"
 3:13/0/custom_data_1 = true
 4:13/0 = 0
+4:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_jewd6")
 4:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:13/0/custom_data_0 = "倉庫（トタン）"
 4:13/0/custom_data_1 = true
 5:13/0 = 0
+5:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_cxk7j")
 5:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:13/0/custom_data_0 = "倉庫（トタン）"
 5:13/0/custom_data_1 = true
 6:13/0 = 0
+6:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ff68a")
 6:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:13/0/custom_data_0 = "倉庫（トタン）"
 6:13/0/custom_data_1 = true
 7:13/0 = 0
+7:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bp8mf")
 7:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:13/0/custom_data_0 = "倉庫（トタン）"
 7:13/0/custom_data_1 = true
 8:13/0 = 0
+8:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yn4ur")
 8:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:13/0/custom_data_0 = "倉庫（トタン）"
 8:13/0/custom_data_1 = true
 9:13/0 = 0
+9:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_h6dlk")
 9:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:13/0/custom_data_0 = "倉庫（トタン）"
 9:13/0/custom_data_1 = true
 10:13/0 = 0
+10:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_utugk")
 10:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:13/0/custom_data_0 = "倉庫（トタン）"
 10:13/0/custom_data_1 = true
 11:13/0 = 0
+11:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yib8y")
 11:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:13/0/custom_data_0 = "公共建築の壁（タイル）"
 12:13/0 = 0
+12:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0lho7")
 12:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:13/0/custom_data_0 = "公共建築の壁（タイル）"
 13:13/0 = 0
+13:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_57wv0")
 13:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:13/0/custom_data_0 = "公共建築の壁（タイル）"
 14:13/0 = 0
+14:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5l52n")
 14:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:13/0/custom_data_0 = "公共建築の壁（タイル）"
 15:13/0 = 0
+15:13/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fnlvd")
 15:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:13/0/custom_data_0 = "公共建築の壁（タイル）"
 0:14/0 = 0
+0:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_of221")
 0:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:14/0/custom_data_0 = "公共建築の壁（タイル）"
 1:14/0 = 0
+1:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rix5g")
 1:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:14/0/custom_data_0 = "公共建築の壁（タイル）"
 2:14/0 = 0
+2:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_8dbee")
 2:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:14/0/custom_data_0 = "公共建築の壁（タイル）"
 3:14/0 = 0
+3:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ylibw")
 3:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:14/0/custom_data_0 = "公共建築の壁（タイル）"
 4:14/0 = 0
+4:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_e2orp")
 4:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:14/0/custom_data_0 = "公共建築の壁（タイル）"
 5:14/0 = 0
+5:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2kb25")
 5:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:14/0/custom_data_0 = "公共建築の壁（タイル）"
 6:14/0 = 0
+6:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_nr3k6")
 6:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:14/0/custom_data_0 = "公共建築の壁（タイル）"
 7:14/0 = 0
+7:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_r48uf")
 7:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:14/0/custom_data_0 = "公共建築の壁（タイル）"
 8:14/0 = 0
+8:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4f2xa")
 8:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:14/0/custom_data_0 = "公共建築の壁（タイル）"
 9:14/0 = 0
+9:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_koqrp")
 9:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:14/0/custom_data_0 = "公共建築の壁（タイル）"
 10:14/0 = 0
+10:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_p8l6a")
 10:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:14/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 11:14/0 = 0
+11:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d1dq6")
 11:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:14/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 12:14/0 = 0
+12:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hhrfo")
 12:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:14/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 13:14/0 = 0
+13:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fdt32")
 13:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:14/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 14:14/0 = 0
+14:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_siljc")
 14:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:14/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 15:14/0 = 0
+15:14/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_be26t")
 15:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:14/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 0:15/0 = 0
+0:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_nb3rc")
 0:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:15/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 1:15/0 = 0
+1:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d5cgk")
 1:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:15/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 2:15/0 = 0
+2:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6ulb3")
 2:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:15/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 3:15/0 = 0
+3:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_lv5iy")
 3:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:15/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 4:15/0 = 0
+4:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_cxdtm")
 4:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:15/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 5:15/0 = 0
+5:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0nr3t")
 5:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:15/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 6:15/0 = 0
+6:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_q5nlx")
 6:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:15/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 7:15/0 = 0
+7:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_u0egp")
 7:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:15/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 8:15/0 = 0
+8:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_22vlc")
 8:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:15/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
 9:15/0 = 0
+9:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_abihb")
 9:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:15/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 10:15/0 = 0
+10:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xxjl4")
 10:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:15/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 11:15/0 = 0
+11:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_i3vtj")
 11:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:15/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 12:15/0 = 0
+12:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ckuda")
 12:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:15/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 13:15/0 = 0
+13:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hiosc")
 13:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:15/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 14:15/0 = 0
+14:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ownf4")
 14:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:15/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 15:15/0 = 0
+15:15/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2s1a6")
 15:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:15/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 0:16/0 = 0
+0:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_do5pt")
 0:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:16/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 1:16/0 = 0
+1:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_uo2uk")
 1:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:16/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 2:16/0 = 0
+2:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_knvj1")
 2:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:16/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 3:16/0 = 0
+3:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_k63mo")
 3:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:16/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 4:16/0 = 0
+4:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_h1gq8")
 4:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:16/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 5:16/0 = 0
+5:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_nfn0g")
 5:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:16/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 6:16/0 = 0
+6:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fjcku")
 6:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:16/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 7:16/0 = 0
+7:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7gr2g")
 7:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:16/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
 8:16/0 = 0
+8:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qc6gy")
 8:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:16/0/custom_data_0 = "土塀（漆喰・崩れ）"
 9:16/0 = 0
+9:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4phh6")
 9:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:16/0/custom_data_0 = "土塀（漆喰・崩れ）"
 10:16/0 = 0
+10:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2uyxf")
 10:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:16/0/custom_data_0 = "土塀（漆喰・崩れ）"
 11:16/0 = 0
+11:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_dt1xs")
 11:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:16/0/custom_data_0 = "土塀（漆喰・崩れ）"
 12:16/0 = 0
+12:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fhbid")
 12:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:16/0/custom_data_0 = "土塀（漆喰・崩れ）"
 13:16/0 = 0
+13:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_kcg30")
 13:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:16/0/custom_data_0 = "土塀（漆喰・崩れ）"
 14:16/0 = 0
+14:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5yyg4")
 14:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:16/0/custom_data_0 = "土塀（漆喰・崩れ）"
 15:16/0 = 0
+15:16/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bh7yj")
 15:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:16/0/custom_data_0 = "土塀（漆喰・崩れ）"
 0:17/0 = 0
+0:17/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tlt1h")
 0:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:17/0/custom_data_0 = "土塀（漆喰・崩れ）"
 1:17/0 = 0
+1:17/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2oyqv")
 1:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:17/0/custom_data_0 = "土塀（漆喰・崩れ）"
 2:17/0 = 0
+2:17/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rdihv")
 2:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:17/0/custom_data_0 = "土塀（漆喰・崩れ）"
 3:17/0 = 0
+3:17/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_mcnm4")
 3:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:17/0/custom_data_0 = "土塀（漆喰・崩れ）"
 4:17/0 = 0
+4:17/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_80sst")
 4:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:17/0/custom_data_0 = "土塀（漆喰・崩れ）"
 5:17/0 = 0
+5:17/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_j07y5")
 5:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:17/0/custom_data_0 = "土塀（漆喰・崩れ）"
 6:17/0 = 0
+6:17/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vtcs5")
 6:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:17/0/custom_data_0 = "土塀（漆喰・崩れ）"
 7:17/0 = 0
@@ -911,273 +2427,363 @@ texture_region_size = Vector2i(32, 32)
 5:18/0/custom_data_0 = "展望所の柵"
 5:18/0/custom_data_1 = true
 6:18/0 = 0
+6:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_dbofj")
 6:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:18/0/custom_data_0 = "庵の板壁と瓦"
 7:18/0 = 0
+7:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hhgon")
 7:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:18/0/custom_data_0 = "庵の板壁と瓦"
 8:18/0 = 0
+8:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_g7xbk")
 8:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:18/0/custom_data_0 = "庵の板壁と瓦"
 9:18/0 = 0
+9:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ybucg")
 9:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:18/0/custom_data_0 = "庵の板壁と瓦"
 10:18/0 = 0
+10:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vhxnd")
 10:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:18/0/custom_data_0 = "庵の板壁と瓦"
 11:18/0 = 0
+11:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_w8k5s")
 11:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:18/0/custom_data_0 = "庵の板壁と瓦"
 12:18/0 = 0
+12:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hga23")
 12:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:18/0/custom_data_0 = "庵の板壁と瓦"
 13:18/0 = 0
+13:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f2w5k")
 13:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:18/0/custom_data_0 = "庵の板壁と瓦"
 14:18/0 = 0
+14:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4d4fb")
 14:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:18/0/custom_data_0 = "庵の板壁と瓦"
 15:18/0 = 0
+15:18/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0jtf4")
 15:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:18/0/custom_data_0 = "庵の板壁と瓦"
 0:19/0 = 0
+0:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_802ub")
 0:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:19/0/custom_data_0 = "庵の板壁と瓦"
 1:19/0 = 0
+1:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_nt1sr")
 1:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:19/0/custom_data_0 = "庵の板壁と瓦"
 2:19/0 = 0
+2:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7e5o6")
 2:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:19/0/custom_data_0 = "庵の板壁と瓦"
 3:19/0 = 0
+3:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hml1o")
 3:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:19/0/custom_data_0 = "庵の板壁と瓦"
 4:19/0 = 0
+4:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_y8udj")
 4:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:19/0/custom_data_0 = "庵の板壁と瓦"
 5:19/0 = 0
+5:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_df38p")
 5:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 6:19/0 = 0
+6:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_051ni")
 6:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 7:19/0 = 0
+7:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_p0sjd")
 7:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 8:19/0 = 0
+8:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_g3ry3")
 8:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 9:19/0 = 0
+9:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_n5axx")
 9:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 10:19/0 = 0
+10:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xvkfs")
 10:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 11:19/0 = 0
+11:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ps74p")
 11:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 12:19/0 = 0
+12:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_stxjp")
 12:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 13:19/0 = 0
+13:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xp68p")
 13:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 14:19/0 = 0
+14:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_jjcjp")
 14:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 15:19/0 = 0
+15:19/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5jqak")
 15:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:19/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 0:20/0 = 0
+0:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_24uj0")
 0:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:20/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 1:20/0 = 0
+1:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_uipwd")
 1:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:20/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 2:20/0 = 0
+2:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_aqkyy")
 2:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:20/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 3:20/0 = 0
+3:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qhydl")
 3:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:20/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
 4:20/0 = 0
+4:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ptvat")
 4:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 5:20/0 = 0
+5:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hjx77")
 5:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 6:20/0 = 0
+6:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_gaeiq")
 6:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 7:20/0 = 0
+7:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_chf83")
 7:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 8:20/0 = 0
+8:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_8hpku")
 8:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 9:20/0 = 0
+9:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rsxpt")
 9:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 10:20/0 = 0
+10:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rcsan")
 10:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 11:20/0 = 0
+11:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_u37cc")
 11:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 12:20/0 = 0
+12:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_alrek")
 12:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 13:20/0 = 0
+13:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_8csw2")
 13:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 14:20/0 = 0
+14:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_w84vo")
 14:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 15:20/0 = 0
+15:20/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qc53f")
 15:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:20/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 0:21/0 = 0
+0:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_h7aq2")
 0:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:21/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 1:21/0 = 0
+1:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_x82nk")
 1:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:21/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 2:21/0 = 0
+2:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d8xe5")
 2:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:21/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
 3:21/0 = 0
+3:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_kp07l")
 3:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:21/0/custom_data_0 = "支所の壁（タイル）"
 4:21/0 = 0
+4:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ubawj")
 4:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:21/0/custom_data_0 = "支所の壁（タイル）"
 5:21/0 = 0
+5:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4w3tj")
 5:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:21/0/custom_data_0 = "支所の壁（タイル）"
 6:21/0 = 0
+6:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_egcu1")
 6:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:21/0/custom_data_0 = "支所の壁（タイル）"
 7:21/0 = 0
+7:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_12e6k")
 7:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:21/0/custom_data_0 = "支所の壁（タイル）"
 8:21/0 = 0
+8:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ad7ri")
 8:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:21/0/custom_data_0 = "支所の壁（タイル）"
 9:21/0 = 0
+9:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_htfjw")
 9:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:21/0/custom_data_0 = "支所の壁（タイル）"
 10:21/0 = 0
+10:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_q07wr")
 10:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:21/0/custom_data_0 = "支所の壁（タイル）"
 11:21/0 = 0
+11:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7awpj")
 11:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:21/0/custom_data_0 = "支所の壁（タイル）"
 12:21/0 = 0
+12:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6gh36")
 12:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:21/0/custom_data_0 = "支所の壁（タイル）"
 13:21/0 = 0
+13:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vl2yb")
 13:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:21/0/custom_data_0 = "支所の壁（タイル）"
 14:21/0 = 0
+14:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_uooth")
 14:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:21/0/custom_data_0 = "支所の壁（タイル）"
 15:21/0 = 0
+15:21/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_coi34")
 15:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:21/0/custom_data_0 = "支所の壁（タイル）"
 0:22/0 = 0
+0:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ycjkk")
 0:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:22/0/custom_data_0 = "支所の壁（タイル）"
 1:22/0 = 0
+1:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_e86u3")
 1:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:22/0/custom_data_0 = "支所の壁（タイル）"
 2:22/0 = 0
+2:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_52wmo")
 2:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 3:22/0 = 0
+3:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1x6ls")
 3:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 4:22/0 = 0
+4:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f1awh")
 4:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 5:22/0 = 0
+5:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_aw2pl")
 5:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 6:22/0 = 0
+6:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ygjsl")
 6:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 7:22/0 = 0
+7:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_s56wk")
 7:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 8:22/0 = 0
+8:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wf6s5")
 8:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 9:22/0 = 0
+9:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ofwin")
 9:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 10:22/0 = 0
+10:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6e8cg")
 10:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 11:22/0 = 0
+11:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_s1ueh")
 11:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 12:22/0 = 0
+12:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yly6h")
 12:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 13:22/0 = 0
+13:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f7cat")
 13:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 14:22/0 = 0
+14:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xr4v4")
 14:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 15:22/0 = 0
+15:22/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_t6ovm")
 15:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:22/0/custom_data_0 = "新校舎 外壁（タイル）"
 0:23/0 = 0
+0:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d1xx1")
 0:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:23/0/custom_data_0 = "新校舎 外壁（タイル）"
 1:23/0 = 0
+1:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_46dyk")
 1:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 2:23/0 = 0
+2:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vvfdt")
 2:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 3:23/0 = 0
+3:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_gryti")
 3:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 4:23/0 = 0
+4:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5rcrq")
 4:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 5:23/0 = 0
+5:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_06fso")
 5:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 6:23/0 = 0
+6:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_sflb7")
 6:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 7:23/0 = 0
+7:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_8aoy4")
 7:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 8:23/0 = 0
+8:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7wyb8")
 8:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 9:23/0 = 0
+9:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_na1j2")
 9:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 10:23/0 = 0
+10:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yjciw")
 10:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 11:23/0 = 0
+11:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_c27gu")
 11:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 12:23/0 = 0
+12:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_m4wp8")
 12:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 13:23/0 = 0
+13:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_a0bv5")
 13:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 14:23/0 = 0
+14:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_jglee")
 14:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 15:23/0 = 0
+15:23/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_y41xp")
 15:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:23/0/custom_data_0 = "旧校舎 外壁（下見板）"
 0:24/0 = 0
@@ -1226,545 +2832,714 @@ texture_region_size = Vector2i(32, 32)
 14:24/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:24/0/custom_data_0 = "玉垣"
 15:24/0 = 0
+15:24/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3c7p4")
 15:24/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:24/0/custom_data_0 = "瓦屋根（連続）"
 0:25/0 = 0
+0:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_jnx07")
 0:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:25/0/custom_data_0 = "瓦屋根（連続）"
 1:25/0 = 0
+1:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0hded")
 1:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:25/0/custom_data_0 = "瓦屋根（連続）"
 2:25/0 = 0
+2:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_pikk2")
 2:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:25/0/custom_data_0 = "瓦屋根（連続）"
 3:25/0 = 0
+3:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3woel")
 3:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:25/0/custom_data_0 = "瓦屋根（連続）"
 4:25/0 = 0
+4:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_a4ydn")
 4:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:25/0/custom_data_0 = "瓦屋根（連続）"
 5:25/0 = 0
+5:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3ksp5")
 5:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:25/0/custom_data_0 = "瓦屋根（連続）"
 6:25/0 = 0
+6:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5rogg")
 6:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:25/0/custom_data_0 = "瓦屋根（連続）"
 7:25/0 = 0
+7:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_e8sio")
 7:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:25/0/custom_data_0 = "瓦屋根（連続）"
 8:25/0 = 0
+8:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qm6ki")
 8:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:25/0/custom_data_0 = "瓦屋根（連続）"
 9:25/0 = 0
+9:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_38jok")
 9:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:25/0/custom_data_0 = "瓦屋根（連続）"
 10:25/0 = 0
+10:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tvflt")
 10:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:25/0/custom_data_0 = "瓦屋根（連続）"
 11:25/0 = 0
+11:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f0dtx")
 11:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:25/0/custom_data_0 = "瓦屋根（連続）"
 12:25/0 = 0
+12:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fru8r")
 12:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:25/0/custom_data_0 = "瓦屋根（連続）"
 13:25/0 = 0
+13:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_sm2ly")
 13:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:25/0/custom_data_0 = "瓦屋根（連続）"
 14:25/0 = 0
+14:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wjuyb")
 14:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:25/0/custom_data_0 = "生垣"
 15:25/0 = 0
+15:25/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_x03tg")
 15:25/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:25/0/custom_data_0 = "生垣"
 0:26/0 = 0
+0:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wxr3r")
 0:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:26/0/custom_data_0 = "生垣"
 1:26/0 = 0
+1:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3g0f6")
 1:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:26/0/custom_data_0 = "生垣"
 2:26/0 = 0
+2:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_dbi3v")
 2:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:26/0/custom_data_0 = "生垣"
 3:26/0 = 0
+3:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vn7ll")
 3:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:26/0/custom_data_0 = "生垣"
 4:26/0 = 0
+4:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_087p4")
 4:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:26/0/custom_data_0 = "生垣"
 5:26/0 = 0
+5:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_s2smh")
 5:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:26/0/custom_data_0 = "生垣"
 6:26/0 = 0
+6:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_483ql")
 6:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:26/0/custom_data_0 = "生垣"
 7:26/0 = 0
+7:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ky4et")
 7:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:26/0/custom_data_0 = "生垣"
 8:26/0 = 0
+8:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xm31d")
 8:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:26/0/custom_data_0 = "生垣"
 9:26/0 = 0
+9:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_80eya")
 9:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:26/0/custom_data_0 = "生垣"
 10:26/0 = 0
+10:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hmd2m")
 10:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:26/0/custom_data_0 = "生垣"
 11:26/0 = 0
+11:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_gpisw")
 11:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:26/0/custom_data_0 = "生垣"
 12:26/0 = 0
+12:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_nk4nr")
 12:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:26/0/custom_data_0 = "生垣"
 13:26/0 = 0
+13:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qpmfm")
 13:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:26/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 14:26/0 = 0
+14:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_aya2a")
 14:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:26/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 15:26/0 = 0
+15:26/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3o1tc")
 15:26/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:26/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 0:27/0 = 0
+0:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bo2qq")
 0:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 1:27/0 = 0
+1:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_147gm")
 1:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 2:27/0 = 0
+2:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qaikk")
 2:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 3:27/0 = 0
+3:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yiaaj")
 3:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 4:27/0 = 0
+4:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1ckjq")
 4:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 5:27/0 = 0
+5:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hy45p")
 5:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 6:27/0 = 0
+6:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ur1dr")
 6:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 7:27/0 = 0
+7:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yfy50")
 7:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 8:27/0 = 0
+8:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_e41h1")
 8:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 9:27/0 = 0
+9:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_awtol")
 9:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 10:27/0 = 0
+10:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_c1dd2")
 10:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 11:27/0 = 0
+11:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_m8pw2")
 11:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:27/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
 12:27/0 = 0
+12:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_oe1c3")
 12:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:27/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 12:27/0/custom_data_1 = true
 13:27/0 = 0
+13:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_kvkp7")
 13:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:27/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 13:27/0/custom_data_1 = true
 14:27/0 = 0
+14:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_g7o8w")
 14:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:27/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 14:27/0/custom_data_1 = true
 15:27/0 = 0
+15:27/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_78jq4")
 15:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:27/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 15:27/0/custom_data_1 = true
 0:28/0 = 0
+0:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bsd3w")
 0:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 0:28/0/custom_data_1 = true
 1:28/0 = 0
+1:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_oyv1m")
 1:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 1:28/0/custom_data_1 = true
 2:28/0 = 0
+2:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_sdtpn")
 2:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 2:28/0/custom_data_1 = true
 3:28/0 = 0
+3:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7pn0y")
 3:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 3:28/0/custom_data_1 = true
 4:28/0 = 0
+4:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_j51bd")
 4:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 4:28/0/custom_data_1 = true
 5:28/0 = 0
+5:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qdhim")
 5:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 5:28/0/custom_data_1 = true
 6:28/0 = 0
+6:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fn7rs")
 6:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 6:28/0/custom_data_1 = true
 7:28/0 = 0
+7:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4kcmq")
 7:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 7:28/0/custom_data_1 = true
 8:28/0 = 0
+8:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ljgj3")
 8:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 8:28/0/custom_data_1 = true
 9:28/0 = 0
+9:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_e85rn")
 9:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 9:28/0/custom_data_1 = true
 10:28/0 = 0
+10:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_si60m")
 10:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:28/0/custom_data_0 = "観音堂の板壁・格子・屋根"
 10:28/0/custom_data_1 = true
 11:28/0 = 0
+11:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_slfia")
 11:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:28/0/custom_data_0 = "農家の壁・瓦"
 12:28/0 = 0
+12:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_moc5r")
 12:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:28/0/custom_data_0 = "農家の壁・瓦"
 13:28/0 = 0
+13:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_a4f1c")
 13:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:28/0/custom_data_0 = "農家の壁・瓦"
 14:28/0 = 0
+14:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3s3fk")
 14:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:28/0/custom_data_0 = "農家の壁・瓦"
 15:28/0 = 0
+15:28/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5gtsj")
 15:28/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:28/0/custom_data_0 = "農家の壁・瓦"
 0:29/0 = 0
+0:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_h8js6")
 0:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:29/0/custom_data_0 = "農家の壁・瓦"
 1:29/0 = 0
+1:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_14ifb")
 1:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:29/0/custom_data_0 = "農家の壁・瓦"
 2:29/0 = 0
+2:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_b7wgu")
 2:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:29/0/custom_data_0 = "農家の壁・瓦"
 3:29/0 = 0
+3:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4d2ln")
 3:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:29/0/custom_data_0 = "農家の壁・瓦"
 4:29/0 = 0
+4:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5ue4a")
 4:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:29/0/custom_data_0 = "農家の壁・瓦"
 5:29/0 = 0
+5:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_dbevo")
 5:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:29/0/custom_data_0 = "農家の壁・瓦"
 6:29/0 = 0
+6:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_egdox")
 6:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:29/0/custom_data_0 = "農家の壁・瓦"
 7:29/0 = 0
+7:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_mnvsb")
 7:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:29/0/custom_data_0 = "農家の壁・瓦"
 8:29/0 = 0
+8:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bgcxy")
 8:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:29/0/custom_data_0 = "農家の壁・瓦"
 9:29/0 = 0
+9:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_e3hvo")
 9:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:29/0/custom_data_0 = "農家の壁・瓦"
 10:29/0 = 0
+10:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1atdv")
 10:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:29/0/custom_data_0 = "農機具小屋（トタン・板）"
 10:29/0/custom_data_1 = true
 11:29/0 = 0
+11:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ykx7k")
 11:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:29/0/custom_data_0 = "農機具小屋（トタン・板）"
 11:29/0/custom_data_1 = true
 12:29/0 = 0
+12:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_juj45")
 12:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:29/0/custom_data_0 = "農機具小屋（トタン・板）"
 12:29/0/custom_data_1 = true
 13:29/0 = 0
+13:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7b8kt")
 13:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:29/0/custom_data_0 = "農機具小屋（トタン・板）"
 13:29/0/custom_data_1 = true
 14:29/0 = 0
+14:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yitec")
 14:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:29/0/custom_data_0 = "農機具小屋（トタン・板）"
 14:29/0/custom_data_1 = true
 15:29/0 = 0
+15:29/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_y8m66")
 15:29/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:29/0/custom_data_0 = "農機具小屋（トタン・板）"
 15:29/0/custom_data_1 = true
 0:30/0 = 0
+0:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ealt5")
 0:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:30/0/custom_data_0 = "農機具小屋（トタン・板）"
 0:30/0/custom_data_1 = true
 1:30/0 = 0
+1:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ccmmx")
 1:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:30/0/custom_data_0 = "農機具小屋（トタン・板）"
 1:30/0/custom_data_1 = true
 2:30/0 = 0
+2:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3rdug")
 2:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:30/0/custom_data_0 = "農機具小屋（トタン・板）"
 2:30/0/custom_data_1 = true
 3:30/0 = 0
+3:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_436wc")
 3:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:30/0/custom_data_0 = "農機具小屋（トタン・板）"
 3:30/0/custom_data_1 = true
 4:30/0 = 0
+4:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wkqyq")
 4:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:30/0/custom_data_0 = "農機具小屋（トタン・板）"
 4:30/0/custom_data_1 = true
 5:30/0 = 0
+5:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fgnpg")
 5:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:30/0/custom_data_0 = "農機具小屋（トタン・板）"
 5:30/0/custom_data_1 = true
 6:30/0 = 0
+6:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_xtold")
 6:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:30/0/custom_data_0 = "農機具小屋（トタン・板）"
 6:30/0/custom_data_1 = true
 7:30/0 = 0
+7:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_jpe4g")
 7:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:30/0/custom_data_0 = "農機具小屋（トタン・板）"
 7:30/0/custom_data_1 = true
 8:30/0 = 0
+8:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0rca6")
 8:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:30/0/custom_data_0 = "農機具小屋（トタン・板）"
 8:30/0/custom_data_1 = true
 9:30/0 = 0
+9:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_iocws")
 9:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:30/0/custom_data_0 = "防音壁"
 10:30/0 = 0
+10:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_v6mt0")
 10:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:30/0/custom_data_0 = "防音壁"
 11:30/0 = 0
+11:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_eo2ty")
 11:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:30/0/custom_data_0 = "防音壁"
 12:30/0 = 0
+12:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_r1s6d")
 12:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:30/0/custom_data_0 = "防音壁"
 13:30/0 = 0
+13:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_nx0vr")
 13:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:30/0/custom_data_0 = "防音壁"
 14:30/0 = 0
+14:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_mswfo")
 14:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:30/0/custom_data_0 = "防音壁"
 15:30/0 = 0
+15:30/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_lxw62")
 15:30/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:30/0/custom_data_0 = "防音壁"
 0:31/0 = 0
+0:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qkgyp")
 0:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:31/0/custom_data_0 = "防音壁"
 1:31/0 = 0
+1:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1xues")
 1:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:31/0/custom_data_0 = "防音壁"
 2:31/0 = 0
+2:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_45e85")
 2:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:31/0/custom_data_0 = "防音壁"
 3:31/0 = 0
+3:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ntl3h")
 3:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:31/0/custom_data_0 = "防音壁"
 4:31/0 = 0
+4:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bwmr4")
 4:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:31/0/custom_data_0 = "防音壁"
 5:31/0 = 0
+5:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bxs8q")
 5:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:31/0/custom_data_0 = "防音壁"
 6:31/0 = 0
+6:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6lp01")
 6:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:31/0/custom_data_0 = "防音壁"
 7:31/0 = 0
+7:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ape6s")
 7:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:31/0/custom_data_0 = "防音壁"
 8:31/0 = 0
+8:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_45bsb")
 8:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:31/0/custom_data_0 = "防音壁（遠景）"
 9:31/0 = 0
+9:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_m4h6p")
 9:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:31/0/custom_data_0 = "防音壁（遠景）"
 10:31/0 = 0
+10:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2o0h4")
 10:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:31/0/custom_data_0 = "防音壁（遠景）"
 11:31/0 = 0
+11:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wggfe")
 11:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:31/0/custom_data_0 = "防音壁（遠景）"
 12:31/0 = 0
+12:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_oibhe")
 12:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:31/0/custom_data_0 = "防音壁（遠景）"
 13:31/0 = 0
+13:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hwgvm")
 13:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:31/0/custom_data_0 = "防音壁（遠景）"
 14:31/0 = 0
+14:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_j4582")
 14:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:31/0/custom_data_0 = "防音壁（遠景）"
 15:31/0 = 0
+15:31/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_k17r6")
 15:31/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:31/0/custom_data_0 = "防音壁（遠景）"
 0:32/0 = 0
+0:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d254f")
 0:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:32/0/custom_data_0 = "防音壁（遠景）"
 1:32/0 = 0
+1:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7bier")
 1:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:32/0/custom_data_0 = "防音壁（遠景）"
 2:32/0 = 0
+2:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_kqba4")
 2:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:32/0/custom_data_0 = "防音壁（遠景）"
 3:32/0 = 0
+3:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f52rl")
 3:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:32/0/custom_data_0 = "防音壁（遠景）"
 4:32/0 = 0
+4:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_pkqmc")
 4:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:32/0/custom_data_0 = "防音壁（遠景）"
 5:32/0 = 0
+5:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6bj4q")
 5:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:32/0/custom_data_0 = "防音壁（遠景）"
 6:32/0 = 0
+6:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1j0vt")
 6:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:32/0/custom_data_0 = "防音壁（遠景）"
 7:32/0 = 0
+7:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_mdqlu")
 7:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:32/0/custom_data_0 = "隧道内壁（湿）"
 8:32/0 = 0
+8:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qwapm")
 8:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:32/0/custom_data_0 = "隧道内壁（湿）"
 9:32/0 = 0
+9:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4vmq6")
 9:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:32/0/custom_data_0 = "隧道内壁（湿）"
 10:32/0 = 0
+10:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_i7tys")
 10:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:32/0/custom_data_0 = "隧道内壁（湿）"
 11:32/0 = 0
+11:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ruvac")
 11:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:32/0/custom_data_0 = "隧道内壁（湿）"
 12:32/0 = 0
+12:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ksc1p")
 12:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:32/0/custom_data_0 = "隧道内壁（湿）"
 13:32/0 = 0
+13:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_224hr")
 13:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:32/0/custom_data_0 = "隧道内壁（湿）"
 14:32/0 = 0
+14:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vg5md")
 14:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:32/0/custom_data_0 = "隧道内壁（湿）"
 15:32/0 = 0
+15:32/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ib5s6")
 15:32/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:32/0/custom_data_0 = "隧道内壁（湿）"
 0:33/0 = 0
+0:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_py22v")
 0:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:33/0/custom_data_0 = "隧道内壁（湿）"
 1:33/0 = 0
+1:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ubvdb")
 1:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:33/0/custom_data_0 = "隧道内壁（湿）"
 2:33/0 = 0
+2:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_37jy8")
 2:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:33/0/custom_data_0 = "隧道内壁（湿）"
 3:33/0 = 0
+3:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_crrb6")
 3:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:33/0/custom_data_0 = "隧道内壁（湿）"
 4:33/0 = 0
+4:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_j7r8d")
 4:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:33/0/custom_data_0 = "隧道内壁（湿）"
 5:33/0 = 0
+5:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7ptq6")
 5:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:33/0/custom_data_0 = "隧道内壁（湿）"
 6:33/0 = 0
+6:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2q6hq")
 6:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:33/0/custom_data_0 = "駐輪場の屋根"
 7:33/0 = 0
+7:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vj0im")
 7:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:33/0/custom_data_0 = "駐輪場の屋根"
 8:33/0 = 0
+8:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ygy5p")
 8:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:33/0/custom_data_0 = "駐輪場の屋根"
 9:33/0 = 0
+9:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_c580a")
 9:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:33/0/custom_data_0 = "駐輪場の屋根"
 10:33/0 = 0
+10:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_npv26")
 10:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:33/0/custom_data_0 = "駐輪場の屋根"
 11:33/0 = 0
+11:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wnf7j")
 11:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:33/0/custom_data_0 = "駐輪場の屋根"
 12:33/0 = 0
+12:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f0oa8")
 12:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:33/0/custom_data_0 = "駐輪場の屋根"
 13:33/0 = 0
+13:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_y1kx2")
 13:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:33/0/custom_data_0 = "駐輪場の屋根"
 14:33/0 = 0
+14:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bubh8")
 14:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:33/0/custom_data_0 = "駐輪場の屋根"
 15:33/0 = 0
+15:33/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d7k8j")
 15:33/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:33/0/custom_data_0 = "駐輪場の屋根"
 0:34/0 = 0
+0:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_i3oo0")
 0:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:34/0/custom_data_0 = "駐輪場の屋根"
 1:34/0 = 0
+1:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_pbeit")
 1:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:34/0/custom_data_0 = "駐輪場の屋根"
 2:34/0 = 0
+2:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4c4iw")
 2:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:34/0/custom_data_0 = "駐輪場の屋根"
 3:34/0 = 0
+3:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rljks")
 3:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:34/0/custom_data_0 = "駐輪場の屋根"
 4:34/0 = 0
+4:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bg0f3")
 4:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:34/0/custom_data_0 = "駐輪場の屋根"
 5:34/0 = 0
+5:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hcxjl")
 5:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:34/0/custom_data_0 = "高架橋脚"
 6:34/0 = 0
+6:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rdhaj")
 6:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:34/0/custom_data_0 = "高架橋脚"
 7:34/0 = 0
+7:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_b0s02")
 7:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:34/0/custom_data_0 = "高架橋脚"
 8:34/0 = 0
+8:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_emv48")
 8:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:34/0/custom_data_0 = "高架橋脚"
 9:34/0 = 0
+9:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fikay")
 9:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:34/0/custom_data_0 = "高架橋脚"
 10:34/0 = 0
+10:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_r55se")
 10:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:34/0/custom_data_0 = "高架橋脚"
 11:34/0 = 0
+11:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_aiu77")
 11:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:34/0/custom_data_0 = "高架橋脚"
 12:34/0 = 0
+12:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rj6jj")
 12:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:34/0/custom_data_0 = "高架橋脚"
 13:34/0 = 0
+13:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vi4tv")
 13:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:34/0/custom_data_0 = "高架橋脚"
 14:34/0 = 0
+14:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ygwfj")
 14:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:34/0/custom_data_0 = "高架橋脚"
 15:34/0 = 0
+15:34/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_45m47")
 15:34/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 15:34/0/custom_data_0 = "高架橋脚"
 0:35/0 = 0
+0:35/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f8im0")
 0:35/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:35/0/custom_data_0 = "高架橋脚"
 1:35/0 = 0
+1:35/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_28rcn")
 1:35/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:35/0/custom_data_0 = "高架橋脚"
 2:35/0 = 0
+2:35/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qx57o")
 2:35/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:35/0/custom_data_0 = "高架橋脚"
 3:35/0 = 0
+3:35/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7uwy8")
 3:35/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:35/0/custom_data_0 = "高架橋脚"
 0:36/0 = 0
 0:37/0 = 0
+0:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d6ljw")
 0:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:37/0/custom_data_0 = "イチョウ（大木）"
 0:37/0/custom_data_1 = true
 1:36/0 = 0
 1:37/0 = 0
+1:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_lan63")
 1:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:37/0/custom_data_0 = "寺の山門"
 2:36/0 = 0
 2:37/0 = 0
+2:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_cbvg6")
 2:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:37/0/custom_data_0 = "山の斜面（樹林）"
 3:36/0 = 0
 3:37/0 = 0
+3:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_s70x2")
 3:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:37/0/custom_data_0 = "山門（木・瓦）"
 4:36/0 = 0
@@ -1773,43 +3548,53 @@ texture_region_size = Vector2i(32, 32)
 4:37/0/custom_data_0 = "時計塔"
 5:36/0 = 0
 5:37/0 = 0
+5:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_o0ua8")
 5:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:37/0/custom_data_0 = "杉林"
 6:36/0 = 0
 6:37/0 = 0
+6:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_n664q")
 6:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:37/0/custom_data_0 = "杉林（暗）"
 7:36/0 = 0
 7:37/0 = 0
+7:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0r50x")
 7:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:37/0/custom_data_0 = "柿の木（実あり）"
 7:37/0/custom_data_1 = true
 8:36/0 = 0
 8:37/0 = 0
+8:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_p2kvn")
 8:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 8:37/0/custom_data_0 = "栗の木"
 9:36/0 = 0
 9:37/0 = 0
+9:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bpgw6")
 9:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 9:37/0/custom_data_0 = "桜（葉・裸）"
 10:36/0 = 0
 10:37/0 = 0
+10:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2vjhv")
 10:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 10:37/0/custom_data_0 = "梅の木（開花・裸）"
 11:36/0 = 0
 11:37/0 = 0
+11:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_g0ss1")
 11:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 11:37/0/custom_data_0 = "植栽"
 12:36/0 = 0
 12:37/0 = 0
+12:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2m4rf")
 12:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 12:37/0/custom_data_0 = "植栽（低木）"
 13:36/0 = 0
 13:37/0 = 0
+13:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yyw13")
 13:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 13:37/0/custom_data_0 = "樹林（暗）"
 14:36/0 = 0
 14:37/0 = 0
+14:37/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yx8fx")
 14:37/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 14:37/0/custom_data_0 = "火の見櫓"
 14:37/0/custom_data_1 = true
@@ -1820,6 +3605,7 @@ texture_region_size = Vector2i(32, 32)
 15:37/0/custom_data_1 = true
 0:38/0 = 0
 0:39/0 = 0
+0:39/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rbws1")
 0:39/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:39/0/custom_data_0 = "給水塔"
 0:39/0/custom_data_1 = true
@@ -1833,10 +3619,12 @@ texture_region_size = Vector2i(32, 32)
 2:39/0/custom_data_0 = "街灯（柱・光源）"
 3:38/0 = 0
 3:39/0 = 0
+3:39/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_y258y")
 3:39/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:39/0/custom_data_0 = "谷の斜面（暗い樹林）"
 4:38/0 = 0
 4:39/0 = 0
+4:39/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_er0ij")
 4:39/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:39/0/custom_data_0 = "電柱・電線"
 5:38/0 = 0
@@ -1846,12 +3634,13 @@ texture_region_size = Vector2i(32, 32)
 
 [resource]
 tile_size = Vector2i(32, 32)
+occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "tile_type"
 custom_data_layer_0/type = 4
 custom_data_layer_1/name = "is_interactable"
 custom_data_layer_1/type = 1
-sources/0 = SubResource("TileSetAtlasSource_401t7")
+sources/0 = SubResource("TileSetAtlasSource_guaia")
 metadata/tile_coords = {
 "アスファルト": Vector2i(0, 0),
 "イチョウ（大木）": Vector2i(0, 37),

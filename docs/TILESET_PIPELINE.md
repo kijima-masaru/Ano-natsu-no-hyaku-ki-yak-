@@ -79,6 +79,7 @@ xvfb-run ... --runner=$R/driver_shots.gd --out=DIR                    # 画面�
 
 - **オートタイル**：`AUTOTILE` の種別は 4 近傍（N=1 E=2 S=4 W=8）の 15 通りを `<種別>#m<mask>` としてアトラスに並べる。地図を組んだ後に `TileVariants.apply()` が隣接を見て差し替える（`FieldMapBuilder.build_from` の最後）。地図の外は「同じ」とみなし端で切れ目を出さない。
 - **背の高い部品**：`TALL` の種別は 32×64 で描き、下半分が本体（種別名・通行判定）、上半分 `<種別>#top` が 1 マス上の `overhead` 層に載る（アクターより前に描かれ、梢が人物を隠す）。`TileSet` の meta `tile_variants` / `tile_tall` に座標表がある。
+- **光の遮蔽**：通行不可の種別のうち壁・建物・崖・木の幹などは遮蔽ポリゴン（TileSet の occlusion 層）を持ち、`Lighting` の光源（街灯・懐中電灯）が影を落とす。どのペインタが遮るかは `driver_tileset_export` の `OCCLUDE_FULL` / `OCCLUDE_TRUNK`。光源になる種別（`LightCatalog`）と柵・金網・水・看板は遮らない。判定（`Lighting.light_level_at`）は影を見ない
 - 旧 16 px・16 色のペインタ（`paint_atlas.py` / `special.py`）は残してあるが、現在は使っていない（すべての種別が 32 px 直描き）。
 
 `TileCatalog` に種別を足したら `--catalog` で catalog.json を更新し、`paint32.py`（地面・壁）か `props32*.py`（物）に描画を書いて `paint32.py` を実行する。生成ペインタ（`tile_painters_*.gd`）は layout が無いときのフォールバックとして残す。

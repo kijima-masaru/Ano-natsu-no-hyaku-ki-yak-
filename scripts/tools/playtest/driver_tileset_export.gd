@@ -11,6 +11,11 @@ const ATLAS_PNG: String = "res://resources/tilesets/common_atlas.png"
 const LAYOUT_JSON: String = "res://resources/tilesets/atlas_layout.json"
 const TRES: String = "res://resources/tilesets/common.tres"
 const CATALOG_JSON: String = "res://tools/tiles/catalog.json"
+## 光を遮るペインタ（TileCatalog の painter 名）。マス全体を遮る物と、幹・柱だけ遮る物。
+## 光源になる種別（LightCatalog）は光が内側から出るので遮らない。柵・金網・水・看板は遮らない
+const OCCLUDE_FULL: PackedStringArray = ["block_wall", "concrete_wall", "tile_wall", "plank_h", "plank_v", "roof", "box", "door",
+	"shutter", "fence", "cliff", "conifer", "gate", "mound", "rock", "car", "window", "grass", "vending", "glass"]
+const OCCLUDE_TRUNK: PackedStringArray = ["tree", "bare_tree", "pole", "slab", "tower", "lamp"]
 
 
 func _ready() -> void:
@@ -66,6 +71,8 @@ func _build_from_layout(names: PackedStringArray) -> TileSet:
 	tile_set.add_physics_layer()
 	tile_set.set_physics_layer_collision_layer(0, 1)
 	tile_set.set_physics_layer_collision_mask(0, 1)
+	tile_set.add_occlusion_layer()
+	tile_set.set_occlusion_layer_light_mask(0, 1)
 	tile_set.add_custom_data_layer()
 	tile_set.set_custom_data_layer_name(0, TileGenerator.CUSTOM_TILE_TYPE)
 	tile_set.set_custom_data_layer_type(0, TYPE_STRING)
@@ -103,6 +110,10 @@ func _build_from_layout(names: PackedStringArray) -> TileSet:
 		if not TileGenerator.is_walkable(name):
 			data.add_collision_polygon(0)
 			data.set_collision_polygon_points(0, 0, _full_square())
+			var occluder: OccluderPolygon2D = _occluder_for(name)
+			if occluder != null:
+				data.set_occluder_polygons_count(0, 1)
+				data.set_occluder_polygon(0, 0, occluder)
 		if variant.is_empty():
 			coords_by_name[name] = coords
 		elif variant.begins_with("m"):
@@ -119,6 +130,24 @@ func _build_from_layout(names: PackedStringArray) -> TileSet:
 	tile_set.set_meta(TileVariants.META_TALL, tall)
 	print("layout: 種別 %d、オートタイル %d、背の高い部品 %d" % [coords_by_name.size(), variants.size(), tall.size()])
 	return tile_set
+
+
+## 種別の遮蔽ポリゴン。光源の種別と、遮らないペインタは null
+func _occluder_for(name: String) -> OccluderPolygon2D:
+	if not LightCatalog.get_light(name).is_empty():
+		return null
+	var painter: String = str((TileCatalog.entries()[name] as Dictionary).get("painter", ""))
+	var poly: OccluderPolygon2D = OccluderPolygon2D.new()
+	poly.cull_mode = OccluderPolygon2D.CULL_DISABLED
+	if OCCLUDE_FULL.has(painter):
+		poly.polygon = _full_square()
+		return poly
+	if OCCLUDE_TRUNK.has(painter):
+		var h: float = GameConstants.TILE_SIZE * 0.5
+		var w: float = GameConstants.TILE_SIZE * 0.125
+		poly.polygon = PackedVector2Array([Vector2(-w, -h * 0.25), Vector2(w, -h * 0.25), Vector2(w, h), Vector2(-w, h)])
+		return poly
+	return null
 
 
 func _full_square() -> PackedVector2Array:

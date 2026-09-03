@@ -383,6 +383,11 @@
       "text": "明るさ"
     },
     {
+      "id": "ui_setting_screen_fx",
+      "speaker": "system",
+      "text": "画面効果（にじみ・ぼかし・粒子）"
+    },
+    {
       "id": "ui_setting_debug_overlay",
       "speaker": "system",
       "text": "デバッグ表示"

@@ -77,6 +77,7 @@ func find_exit(to_id):
 | `EvidenceRegistry` | 証拠と隠蔽（`data/evidence.json`）、8/30 の提示画面 |
 | `AudioManager` | BGM・環境音・SE と直近の音源（配線は `AudioMixer`、合成音は `SoundSynth`） |
 | `Lighting` | 時間帯の色調・タイル光源・月光・懐中電灯 |
+| `ScreenFx` | 画面効果（にじみ・上下端のぼかし・周辺減光のシェーダ、舞う葉・埃・蛍の粒子）。設定 `screen_fx` で切れる。判定には関わらない |
 | `AttachedEntity` | ナツ（憑いた怪異）。労わり・幸運・気配 |
 | `AnomalySystem` | 怪異（`data/anomalies.json`） |
 | `SteamBridge` | GodotSteam への空実装インターフェース（実績・クラウドセーブのフック） |
