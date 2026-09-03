@@ -5,8 +5,8 @@
 *.tmp
 *.translation
 
-# エクスポート設定（署名・パスを含むためローカル管理）
-export_presets.cfg
+# エクスポート（プリセットは共有する。署名などの秘密は Godot 4 が export_credentials.cfg に分けるのでそちらだけ除外）
+export_credentials.cfg
 export/
 build/
 *.pck

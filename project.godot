@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="磐戸町奇譚"
+config/version="0.4.0"
 config/description="2Dドット絵・見下ろし型ホラーアドベンチャー。架空の町「神代市 磐戸町」の16フィールドを探索する。"
 run/main_scene="res://scenes/ui/title.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")

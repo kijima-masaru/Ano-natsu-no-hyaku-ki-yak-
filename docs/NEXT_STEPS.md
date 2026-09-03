@@ -63,6 +63,42 @@ xvfb-run -a -s "-screen 0 1152x648x24" $G --path . $D -- --runner=$R/driver_shot
 ```
 数値の期待値は `docs/PLAYTEST_LOG.md`「閾値の確定」（接近度 52／75／100、推定 124／194 分、二層 118 件、セーブ 5 セクション一致、action_failed 0）。
 
+## 5b. ビルド（タスク13、v0.4.0 リリース候補）
+
+`export_presets.cfg` をリポジトリに含める（Godot 4 は署名などの秘密を `export_credentials.cfg` に分けるので、そちらだけ `.gitignore`）。プリセットは Linux（x86_64）と Windows（x86_64）、PCK 埋め込み、`docs/` `*.md` `*.py` `.github/` と検証ドライバを除外。
+
+```
+G=./Godot_v4.7-stable_linux.x86_64
+$G --headless --path . --export-release "Linux" build/linux/iwato.x86_64
+$G --headless --path . --export-release "Windows" build/windows/iwato.exe
+./build/linux/iwato.x86_64 --headless --quit-after 180     # 起動確認（EventSystem の検証ログが出て終了コード 0）
+```
+
+| 出力 | サイズ | 備考 |
+|---|---|---|
+| `build/linux/iwato.x86_64` | 76 MB | ELF x86_64、PCK 埋め込み。headless で起動確認済み |
+| `build/windows/iwato.exe` | 110 MB | PE32+ x86_64、PCK 埋め込み。アイコン・署名なし（rcedit 未設定）。Windows 実機での起動は未確認 |
+
+エクスポートテンプレートは `Godot_v4.7-stable_export_templates.tpz`（1.3 GB）を `~/.local/share/godot/export_templates/4.7.stable/` に展開する。Steam 向けの最終ビルド（アイコン、バージョン情報、GodotSteam の GDExtension 同梱）はステップ6。
+
+### v0.4.0 で できていること／いないこと
+
+**できている**
+- タイトルから全 ED・周回まで実機で通る。進行不能・データ破損 0 件（`docs/PLAYTEST_LOG.md`）
+- 16 フィールド、全日程、イベント 356、テキスト 796（二層 118 対）、隠蔽 17、怪異 27、ED 3 種、裏面
+- 接近度・プレイ時間の閾値確定（最短 約 2h25／全消費 約 3h35、ED-A/B/C が選べる）
+- コンテンツ警告（起動時・エンディング後）、相談窓口の枠、ストア文案
+- セーブ／ロード、クリア記録、設定、装置別の操作案内、ゲームパッド対応
+- データ検証（CI）、実機検証ドライバ 10 本、Linux／Windows のビルド
+
+**できていない**
+- 画像・音声の本番素材（すべて生成素材。`docs/ASSETS_NEEDED.md`）、PixelMplus12 の配置
+- 相談窓口の連絡先の記入（確認待ち）
+- GodotSteam（`SteamBridge` は空実装）、実績、Steam Deck の実機確認、ストアの画像
+- 人手による通しプレイの実測（時間・ED の分布・追跡者の難度）
+- Windows 実機での起動確認、アイコン・署名
+- `v0.4.0` タグのリモートへの反映（この環境からは push できない。下記 6）
+
 ## 6. 手作業が必要な項目（環境の制約で未実施）
 
 - タグのプッシュ：`git push origin v0.1.0 v0.2.0 v0.3.0 v0.4.0`（この環境からはプロキシに落とされ、リモートにタグが無い）
