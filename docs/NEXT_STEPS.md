@@ -17,10 +17,11 @@
 | 8 | chore/full-playtest | **済（PR #51）**。全 ED 到達・validate 0 件・セーブ復元・二層 118 件・隠蔽 17 件の提示・フラグ棚卸し・操作系・可読性・起動時間・推定プレイ時間を docs/PLAYTEST_LOG.md「通しプレイ」に記録。問題 10 件を一覧化（修正はタスク9） |
 | 9 | fix/playtest-issues | **済（PR #52）**。問題 10 件の対処：修正 3 件（全体図の視認性、操作案内の装置別表記 `InputDevice`、検証スロットの後始末）、誤報 1 件（棚卸しスクリプト）、仕様確認 1 件、タスク10 へ 2 件（接近度、屋内の暗さ）、タスク12 へ 1 件（未参照フラグ）、素材待ち 1 件、保留 1 件 |
 | 10 | chore/balance-tuning | **PR 済・承認待ち**。目標 2 時間〜3 時間半で合意。接近度 A 案（日付経過 0・初訪問 +1・怪異は初回のみ）→ 最短 52／全消費 75／目撃 100。歩行 64 px/s、8/16〜28 の P 5 → 4、屋内の暗さと明るさ既定 0.5、文字送り 0.7、`rotate` で daily の日替わり文 |
-| 11〜13 | refactor/file-splitting 以降 | 未着手 |
+| 11 | refactor/file-splitting | **PR 済・承認待ち**。動作不変の切り出し：`JsonFile`（JSON 読み書きの共通化、8 箇所）、`EventLoader`、`FieldNpcs`、`ScreenFade`、`AudioMixer`、`StalkerView`、`GameConstants.FIRST_VISIT_POINTS` |
+| 12〜13 | docs/handover 以降 | 未着手 |
 
 ### 次に何をすべきか
-- タスク10 の PR をレビュー・マージ → `refactor/file-splitting`（200 行超 16 ファイルの整理。動作不変。`field_base` → `FieldNpcs` 切り出し、`Main` の初訪問 +1 P を `GameConstants` へ。機械的分割はしない）。
+- タスク11 の PR をレビュー・マージ → `docs/handover`（docs 最新化、未使用フラグの扱いの決定、ASSETS_NEEDED を発注書として完成、NEXT_STEPS にステップ6 の申し送り）。
 - 相談窓口：候補の一覧を提示済み。確認が取れたものだけ `data/locale/ja/support.json` に記入し、`meta.verified_at` を書く。
 - **タスク6 の判断**：
   - 2 周目は軽い形で実装した。クリア後にタイトルへ「裏面から」が増え、8/1 から `truth_revealed` を立てて始める（二層 118 対がすべて真相版。イベント・日程・ED 条件は表と同じ）。題字の下にクリア数だけ「面」を並べる。追加テキストや新イベントは作らない（重ければ「裏面から」をメニューから外すだけで戻せる）。
@@ -103,7 +104,7 @@ unzip godot.zip && ./Godot_v4.7-stable_linux.x86_64 --headless --path . --import
 - 支所の「閉庁」文は 8/1・8/2 のみ。曜日条件（`weekday`）は未実装。
 - シゲ（F14）はトキの絵を流用（`set_npc_present(..., "toki", ...)`）。素材が来たら種別を `shige` に。
 - 8/11・8/17・8/21〜22・8/27〜28 は `daily` だけで P を満たす日。daily 文が単調なら日ごとの一行に分ける。
-- **200 行超**：`stalker.gd`(305) `field_base.gd`(293) `scene_router.gd`(289) `audio_manager.gd`(282) `event_system.gd`(276) `tile_painters_ground.gd`(257) `calendar.gd`(248) `data_checks_fields.gd`(242) `data_checks_refs.gd`(230) `tile_painters_objects.gd`(229) `save_manager.gd`(219) `tile_catalog.gd`(215) `tile_painters_built.gd`(211) `game_state.gd`(211) `main.gd`(209) `lighting.gd`(202)。理由は各 PR。`field_base.gd` は `set_npc_present` / `add_point_of_interest` を `FieldNpcs` へ切り出す候補。
+- **200 行超（タスク11 後）**：`stalker.gd`(303、状態機械は一体で保つ) `scene_router.gd`(283、遷移と同行の同期) `audio_manager.gd`(280) `field_base.gd`(274、タイル層と出口) `event_system.gd`(273、待ち行列と実行) `data_checks_refs.gd`(263) `tile_painters_ground.gd`(257) `calendar.gd`(248) `data_checks_fields.gd`(242) `tile_painters_objects.gd`(229) `save_manager.gd`(217) `tile_catalog.gd`(215) `event_actions.gd`(213) `tile_painters_built.gd`(211) `game_state.gd`(211) `dialogue_window.gd`(210) `main.gd`(209) `lighting.gd`(207)。開発ツール（tile_painters_* / data_checks_* / tile_catalog）は表に近い列挙で分割の益が薄い。以後は「意味のある単位が見つかったとき」だけ切り出す。
 
 ## 手作業が必要な項目（環境の制約で未実施）
 
