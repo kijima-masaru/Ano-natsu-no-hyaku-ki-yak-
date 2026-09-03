@@ -152,7 +152,8 @@ def drip(sec: float, rng, rate: float = 0.5, ir: np.ndarray | None = None) -> np
     for _ in range(count):
         f = rng.uniform(1800, 3200)
         d = s.sine(f, 0.05) * s.exp_decay(0.05, 90, 0.001)
-        d += s.sine(f * 2.3, 0.02) * s.exp_decay(0.02, 200, 0.0005) * 0.3
+        hi = s.sine(f * 2.3, 0.02) * s.exp_decay(0.02, 200, 0.0005) * 0.3
+        d[: len(hi)] += hi
         i = int(rng.random() * n)
         end = min(n, i + len(d))
         out[i:end] += d[: end - i] * rng.uniform(0.4, 1.0)
