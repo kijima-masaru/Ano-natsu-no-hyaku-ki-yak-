@@ -46,7 +46,8 @@
 | `flag_yakushi_open` | 薬師谷の落石が崩れた（既存） | 8/28 夕、自由日終了時に自動 | F14→F16 出口 lock |
 | `baba_told_seal` | シゲが澪に封石の戻し方を教えた | 8/29 F14、澪と一緒にシゲを訪ねる（`ev_f14_shige_d29`）。**任意到達**。立たなくても 8/30 の封印は手探りで成立する | `truth_partial_entity`（ED-A）、8/30 の手順の分かりやすさ |
 | `entered_yakushi` | F16 に入った | 8/29 | day 29 進行 |
-| `seal_restored` | 封石を戻した | 8/30 封印パズル完了 | 町の怪異停止、F01 静まり返り演出 |
+| `seal_placed_okina` / `seal_placed_uba` / `seal_placed_oni` / `seal_placed_warabe` | 8/30 の台座に面を戻した（東・西・南・北） | F16 裂け目の口、各台座（`ev_f16_ped_*_place`） | 封石が動く条件（4 つ全部） |
+| `seal_restored` | 封石を戻した | 8/30 F16 `ev_f16_seal`（4 面を戻して澪と押す） | 霧が引き封石が元の位置へ、F16 の「何も起こらない」停止、F01 の静まり返り（`ev_f01_d30_silence`）、以後の真相開示（タスク3） |
 | `flag_minimap_unlocked` | 全体マップ解放（既存） | F06 地図看板 | ミニマップ UI |
 
 ## 日付・探索系
