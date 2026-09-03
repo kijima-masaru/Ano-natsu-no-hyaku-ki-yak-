@@ -57,7 +57,20 @@ layer.set_cell(Vector2i(3, 4), TileGenerator.SOURCE_ID, coords)
 | カスタムデータ 0 | `tile_type` | String | 種別名 |
 | カスタムデータ 1 | `is_interactable` | bool | 調べられる対象か |
 
-## 手描き PNG への差し替え手順（後のステップ）
+## 現在の構成（`source="resource"`）
+
+`resources/tilesets/common_atlas.png` は **`tools/tiles/paint_atlas.py`（Python、Pillow）が描く**。種別名 → ペインタ名・引数・通行可否は `tools/tiles/catalog.json` に書き出してあり（`driver_tileset_export --catalog`）、Python 側はそれを読んで同じ引数（色インデックス・密度）で描く。`common.tres` は `driver_tileset_export` が生成し、アトラスの texture としてこの PNG を参照する。
+
+```
+python3 tools/tiles/paint_atlas.py --preview build/atlas_x4.png     # PNG を描く（決定的）
+$G --headless --path . --import                                       # PNG を取り込む
+$G --headless --path . $D -- --runner=$R/driver_tileset_export.gd     # common.tres を更新（PNG を参照）
+xvfb-run ... --runner=$R/driver_shots.gd --out=DIR                    # 画面で確認
+```
+
+`TileCatalog` に種別を足したら `--catalog` で catalog.json を更新し、`paint_atlas.py` に該当ペインタがあることを確認する（無ければ `PAINTERS` に追加）。生成ペインタ（`tile_painters_*.gd`）はフォールバックとして残す。
+
+## 手描き PNG への差し替え手順
 
 1. **起点ファイルを作る**：`scenes/debug/tile_preview.tscn` を実行し Enter を押す（または `TileSetProvider.save_generated()`）。
    `resources/tilesets/common.tres` に、生成アトラスと全タイルの物理・カスタムデータ・`tile_coords` meta を含む TileSet が保存される。
