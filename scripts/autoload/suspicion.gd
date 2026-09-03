@@ -25,6 +25,8 @@ func _ready() -> void:
 	Calendar.day_advanced.connect(_on_day_advanced)
 	GameState.flag_raised.connect(_on_flag_raised)
 	GameState.field_visited.connect(func(_id: String) -> void: add(FIELD_VISIT_DELTA, "visit"))
+	# はじめから（周回を含む）では前の周の値を持ち越さない
+	GameState.state_reset.connect(func() -> void: value = 0)
 	SaveManager.register_section("suspicion", to_dict, from_dict)
 	EventSystem.register_action("raise_suspicion", func(a: Dictionary, _c: Dictionary) -> void:
 		add(int(a.get("amount", 0)), str(a.get("reason", "event"))))
