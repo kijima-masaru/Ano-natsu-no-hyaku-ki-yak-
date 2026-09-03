@@ -386,6 +386,31 @@ def check_points(r, schedule, events):
             r.warn("points", "day %d: 調査 P の供給源 %d < 必要 %d（初訪問ボーナスを除く）" % (day, supply, required))
 
 
+def check_support(r):
+    """data/locale/<lang>/support.json：相談窓口の一覧（docs/CONTENT_NOTICE.md §5）"""
+    base = os.path.join(ROOT, "data", "locale")
+    if not os.path.isdir(base):
+        r.warn("support", "data/locale が無く、相談窓口は未掲載になります")
+        return
+    for lang in sorted(os.listdir(base)):
+        path = os.path.join(base, lang, "support.json")
+        if not os.path.isfile(path):
+            r.error("support", "%s に support.json がありません" % lang)
+            continue
+        with open(path, encoding="utf-8") as f:
+            d = json.load(f)
+        entries = d.get("entries")
+        if not isinstance(entries, list):
+            r.error("support", "%s: entries は配列である必要があります" % lang); continue
+        for i, e in enumerate(entries):
+            if not isinstance(e, dict) or not e.get("name") or not e.get("contact"):
+                r.error("support", "%s: entries[%d] に name と contact が必要です" % (lang, i))
+        if entries and not d.get("meta", {}).get("verified_at"):
+            r.error("support", "%s: 窓口を掲載するなら meta.verified_at に確認日を書く" % lang)
+        if not entries:
+            r.warn("support", "%s: 相談窓口が未掲載（案内画面には未掲載の一行が出る）" % lang)
+
+
 def main(argv):
     strict = "--strict" in argv
     r = Report()
@@ -398,6 +423,7 @@ def main(argv):
     check_messages(r, msgs["messages"], msgs.get("meta", {}).get("speakers", {}))
     check_schedule(r, schedule, ctx, id_set(events), strict)
     check_evidence(r, evidence, ctx)
+    check_support(r)
     targets = check_maps(r, fields, ctx["implemented"])
     check_targets(r, events, targets)
     check_anomalies(r, load("anomalies")["anomalies"], ctx, id_set(events), targets)

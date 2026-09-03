@@ -6,6 +6,8 @@ extends Node
 signal load_failed(errors: PackedStringArray)
 
 const MESSAGES_PATH: String = "res://data/messages.json"
+## 相談窓口の一覧（配信地域ごと。docs/CONTENT_NOTICE.md §5）。無くても起動は止めない
+const SUPPORT_PATH: String = "res://data/locale/ja/support.json"
 const TRUTH_FLAG: String = "truth_revealed"
 const MISSING_FORMAT: String = "［%s］"
 ## 話者定義の color 文字列 → パレットインデックス
@@ -23,10 +25,45 @@ var load_errors: PackedStringArray = PackedStringArray()
 
 var _messages: Dictionary = {}
 var _speakers: Dictionary = {}
+var _support_entries: Array[Dictionary] = []
 
 
 func _ready() -> void:
 	load_file(MESSAGES_PATH)
+	load_support(SUPPORT_PATH)
+
+
+## 相談窓口の一覧を読む。要素は {name, contact, hours?, note?}。name と contact の無い要素は捨てる
+func load_support(path: String) -> bool:
+	_support_entries.clear()
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		push_warning("MessageResolver: %s を開けません（%s）。相談窓口は未掲載として扱います" % [path, error_string(FileAccess.get_open_error())])
+		return false
+	var json: JSON = JSON.new()
+	if json.parse(file.get_as_text()) != OK or not json.data is Dictionary:
+		push_error("MessageResolver: %s: JSON 構文エラー 行 %d: %s" % [path, json.get_error_line(), json.get_error_message()])
+		return false
+	var root: Dictionary = json.data
+	var list: Variant = root.get("entries", [])
+	if not list is Array:
+		push_error("MessageResolver: %s: 'entries' は配列である必要があります" % path)
+		return false
+	for item: Variant in list as Array:
+		if not item is Dictionary:
+			push_error("MessageResolver: %s: entries の要素が辞書ではありません" % path)
+			continue
+		var d: Dictionary = item
+		if str(d.get("name", "")).is_empty() or str(d.get("contact", "")).is_empty():
+			push_error("MessageResolver: %s: name と contact の無い窓口があります" % path)
+			continue
+		_support_entries.append(d)
+	return true
+
+
+## 相談窓口の一覧（複製）。空なら未掲載
+func support_entries() -> Array[Dictionary]:
+	return _support_entries.duplicate()
 
 
 func load_file(path: String) -> bool:

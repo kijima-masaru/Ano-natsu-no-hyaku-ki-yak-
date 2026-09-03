@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "region": "ja",
+    "language": "ja",
+    "verified_at": "",
+    "note": "相談窓口の一覧。entries が空のあいだは案内画面に ui_notice_support_pending を出す。掲載する窓口は docs/CONTENT_NOTICE.md §5 の手順で確認してから記入する（名称・連絡先・受付時間は公式の一次情報で照合し、verified_at に確認日を書く）。"
+  },
+  "entries": []
+}

@@ -68,7 +68,7 @@ func _ready() -> void:
 		if notice != null:
 			if not seen_notice:
 				seen_notice = true
-				print("  notice: mode=%s title=%s" % [notice.get("mode"), (notice.get_node("Title") as Label).text])
+				print("  notice: mode=%s title=%s" % [notice.get("mode"), (notice.get_node("Column/Title") as Label).text])
 				await _shot("ending_notice")
 			notice.call("_unhandled_input", _press("interact"))
 		elif roll != null:
