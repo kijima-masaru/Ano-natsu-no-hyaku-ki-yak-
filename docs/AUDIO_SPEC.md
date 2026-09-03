@@ -275,14 +275,113 @@ ID は `se_step_<材質>_<1..5>`、忍び足は `se_step_<材質>_sneak_<1..3>`�
 
 書き出し：libsndfile 1.2.2 の Vorbis 書き出しは 60 秒超のステレオでセグメンテーション違反を起こすため、BGM だけ ffmpeg（libvorbis, q5）で書く。環境音・SE は従来通り libsndfile（生成済みファイルとエンコーダを揃える）。
 
-## 12. AudioManager への統合案（タスク8 でまとめる。実装はしない）
+## 12. AudioManager への統合案（タスク8。実装はしない）
 
-- 読み込み経路：`OGG_DIR` を `res://assets/audio/<kind>/` に（kind は audio.json の `kind`）
-- 時間帯 4 段階の環境音、蝉レイヤー（§4）、`_still` 系の切替（怪異・日付）
-- 足音の材質選択（タイル種別 → `se_step_<mat>_<n>` の乱択）
-- 新 ID の audio.json への登録（§5〜7 の表と manifest.json から機械的に生成できる）
+本 PR 群はコード（scripts/ scenes/ data/）を変更していない。**以下を実装するまで、生成した音はゲーム内で一切鳴らない。** すべて `scripts/autoload/audio_manager.gd` と周辺の小さな変更で、順に独立して入れられる。
 
-## 13. 進捗
+### 12.1 読み込み経路（必須。これだけで既存 31 ID が鳴る）
+
+```gdscript
+# audio_manager.gd
+const OGG_DIR: String = "res://assets/audio"
+
+func _get_stream(id: String) -> AudioStream:
+    ...
+    var kind: String = str((_tracks[id] as Dictionary).get("kind", "se"))
+    var ogg_path: String = "%s/%s/%s.ogg" % [OGG_DIR, kind, id]
+```
+
+既存 ID（bgm_title / bgm_tension / amb_* 21 / se_footstep / se_footstep_sneak / se_interact / se_menu_* / se_door / se_heartbeat）は同名で用意してあるので、この変更だけで SoundSynth から差し替わる。`resources/audio/` は使わない（`docs/ASSETS_NEEDED.md` §6 も更新済み）。
+
+### 12.2 audio.json への登録（必須。新 ID 184 件）
+
+`python3 tools/audio/propose_audio_json.py` が `build/audio_json_proposal.json` を書く。既存 31 件はそのまま（synth を残す）、新 184 件は `{"id", "kind", "loop", "base_volume_db": 0.0, "note"}`、蝉レイヤーは `"seasonal": "cicada"`。`data/audio.json` の `tracks` をこの配列で置き換える。`data_checks_refs` が参照整合を見るので、置き換え後に `driver_data_checks` を通す。
+
+### 12.3 時間帯 4 段階（環境音）
+
+```gdscript
+func ambience_for(field_id: String, time_of_day: String) -> String:
+    ...
+    var suffix: String = {Calendar.TIME_MORNING: "_morning", Calendar.TIME_EVENING: "_evening", Calendar.TIME_NIGHT: "_night"}.get(time_of_day, "")
+    if not suffix.is_empty() and _tracks.has(f.ambience_track + suffix):
+        return f.ambience_track + suffix
+    return f.ambience_track
+```
+
+現行は夕方を夜に寄せている。§5 の表の通り 11 フィールド × 4 時間帯を用意したので、夕方は `_evening` に。無ければ無印にフォールバック（F16 は無印のみ）。
+
+### 12.4 蝉レイヤー（§4）
+
+環境音本体から蝉を分離してある。AudioManager に 2 本目の環境音プレイヤー（`_cicada`）を持ち、`_on_field_entered` / `_refresh_field_ambience` で `cicada_layers_for(day, tod)`（§4 の表）の ID を `_track_db` で鳴らす。`LAST_CICADA_DAY` の減衰はそのまま `seasonal: "cicada"` に効く。夜は蝉を鳴らさない（`amb_cicada_evening` は夕方のみ）。
+
+### 12.5 `_still` 系の切替（怪異）
+
+- `an_f01_silence`（8/15〜、夜、F01）：actions の先頭に `{"type": "set_ambience", "id": "amb_road_still"}` を追加（既存の `stop_bgm` の前）。次のフィールドに入るまで有効なので、戻す処理は不要
+- `an_f14_frogs`（8/15〜、夕夜、F14）：同様に `amb_paddy_still`。8/30 以降は `ambience_for` で F14 の夜を `amb_paddy_still` に固定（`Calendar.day >= 30`）
+
+### 12.6 足音の材質選択
+
+```gdscript
+# audio_manager.gd
+func _on_player_noise(radius: float) -> void:
+    var sneak: bool = radius <= Player.SNEAK_NOISE_RADIUS
+    var mat: String = _material_under(SceneRouter.current_field)   # タイル種別 → asphalt/soil/grass/gravel/boards/tatami/stone/puddle
+    var n: int = randi_range(1, 3 if sneak else 5)
+    play_se("se_step_%s%s_%d" % [mat, "_sneak" if sneak else "", n])
+```
+
+`_material_under` はプレイヤー直下のタイルの種別（`TileGenerator` の種別名）を §7.1 の 8 材質に写像する。写像表は fields の地図種別に依存するので、実装時に `docs/TILESET_PIPELINE.md` の種別一覧から決める（未定義は asphalt）。屋内の階（`FieldFloors`）は F11 の 1F・2F を boards、自宅を tatami。互換の `se_footstep` / `se_footstep_sneak` は写像が無い間の既定として残す。
+
+同じ関数で追跡者（`se_stalker_step_<gravel|boards>_<1..2>`）と澪（`se_heroine_step_<1..3>`）も鳴らす。追跡者は `stalker.gd` の移動周期、澪は `heroine.gd` の同行移動に `noise_emitted` 相当の signal を足すのが最小。
+
+### 12.7 UI・プレイヤーの新 SE の呼び出し箇所
+
+| ID | 呼び出し |
+|---|---|
+| `se_menu_error` | `MenuList` の無効項目で決定したとき |
+| `se_text_tick` / `se_natsu_text_tick` | `DialogueWindow._process` で `visible_characters` が 2〜3 進むごとに 1 回。話者 natsu なら後者 |
+| `se_save` / `se_load` | `SlotMenu` の保存・読込の完了時 |
+| `se_evidence_add` | `GameState.add_evidence` |
+| `se_notebook_open` / `_close` / `se_notebook_page` | `Notebook` の開閉・ページ切替 |
+| `se_sleep` → `se_day_advance` | `advance_day` の暗転前と日付表示時 |
+| `se_flashlight_on` / `_off` | `Lighting.set_flashlight` |
+| `se_item_get` | `give_item` アクション |
+| `se_stairs_up` / `_down` | `FieldBase.switch_floor`（1f→2f は up） |
+| `se_door_sliding` / `se_door_metal` / `se_shutter` | events の `play_sound`（現在 `se_door` 一律のところを場所で分ける。任意） |
+| `se_interact` | `Interactable` の調べ開始（現在未使用） |
+
+### 12.8 怪異・追跡者・ナツ
+
+- 怪異 27 件：`data/anomalies.json` の各 actions に `{"type": "play_sound", "id": "se_<anomaly_id>"}` を、最初の `message` の直前に挿入する（§9 の表）。暫定指定の差し替え：`an_f03_bus_nobody` の `se_door` → `se_an_f03_bus_nobody`、`an_f15_footsteps` の `se_footstep` → `se_an_f15_footsteps`、`an_f11_chime` の `se_menu_ok` → `se_an_f11_chime`
+- 追跡者：`stalker.gd _set_state` で SUSPICIOUS → `se_stalker_far`、CHASE → `se_stalker_notice` + `set_tension(true)`、SEARCH→RETREAT → `se_stalker_lost`。`se_stalker_chase_loop` は `set_tension` 内で `se_heartbeat` と同じ扱いの 2 本目のループとして鳴らす（`bgm_tension` を鳴らさない F 以外で追跡が起きた場合の代替）
+- ナツ：`AttachedEntity.presence_pulse` を AudioManager で購読し、strength < 0.45 → `se_natsu_pulse_weak`、< 0.75 → `_mid`、以上 → `_strong`。`spoke` の直前（`speak` の `show_entry` 前）に `se_natsu_speak`。`luck_triggered` → `se_natsu_luck`。**ナツの音は残響バスに送らない**（§10）
+
+### 12.9 BGM
+
+| 場面 | 呼び出し |
+|---|---|
+| 8/30 封印の配置パズル | 開始で `play_bgm("bgm_seal")`、封石を戻す `se_seal_stone` と同時に `stop_bgm()` と `set_ambience("")` |
+| 8/30 対決会話〜提示画面 | `truth_revealed` を立てるイベントの直前で `play_bgm("bgm_truth")`、提示画面の終わりで `stop_bgm()` |
+| 8/31 F15 | ED 判定に応じて `bgm_ending_a` / `bgm_ending` / `bgm_ending_c` |
+| スタッフロール | `StaffRoll._ready` で `play_bgm("bgm_credits")` |
+
+すべて `data/events.json` / `schedule.json` の actions に `play_bgm` / `stop_bgm` を足すだけで済む。
+
+### 12.10 音量バスと残響
+
+現在は BGM / Ambience / SE の 3 バス。提案：SE バスの下に `SE_Dry`（ナツ専用、リバーブ無し）を足すか、逆にフィールドの残響をゲーム側で掛けないなら現状のままでよい（素材側で必要な残響は焼き込んである）。**ゲーム側で追加の残響は掛けない** ことを推奨する。
+
+## 13. 全ファイル一覧と検証記録
+
+`assets/audio/manifest.json`（215 件。ID、種別、パス、ループ、秒、LUFS と目標、ピーク、サイズ、シード、モジュール、狙い、使いどころ）が正本。検証結果は `docs/AUDIO_VERIFY.md`（`python3 tools/audio/report.py` で再生成）。
+
+| 種別 | 件数 | 合計 |
+|---|---|---|
+| 環境音 | 72 | 約 29 MB |
+| SE | 135 | 約 1.1 MB |
+| BGM | 8 | 約 3.8 MB |
+
+## 14. 進捗
 
 | タスク | 状態 |
 |---|---|
@@ -293,4 +392,7 @@ ID は `se_step_<材質>_<1..5>`、忍び足は `se_step_<材質>_sneak_<1..3>`�
 | 4 UI の SE | PR #64 |
 | 5 怪異・追跡者の SE | PR #65 |
 | 6 ナツの音 | PR #66 |
-| 7 BGM | 作業中 |
+| 7 BGM | PR #67 |
+| 8 統合仕様 | PR #68 |
+
+PR は 0 → 8 の順に積んである（各 PR の base は前のブランチ）。main へ入れる順もこの順。
