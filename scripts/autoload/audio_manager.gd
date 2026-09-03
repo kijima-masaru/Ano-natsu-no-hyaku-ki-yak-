@@ -66,12 +66,7 @@ func _exit_tree() -> void:
 # ── 初期化 ──
 
 func _setup_buses() -> void:
-	for name: String in [BUS_BGM, BUS_SE, BUS_AMBIENCE]:
-		if AudioServer.get_bus_index(name) < 0:
-			var idx: int = AudioServer.bus_count
-			AudioServer.add_bus(idx)
-			AudioServer.set_bus_name(idx, name)
-			AudioServer.set_bus_send(idx, "Master")
+	AudioMixer.ensure_buses(PackedStringArray([BUS_BGM, BUS_SE, BUS_AMBIENCE]))
 
 
 func _setup_players() -> void:
@@ -84,23 +79,16 @@ func _setup_players() -> void:
 
 
 func _make_player(bus: String, name: String) -> AudioStreamPlayer:
-	var p: AudioStreamPlayer = AudioStreamPlayer.new()
-	p.name = name
-	p.bus = bus
-	add_child(p)
-	return p
+	return AudioMixer.make_player(self, bus, name)
 
 
 func _load_tracks(path: String) -> void:
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		push_error("AudioManager: %s を開けません" % path)
+	var errors: PackedStringArray = PackedStringArray()
+	var root: Dictionary = JsonFile.read_dict(path, errors)
+	if root.is_empty():
+		push_error("AudioManager: " + (errors[0] if not errors.is_empty() else "%s に tracks がありません" % path))
 		return
-	var json: JSON = JSON.new()
-	if json.parse(file.get_as_text()) != OK or not json.data is Dictionary:
-		push_error("AudioManager: %s の解析に失敗（行 %d: %s）" % [path, json.get_error_line(), json.get_error_message()])
-		return
-	for item: Variant in (json.data as Dictionary).get("tracks", []) as Array:
+	for item: Variant in root.get("tracks", []) as Array:
 		if item is Dictionary and (item as Dictionary).has("id"):
 			_tracks[str((item as Dictionary)["id"])] = item
 	for f: FieldData in FieldRegistry.get_all_fields():
@@ -281,26 +269,12 @@ func _apply_volumes() -> void:
 
 
 func _set_bus_volume(bus: String, linear: float) -> void:
-	var idx: int = AudioServer.get_bus_index(bus)
-	if idx < 0:
-		return
-	AudioServer.set_bus_volume_db(idx, SILENT_DB if linear <= 0.0 else linear_to_db(clampf(linear, 0.0, 1.0)))
+	AudioMixer.set_bus_volume(bus, linear, SILENT_DB)
 
 
 func _crossfade(from_player: AudioStreamPlayer, to_player: AudioStreamPlayer, stream: AudioStream, target_db: float, fade: float) -> void:
-	to_player.stream = stream
-	to_player.volume_db = SILENT_DB
-	to_player.play()
-	var tween: Tween = create_tween().set_parallel(true)
-	tween.tween_property(to_player, "volume_db", target_db, fade)
-	if from_player.playing:
-		tween.tween_property(from_player, "volume_db", SILENT_DB, fade)
-		tween.chain().tween_callback(from_player.stop)
+	AudioMixer.crossfade(self, from_player, to_player, stream, target_db, fade, SILENT_DB)
 
 
 func _fade_out(player: AudioStreamPlayer, fade: float) -> void:
-	if not player.playing:
-		return
-	var tween: Tween = create_tween()
-	tween.tween_property(player, "volume_db", SILENT_DB, fade)
-	tween.tween_callback(player.stop)
+	AudioMixer.fade_out(self, player, fade, SILENT_DB)

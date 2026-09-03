@@ -294,15 +294,8 @@ func _update_sprite() -> void:
 func _draw() -> void:
 	if not bool(SaveManager.get_setting("debug_overlay")):
 		return
-	var hearing: float = AudioManager.last_noise_radius * hearing_multiplier()
-	draw_arc(Vector2.ZERO, maxf(hearing, 8.0), 0.0, TAU, 32, Palette.with_alpha(Palette.FLUORESCENT, 0.5), 1.0)
-	var forward: float = Vector2(facing).angle()
-	var pts: PackedVector2Array = PackedVector2Array([Vector2.ZERO])
-	for i: int in 9:
-		var a: float = forward - vision_half_angle() + vision_half_angle() * 2.0 * i / 8.0
-		pts.append(Vector2.from_angle(a) * vision_range())
-	draw_colored_polygon(pts, Palette.with_alpha(Palette.VENDING_RED if state == State.CHASE else Palette.STREETLAMP_GLOW, 0.2))
-	draw_string(ThemeDB.fallback_font, Vector2(-16, -26), STATE_NAMES[state], HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Palette.get_color(Palette.FLUORESCENT))
+	StalkerView.draw_debug(self, STATE_NAMES[state], state == State.CHASE, facing,
+		AudioManager.last_noise_radius * hearing_multiplier(), vision_range(), vision_half_angle())
 
 
 func _process(_delta: float) -> void:

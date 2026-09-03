@@ -202,43 +202,24 @@ func get_stalker() -> Node2D:
 
 
 ## 調べ物を Triggers 配下に置き、interaction_started に中継する
+## 調べ物・NPC の出し入れは FieldNpcs（各フィールドはこちらのメソッドを使う）
 func add_interactable(node: Interactable) -> void:
-	triggers.add_child(node)
-	node.interacted.connect(func(_by: Node, target: Interactable) -> void: interaction_started.emit(target))
+	FieldNpcs.add_interactable(self, node)
 
 
 ## 日付やフラグで後から現れる調べ物を置く（見た目は set_tile で別に置く）。既にあればそれを返す
 func add_point_of_interest(id: String, label: String, tile: Vector2i, kind: String = "object") -> Interactable:
-	var existing: Interactable = get_interactable(id)
-	if existing != null:
-		return existing
-	var node: Interactable = Interactable.create(id, label, "", tile, Vector2i.ONE, kind)
-	add_interactable(node)
-	return node
+	return FieldNpcs.add_point_of_interest(self, id, label, tile, kind)
 
 
 ## interaction_id で調べ物を探す。無ければ null
 func get_interactable(id: String) -> Interactable:
-	for node: Node in triggers.get_children():
-		var it: Interactable = node as Interactable
-		if it != null and it.interaction_id == id:
-			return it
-	return null
+	return FieldNpcs.get_interactable(self, id)
 
 
 ## 時間帯・日付で出し入れする NPC（見た目付きの調べ物）。present に合わせて生成／削除し、現在のノードを返す
 func set_npc_present(id: String, present: bool, tile: Vector2i, sprite_kind: String, facing: Vector2i = Vector2i.DOWN) -> Interactable:
-	var existing: Interactable = get_interactable(id)
-	if present and existing == null:
-		var npc: Interactable = Interactable.create(id, "", "", tile, Vector2i.ONE, "npc")
-		npc.set_actor_sprite(sprite_kind, facing)
-		add_interactable(npc)
-		return npc
-	if not present and existing != null:
-		triggers.remove_child(existing)
-		existing.queue_free()
-		return null
-	return existing
+	return FieldNpcs.set_npc_present(self, id, present, tile, sprite_kind, facing)
 
 
 # ── 内部 ──

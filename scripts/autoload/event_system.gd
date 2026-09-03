@@ -88,45 +88,18 @@ func get_item_ids() -> PackedStringArray:
 # ── 読み込み ──
 
 func load_events(path: String) -> bool:
-	_events.clear()
-	_by_trigger.clear()
-	load_errors.clear()
 	is_loaded = false
-	var root: Dictionary = _read_json(path, load_errors)
-	if root.is_empty():
-		_report_load()
-		return false
-	var list: Variant = root.get("events", null)
-	if not list is Array:
-		load_errors.append("%s: 'events' 配列がありません" % path)
-		_report_load()
-		return false
-	for item: Variant in list as Array:
-		if not item is Dictionary:
-			load_errors.append("events の要素が辞書ではありません")
-			continue
-		var e: EventData = EventData.from_dict(item, load_errors)
-		if e.id.is_empty():
-			continue
-		if _events.has(e.id):
-			load_errors.append("イベント ID '%s' が重複しています" % e.id)
-			continue
-		_events[e.id] = e
-		if not _by_trigger.has(e.trigger):
-			_by_trigger[e.trigger] = []
-		(_by_trigger[e.trigger] as Array).append(e)
+	var result: Dictionary = EventLoader.load_file(path)
+	_events = result[EventLoader.KEY_EVENTS]
+	_by_trigger = result[EventLoader.KEY_BY_TRIGGER]
+	load_errors = result[EventLoader.KEY_ERRORS]
 	_report_load()
 	is_loaded = not _events.is_empty()
 	return is_loaded
 
 
 func _load_items(path: String) -> void:
-	var root: Dictionary = _read_json(path, load_errors)
-	var list: Variant = root.get("items", [])
-	if list is Array:
-		for item: Variant in list as Array:
-			if item is Dictionary:
-				_item_ids.append(str((item as Dictionary).get("id", "")))
+	_item_ids = EventLoader.load_item_ids(path, load_errors)
 
 
 ## 他のシステムが立てるフラグを登録する（AnomalySystem が _ready で呼ぶ。validate は遅延実行なので間に合う）
@@ -298,18 +271,3 @@ func show_choice(labels: PackedStringArray) -> int:
 
 func emit_action_failed(event_id: String, action: Dictionary, reason: String) -> void:
 	action_failed.emit(event_id, action, reason)
-
-
-func _read_json(path: String, errors: PackedStringArray) -> Dictionary:
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		errors.append("%s を開けません（%s）" % [path, error_string(FileAccess.get_open_error())])
-		return {}
-	var json: JSON = JSON.new()
-	if json.parse(file.get_as_text()) != OK:
-		errors.append("%s: JSON 構文エラー 行 %d: %s" % [path, json.get_error_line(), json.get_error_message()])
-		return {}
-	if not json.data is Dictionary:
-		errors.append("%s: トップレベルは辞書である必要があります" % path)
-		return {}
-	return json.data

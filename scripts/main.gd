@@ -23,7 +23,7 @@ func _ready() -> void:
 	ui.add_child(_message_window)
 	_message_window.closed.connect(_on_message_closed)
 	EventSystem.register_message_window(_message_window)
-	GameState.field_visited.connect(func(_id: String) -> void: Calendar.add_investigation_points(1))
+	GameState.field_visited.connect(func(_id: String) -> void: Calendar.add_investigation_points(GameConstants.FIRST_VISIT_POINTS))
 	ui.add_child(DATE_HUD_SCENE.instantiate())
 	add_child(DEBUG_OVERLAY_SCENE.instantiate())
 	SceneRouter.register_world(world)

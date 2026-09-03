@@ -11,21 +11,9 @@ const KEY_ERRORS: String = "errors"
 static func load_file(path: String) -> Dictionary:
 	var result: Dictionary = {KEY_DAYS: {}, KEY_META: {}, KEY_ERRORS: PackedStringArray()}
 	var errors: PackedStringArray = result[KEY_ERRORS]
-	if not FileAccess.file_exists(path):
-		errors.append("%s が見つかりません" % path)
+	var root: Dictionary = JsonFile.read_dict(path, errors, true)
+	if root.is_empty():
 		return result
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		errors.append("%s を開けません（%s）" % [path, error_string(FileAccess.get_open_error())])
-		return result
-	var json: JSON = JSON.new()
-	if json.parse(file.get_as_text()) != OK:
-		errors.append("%s: JSON 構文エラー 行 %d: %s" % [path, json.get_error_line(), json.get_error_message()])
-		return result
-	if not json.data is Dictionary:
-		errors.append("%s: トップレベルは辞書である必要があります" % path)
-		return result
-	var root: Dictionary = json.data
 	if root.get(KEY_META, {}) is Dictionary:
 		result[KEY_META] = root.get(KEY_META, {})
 	var entries: Variant = root.get(KEY_DAYS, null)

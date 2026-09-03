@@ -43,13 +43,13 @@ func load_file(path: String) -> bool:
 	_anomalies.clear()
 	_by_trigger.clear()
 	load_errors.clear()
-	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		return _fail("%s を開けません" % path)
-	var data: Variant = JSON.parse_string(file.get_as_text())
-	if not data is Dictionary or not (data as Dictionary).get("anomalies", null) is Array:
+	var read_errors: PackedStringArray = PackedStringArray()
+	var root: Dictionary = JsonFile.read_dict(path, read_errors)
+	if root.is_empty():
+		return _fail(read_errors[0])
+	if not root.get("anomalies", null) is Array:
 		return _fail("%s: 'anomalies' 配列がありません" % path)
-	for item: Variant in (data as Dictionary)["anomalies"]:
+	for item: Variant in root["anomalies"]:
 		if not item is Dictionary:
 			continue
 		var a: AnomalyData = AnomalyData.from_dict(item, load_errors)

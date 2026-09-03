@@ -28,5 +28,8 @@ static func tile_to_world(tile: Vector2i) -> Vector2:
 static func world_to_tile(world: Vector2) -> Vector2i:
 	return Vector2i(floori(world.x / TILE_SIZE), floori(world.y / TILE_SIZE))
 
+## フィールドの初訪問で得る調査ポイント（Main が field_visited で加算する）
+const FIRST_VISIT_POINTS: int = 1
+
 ## 視点切替：このフラグが立っている間、プレイヤーの絵はヒロイン（8/31 は澪を操作する）
 const POV_HEROINE_FLAG: String = "pov_mio"
