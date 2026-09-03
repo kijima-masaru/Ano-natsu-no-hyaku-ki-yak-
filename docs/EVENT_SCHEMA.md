@@ -25,6 +25,7 @@
 | `conditions` | [Condition] | | すべて満たすと発生（空なら常時） |
 | `actions` | [Action] | ○ | 順に実行。メッセージは閉じるまで待つ |
 | `once` | bool | | 既定 true。一度実行すると `ev_done_<id>` が立ち、以後発生しない |
+| `daily` | bool | | 既定 false。`once: false` と組で使い、実行すると `ev_day_<id>_<day>` が立って **その日のうちは** 再発生しない。自由日の調査 P を毎日 1 回得られる観察点（支所・交番・図書室など）に使う。`once` と同時指定はエラー |
 | `priority` | int | | `on_interact` で複数候補があるとき最大のものだけ実行。他のトリガーは全件を優先度順に実行 |
 
 ## 条件（Condition）
@@ -96,7 +97,7 @@
 - `items.json` に無いアイテム
 - 存在しないフィールド
 - 存在しない `run_event` 先
-- **どこでも立てられないフラグ**（`set_flag`・schedule のフラグ操作・鍵・コード既知フラグ・動的接頭辞 `visited_ ev_ hid_ seen_ day_ luck_` 以外）
+- **どこでも立てられないフラグ**（`set_flag`・schedule のフラグ操作・鍵・コード既知フラグ・動的接頭辞 `visited_ ev_ ev_done_ ev_day_ hid_ hid_fail_ seen_ day_ luck_ an_done_` 以外）
 - `on_day_start` に `day_range` が無い
 
 `MessageResolver` は別途、`truth_id` の片側欠落と未定義話者を検証する。

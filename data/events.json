@@ -287,10 +287,15 @@
         {
           "type": "message",
           "id": "msg_f06_police"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f06_bulletin",
@@ -525,10 +530,15 @@
         {
           "type": "message",
           "id": "msg_f01_bulletin"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f01_trash",
@@ -707,10 +717,15 @@
         {
           "type": "message",
           "id": "msg_f05_storefront"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f05_shop",
@@ -1123,10 +1138,15 @@
         {
           "type": "message",
           "id": "msg_f02_door_locked"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f02_window",
@@ -1608,10 +1628,15 @@
         {
           "type": "message",
           "id": "msg_f12_post_later"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f12_office_closed",
@@ -1677,10 +1702,15 @@
         {
           "type": "message",
           "id": "msg_f12_office_repeat"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f12_office_board",
@@ -1800,6 +1830,29 @@
       "priority": 5
     },
     {
+      "id": "ev_f06_library_book",
+      "field": "F06",
+      "trigger": "on_interact",
+      "target": "library",
+      "day_range": [
+        9,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "conceal_evidence",
+          "evidence": "library_book"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        }
+      ],
+      "once": true,
+      "priority": 5
+    },
+    {
       "id": "ev_f06_library_again",
       "field": "F06",
       "trigger": "on_interact",
@@ -1809,10 +1862,15 @@
         {
           "type": "message",
           "id": "msg_f06_library_again"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f05_calendar_after",
@@ -2040,10 +2098,15 @@
         {
           "type": "message",
           "id": "msg_f03_vending"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f03_graffiti",
@@ -2306,10 +2369,15 @@
         {
           "type": "message",
           "id": "msg_f13_nameplate_a"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f13_nameplate_b",
@@ -2662,10 +2730,15 @@
         {
           "type": "message",
           "id": "msg_f10_backnet"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f10_panel",
@@ -2957,10 +3030,15 @@
         {
           "type": "message",
           "id": "msg_f07_basin"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f07_ginkgo_early",
@@ -3253,10 +3331,15 @@
         {
           "type": "message",
           "id": "msg_f08_haiden"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f08_basin",
@@ -3549,10 +3632,15 @@
         {
           "type": "message",
           "id": "msg_f09_keep_again"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f09_moat_item",
@@ -3791,10 +3879,15 @@
         {
           "type": "message",
           "id": "msg_f14_sluice"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f14_tower_bell",
@@ -4231,10 +4324,15 @@
         {
           "type": "message",
           "id": "msg_f15_bench"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f15_barricade_1",
@@ -4565,10 +4663,15 @@
         {
           "type": "message",
           "id": "msg_f04_cloth"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f04_footprints",
@@ -4852,10 +4955,15 @@
         {
           "type": "message",
           "id": "msg_f11_platform"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f11_gym",
@@ -5633,10 +5741,15 @@
         {
           "type": "message",
           "id": "msg_f16_spring"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
         }
       ],
       "once": false,
-      "priority": 0
+      "priority": 0,
+      "daily": true
     },
     {
       "id": "ev_f16_rockfall",

@@ -18,12 +18,18 @@ var conditions: Array[Dictionary] = []
 var actions: Array[Dictionary] = []
 ## true なら一度だけ（ev_done_<id> フラグで管理）
 var once: bool = true
+## true なら 1 日 1 回（ev_day_<id>_<day> フラグで管理）。自由日の調査 P を毎日得られる観察点に使う
+var daily: bool = false
 ## 同じトリガーで複数候補があるとき、大きい方を優先
 var priority: int = 0
 
 
 func done_flag() -> String:
 	return "ev_done_%s" % id
+
+
+func daily_flag(day: int) -> String:
+	return "ev_day_%s_%d" % [id, day]
 
 
 func matches_day(day: int) -> bool:
@@ -66,6 +72,9 @@ static func from_dict(d: Dictionary, errors: PackedStringArray) -> EventData:
 	if e.actions.is_empty():
 		errors.append("%s: actions が空です" % label)
 	e.once = bool(d.get("once", true))
+	e.daily = bool(d.get("daily", false))
+	if e.once and e.daily:
+		errors.append("%s: once と daily は同時に指定できません" % label)
 	e.priority = int(d.get("priority", 0))
 	return e
 

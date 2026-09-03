@@ -233,7 +233,7 @@ static func check_points(report: DataReport, schedule: Array, events: Array) -> 
 			var r: Array = e.get("day_range", [])
 			if r.size() == 2 and (day < int(r[0]) or day > int(r[1])):
 				continue
-			if not bool(e.get("once", false)):
+			if not bool(e.get("once", false)) and not bool(e.get("daily", false)):
 				repeatable.append(str(e.get("id", "")))
 			supply += 1
 		for rid: String in repeatable:
