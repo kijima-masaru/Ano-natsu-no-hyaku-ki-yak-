@@ -1,0 +1,398 @@
+# 音響仕様（AUDIO_SPEC）
+
+本作の全音声素材は `tools/audio/` の Python だけでゼロから合成する（既存音源・素材集は使わない）。本書は素材の一覧、音量設計、蝉の分離仕様、AudioManager への統合案をまとめる。素材は `assets/audio/<kind>/<id>.ogg`、生成物の記録は `assets/audio/manifest.json`。
+
+## 1. 方針
+
+- 恐怖は静けさで作る。あるべき音が無いことで不安を生じさせる（国道の車が止む、蛙が止む、谷では風も水も無い）
+- 生活音の残留。誰もいないのに、自販機・給水塔・蛍光灯・ポストの蓋だけが働いている
+- 8 月が終わっていく。蝉は日ごとに減る。減衰は音量ではなく「群れの密度」で作る（§4）
+- 主人公は加害者。安心の音（ナツ）は終盤で最も不吉に響く（§7、タスク6 で確定）
+- ジャンプスケア・悲鳴・苦痛・自死を想起させる物音は作らない。音楽は最小限。無音を恐れない
+
+## 2. 規格
+
+| 項目 | 値 |
+|---|---|
+| 形式 | OGG Vorbis 44.1 kHz。BGM・環境音はステレオ、SE はモノ |
+| ラウドネス（系統の基準） | 環境音 -28 LUFS、BGM -20 LUFS、SE -16 LUFS（BS.1770、ゲート付き。`tools/audio/master.py`） |
+| ピーク | -3 dBFS 以下 |
+| ループ | 末尾 0.5 秒を先頭へ等パワーでクロスフェード。粒状合成は境界をまたぐ粒を折り返す。`verify.py` が 3 周連結の継ぎ目を検査 |
+| サイズ | BGM 2 MB、環境音 1 MB、SE 100 KB 以下 |
+| 再生成 | `python3 tools/audio/build.py`（ID ごとに固定シード。決定論的） |
+
+## 3. 音量設計（系統の基準からの意図的なずれ）
+
+環境音はすべて -28 LUFS に揃えるのではなく、**場所の落差を素材側に持たせる**。国道（F01）と川（F15）を 0 dB の基準にし、静かな場所ほど負のオフセットを付ける。`manifest.json` の `target_lufs` が各素材の目標で、`verify.py` はそれに対して検査する。
+
+| フィールド | 昼のずれ | 夜の追加 | 意図 |
+|---|---|---|---|
+| F01 国道 | 0 | -3 | 町で唯一うるさい。後の静寂が効く |
+| F15 蒼籠川 | 0 | 0 | 川が全てを覆う |
+| F03 高架下 | -2 | -2 | 上から降る走行音 |
+| F04 谷戸・F10 河川敷 | -3 | 0 / -1 | 風と草。開けている |
+| F09 城址・F12 団地・F14 朝和 | -4 | -1 / -2 / 0 | 遠い低音、機械音、水路 |
+| F02 住宅地 | -5 | -2 | 壁に吸われる |
+| F05 旧街道 | -9 | -2 | ほぼ無音。自分の足音だけ |
+| F13 ニュータウン | -10 | -2 | 均質な無音 |
+| 静まり返り（road_still / paddy_still） | -8 | ― | 「無くなった」ことが分かる残り |
+
+AudioManager 側の `base_volume_db`（audio.json）は 0 のままでよい。素材の差し替え後、実機で全体の Ambience バスを ±2 dB で合わせる。
+
+## 4. 蝉トラックの分離仕様
+
+フィールドの環境音には **蝉を入れていない**。蝉は独立した 4 本の 30 秒ループで、AudioManager が「日付・時間帯」で選んで重ねる。減衰は音量ではなく密度（rasp → rasp_thin）で作る。
+
+| ID | 内容 | 重ねる時間帯 | 日付 |
+|---|---|---|---|
+| `amb_cicada_rasp` | アブラゼミ系の密な群れ | morning / noon / evening | 8/1〜8/15 |
+| `amb_cicada_rasp_thin` | 同じ群れの疎な版 | morning / noon / evening | 8/16〜8/31 |
+| `amb_cicada_tonal` | ミンミンゼミ系の数匹（薄く） | morning / noon | 8/1〜8/19 |
+| `amb_cicada_evening` | ヒグラシ | evening | 8/1〜8/31（最後まで残る唯一の蝉） |
+
+屋内（F06 F07 F11 F16 の内部）と隧道では重ねない。F16 は谷全体で重ねない（何も鳴かない場所）。
+
+**想定 API（AudioManager。実装はステップ5 完了後に判断）**
+```
+func cicada_layers_for(day: int, tod: String) -> Array[String]   # 上表を返す。night は []
+func set_cicada_gain(day: int) -> void                            # 既存の cicada_gain(day) を「thin への切替 ＋ 微減」に置き換える
+```
+第 3 のプレイヤー（Cicada）を Ambience バスに足し、フィールド遷移時に `ambience_for()` と同時に `cicada_layers_for()` を評価する。既存の `seasonal: "cicada"` による本体の減衰は廃止（本体に蝉が無いため）。
+
+## 5. 環境音の対応表（屋外、タスク1）
+
+ID は昼＝既存の `amb_<name>`、他は `_morning` / `_evening` / `_night`。各 39.5 秒ループ、ステレオ。
+
+| フィールド | ID（昼） | 主な部品 | 夜の変化 |
+|---|---|---|---|
+| F01 | `amb_road` | 車の床・通過（ドップラー）・自販機コンプレッサ（11 秒回って 7 秒止まる）・換気扇 | 車 2 台、蛍光灯の唸り、虫 |
+| F02 | `amb_residential` | 遠い国道（壁に吸われた低域）、風、葉 | 風だけに近づく |
+| F03 | `amb_underpass` | 上を走る車（床版越しの LPF ＋ 隧道の残響）、防音壁の共鳴 63 Hz、遠い低音 | 車 2 台、バス停の蛍光灯 |
+| F04 | `amb_orchard` | 風（明るめ）、葉擦れ、トタンの共鳴、草 | 虫が最も多い |
+| F05 | `amb_shopping_street` | 空気（room tone）、狭い通りの風（帯域を絞る）、シャッターの軋み | 虫 1 匹 |
+| F09 | `amb_castle` | 防音壁越しの高速（最低域）、土塁の風、草 | 虫 |
+| F10 | `amb_ground` | 遠い川、風、草擦れ、金網の共鳴 | 虫 |
+| F12 | `amb_estate` | 反射した国道（残響）、給水塔 50 Hz、ポストの蓋の二連打 | 階段室の灯り、虫 |
+| F13 | `amb_newtown` | 空気、弱い風、街灯のハム | ハムが前に出る |
+| F14 | `amb_paddy` | 水路の細い流れと粒、風、草 | 蛙の合唱 |
+| F15 | `amb_river` | 川（4 帯域のノイズをそれぞれ揺らす）、風 | 橋灯の唸り（微）、虫 |
+| 特殊 | `amb_road_still` | 車が一台も来ない国道（自販機と灯りだけ） | 8/15 以降の夜、怪異 an_f01_silence |
+| 特殊 | `amb_paddy_still` | 蛙が止んだ夜の水路 | 怪異 an_f14_frogs の後、8/30 以降 |
+
+時間帯の切替は AudioManager の `ambience_for(field, tod)` を 4 段階（`_morning` / 無印 / `_evening` / `_night`。無ければ無印にフォールバック）に拡張する（§12）。
+
+## 6. 屋内・特殊空間（タスク2）
+
+残響で部屋を描き分ける（`synth.make_ir`：`room` 短い初期反射、`hall` 高い天井、`tunnel` 長い等間隔の反射、`outdoor` ほぼ無し）。屋内では蝉を重ねない。
+
+| ID | 場所 | 残響 | 部品 | ずれ |
+|---|---|---|---|---|
+| `amb_town`（×4） | F06 広場 | なし | 掲示板の紙、遠い国道、風。夜は交番の灯りの唸り | -3（夜 -5） |
+| `amb_town_library` | F06 図書室 | room 0.7 s、減衰 5 kHz（コンクリート、低い天井） | 空調の低い風、通気口、蛍光灯、外の国道は 150 Hz 以下だけ | -6 |
+| `amb_temple`（×4） | F07 門前・墓域 | なし | 弱い風、葉、木の軋み（55 Hz 台）、空気 | -6（夜 -8） |
+| `amb_temple_hall` | F07 堂内 | hall 2.2 s、減衰 2.2 kHz（木造の高い天井） | 板壁越しの風、床と柱の軋み、空気 | -8 |
+| `amb_shrine`（×4） | F08 天神社 | なし | 風、枯れた梅の枝が触れ合う粒（1.4／2.6 kHz の共鳴）、空気。町の音は入れない | -7（夜 -9） |
+| `amb_school`（×4） | F11 校庭 | なし | 弱い風、校旗の綱が支柱に当たる金属音、空気。夜は非常灯 | -8（夜 -10） |
+| `amb_school_1f` | F11 旧校舎 1 階 | hall 0.9 s、減衰 3.2 kHz（板張りの廊下） | 床板の軋み（70 Hz 台）、不規則に揺れる蛍光灯、遠いチャイムの残骸（4 音の下降、ループ中 1 回、-24 dB）、すき間風 | -7 |
+| `amb_valley` | F16 谷全体 | なし | 水も風も無い。31 Hz の圧の揺れと 140 Hz 以下の空気だけ（既存 ID。無音から差し替え） | -14 |
+| `amb_valley_inner` | F16 裂け目の口 | なし | 55 Hz と不協和な部分音（1.50／2.03／2.77／4.19 倍）が干渉し、8 秒ごとに沈む。微かな高域の擦れ | -4 |
+| `amb_underpass_tunnel` | F03 隧道内 | tunnel 2.6 s、減衰 1.8 kHz | 350 Hz 以下に削った通過音、92 Hz の定在波、水滴、**遅れて逆の定位から返る反響**（0.7〜1.1 秒、-9 dB） | -3 |
+
+F11 は階（`FieldFloors`）ごとに切り替える：屋外＝`amb_school*`、`1f`＝`amb_school_1f`。図書室・堂内・隧道は「入った」をどう検出するかが統合の論点（§12：屋内タイル種別または `set_ambience` アクション）。
+
+## 7. プレイヤーの SE（タスク3）
+
+モノ、`assets/audio/se/`。本作で最も再生回数が多いのが足音なので、耳障りにならないよう **アタックを鈍らせ、高域を削り、変化は材質とばらつきで作る**。すべて `tools/audio/defs/se_player.py`。
+
+### 7.1 足音（材質 8 × 通常 5・忍び足 3 = 64 本）
+
+ID は `se_step_<材質>_<1..5>`、忍び足は `se_step_<材質>_sneak_<1..3>`。通常 -22 LUFS（基準 -6）、忍び足 -30 LUFS（基準 -14）。忍び足は同じ合成に 1.4 kHz のローパスと鈍いアタックのエンベロープを重ねたもので、「打面より擦れが残る」音にしている。
+
+| 材質 | 狙い | 合成 |
+|---|---|---|
+| asphalt | 乾いた短い打面、微かな擦れ | 帯域 250–2600 Hz のノイズ打面 + 120 Hz の短い正弦 + 2.5–6 kHz の擦れを 6% |
+| soil | 低く鈍い | 打面を 900 Hz でローパス + 85 Hz の低音 + 粒状ノイズ（600–3000 Hz）の砕け |
+| grass | 短い擦れが主 | 1.5–6.5 kHz の擦れ（ADSR）+ 95 Hz の低音を控えめに + 弱い打面 |
+| gravel | 細かい粒が複数 | 粒状合成 90 粒/秒（900–6000 Hz）を指数減衰 + 低音 + 短い打面 |
+| boards | 空洞の共鳴、ときどき軋む | 打面を 95–140 Hz と 260–340 Hz の共鳴体へ + 35% の確率で 70–110 Hz のパルス列を 180–260 Hz の共鳴で軋みに |
+| tatami | 最も柔らかい | 100–900 Hz の打面を 650 Hz でローパス + 75 Hz の低音 + 高域を 8% だけ |
+| stone | 硬い打面と短い反射 | 2–3.2 kHz と 4.2–6 kHz の共鳴体でクリック + 25–40 ms 後に 25% の反射（3 kHz でローパス） |
+| puddle | 飛沫と低い音 | 2–9 kHz の飛沫 + 正弦の粒（1.8–4.5 kHz、水滴）+ FM の「ぽちゃ」+ 低音 |
+
+材質は統合時にタイル種別から選ぶ（§12 統合案）。現行コードが参照する `se_footstep` / `se_footstep_sneak` は asphalt の 1 種を同じ ID で用意した（互換）。
+
+### 7.2 その他
+
+| ID | 長さ | 目標 LUFS | 狙い | 合成 | 使いどころ |
+|---|---|---|---|---|---|
+| `se_stairs_up` / `se_stairs_down` | 0.5 s | -22 | 木の階段 2 歩。上りは 2 歩目が少し高く、下りは低く重い | boards の足音 2 つを 220–280 ms 間隔で、120/95 Hz の共鳴を足す | F11 の階の切替 |
+| `se_door` | 0.6 s | -18 | 既存 ID。木戸 | 取っ手（2.4/3.9 kHz の共鳴体）→ 蝶番（パルス列を 300–420 Hz で共鳴）→ 枠に当たる鈍い音（110–150 Hz） | events の `play_sound se_door` |
+| `se_door_sliding` | 0.7 s | -20 | 引き戸 | 400–2200 Hz のノイズを ADSR で滑らせ 700–900 Hz の共鳴を重ね、端で軽い木の音 | 自宅・商店の戸 |
+| `se_door_metal` | 0.9 s | -16 | 金属戸。重い蝶番と箱鳴り | 70–95 Hz の FM の唸り（210–280 / 900–1200 Hz の共鳴）+ 85–110 / 300–380 / 1.5–2.1 kHz の共鳴体で閉まる | 旧校舎の昇降口・校門 |
+| `se_shutter` | 1.2 s | -18 | シャッター。波板が連続して鳴る | 粒状ノイズ 40 粒/秒を 180–240 / 1.1–1.5 kHz の共鳴体へ + 45–60 Hz の FM の震え + 止まる音 | F05 の半開きのシャッター |
+| `se_interact` | 0.1 s | -24 | 調べる。木片を弾いたような 1 音 | 400–4000 Hz の打面を 1320 / 2640 Hz の共鳴体へ + 220 Hz の短い正弦 | Interactable（現行は未使用） |
+| `se_item_get` | 0.4 s | -22 | 取得。紙を手に取りポケットへ。**音程を付けない**（報酬感を出さない） | 1.2–6 kHz の擦れ（ADSR）+ 100–900 Hz の柔らかい打面 | give_item |
+| `se_notebook_open` / `_close` | 0.3 s | -24 | ノートの開閉 | 900–5000 Hz の紙の擦れ + 表紙の鈍い音（閉じる方を重く） | Notebook |
+| `se_flashlight_on` / `_off` | 0.1 s | -26 | 懐中電灯のスイッチ。2 段のクリック | 1.5–8 kHz の 30 ms の打面を 3.6 / 5.4 kHz の共鳴体へ、2 段目を 25 ms 後に | `Lighting.set_flashlight` |
+
+### 7.3 プレイヤー SE の検証で分かったこと（仕上げ工程へ反映済み）
+
+- 1 秒未満の単発音に 8 Hz の DC 除去を掛けると両端にオフセットが出てクリックになる → 掛けない
+- Vorbis のプリエコーが先頭サンプルに乗る → 10 ms の無音を前置
+- 復号後にピークが 0.4 dB ほど膨らむ → 上限を -3.5 dBFS に
+- クリック的な音（石段・板張り）はピーク制限だけでは目標ラウドネスに 2 dB 届かない → tanh で最上部だけ丸めて再正規化（manifest `soft_clip_drive`）
+- シード導出に偏りがあり `se_step_*` の 5 種が同一波形になっていた → SHA-256 に変更（環境音は生成済みファイルを変えないため旧方式を明示して維持）
+
+## 8. UI の SE（タスク4）
+
+モノ、`tools/audio/defs/se_ui.py`、11 本。**UI 音は主張しない**。音程のある電子音（「ピッ」）は使わず、木片・紙・布を触る短い実音で作る。全体を SE 基準より 6〜18 dB 下げた。
+
+| ID | 長さ | 目標 LUFS | 狙い | 合成 | 使いどころ |
+|---|---|---|---|---|---|
+| `se_menu_move` | 0.05 s | -28 | 既存 ID。カーソル移動。木片を指で弾く程度 | 短いノイズ打面を 1.9 / 3.3 kHz の共鳴体へ | SettingsMenu / MenuList（現行コード） |
+| `se_menu_ok` | 0.09 s | -26 | 既存 ID。決定。2 打ではなく 1 打で「置く」 | 1.3 / 2.5 kHz の共鳴体 + 180 Hz の短い正弦 | SettingsMenu / events（現行コード） |
+| `se_menu_cancel` | 0.1 s | -28 | 既存 ID。キャンセル。決定より鈍く低い | 700 / 1400 Hz の共鳴体を 2.2 kHz でローパス + 120 Hz | SettingsMenu（現行コード） |
+| `se_menu_error` | 0.2 s | -28 | 無効操作。鈍い 2 打（70 ms 間隔）、音程なし | 380 / 760 Hz の共鳴体を 1.5 kHz でローパス ×2 | MenuList の無効項目 |
+| `se_text_tick` | 0.015 s | -34 | 文字送り。極めて控えめな 12 ms のクリック | 1.5–4.5 kHz のノイズを 300/s で減衰、3.5 kHz でローパス | DialogueWindow（2〜3 文字に 1 回を推奨） |
+| `se_save` | 0.4 s | -26 | セーブ。鉛筆で短く 2 画書き留める。報酬感を出さない | 1.8–7 kHz の擦れ ×2（2.4–3 kHz の共鳴） + 小さな置き音 | SlotMenu の保存 |
+| `se_load` | 0.5 s | -26 | ロード。畳んだ紙を開く | 紙の擦れ ×2 + 最後に紙の張り（420–520 Hz） | SlotMenu の読込 |
+| `se_evidence_add` | 0.35 s | -26 | 証拠が増える。ノートに紙を挟み、軽く押さえる | 紙の擦れ → 100–900 Hz の柔らかい打面 | `GameState.add_evidence` |
+| `se_notebook_page` | 0.36 s | -28 | ノートのページ送り | 持ち上げる擦れ（1.2–7 kHz）→ 落ちる擦れ（0.6–4 kHz） | Notebook のページ切替 |
+| `se_sleep` | 1.8 s | -24 | 就寝。長い息を吐くような低いノイズの膨らみ。音程なし | ピンクノイズ 600 Hz ローパス + ブラウンノイズ 120 Hz、ADSR 0.5/0.2/1.0 | advance_day の前 |
+| `se_day_advance` | 1.6 s | -22 | 日付が進む。遠くで何かを閉じたような低い 1 打と短い静けさ。鐘や旋律は使わない | 52–58 / 140–160 Hz の共鳴体 + 400 Hz ローパスのノイズの膨らみ 12% | advance_day の日付表示 |
+
+「8 月が終わっていく」は BGM ではなく、`se_day_advance` の区切りと蝉の減衰（§4）で示す。
+
+## 9. 怪異・追跡者の SE（タスク5）
+
+モノ、`tools/audio/defs/se_anomaly.py`、40 本・約 510 KB。
+
+原則：
+- 起きたことを音で説明しない。**生活音が一つ欠ける・一つ増える・一つ遅れる** だけで作る
+- 大きくしない（多くは -26〜-32 LUFS）。ジャンプスケア、叫び、呻き、断末魔は使わない
+- 環境音の切替（`amb_road_still` / `amb_paddy_still`）で表す怪異は、音はごく短い「切れ目」だけ
+- 具体的な事故・自死を思わせる物音は作らない（落下音、水没音、ロープ、椅子の類は一切無い）
+- 声は使わない（`an_f16_count` の「数える」は石の打音三つ）
+- 既存のチャイム（ウェストミンスター）は再現しない。`an_f11_chime` は独自の 4 音の鐘状 FM 音で、3 音目の途中で切れる
+
+怪異は 1 件 1 音、ID は `se_<anomaly_id>`。すべて `allow_silence`（間の多さは意図）。
+
+| ID | 長さ | 目標 LUFS | 狙い・合成 | 使いどころ |
+|---|---|---|---|---|
+| `se_an_f01_silence` | 3.01 s | -28 | 国道の音が消える。走行音が閉じ、自販機のハムだけ残る | 怪異 an_f01_silence（統合案：actions の play_sound） |
+| `se_an_f02_laundry` | 2.01 s | -28 | 竿だけが揺れている。竿の 2 打と湿った布 | 怪異 an_f02_laundry（統合案：actions の play_sound） |
+| `se_an_f03_bus_nobody` | 4.51 s | -24 | バスが来て扉が開閉、誰も降りない。チャイム無し | 怪異 an_f03_bus_nobody（統合案：actions の play_sound） |
+| `se_an_f03_tunnel_light` | 1.81 s | -28 | 隧道を抜ける圧の抜け。ローパスが開く | 怪異 an_f03_tunnel_light（統合案：actions の play_sound） |
+| `se_an_f04_bulb` | 3.01 s | -30 | フィラメントの「チン」と細いハム | 怪異 an_f04_bulb（統合案：actions の play_sound） |
+| `se_an_f04_loop` | 2.51 s | -28 | 方向感の失われる圧の揺れとトタン | 怪異 an_f04_loop（統合案：actions の play_sound） |
+| `se_an_f05_fresh_goods` | 1.01 s | -32 | 新しい駄菓子。セロファンが一度鳴る | 怪異 an_f05_fresh_goods（統合案：actions の play_sound） |
+| `se_an_f06_board_night` | 1.61 s | -28 | 紙が一枚だけ風で鳴り、画鋲が板を打つ | 怪異 an_f06_board_night（統合案：actions の play_sound） |
+| `se_an_f07_gaze` | 2.21 s | -28 | 格子が鳴り、布が擦れる。堂内の反響 | 怪異 an_f07_gaze（統合案：actions の play_sound） |
+| `se_an_f07_lamps` | 2.51 s | -32 | 灯明の炎と芯の弾け | 怪異 an_f07_lamps（統合案：actions の play_sound） |
+| `se_an_f08_lookout_lights` | 2.51 s | -34 | 遠くの電気的な唸りが膨らむだけ | 怪異 an_f08_lookout_lights（統合案：actions の play_sound） |
+| `se_an_f08_plum_steps` | 4.01 s | -26 | 枝の折れる音が 3 回、近づく | 怪異 an_f08_plum_steps（統合案：actions の play_sound） |
+| `se_an_f09_bridge_gone` | 3.01 s | -28 | 土が空堀へこぼれる。樹林の風 | 怪異 an_f09_bridge_gone（統合案：actions の play_sound） |
+| `se_an_f09_map_drift` | 2.01 s | -30 | 案内板のアクリルが軋み、枠に当たる | 怪異 an_f09_map_drift（統合案：actions の play_sound） |
+| `se_an_f10_light` | 4.01 s | -24 | 照明塔が一灯点く。遮断器と放電灯の点火 | 怪異 an_f10_light（統合案：actions の play_sound） |
+| `se_an_f10_line` | 2.51 s | -28 | 堤防の風と、河原の石が転がる | 怪異 an_f10_line（統合案：actions の play_sound） |
+| `se_an_f11_chime` | 5.01 s | -22 | 独自の 4 音の鐘状の音、遠く、3 音目で切れる | 怪異 an_f11_chime（統合案：actions の play_sound） |
+| `se_an_f11_desks` | 2.01 s | -28 | 机の脚が一度床に当たる。教室の反響 | 怪異 an_f11_desks（統合案：actions の play_sound） |
+| `se_an_f11_upstairs` | 5.01 s | -26 | 二階で机を引きずる音、二回 | 怪異 an_f11_upstairs（統合案：actions の play_sound） |
+| `se_an_f12_stairwell_blink` | 4.01 s | -26 | 灯りが消え、三階だけ点く。リレー・ハム停止・安定器の点き始め | 怪異 an_f12_stairwell_blink（統合案：actions の play_sound） |
+| `se_an_f13_house_count` | 2.51 s | -30 | 遠くの玄関扉が一度だけ閉まる。街灯のハム | 怪異 an_f13_house_count（統合案：actions の play_sound） |
+| `se_an_f14_frogs` | 4.01 s | -26 | 草が順に倒れていく 5 回。足音は無い | 怪異 an_f14_frogs（統合案：actions の play_sound） |
+| `se_an_f14_moon` | 2.51 s | -30 | 水面が一度だけ鳴る | 怪異 an_f14_moon（統合案：actions の play_sound） |
+| `se_an_f15_fog` | 3.51 s | -28 | 川の音が霧に閉じていく | 怪異 an_f15_fog（統合案：actions の play_sound） |
+| `se_an_f15_footsteps` | 3.51 s | -24 | 向こう岸から橋の板の足音 4 歩、同じ歩調で | 怪異 an_f15_footsteps（統合案：actions の play_sound） |
+| `se_an_f16_count` | 4.51 s | -24 | 石の鈍い打音が三つ、三つ目で止まる。声は無い | 怪異 an_f16_count（統合案：actions の play_sound） |
+| `se_an_f16_nothing` | 4.01 s | -38 | ほぼ無音。微かな風と小石一つ | 怪異 an_f16_nothing（統合案：actions の play_sound） |
+| `se_heartbeat` | 3.871 s | -24 | 既存 ID。心拍 62 bpm、4 拍ちょうどのループ。60–110 Hz、鈍く | AudioManager.set_tension（現行コード） |
+| `se_heroine_step_1` | 0.13 s | -24 | 澪の足音。軽く高い | Heroine の歩行（統合案：乱択） |
+| `se_heroine_step_2` | 0.13 s | -24 | 澪の足音 | 同上 |
+| `se_heroine_step_3` | 0.13 s | -24 | 澪の足音 | 同上 |
+| `se_seal_stone` | 2.41 s | -20 | 封石を押し戻す。石が擦れて動き、低く据わって止まる | 8/30 封印（統合案：amb_valley_inner をここで止める） |
+| `se_stalker_chase_loop` | 8.0 s | -28 | 追跡中の 8 秒ループ。呼吸の速さでうねる低いノイズと 40 Hz の圧。心拍の帯域を避ける | Stalker CHASE 中（統合案：bgm_tension の代替または併用） |
+| `se_stalker_far` | 2.01 s | -32 | 遠くの気配。砂利の足音 2 歩が遠く | Stalker SUSPICIOUS への遷移（統合案） |
+| `se_stalker_lost` | 2.51 s | -30 | 見失った。圧が抜けて環境が戻る | Stalker SEARCH → RETREAT（統合案） |
+| `se_stalker_notice` | 2.01 s | -26 | 気付かれた。低い圧が膨らんで抜ける | Stalker CHASE への遷移（統合案） |
+| `se_stalker_step_boards_1` | 0.19 s | -20 | 追跡者の足音（板） | 同上 |
+| `se_stalker_step_boards_2` | 0.19 s | -20 | 追跡者の足音（板） | 同上 |
+| `se_stalker_step_gravel_1` | 0.23 s | -20 | 追跡者の足音（砂利） | Stalker の歩行（統合案：材質で選び乱択） |
+| `se_stalker_step_gravel_2` | 0.23 s | -20 | 追跡者の足音（砂利） | 同上 |
+
+追跡者の音は「発見が大きい」を避け、**遠くの気配 → 気付き（圧が膨らむ） → 足音（主人公より遅く重い） → 追跡ループ（呼吸の速さのうねり） → 見失う（圧が抜ける）** の順で段階を作る。追跡ループは心拍（60–110 Hz）の帯域を避け、250–900 Hz のうねりと 45 Hz 以下の圧だけで構成する。心拍 `se_heartbeat` は 62 bpm・4 拍ちょうどの 3.871 秒ループで、拍が継ぎ目に掛からないよう末尾を無音にしている。
+
+イベント側の暫定指定（`an_f03_bus_nobody` の `se_door`、`an_f15_footsteps` の `se_footstep`、`an_f11_chime` の `se_menu_ok`）は、それぞれ `se_an_f03_bus_nobody` / `se_an_f15_footsteps` / `se_an_f11_chime` への差し替えを §12 で提案する（data/ は変更していない）。
+
+## 10. ナツの音（タスク6）
+
+モノ、`tools/audio/defs/se_natsu.py`、6 本・約 50 KB。ユーザーの委任により設計案の提示と実装を同時に行った（PR #66 に設計の全文）。
+
+### 10.1 設計
+
+- **乾いて近い。** 本作の他の音はすべて「遠く・反響の中」にある。ナツだけは残響を一切掛けない。隣にいる音
+- **音色の出どころ。** 7/31 の夜に主人公が唯一「安全だ」と感じた自販機の灯りのハム。96 Hz の 2 本がわずかにずれて 0.4 Hz でゆっくりうねる温かい低いトーンと、声にならない僅かな息（400–1200 Hz のノイズ、リズムなし）。旋律も和声も持たない
+- **同じ音が反転する仕組み。** 部分音の比は薬師谷の「裂け目の口」（`amb_valley_inner`）と同じ **不協和な比（1 : 1.498 : 2.03 : 2.77）** を 4 倍の音域で小さく重ねてある。序盤は温かさの「厚み」としてしか聞こえない。8/30 に谷でその比を大音量で聞いたあと、同じ音が同じ比を持っていたことに気づく。**ファイルは 1 つで切り替えはしない。** 意味だけが反転する
+- **やらないこと。** 叫び、囁き声、笑い声、呼吸のリズム、反響、音程の動き
+
+### 10.2 ファイル
+
+| ID | 長さ | 目標 LUFS | 狙い | 使いどころ（統合案） |
+|---|---|---|---|---|
+| `se_natsu_pulse_weak` | 0.9 s | -32 | 気配・弱。灯りが一瞬強まる程度 | `presence_pulse` strength < 0.45 |
+| `se_natsu_pulse_mid` | 1.6 s | -30 | 気配・中。トーンに、柔らかい二連の置き音（足音が一組増える。打面を持たない） | 0.45〜0.75 |
+| `se_natsu_pulse_strong` | 2.6 s | -28 | 気配・強。谷の比の部分音が聞き取れる長さ | ≥ 0.75 |
+| `se_natsu_speak` | 0.6 s | -34 | 話し始める。息を一つ吸う | `AttachedEntity.speak` の吹き出し表示時 |
+| `se_natsu_text_tick` | 0.02 s | -38 | ナツの文字送り。通常より低く柔らかい | 話者 natsu の文字送り |
+| `se_natsu_luck` | 2.2 s | -28 | 不自然な幸運。急に現れゆっくり消える（「何かが逸れた」） | `luck_triggered` |
+
+強さは `presence_pulse(strength)` の値で 3 段に振り分ける（現行の呼び出しは 0.3〜1.0 で 27 箇所 + speak の 0.3）。`entity_pulse` は現在音を出していないので、統合時に AudioManager 側で `AttachedEntity.presence_pulse` を購読するだけでよい（§12）。
+
+終幕の扱い：エンド B の「空白の吹き出し」は `se_natsu_speak` だけを鳴らし文字送りを鳴らさない。エンド A でナツが澪に返事をする一言も同じ `se_natsu_speak`。ナツの音は最後まで変えない。
+
+## 11. BGM（タスク7）
+
+ステレオ、ループ（クロスフェード 1 秒）、`tools/audio/defs/bgm.py`、8 本・約 3.8 MB。**暫定＝差し替え可能** な設計で、ID と長さ・ラウドネスだけ守れば人の作った曲に置き換えられる。
+
+方針：
+- 音楽を鳴らし続けない。曲があるのはタイトル・追跡・8/30 の封印と真相・8/31・スタッフロールだけ。フィールドは環境音のみ
+- 低周波ドローンと、3 音の断片（A3 → C4 → G3。下降して終わらない）だけ。和声を積まない。生楽器を模倣しない。残響は控えめ
+- 追跡曲は心拍（60–110 Hz）の帯域を空ける（35–50 Hz の圧と 200–600 Hz の脈）
+- **真相の曲が最も強い**（基準 -20 LUFS ちょうど）。ナツの 96 Hz の温かいトーンと谷の不協和比（§10）を、ここで初めて同じ音として大きく鳴らす
+- 8/31 は澪の視点・昼の光。川を薄く、880 Hz の細い持続音、断片。エンド A は下にナツのトーンが小さく残り、C は断片を鳴らさない
+- スタッフロールはタイトルのドローンから蝉を抜き（8 月は終わった）、断片を 5 音に伸ばす
+
+| ID | 長さ | 目標 LUFS | サイズ | 内容 | 使いどころ |
+|---|---|---|---|---|---|
+| `bgm_title` | 70 s | -24 | 669 KB | 既存 ID。タイトル。低いドローン、遠い蝉の残響、3 音の断片が 1 回 | Title（現行コード） |
+| `bgm_tension` | 32 s | -22 | 356 KB | 既存 ID。追跡。35–50 Hz の圧と 200–600 Hz の脈。心拍の帯域を空ける。旋律なし | events の play_bgm bgm_tension（現行コード） |
+| `bgm_seal` | 60 s | -24 | 182 KB | 8/30 封印。谷の不協和比のドローンと、面を戻す木の置き音 | 8/30 封印の配置パズル（統合案） |
+| `bgm_truth` | 60 s | -20 | 412 KB | 8/30 真相。最も強い。ナツのトーンと谷の比を同じ音として大きく | truth_revealed 前後の対決会話〜提示画面（統合案） |
+| `bgm_ending` | 60 s | -24 | 568 KB | 8/31 御渡橋。基本（エンド B）。川、細い持続音、断片 | 8/31 の F15（統合案） |
+| `bgm_ending_a` | 60 s | -24 | 560 KB | 8/31 エンド A。下にナツのトーンが小さく残る | エンド A（統合案） |
+| `bgm_ending_c` | 60 s | -26 | 540 KB | 8/31 エンド C。旋律を鳴らさない | エンド C（統合案） |
+| `bgm_credits` | 90 s | -25 | 442 KB | スタッフロール。蝉を抜いたタイトルのドローン、断片を 5 音に | StaffRoll（統合案） |
+
+書き出し：libsndfile 1.2.2 の Vorbis 書き出しは 60 秒超のステレオでセグメンテーション違反を起こすため、BGM だけ ffmpeg（libvorbis, q5）で書く。環境音・SE は従来通り libsndfile（生成済みファイルとエンコーダを揃える）。
+
+## 12. AudioManager への統合案（タスク8。実装はしない）
+
+本 PR 群はコード（scripts/ scenes/ data/）を変更していない。**以下を実装するまで、生成した音はゲーム内で一切鳴らない。** すべて `scripts/autoload/audio_manager.gd` と周辺の小さな変更で、順に独立して入れられる。
+
+### 12.1 読み込み経路（必須。これだけで既存 31 ID が鳴る）
+
+```gdscript
+# audio_manager.gd
+const OGG_DIR: String = "res://assets/audio"
+
+func _get_stream(id: String) -> AudioStream:
+    ...
+    var kind: String = str((_tracks[id] as Dictionary).get("kind", "se"))
+    var ogg_path: String = "%s/%s/%s.ogg" % [OGG_DIR, kind, id]
+```
+
+既存 ID（bgm_title / bgm_tension / amb_* 21 / se_footstep / se_footstep_sneak / se_interact / se_menu_* / se_door / se_heartbeat）は同名で用意してあるので、この変更だけで SoundSynth から差し替わる。`resources/audio/` は使わない（`docs/ASSETS_NEEDED.md` §6 も更新済み）。
+
+### 12.2 audio.json への登録（必須。新 ID 184 件）
+
+`python3 tools/audio/propose_audio_json.py` が `build/audio_json_proposal.json` を書く。既存 31 件はそのまま（synth を残す）、新 184 件は `{"id", "kind", "loop", "base_volume_db": 0.0, "note"}`、蝉レイヤーは `"seasonal": "cicada"`。`data/audio.json` の `tracks` をこの配列で置き換える。`data_checks_refs` が参照整合を見るので、置き換え後に `driver_data_checks` を通す。
+
+### 12.3 時間帯 4 段階（環境音）
+
+```gdscript
+func ambience_for(field_id: String, time_of_day: String) -> String:
+    ...
+    var suffix: String = {Calendar.TIME_MORNING: "_morning", Calendar.TIME_EVENING: "_evening", Calendar.TIME_NIGHT: "_night"}.get(time_of_day, "")
+    if not suffix.is_empty() and _tracks.has(f.ambience_track + suffix):
+        return f.ambience_track + suffix
+    return f.ambience_track
+```
+
+現行は夕方を夜に寄せている。§5 の表の通り 11 フィールド × 4 時間帯を用意したので、夕方は `_evening` に。無ければ無印にフォールバック（F16 は無印のみ）。
+
+### 12.4 蝉レイヤー（§4）
+
+環境音本体から蝉を分離してある。AudioManager に 2 本目の環境音プレイヤー（`_cicada`）を持ち、`_on_field_entered` / `_refresh_field_ambience` で `cicada_layers_for(day, tod)`（§4 の表）の ID を `_track_db` で鳴らす。`LAST_CICADA_DAY` の減衰はそのまま `seasonal: "cicada"` に効く。夜は蝉を鳴らさない（`amb_cicada_evening` は夕方のみ）。
+
+### 12.5 `_still` 系の切替（怪異）
+
+- `an_f01_silence`（8/15〜、夜、F01）：actions の先頭に `{"type": "set_ambience", "id": "amb_road_still"}` を追加（既存の `stop_bgm` の前）。次のフィールドに入るまで有効なので、戻す処理は不要
+- `an_f14_frogs`（8/15〜、夕夜、F14）：同様に `amb_paddy_still`。8/30 以降は `ambience_for` で F14 の夜を `amb_paddy_still` に固定（`Calendar.day >= 30`）
+
+### 12.6 足音の材質選択
+
+```gdscript
+# audio_manager.gd
+func _on_player_noise(radius: float) -> void:
+    var sneak: bool = radius <= Player.SNEAK_NOISE_RADIUS
+    var mat: String = _material_under(SceneRouter.current_field)   # タイル種別 → asphalt/soil/grass/gravel/boards/tatami/stone/puddle
+    var n: int = randi_range(1, 3 if sneak else 5)
+    play_se("se_step_%s%s_%d" % [mat, "_sneak" if sneak else "", n])
+```
+
+`_material_under` はプレイヤー直下のタイルの種別（`TileGenerator` の種別名）を §7.1 の 8 材質に写像する。写像表は fields の地図種別に依存するので、実装時に `docs/TILESET_PIPELINE.md` の種別一覧から決める（未定義は asphalt）。屋内の階（`FieldFloors`）は F11 の 1F・2F を boards、自宅を tatami。互換の `se_footstep` / `se_footstep_sneak` は写像が無い間の既定として残す。
+
+同じ関数で追跡者（`se_stalker_step_<gravel|boards>_<1..2>`）と澪（`se_heroine_step_<1..3>`）も鳴らす。追跡者は `stalker.gd` の移動周期、澪は `heroine.gd` の同行移動に `noise_emitted` 相当の signal を足すのが最小。
+
+### 12.7 UI・プレイヤーの新 SE の呼び出し箇所
+
+| ID | 呼び出し |
+|---|---|
+| `se_menu_error` | `MenuList` の無効項目で決定したとき |
+| `se_text_tick` / `se_natsu_text_tick` | `DialogueWindow._process` で `visible_characters` が 2〜3 進むごとに 1 回。話者 natsu なら後者 |
+| `se_save` / `se_load` | `SlotMenu` の保存・読込の完了時 |
+| `se_evidence_add` | `GameState.add_evidence` |
+| `se_notebook_open` / `_close` / `se_notebook_page` | `Notebook` の開閉・ページ切替 |
+| `se_sleep` → `se_day_advance` | `advance_day` の暗転前と日付表示時 |
+| `se_flashlight_on` / `_off` | `Lighting.set_flashlight` |
+| `se_item_get` | `give_item` アクション |
+| `se_stairs_up` / `_down` | `FieldBase.switch_floor`（1f→2f は up） |
+| `se_door_sliding` / `se_door_metal` / `se_shutter` | events の `play_sound`（現在 `se_door` 一律のところを場所で分ける。任意） |
+| `se_interact` | `Interactable` の調べ開始（現在未使用） |
+
+### 12.8 怪異・追跡者・ナツ
+
+- 怪異 27 件：`data/anomalies.json` の各 actions に `{"type": "play_sound", "id": "se_<anomaly_id>"}` を、最初の `message` の直前に挿入する（§9 の表）。暫定指定の差し替え：`an_f03_bus_nobody` の `se_door` → `se_an_f03_bus_nobody`、`an_f15_footsteps` の `se_footstep` → `se_an_f15_footsteps`、`an_f11_chime` の `se_menu_ok` → `se_an_f11_chime`
+- 追跡者：`stalker.gd _set_state` で SUSPICIOUS → `se_stalker_far`、CHASE → `se_stalker_notice` + `set_tension(true)`、SEARCH→RETREAT → `se_stalker_lost`。`se_stalker_chase_loop` は `set_tension` 内で `se_heartbeat` と同じ扱いの 2 本目のループとして鳴らす（`bgm_tension` を鳴らさない F 以外で追跡が起きた場合の代替）
+- ナツ：`AttachedEntity.presence_pulse` を AudioManager で購読し、strength < 0.45 → `se_natsu_pulse_weak`、< 0.75 → `_mid`、以上 → `_strong`。`spoke` の直前（`speak` の `show_entry` 前）に `se_natsu_speak`。`luck_triggered` → `se_natsu_luck`。**ナツの音は残響バスに送らない**（§10）
+
+### 12.9 BGM
+
+| 場面 | 呼び出し |
+|---|---|
+| 8/30 封印の配置パズル | 開始で `play_bgm("bgm_seal")`、封石を戻す `se_seal_stone` と同時に `stop_bgm()` と `set_ambience("")` |
+| 8/30 対決会話〜提示画面 | `truth_revealed` を立てるイベントの直前で `play_bgm("bgm_truth")`、提示画面の終わりで `stop_bgm()` |
+| 8/31 F15 | ED 判定に応じて `bgm_ending_a` / `bgm_ending` / `bgm_ending_c` |
+| スタッフロール | `StaffRoll._ready` で `play_bgm("bgm_credits")` |
+
+すべて `data/events.json` / `schedule.json` の actions に `play_bgm` / `stop_bgm` を足すだけで済む。
+
+### 12.10 音量バスと残響
+
+現在は BGM / Ambience / SE の 3 バス。提案：SE バスの下に `SE_Dry`（ナツ専用、リバーブ無し）を足すか、逆にフィールドの残響をゲーム側で掛けないなら現状のままでよい（素材側で必要な残響は焼き込んである）。**ゲーム側で追加の残響は掛けない** ことを推奨する。
+
+## 13. 全ファイル一覧と検証記録
+
+`assets/audio/manifest.json`（215 件。ID、種別、パス、ループ、秒、LUFS と目標、ピーク、サイズ、シード、モジュール、狙い、使いどころ）が正本。検証結果は `docs/AUDIO_VERIFY.md`（`python3 tools/audio/report.py` で再生成）。
+
+| 種別 | 件数 | 合計 |
+|---|---|---|
+| 環境音 | 72 | 約 29 MB |
+| SE | 135 | 約 1.1 MB |
+| BGM | 8 | 約 3.8 MB |
+
+## 14. 進捗
+
+| タスク | 状態 |
+|---|---|
+| 0 合成基盤 | PR #60 |
+| 1 屋外の環境音 | PR #61 |
+| 2 屋内・特殊空間 | PR #62 |
+| 3 プレイヤーの SE | PR #63 |
+| 4 UI の SE | PR #64 |
+| 5 怪異・追跡者の SE | PR #65 |
+| 6 ナツの音 | PR #66 |
+| 7 BGM | PR #67 |
+| 8 統合仕様 | PR #68 |
+
+PR は 0 → 8 の順に積んである（各 PR の base は前のブランチ）。main へ入れる順もこの順。

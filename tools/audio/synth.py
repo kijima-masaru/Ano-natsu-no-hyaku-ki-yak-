@@ -41,12 +41,16 @@ def silence(sec: float, stereo: bool = False) -> np.ndarray:
 
 def to_stereo(x: np.ndarray) -> np.ndarray:
     if x.ndim == 2:
+        if x.shape[1] == 1:
+            return np.repeat(x, 2, axis=1)
         return x
     return np.stack([x, x], axis=1)
 
 
 def to_mono(x: np.ndarray) -> np.ndarray:
-    return x if x.ndim == 1 else x.mean(axis=1)
+    if x.ndim == 1:
+        return x
+    return x[:, 0] if x.shape[1] == 1 else x.mean(axis=1)
 
 
 def fit(x: np.ndarray, n: int) -> np.ndarray:
@@ -188,8 +192,11 @@ def wander(sec: float, rng: np.random.Generator, rate_hz: float = 0.2, depth: fl
     n = n_samples(sec)
     steps = max(4, int(sec * rate_hz * 4))
     knots = rng.random(steps + 1)
-    x = np.interp(np.linspace(0, steps, n), np.arange(steps + 1), knots)
-    x = signal.savgol_filter(x, min(n // 2 * 2 - 1, 8191), 3) if n > 16 else x
+    coarse = max(64, int(sec * 200))  # 200 Hz の粗い格子で平滑化してから補間（全サンプルで平滑化すると重い）
+    x = np.interp(np.linspace(0, steps, coarse), np.arange(steps + 1), knots)
+    win = min(coarse // 2 * 2 - 1, 401)
+    x = signal.savgol_filter(x, win, 3) if win >= 5 else x
+    x = np.interp(np.linspace(0, coarse - 1, n), np.arange(coarse), x)
     x = (x - x.min()) / (x.max() - x.min() + 1e-9)
     return (x * depth).astype(np.float32)
 
@@ -293,8 +300,6 @@ def swarm(sec: float, rng: np.random.Generator, density: float, grain_sec: tuple
         pan = rng.uniform(-pan_spread, pan_spread)
         l, r = np.cos((pan + 1) * np.pi / 4), np.sin((pan + 1) * np.pi / 4)
         s = int(t0 * SR)
-        for k in range(len(g)):
-            pass
         idx = (np.arange(len(g)) + s)
         if loop:
             idx = idx % n

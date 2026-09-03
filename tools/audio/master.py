@@ -11,10 +11,12 @@ import numpy as np
 import soundfile as sf
 from scipy import signal
 
-from synth import SR, n_samples, to_stereo
+from synth import soft_clip, SR, n_samples, to_stereo
 
 TARGET_LUFS = {"ambience": -28.0, "bgm": -20.0, "se": -16.0}
 PEAK_DBFS = -3.0
+CODEC_MARGIN_DB = 0.5  # Vorbis 復号後にピークが僅かに膨らむ分の余裕（クリック的な音で 0.4 dB 程度膨らむのを確認）
+LEAD_PAD_SEC = 0.01  # 単発音の先頭無音。Vorbis のプリエコーが先頭サンプルに乗ってクリックになるのを避ける
 OGG_QUALITY = {"ambience": 0.4, "bgm": 0.5, "se": 0.5}
 
 
@@ -122,17 +124,35 @@ def fade_edges(x: np.ndarray, fade_in: float, fade_out: float) -> np.ndarray:
     return fade(x, fade_in, fade_out)
 
 
-def finalize(x: np.ndarray, kind: str, loop: bool, stereo: bool, fade_in: float = 0.0, fade_out: float = 0.0, crossfade_sec: float = 0.5) -> tuple[np.ndarray, dict]:
-    """共通の仕上げ。戻り値は (波形, 記録用の辞書)"""
+def finalize(x: np.ndarray, kind: str, loop: bool, stereo: bool, fade_in: float = 0.0, fade_out: float = 0.0, crossfade_sec: float = 0.5,
+             lufs_offset: float = 0.0) -> tuple[np.ndarray, dict]:
+    """共通の仕上げ。戻り値は (波形, 記録用の辞書)。lufs_offset は系統の目標からの意図的なずれ（静かな場所は負）"""
     y = to_stereo(x) if stereo else (x if x.ndim == 1 else x.mean(axis=1)).astype(np.float32)
-    y = remove_dc(y)
+    if len(y) >= SR:
+        y = remove_dc(y)
+    # 1 秒未満の単発音に 8 Hz の HPF をかけると、短い信号の平均を打ち消そうとして両端に緩やかなオフセット（クリック）が生じるので掛けない
     if loop:
         y = seamless_loop(y, crossfade_sec)
     else:
-        y = fade_edges(y, fade_in, fade_out)
-    y = normalize_lufs(y, TARGET_LUFS[kind])
-    y, reduced = limit_peak(y)
-    info = {"lufs": loudness_lufs(y), "peak_dbfs": peak_dbfs(y), "gain_reduced_db": reduced, "seconds": len(y) / SR}
+        # 先頭が非ゼロだとクリックになるので最低 0.5 ms のフェードインを保証し、プリエコー用の無音を前置する
+        y = fade_edges(y, max(fade_in, 0.0005), fade_out)
+        y = np.concatenate([np.zeros((n_samples(LEAD_PAD_SEC),) + y.shape[1:], np.float32), y])
+    target = TARGET_LUFS[kind] + lufs_offset
+    ceiling = PEAK_DBFS - CODEC_MARGIN_DB
+    y = normalize_lufs(y, target)
+    y, reduced = limit_peak(y, ceiling)
+    drive = 0.0
+    if kind == "se" and not loop and reduced > 0.5:
+        # 波高率が高い（クリック的な）単発音は、ピーク制限だけでは目標ラウドネスに届かない。
+        # 最上部のピークだけを tanh で丸めて（アタックを鈍らせる方針に沿う）再正規化する。最大 3 段。
+        for drive in (1.5, 2.5, 4.0):
+            z = soft_clip(y, drive)
+            z = normalize_lufs(z, target)
+            z, reduced = limit_peak(z, ceiling)
+            y = z
+            if reduced <= 0.5:
+                break
+    info = {"lufs": loudness_lufs(y), "peak_dbfs": peak_dbfs(y), "gain_reduced_db": reduced, "soft_clip_drive": drive, "seconds": len(y) / SR, "target_lufs": target}
     return y, info
 
 
@@ -147,8 +167,21 @@ def ffmpeg_exe() -> str | None:
 
 
 def write_ogg(path: str, x: np.ndarray, kind: str) -> None:
+    """OGG Vorbis 書き出し。BGM（60 秒超のステレオ）は libsndfile 1.2.2 の Vorbis 書き出しがセグメンテーション違反を起こすので、
+    ffmpeg（libvorbis）で書く。環境音・SE は従来通り libsndfile（生成済みファイルとエンコーダを揃える）"""
     os.makedirs(os.path.dirname(path), exist_ok=True)
     q = OGG_QUALITY[kind]
+    if kind == "bgm":
+        exe = ffmpeg_exe()
+        if not exe:
+            raise RuntimeError("BGM の書き出しには ffmpeg（imageio-ffmpeg）が必要です")
+        tmp = path + ".tmp.wav"
+        sf.write(tmp, x, SR, subtype="FLOAT")
+        r = subprocess.run([exe, "-v", "error", "-y", "-i", tmp, "-c:a", "libvorbis", "-q:a", str(q * 10), "-ar", str(SR), path], capture_output=True, text=True)
+        os.remove(tmp)
+        if r.returncode != 0:
+            raise RuntimeError("ffmpeg: " + r.stderr.strip()[:300])
+        return
     try:
         sf.write(path, x, SR, format="OGG", subtype="VORBIS", compression_level=1.0 - q)
     except TypeError:
