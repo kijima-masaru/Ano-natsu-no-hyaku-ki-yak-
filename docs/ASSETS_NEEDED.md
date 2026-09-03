@@ -9,8 +9,8 @@
 
 | 項目 | 指定 |
 |---|---|
-| 解像度 | 基準 384×216、タイル 16×16、アクター 16×24。整数倍拡大のみ（フィルタ無し） |
-| 色 | `docs/CONVENTIONS.md` §6 のパレット（`scripts/autoload/palette.gd`）。夜は `Lighting` が全体を青く落とすので、**素材側で夜差分は作らない**。光源色は 4 色（街灯・蛍光灯・自販機の赤・月）のみ |
+| 解像度 | 基準 640×360（1080p で 3 倍）、タイル 32×32、アクター 32×48。整数倍拡大のみ（フィルタ無し） |
+| 色 | PNG 素材は色数自由（`tools/tiles/px32.py` の色域を基準にする）。UI・ライトは `docs/CONVENTIONS.md` §6 のパレット（`scripts/autoload/palette.gd`）。夜は `Lighting` が全体を青く落とすので、**素材側で夜差分は作らない**。光源色は 4 色（街灯・蛍光灯・自販機の赤・月）のみ |
 | 表記 | 実在の地名・人名・団体名・宗教施設名を看板・掲示物に入れない。文字はダミー（架空の町名「磐戸」は可） |
 | 描かないもの | 流血・遺体・自死の方法や手段を連想させる器具・場所・状態（`docs/CONTENT_NOTICE.md`） |
 | 納品 | PNG（アルファ付き）。タイルは **32×32**（アトラス 1 枚、`resources/tilesets/common.tres`、`docs/TILESET_PIPELINE.md`）、アクターは **32×48**、画面は **640×360**（1080p で整数 3 倍）、音は OGG Vorbis 44.1kHz |
@@ -19,8 +19,8 @@
 
 | 種別 | 生成側（暫定） | 本番の置き場所 | 切替方法 |
 |---|---|---|---|
-| タイル 16×16 | `scripts/tools/tile_painters_*.gd`（フォールバック） | `resources/tilesets/common_atlas.png`（**配置済み** 164 種。`tools/tiles/paint_atlas.py` で描く）＋ `common.tres` | `iwato/tileset/source="resource"`（**切替済み**） |
-| アクター 16×24 | `scripts/tools/actor_sprite_generator.gd` | `SpriteFrames` リソース | `ActorSpriteGenerator.get_texture` の返却先を差し替え |
+| タイル 32×32 | `scripts/tools/tile_painters_*.gd`（フォールバック） | `resources/tilesets/common_atlas.png`（**配置済み** 164 種すべて 32 px 直描き。オートタイル 28 種・背の高い部品 22 種。`tools/tiles/paint32.py` で描く）＋ `common.tres` ＋ `atlas_layout.json` | `iwato/tileset/source="resource"`（**切替済み**） |
+| アクター 32×48 | `scripts/tools/actor_sprite_generator.gd` | `SpriteFrames` リソース | `ActorSpriteGenerator.get_texture` の返却先を差し替え |
 | 音 | `scripts/tools/sound_synth.gd`（OGG が無い ID だけ） | `assets/audio/<kind>/<id>.ogg`（**配置済み** 215 件。`tools/audio/` で合成） | `audio.json` の id と同名の OGG があれば `AudioManager` が優先。ループは `audio.json` の `loop` を正とする |
 | フォント | 代替フォント | `resources/fonts/PixelMplus12-Regular.ttf`（**配置済み**。Bold も） | `UiFont` autoload が読み込み時にアンチエイリアス無しを強制し、全 Control の既定フォントにする |
 | 光源テクスチャ | `scripts/tools/light_texture_generator.gd`（フォールバック） | `resources/lights/radial.png` / `cone.png`（**配置済み**） | `LightTextureGenerator` が PNG を優先（大きさが違えば生成に戻る） |
@@ -56,7 +56,7 @@
 
 旧校舎の 1 階は屋外と別の地図（`FieldFloors`）で、上表の「旧校舎 廊下床（板）」「旧校舎 窓（木枠）」「教室の机・椅子」「黒板」「非常灯」「蛍光灯」を使う。図工室の作品棚（C-17）は「教室の机・椅子」の流用。屋内専用に追加するなら：廊下の壁（腰板）、階段（上り口・立入禁止のロープ）、図工室の棚。屋内はこの 1 階だけで確定（F16 の裂け目の口は屋外扱い）。
 
-## 3. アクター（16×24、4 方向 × 2 フレーム）
+## 3. アクター（32×48、4 方向 × 2 フレーム。描き直しは高精細化 (4) で）
 
 | 種別 | 用途 | 状態 | 備考 |
 |---|---|---|---|
@@ -104,7 +104,7 @@
 ## 6f. 画面（UI 素材）
 | 用途 | 内容 | 状態 |
 |---|---|---|
-| タイトル背景 | 384×216 1 枚。国道と高架、夜。文字は入れない | **配置済み**（`tools/ui/paint_title_bg.py` で描く。`Title._setup_backdrop` が読む） |
+| タイトル背景 | 640×360 1 枚（現状は 384×216 を拡大表示。高精細化 (4) で描き直す）。国道と高架、夜。文字は入れない | **配置済み**（`tools/ui/paint_title_bg.py` で描く。`Title._setup_backdrop` が読む） |
 | 面の印（周回） | 題字の下の「面」1 文字を絵にするなら 12×12 1 枚 | 任意 |
 | ストア用スクリーンショット・トレーラー | 素材差し替え後に撮る（`docs/STORE_PAGE.md`） | 後工程 |
 

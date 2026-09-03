@@ -69,6 +69,8 @@ static func build_from(field: FieldBase, rows: PackedStringArray, ground_legend:
 		var d: Dictionary = data
 		field.add_interactable(Interactable.create(
 			str(d["id"]), str(d.get("name", "")), "", d["tile"], d.get("size", Vector2i.ONE), str(d.get("kind", "object"))))
+	# オートタイルの変種と、背の高い部品の上半分（TileSet に meta があるときだけ）
+	TileVariants.apply(field)
 
 
 ## 継承チェーンをたどって定数を集める（サブクラスの定義が優先）
