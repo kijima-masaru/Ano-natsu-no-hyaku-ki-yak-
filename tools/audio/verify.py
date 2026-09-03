@@ -50,6 +50,8 @@ def loop_seam_score(x: np.ndarray) -> float:
         step = d3[pos - 1] / local
         before, after = x3[pos - w5:pos], x3[pos:pos + w5]
         rb, ra = np.sqrt(np.mean(before ** 2) + 1e-12), np.sqrt(np.mean(after ** 2) + 1e-12)
+        if max(rb, ra) < 1e-3:
+            return 0.0  # 前後とも -60 dBFS 未満なら段差は聞こえない（心拍のような間の多いループの継ぎ目）
         return max(0.0, step - 3.0) + abs(20 * np.log10(rb / ra))
 
     rng = np.random.default_rng(0)
