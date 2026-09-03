@@ -26,6 +26,8 @@ var _by_trigger: Dictionary = {}
 var _handlers: Dictionary = {}
 var _item_ids: PackedStringArray = PackedStringArray()
 var _message_window: Node = null
+## 他のデータ（怪異など）が立てるフラグ。register_defined_flags() で受け取り、参照検証で既知として扱う
+var _extra_defined_flags: Dictionary = {}
 ## 待ち行列。要素はイベント ID（String）か、任意のアクション列 {label, actions}（Dictionary。AnomalySystem 等が使う）
 var _queue: Array = []
 
@@ -36,6 +38,13 @@ func _ready() -> void:
 	load_events(EVENTS_PATH)
 	# 他の autoload が register_action を終えた後（同フレーム末）に参照を検証する
 	validate.call_deferred()
+
+
+## 終了時に static の条件登録と自前のアクション登録を空にする。
+## ラムダを static 変数や autoload の辞書に残したまま終了すると、エンジン終了時にヒープ破壊で落ちる（Godot 4.7 で実機確認）
+func _exit_tree() -> void:
+	ConditionEvaluator.clear_registered()
+	_handlers.clear()
 
 
 # ── 登録 ──
@@ -108,9 +117,20 @@ func _load_items(path: String) -> void:
 				_item_ids.append(str((item as Dictionary).get("id", "")))
 
 
+## 他のシステムが立てるフラグを登録する（AnomalySystem が _ready で呼ぶ。validate は遅延実行なので間に合う）
+func register_defined_flags(flags: PackedStringArray) -> void:
+	for f: String in flags:
+		_extra_defined_flags[f] = true
+
+
+## events.json が立てるフラグ（AnomalySystem の検証が参照する）
+func defined_flags() -> Dictionary:
+	return EventValidator.defined_flags_of(_events)
+
+
 ## 起動時の全件検証。問題は validation_errors に残し push_error する
 func validate() -> void:
-	validation_errors = EventValidator.validate(_events, known_actions(), _item_ids)
+	validation_errors = EventValidator.validate(_events, known_actions(), _item_ids, _extra_defined_flags)
 	for msg: String in validation_errors:
 		push_error("EventSystem: " + msg)
 	if validation_errors.is_empty():
