@@ -81,64 +81,21 @@
 | フォント PixelMplus12 | 未配置（`resources/fonts/README.md`）。**最優先**。無いと代替フォントで文字幅が崩れる |
 | メッセージ枠・ノート・ミニマップ・タイトル | すべてコードで描画（`Palette` の色）。素材化は任意。タイトル画面の背景絵 1 枚（国道と高架、夜）は発注候補 |
 
-## 6. 音（`data/audio.json` の id と 1 対 1、31 件）
+## 6. 音（**完了**：`assets/audio/`、215 件、`tools/audio/` で全自作）
 
-想定フォーマット：OGG Vorbis、44.1kHz、モノラル可。ループ素材はシームレス。ピーク -3dBFS 程度で統一。
+すべて Python の波形合成でゼロから作成した（既存の音源・素材集は不使用。`tools/audio/README.md`）。仕様・狙い・統合案は `docs/AUDIO_SPEC.md`、検証記録は `docs/AUDIO_VERIFY.md`、一覧は `assets/audio/manifest.json`。
 
-### 6a. BGM
-| id | 用途 | 想定尺 | 備考 |
+**ただし AudioManager の読み込み経路が `resources/audio/<id>.ogg` のままなので、統合（`docs/AUDIO_SPEC.md` §12）を実装するまでゲーム内では鳴らない。** 発注は不要。人の演奏・作曲に差し替える場合は BGM から（ID・長さ・ラウドネスを守れば置き換えられる）。
+
+| 区分 | 件数 | 状態 | 備考 |
 |---|---|---|---|
-| bgm_title | タイトル | 60〜90 秒ループ | 低いドローン。旋律は最小限。蝉の残響 |
-| bgm_tension | 追跡者に追われている間（F03・F04・F10・F11） | 30〜45 秒ループ | 低音のうねり。心拍 se_heartbeat と重なる前提で帯域を避ける |
+| 6a BGM | 8 | 完了（暫定・差し替え可） | bgm_title / bgm_tension（既存 ID）+ bgm_seal / bgm_truth / bgm_ending(_a/_c) / bgm_credits |
+| 6b 環境音 | 72 | 完了 | 11 屋外フィールド × 4 時間帯 + `_still` 2 + 蝉レイヤー 4 + 屋内・特殊 22。既存 21 ID を含む |
+| 6c 効果音（既存） | 8 | 完了 | 同名で用意 |
+| 6d 未定義だった効果音 | ― | 完了 | se_stalker_*、se_heroine_step_*、ナツ（se_natsu_*）、怪異 27 件（se_an_*）、フィールド固有の物音は怪異の音に含めた |
+| 6e 終幕 | ― | 完了 | se_seal_stone、bgm_credits |
 
-### 6b. 環境音（フィールド × 時間帯）
-| id | フィールド | 想定尺 | 内容 |
-|---|---|---|---|
-| amb_road / amb_road_night | F01 | 60 秒ループ | 国道の走行音、自販機のコンプレッサ、夜は車が疎らに。**8/15 以降の夜に「静まり返る」怪異があるので、車の無い版も 1 本** |
-| amb_town / amb_town_night | F06 | 60 秒ループ | 蝉（昼）、掲示板の紙が鳴る、夜は虫の声 |
-| amb_residential / _night | F02 | 60 秒ループ | 蝉、遠い国道、夜はほぼ無音に近い風 |
-| amb_shopping_street | F05 | 60 秒ループ | 風、シャッターの軋み。足音が響く前提で薄く |
-| amb_estate | F12 | 60 秒ループ | 給水塔のモーター、階段室の反響、蝉 |
-| amb_newtown | F13 | 60 秒ループ | 均質な無音。街灯の微かなハム |
-| amb_underpass | F03 | 60 秒ループ | 高架の走行音が上から。防音壁の反響。**隧道内の別バリエーション 1 本** |
-| amb_orchard | F04 | 60 秒ループ | 蝉が最も多い。トタンが鳴る |
-| amb_temple / amb_shrine | F07 / F08 | 60 秒ループ | 風、木の軋み。梅林の枝が触れ合う音 |
-| amb_castle | F09 | 60 秒ループ | 高速の走行音が防音壁越しに低く。土塁の上は風 |
-| amb_ground | F10 | 60 秒ループ | 川の音、草が寝る音、金網が鳴る |
-| amb_school | F11 | 60 秒ループ | 無音と蛍光灯のハム。**旧校舎 1 階（床板が鳴る）の別バリエーション 1 本** |
-| amb_paddy / amb_paddy_night | F14 | 60 秒ループ | 蛙（夜）、水路。**蛙が止む版（怪異 an_f14_frogs と 8/30 以降）を 1 本** |
-| amb_river | F15 | 60 秒ループ | 川の音が全てを覆う。8/26 以降の霧の日は同じ素材をローパスで処理（ゲーム側） |
-| amb_valley | F16 | ― | **無音**。素材不要 |
-| amb_valley_inner | F16 裂け目の口（8/30、封石を戻すまで） | 30 秒ループ | 耳の奥で鳴るような極低音のハム。封印の瞬間に止まる（`set_ambience`） |
-
-蝉の減衰：`seasonal: "cicada"` の環境音は Calendar.day に応じてゲーム側で音量を落とす。素材側で日ごとの差分は不要。
-
-### 6c. 効果音
-| id | 用途 | 想定尺 |
-|---|---|---|
-| se_footstep / se_footstep_sneak | 歩行／忍び足 | 0.1〜0.2 秒 × 各 3〜4 バリエーション。地面種別差分（アスファルト・砂利・草・板）は将来 |
-| se_interact | 調べる | 0.15 秒 |
-| se_menu_move / se_menu_ok / se_menu_cancel | メニュー | 0.1 秒 |
-| se_door | 戸・門・旧校舎の昇降口 | 0.3 秒 |
-| se_heartbeat | 追跡中に重ねる心拍 | 4 秒ループ |
-
-### 6d. 未定義（`audio.json` に id を足してから発注）
-| 仮 id | 用途 | 備考 |
-|---|---|---|
-| se_stalker_step | 追跡者の足音（砂利・板の 2 種） | 主人公より遅く重い |
-| se_stalker_notice | 追跡開始時の低い息のような環境変化 | ジャンプスケアにしない |
-| se_heroine_step | 澪の足音（主人公より軽い） | 同行時の距離感 |
-| se_presence_pulse | ナツの「気配」（`entity_pulse`）。自販機の光が強まる音、足音が一組増える音 | 2〜3 種 |
-| se_paper / se_stairwell_lamp / se_water_moon | フィールド固有の物音（掲示板の紙、階段室の灯、田に映る月） | 任意 |
-| se_chime | F11 のチャイム（怪異 an_f11_chime） | 遠く、途中で止まる |
-
-## 6e. 終幕・演出（ステップ5 で確定）
-| 用途 | 内容 | 状態 |
-|---|---|---|
-| 8/30 封印（F16 裂け目の口） | `amb_valley_inner`（6b）。封石を押す音 1 本（石が擦れて止まる、2 秒） | 音 1 本が未定義（仮 id `se_seal_stone`） |
-| 8/30 提示画面 | 無音。素材不要 | ― |
-| 8/31 橋 | `amb_river` を流用。暗転のみ | ― |
-| スタッフロール | 無音か `bgm_title` の流用。曲を分けるなら 90 秒 1 本（仮 id `bgm_credits`） | 任意 |
+統合後に残る作業：足音の材質写像（タイル種別 → 8 材質）、文字送りの再生間隔の実機調整、曲の評価。
 
 ## 6f. 画面（UI 素材）
 | 用途 | 内容 | 状態 |
@@ -152,14 +109,14 @@
 1. フォント（配置のみ）
 2. アクター 5 種（player / heroine / stalker / toki / shige）。画面に常に映る
 3. タイル：序盤の環状ルート F12 → F01 → F06 → F02 → F05（52 種）→ F03・F13・F10（31 種）→ 残り
-4. 環境音 19 本（＋バリエーション 4 本）と効果音 8 本
+4. ~~環境音と効果音~~（完了。§6）
 5. 光源テクスチャ 2 枚、タイトル背景 1 枚
-6. 未定義の効果音（6d・6e）
+6. ~~未定義の効果音（6d・6e）~~（完了。§6）
 
 ## 8. 納品の受け入れ確認
 
 1. `docs/CONVENTIONS.md` §6 のパレット外の色が無い（`scenes/debug/palette_preview.tscn`）
 2. タイルはアトラスに配置して `iwato/tileset/source="resource"` で起動し、`driver_smoke` で 16 フィールドが組み上がる
 3. `xvfb-run ... driver_shots` の 18 枚を差し替え前と見比べる（`docs/PLAYTEST_LOG.md`「描画」）
-4. 音は `audio.json` の id と同名の OGG を置くだけで切り替わる。ループの継ぎ目とピークを確認
+4. 音は `assets/audio/<kind>/<id>.ogg` を AudioManager が読むように統合（`docs/AUDIO_SPEC.md` §12）した上で、`python3 tools/audio/verify.py --strict` が問題 0 件であること
 5. 描写制約（§0「描かないもの」）に触れるものが無いか、`docs/CONTENT_NOTICE.md` §1 の表で最終確認
