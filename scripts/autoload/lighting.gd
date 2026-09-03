@@ -22,14 +22,14 @@ const BRIGHTNESS_LIFT_MAX: float = 0.5
 const BRIGHTNESS_DEFAULT: float = 0.5
 ## タイル光源：真昼でも僅かに残す
 const LIGHT_ENERGY_DAY_FLOOR: float = 0.15
-const LIGHT_TEXTURE_PX: int = 64
+const LIGHT_TEXTURE_PX: int = 128
 ## 月光（夜のみ）
 const MOON_ENERGY_MAX: float = 0.18
 ## 懐中電灯
 const FLASHLIGHT_RANGE_TILES: float = 5.0
 const FLASHLIGHT_HALF_ANGLE_DEG: float = 26.0
 const FLASHLIGHT_ENERGY: float = 1.0
-const FLASHLIGHT_TEXTURE_PX: int = 176
+const FLASHLIGHT_TEXTURE_PX: int = 352
 ## この明るさ以上なら「照らされている」（Stalker の視認距離が伸びる）
 const LIT_THRESHOLD: float = 0.35
 

@@ -6,8 +6,8 @@ signal finished()
 
 const FONT_SIZE: int = 12
 const MIN_SECONDS: float = 3.0
-const SCROLL_PX_PER_SEC: float = 14.0
-const LINE_GAP_PX: float = 22.0
+const SCROLL_PX_PER_SEC: float = 23.0
+const LINE_GAP_PX: float = 37.0
 const MAX_LINES: int = 40
 
 var _elapsed: float = 0.0
@@ -29,7 +29,7 @@ func _ready() -> void:
 		label.text = MessageResolver.text(id)
 		label.add_theme_font_size_override("font_size", FONT_SIZE)
 		label.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT_DIM if i == 1 else Palette.UI_TEXT))
-		label.position = Vector2(24.0, y)
+		label.position = Vector2(40.0, y)
 		_lines.add_child(label)
 		y += LINE_GAP_PX
 

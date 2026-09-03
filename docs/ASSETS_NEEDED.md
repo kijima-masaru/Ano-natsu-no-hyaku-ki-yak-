@@ -13,7 +13,7 @@
 | 色 | `docs/CONVENTIONS.md` §6 のパレット（`scripts/autoload/palette.gd`）。夜は `Lighting` が全体を青く落とすので、**素材側で夜差分は作らない**。光源色は 4 色（街灯・蛍光灯・自販機の赤・月）のみ |
 | 表記 | 実在の地名・人名・団体名・宗教施設名を看板・掲示物に入れない。文字はダミー（架空の町名「磐戸」は可） |
 | 描かないもの | 流血・遺体・自死の方法や手段を連想させる器具・場所・状態（`docs/CONTENT_NOTICE.md`） |
-| 納品 | PNG（アルファ付き）。タイルはアトラス 1 枚（`resources/tilesets/common.tres`、`docs/TILESET_PIPELINE.md`）、アクターは種別ごとにシート 1 枚、音は OGG Vorbis 44.1kHz |
+| 納品 | PNG（アルファ付き）。タイルは **32×32**（アトラス 1 枚、`resources/tilesets/common.tres`、`docs/TILESET_PIPELINE.md`）、アクターは **32×48**、画面は **640×360**（1080p で整数 3 倍）、音は OGG Vorbis 44.1kHz |
 
 ## 1. 差し替えの境界（どこを差し替えれば切り替わるか）
 

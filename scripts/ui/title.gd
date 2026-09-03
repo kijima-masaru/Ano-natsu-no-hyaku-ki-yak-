@@ -49,7 +49,7 @@ func _setup_backdrop() -> void:
 	var rect: TextureRect = TextureRect.new()
 	rect.name = "Backdrop"
 	rect.texture = tex
-	rect.stretch_mode = TextureRect.STRETCH_KEEP
+	rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED  # 640×360 の絵に描き直すまでの暫定
 	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(rect)

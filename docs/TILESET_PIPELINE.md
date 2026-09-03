@@ -62,7 +62,7 @@ layer.set_cell(Vector2i(3, 4), TileGenerator.SOURCE_ID, coords)
 `resources/tilesets/common_atlas.png` は **`tools/tiles/paint_atlas.py`（Python、Pillow）が描く**。種別名 → ペインタ名・引数・通行可否は `tools/tiles/catalog.json` に書き出してあり（`driver_tileset_export --catalog`）、Python 側はそれを読んで同じ引数（色インデックス・密度）で描く。`common.tres` は `driver_tileset_export` が生成し、アトラスの texture としてこの PNG を参照する。
 
 ```
-python3 tools/tiles/paint_atlas.py --preview build/atlas_x4.png     # PNG を描く（決定的）
+python3 tools/tiles/paint_atlas.py --preview build/atlas_x4.png     # PNG を描く（決定的。16 px の元絵を --tile-scale 2 で 32 px に拡大。32 px 直描きへ移行中）
 $G --headless --path . --import                                       # PNG を取り込む
 $G --headless --path . $D -- --runner=$R/driver_tileset_export.gd     # common.tres を更新（PNG を参照）
 xvfb-run ... --runner=$R/driver_shots.gd --out=DIR                    # 画面で確認

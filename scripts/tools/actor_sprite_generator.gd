@@ -4,8 +4,8 @@ extends RefCounted
 ## tile_generator と同じ方針で scripts/tools/ に隔離し、将来は PNG のスプライトシートに差し替える。
 ## 4 方向 × 2 フレーム（立ち／歩き）。向きの判別ができれば十分な描き込みに留める。
 
-const W: int = GameConstants.ACTOR_SPRITE_SIZE.x
-const H: int = GameConstants.ACTOR_SPRITE_SIZE.y
+const W: int = GameConstants.ACTOR_ART_SIZE.x
+const H: int = GameConstants.ACTOR_ART_SIZE.y
 const FRAME_COUNT: int = 2
 
 static var _cache: Dictionary = {}
@@ -30,6 +30,8 @@ static func get_texture(kind: String, facing: Vector2i, frame: int = 0) -> Image
 		_:
 			push_warning("ActorSpriteGenerator: 種別 '%s' は未定義のためプレイヤーの絵を使います" % kind)
 			_draw_player(image, facing, frame % FRAME_COUNT)
+	if GameConstants.ART_SCALE > 1:
+		image.resize(GameConstants.ACTOR_SPRITE_SIZE.x, GameConstants.ACTOR_SPRITE_SIZE.y, Image.INTERPOLATE_NEAREST)
 	var texture: ImageTexture = ImageTexture.create_from_image(image)
 	_cache[key] = texture
 	return texture

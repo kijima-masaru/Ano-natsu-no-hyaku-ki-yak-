@@ -10,7 +10,7 @@ signal finished()
 const FONT_SIZE: int = 12
 const CHARS_PER_SECOND_SHOWN: float = 18.0
 const CHARS_PER_SECOND_ACTION: float = 12.0
-const LINE_CHARS: int = 28
+const LINE_CHARS: int = 46
 ## 見た文を出し終えてから実際の行動を出すまでの間
 const PAUSE_BEFORE_ACTION: float = 1.4
 ## 件と件の間の暗転

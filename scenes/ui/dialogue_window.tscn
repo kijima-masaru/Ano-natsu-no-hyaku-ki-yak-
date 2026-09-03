@@ -13,61 +13,61 @@ script = ExtResource("1_dialogue")
 
 [node name="NameBox" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 138.0
-offset_right = 88.0
-offset_bottom = 153.0
+offset_left = 13.0
+offset_top = 230.0
+offset_right = 147.0
+offset_bottom = 255.0
 mouse_filter = 2
 
 [node name="Name" type="Label" parent="NameBox"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 1.0
-offset_right = 78.0
-offset_bottom = 14.0
+offset_left = 10.0
+offset_top = 2.0
+offset_right = 130.0
+offset_bottom = 23.0
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 152.0
-offset_right = 376.0
-offset_bottom = 208.0
+offset_left = 13.0
+offset_top = 253.0
+offset_right = 627.0
+offset_bottom = 347.0
 mouse_filter = 2
 
 [node name="Body" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 6.0
-offset_right = 356.0
-offset_bottom = 50.0
+offset_left = 13.0
+offset_top = 10.0
+offset_right = 593.0
+offset_bottom = 83.0
 
 [node name="Hint" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 350.0
-offset_top = 40.0
-offset_right = 364.0
-offset_bottom = 54.0
+offset_left = 583.0
+offset_top = 67.0
+offset_right = 607.0
+offset_bottom = 90.0
 text = "▼"
 
 [node name="FontNote" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 290.0
-offset_top = 3.0
-offset_right = 364.0
-offset_bottom = 17.0
+offset_left = 483.0
+offset_top = 5.0
+offset_right = 607.0
+offset_bottom = 28.0
 
 [node name="ChoicePanel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 200.0
-offset_top = 96.0
-offset_right = 376.0
-offset_bottom = 150.0
+offset_left = 333.0
+offset_top = 160.0
+offset_right = 627.0
+offset_bottom = 250.0
 mouse_filter = 2
 
 [node name="List" type="VBoxContainer" parent="ChoicePanel"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 4.0
-offset_right = 170.0
-offset_bottom = 50.0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 283.0
+offset_bottom = 83.0
 script = ExtResource("2_menu_list")

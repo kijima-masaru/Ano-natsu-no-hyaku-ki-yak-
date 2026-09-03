@@ -7,17 +7,17 @@ extends CharacterBody2D
 
 signal remarked(evidence_id: String)
 
-const SPEED: float = 60.0
-const ACCEL: float = 360.0
-const TRAIL_STEP: float = 8.0
+const SPEED: float = 3.75 * GameConstants.TILE_SIZE
+const ACCEL: float = 22.5 * GameConstants.TILE_SIZE
+const TRAIL_STEP: float = 0.5 * GameConstants.TILE_SIZE
 const TRAIL_MAX: int = 96
-const ARRIVE_DISTANCE: float = 4.0
+const ARRIVE_DISTANCE: float = 0.25 * GameConstants.TILE_SIZE
 ## 段階（無自覚／違和感／疑念／確信）ごとの目撃半径（px）。
 ## 必ず追従距離 FOLLOW_TILES × 16px より小さくする。普通に追従している澪には見られず、
 ## 遷移直後や先回りで近くにいるとき、澪が追いつく前に調べなかったときだけ目撃される。
 ## （実機検証で、追従距離 ≥ 目撃半径だと同行中の隠蔽が全て失敗すると分かったため。docs/PLAYTEST_LOG.md）
-const WITNESS_RADIUS_BY_STAGE: PackedFloat32Array = [24.0, 40.0, 56.0, 72.0]
-const LOST_DISTANCE: float = 160.0
+const WITNESS_RADIUS_BY_STAGE: PackedFloat32Array = [1.5 * GameConstants.TILE_SIZE, 2.5 * GameConstants.TILE_SIZE, 3.5 * GameConstants.TILE_SIZE, 4.5 * GameConstants.TILE_SIZE]
+const LOST_DISTANCE: float = 10.0 * GameConstants.TILE_SIZE
 const STUCK_SECONDS: float = 1.2
 const AHEAD_IDLE_SECONDS: float = 2.0
 ## 段階ごとの追従距離（タイル）／先回りする確率／主人公を見る間隔（秒、0 は見ない）
@@ -108,7 +108,7 @@ func _record_trail(player_pos: Vector2) -> void:
 
 ## 追従先：段階に応じた距離だけ軌跡を遡った点。疑念以上で主人公が止まっていれば先回り点
 func _pick_target(player: CharacterBody2D, stage: int, delta: float) -> Vector2:
-	var idle: bool = player.velocity.length() < 4.0
+	var idle: bool = player.velocity.length() < 0.25 * GameConstants.TILE_SIZE
 	_idle_timer = _idle_timer + delta if idle else 0.0
 	if _ahead_target != Vector2.INF:
 		if not idle:
@@ -127,7 +127,7 @@ func _pick_target(player: CharacterBody2D, stage: int, delta: float) -> Vector2:
 
 func _check_lost(player: CharacterBody2D, target: Vector2, delta: float) -> void:
 	var far: bool = global_position.distance_to(target) > ARRIVE_DISTANCE * 4.0
-	_stuck_timer = _stuck_timer + delta if far and velocity.length() < 2.0 else 0.0
+	_stuck_timer = _stuck_timer + delta if far and velocity.length() < 0.125 * GameConstants.TILE_SIZE else 0.0
 	if global_position.distance_to(player.global_position) > LOST_DISTANCE or _stuck_timer > STUCK_SECONDS:
 		snap_behind(player, player.facing)
 		_stuck_timer = 0.0
@@ -146,7 +146,7 @@ func _update_facing(player: CharacterBody2D, stage: int, delta: float) -> void:
 			_look_timer = 0.0
 			_look_hold = LOOK_HOLD
 			return
-	if velocity.length() > 4.0:
+	if velocity.length() > 0.25 * GameConstants.TILE_SIZE:
 		var dir: Vector2 = velocity
 		var new_facing: Vector2i = Vector2i(signi(roundi(dir.x)), 0) if absf(dir.x) > absf(dir.y) else Vector2i(0, signi(roundi(dir.y)))
 		if new_facing != Vector2i.ZERO and new_facing != facing:
@@ -163,7 +163,7 @@ func _face_toward(point: Vector2) -> void:
 
 
 func _tick_footsteps(delta: float) -> void:
-	if velocity.length() < 4.0:
+	if velocity.length() < 0.25 * GameConstants.TILE_SIZE:
 		_step_timer = 0.0
 		return
 	_step_timer += delta
@@ -173,7 +173,7 @@ func _tick_footsteps(delta: float) -> void:
 
 
 func _tick_animation(delta: float) -> void:
-	if velocity.length() < 4.0:
+	if velocity.length() < 0.25 * GameConstants.TILE_SIZE:
 		if _anim_frame != 0:
 			_anim_frame = 0
 			_update_sprite()

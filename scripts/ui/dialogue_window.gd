@@ -14,7 +14,7 @@ signal choice_made(index: int)
 
 const FONT_PATH: String = "res://resources/fonts/PixelMplus12-Regular.ttf"
 const FONT_SIZE: int = 12
-const LINE_CHARS: int = 28
+const LINE_CHARS: int = 46
 const LINES_PER_PAGE: int = 2
 const BASE_CHARS_PER_SECOND: float = 30.0
 ## 設定 text_speed（0〜1）を倍率に変換する範囲

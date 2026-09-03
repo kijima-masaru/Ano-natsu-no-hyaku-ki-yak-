@@ -13,23 +13,23 @@ script = ExtResource("1_settings")
 
 [node name="Panel" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 16.0
-offset_right = 360.0
-offset_bottom = 200.0
+offset_left = 40.0
+offset_top = 27.0
+offset_right = 600.0
+offset_bottom = 333.0
 mouse_filter = 2
 
 [node name="Title" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 6.0
-offset_right = 328.0
-offset_bottom = 20.0
+offset_left = 13.0
+offset_top = 10.0
+offset_right = 547.0
+offset_bottom = 33.0
 
 [node name="List" type="VBoxContainer" parent="Panel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 26.0
-offset_right = 328.0
-offset_bottom = 176.0
+offset_left = 13.0
+offset_top = 43.0
+offset_right = 547.0
+offset_bottom = 293.0
 script = ExtResource("2_menu_list")

@@ -13,30 +13,30 @@ script = ExtResource("1_slot_menu")
 
 [node name="Panel" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 344.0
-offset_bottom = 176.0
+offset_left = 67.0
+offset_top = 67.0
+offset_right = 573.0
+offset_bottom = 293.0
 mouse_filter = 2
 
 [node name="Title" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 6.0
-offset_right = 296.0
-offset_bottom = 20.0
+offset_left = 13.0
+offset_top = 10.0
+offset_right = 493.0
+offset_bottom = 33.0
 
 [node name="List" type="VBoxContainer" parent="Panel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 26.0
-offset_right = 296.0
-offset_bottom = 110.0
+offset_left = 13.0
+offset_top = 43.0
+offset_right = 493.0
+offset_bottom = 183.0
 script = ExtResource("2_menu_list")
 
 [node name="Hint" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 116.0
-offset_right = 296.0
-offset_bottom = 130.0
+offset_left = 13.0
+offset_top = 193.0
+offset_right = 493.0
+offset_bottom = 217.0
