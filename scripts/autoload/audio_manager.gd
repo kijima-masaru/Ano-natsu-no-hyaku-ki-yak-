@@ -33,6 +33,8 @@ var _ambience: Array[AudioStreamPlayer] = []
 var _ambience_active: int = 0
 var _current_ambience_id: String = ""
 var _heartbeat: AudioStreamPlayer
+## set_ambience で差し替え中（フィールドに入ると解除）
+var _ambience_override_active: bool = false
 var _se_pool: Array[AudioStreamPlayer] = []
 
 
@@ -49,6 +51,7 @@ func _ready() -> void:
 	EventSystem.register_action("play_sound", func(a: Dictionary, _c: Dictionary) -> void: play_se(str(a.get("id", ""))))
 	EventSystem.register_action("play_bgm", func(a: Dictionary, _c: Dictionary) -> void: play_bgm(str(a.get("id", ""))))
 	EventSystem.register_action("stop_bgm", func(_a: Dictionary, _c: Dictionary) -> void: stop_bgm())
+	EventSystem.register_action("set_ambience", func(a: Dictionary, _c: Dictionary) -> void: set_ambience(str(a.get("id", ""))))
 
 
 ## 終了時に再生を止め、static の合成音キャッシュを空にする（残すと AudioStreamWAV と再生が終了時にリークする。Godot 4.7 で実機確認）
@@ -181,7 +184,19 @@ func ambience_for(field_id: String, time_of_day: String) -> String:
 	return f.ambience_track
 
 
+## イベントが環境音を差し替える（set_ambience アクション）。空文字で無音。次のフィールドに入るまで有効
+func set_ambience(id: String) -> void:
+	_ambience_override_active = true
+	if id.is_empty():
+		stop_ambience()
+	elif _tracks.has(id):
+		play_ambience(id)
+	else:
+		push_error("AudioManager: set_ambience の '%s' は audio.json に無い" % id)
+
+
 func _on_field_entered(field_id: String, _from: String) -> void:
+	_ambience_override_active = false
 	var id: String = ambience_for(field_id, Calendar.time_of_day)
 	if id.is_empty():
 		stop_ambience()
@@ -190,7 +205,7 @@ func _on_field_entered(field_id: String, _from: String) -> void:
 
 
 func _refresh_field_ambience() -> void:
-	if SceneRouter.current_field_id.is_empty():
+	if SceneRouter.current_field_id.is_empty() or _ambience_override_active:
 		return
 	var id: String = ambience_for(SceneRouter.current_field_id, Calendar.time_of_day)
 	if id != _current_ambience_id and not id.is_empty():
