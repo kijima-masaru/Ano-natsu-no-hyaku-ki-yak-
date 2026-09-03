@@ -1,21 +1,29 @@
 class_name ActorSpriteGenerator
 extends RefCounted
-## アクター用 16×24 の仮スプライトをプロシージャル生成する。
-## tile_generator と同じ方針で scripts/tools/ に隔離し、将来は PNG のスプライトシートに差し替える。
-## 4 方向 × 2 フレーム（立ち／歩き）。向きの判別ができれば十分な描き込みに留める。
+## アクターのスプライト（32×48、4 方向 × 2 フレーム）を返す。
+## resources/actors/<kind>.png（tools/actors/paint_actors.py が描くシート。列＝フレーム、行＝下・上・左・右）があればそれを切り出し、
+## 無ければ 16×24 の仮スプライトをプロシージャル生成して拡大する（tile_generator と同じ方針の保険）。
 
 const W: int = GameConstants.ACTOR_ART_SIZE.x
 const H: int = GameConstants.ACTOR_ART_SIZE.y
 const FRAME_COUNT: int = 2
+const SHEET_DIR: String = "res://resources/actors/"
+## シートの行の並び
+const SHEET_ROWS: Array[Vector2i] = [Vector2i.DOWN, Vector2i.UP, Vector2i.LEFT, Vector2i.RIGHT]
 
 static var _cache: Dictionary = {}
+static var _sheets: Dictionary = {}
 
 
 ## 種別・向き・フレームからテクスチャを返す（キャッシュ済みなら同じインスタンス）
-static func get_texture(kind: String, facing: Vector2i, frame: int = 0) -> ImageTexture:
+static func get_texture(kind: String, facing: Vector2i, frame: int = 0) -> Texture2D:
 	var key: String = "%s|%d,%d|%d" % [kind, facing.x, facing.y, frame % FRAME_COUNT]
 	if _cache.has(key):
 		return _cache[key]
+	var from_sheet: Texture2D = _from_sheet(kind, facing, frame % FRAME_COUNT)
+	if from_sheet != null:
+		_cache[key] = from_sheet
+		return from_sheet
 	var image: Image = Image.create_empty(W, H, false, Image.FORMAT_RGBA8)
 	image.fill(Color.TRANSPARENT)
 	match kind:
@@ -25,7 +33,7 @@ static func get_texture(kind: String, facing: Vector2i, frame: int = 0) -> Image
 			_draw_heroine(image, facing, frame % FRAME_COUNT)
 		"stalker":
 			_draw_stalker(image, facing, frame % FRAME_COUNT)
-		"toki":
+		"toki", "shige":
 			_draw_toki(image, facing, frame % FRAME_COUNT)
 		_:
 			push_warning("ActorSpriteGenerator: 種別 '%s' は未定義のためプレイヤーの絵を使います" % kind)
@@ -39,6 +47,30 @@ static func get_texture(kind: String, facing: Vector2i, frame: int = 0) -> Image
 
 static func clear_cache() -> void:
 	_cache.clear()
+	_sheets.clear()
+
+
+## PNG シートから切り出す。シートが無い・寸法が合わない種別は null（生成に戻る）
+static func _from_sheet(kind: String, facing: Vector2i, frame: int) -> Texture2D:
+	if not _sheets.has(kind):
+		var path: String = SHEET_DIR + kind + ".png"
+		var tex: Texture2D = load(path) as Texture2D if ResourceLoader.exists(path) else null
+		var size: Vector2i = GameConstants.ACTOR_SPRITE_SIZE
+		if tex != null and (tex.get_width() != size.x * FRAME_COUNT or tex.get_height() != size.y * SHEET_ROWS.size()):
+			push_warning("ActorSpriteGenerator: %s の寸法 %dx%d が %dx%d と違うので生成に戻します" % [path, tex.get_width(), tex.get_height(), size.x * FRAME_COUNT, size.y * SHEET_ROWS.size()])
+			tex = null
+		_sheets[kind] = tex
+	var sheet: Texture2D = _sheets[kind]
+	if sheet == null:
+		return null
+	var row: int = SHEET_ROWS.find(facing)
+	if row < 0:
+		push_error("ActorSpriteGenerator: facing %s は上下左右の単位ベクトルである必要があります" % facing)
+		row = 0
+	var atlas: AtlasTexture = AtlasTexture.new()
+	atlas.atlas = sheet
+	atlas.region = Rect2(Vector2(frame * GameConstants.ACTOR_SPRITE_SIZE.x, row * GameConstants.ACTOR_SPRITE_SIZE.y), Vector2(GameConstants.ACTOR_SPRITE_SIZE))
+	return atlas
 
 
 static func _rect(image: Image, x: int, y: int, w: int, h: int, index: int) -> void:

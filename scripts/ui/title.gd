@@ -39,7 +39,7 @@ func _ready() -> void:
 		_show_notice()
 
 
-## 背景絵（resources/ui/title_bg.png、384×216）があれば Background の上に敷く。無ければ単色のまま
+## 背景絵（resources/ui/title_bg.png、640×360）があれば Background の上に敷く。無ければ単色のまま
 func _setup_backdrop() -> void:
 	if not ResourceLoader.exists(BACKDROP_PATH):
 		return
@@ -49,7 +49,7 @@ func _setup_backdrop() -> void:
 	var rect: TextureRect = TextureRect.new()
 	rect.name = "Backdrop"
 	rect.texture = tex
-	rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED  # 640×360 の絵に描き直すまでの暫定
+	rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED  # 基準解像度と同じ 640×360 なので等倍。寸法が違っても画面を覆う
 	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(rect)
