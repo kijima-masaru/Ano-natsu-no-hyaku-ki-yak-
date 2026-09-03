@@ -4149,6 +4149,128 @@
       "priority": 0
     },
     {
+      "id": "ev_f14_shige_d29",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_npc",
+      "day_range": [
+        29,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on"
+        },
+        {
+          "flag": "baba_told_seal",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_d29_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_3"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.6
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_4"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_5"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_6"
+        },
+        {
+          "type": "set_flag",
+          "flag": "baba_told_seal"
+        },
+        {
+          "type": "raise_suspicion",
+          "amount": 5,
+          "reason": "baba_told_seal"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 20
+    },
+    {
+      "id": "ev_f14_shige_d29_alone",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_npc",
+      "day_range": [
+        29,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on",
+          "is": false
+        },
+        {
+          "flag": "baba_told_seal",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_d29_alone"
+        }
+      ],
+      "once": false,
+      "priority": 15
+    },
+    {
+      "id": "ev_f14_shige_d29_after",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_npc",
+      "day_range": [
+        29,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "baba_told_seal"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_shige_d29_after"
+        }
+      ],
+      "once": false,
+      "priority": 12
+    },
+    {
       "id": "ev_f14_shige_early",
       "field": "F14",
       "trigger": "on_interact",
