@@ -59,6 +59,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not _disabled.has(get_selected_id()):
 			AudioManager.play_se("se_menu_ok")
 			activated.emit(_index, get_selected_id())
+		else:
+			AudioManager.play_se("se_menu_error")
 	elif event.is_action_pressed("cancel") or event.is_action_pressed("ui_cancel"):
 		AudioManager.play_se("se_menu_cancel")
 		cancelled.emit()

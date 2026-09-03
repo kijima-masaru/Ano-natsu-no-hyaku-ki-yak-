@@ -58,4 +58,5 @@ func _on_activated(_index: int, id: String) -> void:
 		_hint.add_theme_color_override("font_color", Palette.get_color(Palette.UI_ALERT))
 		_list.set_item_text(id, _describe(slot))
 		return
+	AudioManager.play_se("se_save" if mode == "save" else "se_load")
 	finished.emit(true, slot)

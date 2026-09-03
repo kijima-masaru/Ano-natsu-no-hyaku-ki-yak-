@@ -19,6 +19,7 @@ var _done: bool = false
 
 func _ready() -> void:
 	_bg.color = Palette.get_color(Palette.SUMI)
+	AudioManager.play_bgm("bgm_credits")
 	var y: float = float(GameConstants.VIEWPORT_HEIGHT)
 	for i: int in range(1, MAX_LINES + 1):
 		var id: String = "ui_credits_%02d" % i

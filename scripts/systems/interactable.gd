@@ -44,6 +44,7 @@ func set_actor_sprite(kind: String, facing: Vector2i = Vector2i.DOWN) -> void:
 ## プレイヤーから呼ばれる
 func interact(by: Node) -> void:
 	times_interacted += 1
+	AudioManager.play_se("se_interact")
 	interacted.emit(by, self)
 
 

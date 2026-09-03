@@ -10,6 +10,8 @@ signal presence_pulse(strength: float)
 ## 不自然な幸運が働いた（プレイヤーが後から振り返る種）
 signal luck_triggered(index: int, context: String)
 signal spoke(message_id: String)
+## 話し始める直前（吹き出しが開く前）。音響側が「息を吸う」音を鳴らす
+signal speaking(message_id: String)
 
 const SPEAKER: String = "natsu"
 const INTRO_FLAG: String = "entity_intro_done"
@@ -47,6 +49,7 @@ func speak(message_id: String) -> void:
 		entry.speaker_name = str(sp.get("name", ""))
 	GameState.raise_flag(INTRO_FLAG)
 	pulse(0.3)
+	speaking.emit(message_id)
 	await EventSystem.show_entry(entry)
 	spoke.emit(message_id)
 

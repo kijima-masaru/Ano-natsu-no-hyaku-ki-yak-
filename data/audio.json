@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": 1,
-    "note": "kind: bgm / ambience / se。synth は SoundSynth の暫定合成。本番は同 id の OGG を resources/audio/<id>.ogg に置くと AudioManager が優先して読む。seasonal=cicada の音量は Calendar.day で減衰"
+    "note": "kind: bgm / ambience / se。OGG は assets/audio/<kind>/<id>.ogg（tools/audio で合成、docs/AUDIO_SPEC.md）。無ければ synth（SoundSynth の暫定合成）か無音。seasonal=cicada は蝉レイヤーの音量を Calendar.day で緩やかに減衰"
   },
   "tracks": [
     {
@@ -68,8 +68,7 @@
         "loop": true,
         "freq": 4200.0,
         "density": 0.6
-      },
-      "seasonal": "cicada"
+      }
     },
     {
       "id": "amb_town_night",
@@ -97,8 +96,7 @@
         "loop": true,
         "freq": 4000.0,
         "density": 0.5
-      },
-      "seasonal": "cicada"
+      }
     },
     {
       "id": "amb_residential_night",
@@ -137,8 +135,7 @@
         "gain": 0.14,
         "loop": true,
         "freq": 120.0
-      },
-      "seasonal": "cicada"
+      }
     },
     {
       "id": "amb_newtown",
@@ -178,8 +175,7 @@
         "loop": true,
         "freq": 4600.0,
         "density": 0.7
-      },
-      "seasonal": "cicada"
+      }
     },
     {
       "id": "amb_temple",
@@ -258,8 +254,7 @@
         "loop": true,
         "freq": 3800.0,
         "density": 0.6
-      },
-      "seasonal": "cicada"
+      }
     },
     {
       "id": "amb_paddy_night",
@@ -419,6 +414,1297 @@
         "loop": true,
         "freq": 55.0
       }
+    },
+    {
+      "id": "amb_castle_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "城址。防音壁越しの高速の低音と土塁の風"
+    },
+    {
+      "id": "amb_castle_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "城址。防音壁越しの高速の低音と土塁の風"
+    },
+    {
+      "id": "amb_castle_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "城址。防音壁越しの高速の低音と土塁の風"
+    },
+    {
+      "id": "amb_cicada_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "ヒグラシ。夕だけ。8 月末まで残る唯一の蝉"
+    },
+    {
+      "id": "amb_cicada_rasp",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "アブラゼミ系の密な群れ。8 月前半の昼",
+      "seasonal": "cicada"
+    },
+    {
+      "id": "amb_cicada_rasp_thin",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "同じ群れの疎な版。8 月後半",
+      "seasonal": "cicada"
+    },
+    {
+      "id": "amb_cicada_tonal",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "ミンミンゼミ系の数匹。うねる音程",
+      "seasonal": "cicada"
+    },
+    {
+      "id": "amb_estate_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "団地。反射した国道、給水塔のモーター、ポストの蓋"
+    },
+    {
+      "id": "amb_estate_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "団地。反射した国道、給水塔のモーター、ポストの蓋"
+    },
+    {
+      "id": "amb_estate_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "団地。反射した国道、給水塔のモーター、ポストの蓋"
+    },
+    {
+      "id": "amb_ground_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "河川敷。遠い川、風、草擦れ、金網"
+    },
+    {
+      "id": "amb_ground_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "河川敷。遠い川、風、草擦れ、金網"
+    },
+    {
+      "id": "amb_ground_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "河川敷。遠い川、風、草擦れ、金網"
+    },
+    {
+      "id": "amb_newtown_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "ニュータウン。均質な無音と街灯のハム"
+    },
+    {
+      "id": "amb_newtown_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "ニュータウン。均質な無音と街灯のハム"
+    },
+    {
+      "id": "amb_newtown_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "ニュータウン。均質な無音と街灯のハム"
+    },
+    {
+      "id": "amb_orchard_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "谷戸。風・葉擦れ・トタン。夜は虫が最も多い"
+    },
+    {
+      "id": "amb_orchard_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "谷戸。風・葉擦れ・トタン。夜は虫が最も多い"
+    },
+    {
+      "id": "amb_orchard_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "谷戸。風・葉擦れ・トタン。夜は虫が最も多い"
+    },
+    {
+      "id": "amb_paddy_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "朝和。水路と風。夜は蛙の合唱"
+    },
+    {
+      "id": "amb_paddy_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "朝和。水路と風。夜は蛙の合唱"
+    },
+    {
+      "id": "amb_paddy_still",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "蛙が止んだ夜。水路と風だけ"
+    },
+    {
+      "id": "amb_residential_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "住宅地。遠い国道が壁に吸われ、風と葉だけ"
+    },
+    {
+      "id": "amb_residential_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "住宅地。遠い国道が壁に吸われ、風と葉だけ"
+    },
+    {
+      "id": "amb_river_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "蒼籠川。川の音が全てを覆う"
+    },
+    {
+      "id": "amb_river_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "蒼籠川。川の音が全てを覆う"
+    },
+    {
+      "id": "amb_river_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "蒼籠川。川の音が全てを覆う"
+    },
+    {
+      "id": "amb_road_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "国道281号。車の床・通過・自販機のコンプレッサ・換気扇。町で唯一うるさい"
+    },
+    {
+      "id": "amb_road_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "国道281号。車の床・通過・自販機のコンプレッサ・換気扇。町で唯一うるさい"
+    },
+    {
+      "id": "amb_road_still",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "国道が静まり返る（車が一台も来ない）。自販機と灯りだけ"
+    },
+    {
+      "id": "amb_school_1f",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "旧校舎 1 階。床板、不規則な蛍光灯、遠いチャイムの残骸"
+    },
+    {
+      "id": "amb_school_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "校庭。無音に近い。校旗の綱"
+    },
+    {
+      "id": "amb_school_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "校庭。無音に近い。校旗の綱"
+    },
+    {
+      "id": "amb_school_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "校庭。無音に近い。校旗の綱"
+    },
+    {
+      "id": "amb_shopping_street_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "旧街道。ほぼ無音。狭い通りの風とシャッターの軋み"
+    },
+    {
+      "id": "amb_shopping_street_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "旧街道。ほぼ無音。狭い通りの風とシャッターの軋み"
+    },
+    {
+      "id": "amb_shopping_street_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "旧街道。ほぼ無音。狭い通りの風とシャッターの軋み"
+    },
+    {
+      "id": "amb_shrine_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "天神社。町の音が消え、枯れた梅の枝だけ"
+    },
+    {
+      "id": "amb_shrine_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "天神社。町の音が消え、枯れた梅の枝だけ"
+    },
+    {
+      "id": "amb_shrine_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "天神社。町の音が消え、枯れた梅の枝だけ"
+    },
+    {
+      "id": "amb_temple_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "光明院 門前。風が止む墓域、木の軋み"
+    },
+    {
+      "id": "amb_temple_hall",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "堂内。木造の高い天井の長い残響、板壁越しの風"
+    },
+    {
+      "id": "amb_temple_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "光明院 門前。風が止む墓域、木の軋み"
+    },
+    {
+      "id": "amb_temple_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "光明院 門前。風が止む墓域、木の軋み"
+    },
+    {
+      "id": "amb_town_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "市民センター前。掲示板の紙、遠い国道、交番の灯り"
+    },
+    {
+      "id": "amb_town_library",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "図書室。空調と蛍光灯、コンクリートの短い残響"
+    },
+    {
+      "id": "amb_town_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "市民センター前。掲示板の紙、遠い国道、交番の灯り"
+    },
+    {
+      "id": "amb_underpass_evening",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "高架下。上から降ってくる走行音、防音壁の唸り"
+    },
+    {
+      "id": "amb_underpass_morning",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "高架下。上から降ってくる走行音、防音壁の唸り"
+    },
+    {
+      "id": "amb_underpass_night",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "高架下。上から降ってくる走行音、防音壁の唸り"
+    },
+    {
+      "id": "amb_underpass_tunnel",
+      "kind": "ambience",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "隧道内。長い残響、水滴、遅れて逆から返る反響"
+    },
+    {
+      "id": "bgm_credits",
+      "kind": "bgm",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "スタッフロール。蝉を抜いたタイトルのドローン、断片を 5 音に"
+    },
+    {
+      "id": "bgm_ending",
+      "kind": "bgm",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "8/31 御渡橋。基本（エンド B）。川、細い持続音、断片"
+    },
+    {
+      "id": "bgm_ending_a",
+      "kind": "bgm",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "8/31 エンド A。下にナツのトーンが小さく残る"
+    },
+    {
+      "id": "bgm_ending_c",
+      "kind": "bgm",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "8/31 エンド C。旋律を鳴らさない"
+    },
+    {
+      "id": "bgm_seal",
+      "kind": "bgm",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "8/30 封印。谷の不協和比のドローンと、面を戻す木の置き音"
+    },
+    {
+      "id": "bgm_truth",
+      "kind": "bgm",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "8/30 真相。最も強い。ナツのトーンと谷の比を同じ音として大きく"
+    },
+    {
+      "id": "se_an_f01_silence",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "国道の音が消える。走行音が閉じ、自販機のハムだけ残る"
+    },
+    {
+      "id": "se_an_f02_laundry",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "竿だけが揺れている。竿の 2 打と湿った布"
+    },
+    {
+      "id": "se_an_f03_bus_nobody",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "バスが来て扉が開閉、誰も降りない。チャイム無し"
+    },
+    {
+      "id": "se_an_f03_tunnel_light",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "隧道を抜ける圧の抜け。ローパスが開く"
+    },
+    {
+      "id": "se_an_f04_bulb",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "フィラメントの「チン」と細いハム"
+    },
+    {
+      "id": "se_an_f04_loop",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "方向感の失われる圧の揺れとトタン"
+    },
+    {
+      "id": "se_an_f05_fresh_goods",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "新しい駄菓子。セロファンが一度鳴る"
+    },
+    {
+      "id": "se_an_f06_board_night",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "紙が一枚だけ風で鳴り、画鋲が板を打つ"
+    },
+    {
+      "id": "se_an_f07_gaze",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "格子が鳴り、布が擦れる。堂内の反響"
+    },
+    {
+      "id": "se_an_f07_lamps",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "灯明の炎と芯の弾け"
+    },
+    {
+      "id": "se_an_f08_lookout_lights",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "遠くの電気的な唸りが膨らむだけ"
+    },
+    {
+      "id": "se_an_f08_plum_steps",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "枝の折れる音が 3 回、近づく"
+    },
+    {
+      "id": "se_an_f09_bridge_gone",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "土が空堀へこぼれる。樹林の風"
+    },
+    {
+      "id": "se_an_f09_map_drift",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "案内板のアクリルが軋み、枠に当たる"
+    },
+    {
+      "id": "se_an_f10_light",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "照明塔が一灯点く。遮断器と放電灯の点火"
+    },
+    {
+      "id": "se_an_f10_line",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "堤防の風と、河原の石が転がる"
+    },
+    {
+      "id": "se_an_f11_chime",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "独自の 4 音の鐘状の音、遠く、3 音目で切れる"
+    },
+    {
+      "id": "se_an_f11_desks",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "机の脚が一度床に当たる。教室の反響"
+    },
+    {
+      "id": "se_an_f11_upstairs",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "二階で机を引きずる音、二回"
+    },
+    {
+      "id": "se_an_f12_stairwell_blink",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "灯りが消え、三階だけ点く。リレー・ハム停止・安定器の点き始め"
+    },
+    {
+      "id": "se_an_f13_house_count",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "遠くの玄関扉が一度だけ閉まる。街灯のハム"
+    },
+    {
+      "id": "se_an_f14_frogs",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "草が順に倒れていく 5 回。足音は無い"
+    },
+    {
+      "id": "se_an_f14_moon",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "水面が一度だけ鳴る"
+    },
+    {
+      "id": "se_an_f15_fog",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "川の音が霧に閉じていく"
+    },
+    {
+      "id": "se_an_f15_footsteps",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "向こう岸から橋の板の足音 4 歩、同じ歩調で"
+    },
+    {
+      "id": "se_an_f16_count",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "石の鈍い打音が三つ、三つ目で止まる。声は無い"
+    },
+    {
+      "id": "se_an_f16_nothing",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "ほぼ無音。微かな風と小石一つ"
+    },
+    {
+      "id": "se_day_advance",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "日付が進む。遠くの低い 1 打と短い静けさ"
+    },
+    {
+      "id": "se_door_metal",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "金属戸。重い蝶番と箱鳴り"
+    },
+    {
+      "id": "se_door_sliding",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "引き戸。溝を滑って端に当たる"
+    },
+    {
+      "id": "se_evidence_add",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "証拠が増える。ノートに紙を挟む"
+    },
+    {
+      "id": "se_flashlight_off",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "懐中電灯オフ"
+    },
+    {
+      "id": "se_flashlight_on",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "懐中電灯オン。2 段のクリック"
+    },
+    {
+      "id": "se_heroine_step_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "澪の足音。軽く高い"
+    },
+    {
+      "id": "se_heroine_step_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "澪の足音"
+    },
+    {
+      "id": "se_heroine_step_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "澪の足音"
+    },
+    {
+      "id": "se_item_get",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "取得。紙を手に取りポケットへ。音程を付けない"
+    },
+    {
+      "id": "se_load",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "ロード。畳んだ紙を開く"
+    },
+    {
+      "id": "se_menu_error",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "無効操作。鈍い 2 打、音程なし"
+    },
+    {
+      "id": "se_natsu_luck",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "不自然な幸運。急に現れゆっくり消える"
+    },
+    {
+      "id": "se_natsu_pulse_mid",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "気配・中。トーンに、柔らかい二連の置き音（足音が一組増える）"
+    },
+    {
+      "id": "se_natsu_pulse_strong",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "気配・強。谷の比の部分音が聞き取れる長さ 2.6 秒"
+    },
+    {
+      "id": "se_natsu_pulse_weak",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "気配・弱。灯りが一瞬強まる程度の温かいトーン 0.9 秒"
+    },
+    {
+      "id": "se_natsu_speak",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "ナツが話し始める。息を一つ吸う 0.6 秒"
+    },
+    {
+      "id": "se_natsu_text_tick",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "ナツの文字送り。低く柔らかい 18 ms"
+    },
+    {
+      "id": "se_notebook_close",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "ノートを閉じる"
+    },
+    {
+      "id": "se_notebook_open",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "ノートを開く"
+    },
+    {
+      "id": "se_notebook_page",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "ノートのページ送り"
+    },
+    {
+      "id": "se_save",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "セーブ。鉛筆で 2 画書き留める"
+    },
+    {
+      "id": "se_seal_stone",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "封石を押し戻す。石が擦れて動き、低く据わって止まる"
+    },
+    {
+      "id": "se_shutter",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "シャッター。波板が連続して鳴る"
+    },
+    {
+      "id": "se_sleep",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "就寝。長い息のような低いノイズ"
+    },
+    {
+      "id": "se_stairs_down",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "木の階段を下りる 2 歩"
+    },
+    {
+      "id": "se_stairs_up",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "木の階段を上る 2 歩"
+    },
+    {
+      "id": "se_stalker_chase_loop",
+      "kind": "se",
+      "loop": true,
+      "base_volume_db": 0.0,
+      "note": "追跡中の 8 秒ループ。呼吸の速さでうねる低いノイズと 40 Hz の圧。心拍の帯域を避ける"
+    },
+    {
+      "id": "se_stalker_far",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "遠くの気配。砂利の足音 2 歩が遠く"
+    },
+    {
+      "id": "se_stalker_lost",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "見失った。圧が抜けて環境が戻る"
+    },
+    {
+      "id": "se_stalker_notice",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "気付かれた。低い圧が膨らんで抜ける"
+    },
+    {
+      "id": "se_stalker_step_boards_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "追跡者の足音（板）"
+    },
+    {
+      "id": "se_stalker_step_boards_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "追跡者の足音（板）"
+    },
+    {
+      "id": "se_stalker_step_gravel_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "追跡者の足音（砂利）"
+    },
+    {
+      "id": "se_stalker_step_gravel_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "追跡者の足音（砂利）"
+    },
+    {
+      "id": "se_step_asphalt_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "アスファルト。乾いた短い打面、微かな擦れ"
+    },
+    {
+      "id": "se_step_asphalt_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "アスファルト。乾いた短い打面、微かな擦れ"
+    },
+    {
+      "id": "se_step_asphalt_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "アスファルト。乾いた短い打面、微かな擦れ"
+    },
+    {
+      "id": "se_step_asphalt_4",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "アスファルト。乾いた短い打面、微かな擦れ"
+    },
+    {
+      "id": "se_step_asphalt_5",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "アスファルト。乾いた短い打面、微かな擦れ"
+    },
+    {
+      "id": "se_step_asphalt_sneak_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。アスファルト。乾いた短い打面、微かな擦れ"
+    },
+    {
+      "id": "se_step_asphalt_sneak_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。アスファルト。乾いた短い打面、微かな擦れ"
+    },
+    {
+      "id": "se_step_asphalt_sneak_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。アスファルト。乾いた短い打面、微かな擦れ"
+    },
+    {
+      "id": "se_step_boards_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "板張り。空洞の共鳴、ときどき軋む"
+    },
+    {
+      "id": "se_step_boards_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "板張り。空洞の共鳴、ときどき軋む"
+    },
+    {
+      "id": "se_step_boards_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "板張り。空洞の共鳴、ときどき軋む"
+    },
+    {
+      "id": "se_step_boards_4",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "板張り。空洞の共鳴、ときどき軋む"
+    },
+    {
+      "id": "se_step_boards_5",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "板張り。空洞の共鳴、ときどき軋む"
+    },
+    {
+      "id": "se_step_boards_sneak_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。板張り。空洞の共鳴、ときどき軋む"
+    },
+    {
+      "id": "se_step_boards_sneak_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。板張り。空洞の共鳴、ときどき軋む"
+    },
+    {
+      "id": "se_step_boards_sneak_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。板張り。空洞の共鳴、ときどき軋む"
+    },
+    {
+      "id": "se_step_grass_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "草。短い擦れが主"
+    },
+    {
+      "id": "se_step_grass_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "草。短い擦れが主"
+    },
+    {
+      "id": "se_step_grass_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "草。短い擦れが主"
+    },
+    {
+      "id": "se_step_grass_4",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "草。短い擦れが主"
+    },
+    {
+      "id": "se_step_grass_5",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "草。短い擦れが主"
+    },
+    {
+      "id": "se_step_grass_sneak_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。草。短い擦れが主"
+    },
+    {
+      "id": "se_step_grass_sneak_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。草。短い擦れが主"
+    },
+    {
+      "id": "se_step_grass_sneak_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。草。短い擦れが主"
+    },
+    {
+      "id": "se_step_gravel_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "砂利。細かい粒が複数"
+    },
+    {
+      "id": "se_step_gravel_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "砂利。細かい粒が複数"
+    },
+    {
+      "id": "se_step_gravel_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "砂利。細かい粒が複数"
+    },
+    {
+      "id": "se_step_gravel_4",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "砂利。細かい粒が複数"
+    },
+    {
+      "id": "se_step_gravel_5",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "砂利。細かい粒が複数"
+    },
+    {
+      "id": "se_step_gravel_sneak_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。砂利。細かい粒が複数"
+    },
+    {
+      "id": "se_step_gravel_sneak_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。砂利。細かい粒が複数"
+    },
+    {
+      "id": "se_step_gravel_sneak_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。砂利。細かい粒が複数"
+    },
+    {
+      "id": "se_step_puddle_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "水たまり。飛沫と低い音"
+    },
+    {
+      "id": "se_step_puddle_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "水たまり。飛沫と低い音"
+    },
+    {
+      "id": "se_step_puddle_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "水たまり。飛沫と低い音"
+    },
+    {
+      "id": "se_step_puddle_4",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "水たまり。飛沫と低い音"
+    },
+    {
+      "id": "se_step_puddle_5",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "水たまり。飛沫と低い音"
+    },
+    {
+      "id": "se_step_puddle_sneak_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。水たまり。飛沫と低い音"
+    },
+    {
+      "id": "se_step_puddle_sneak_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。水たまり。飛沫と低い音"
+    },
+    {
+      "id": "se_step_puddle_sneak_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。水たまり。飛沫と低い音"
+    },
+    {
+      "id": "se_step_soil_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "土。低く鈍い"
+    },
+    {
+      "id": "se_step_soil_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "土。低く鈍い"
+    },
+    {
+      "id": "se_step_soil_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "土。低く鈍い"
+    },
+    {
+      "id": "se_step_soil_4",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "土。低く鈍い"
+    },
+    {
+      "id": "se_step_soil_5",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "土。低く鈍い"
+    },
+    {
+      "id": "se_step_soil_sneak_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。土。低く鈍い"
+    },
+    {
+      "id": "se_step_soil_sneak_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。土。低く鈍い"
+    },
+    {
+      "id": "se_step_soil_sneak_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。土。低く鈍い"
+    },
+    {
+      "id": "se_step_stone_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "石段。硬い打面と短い反射"
+    },
+    {
+      "id": "se_step_stone_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "石段。硬い打面と短い反射"
+    },
+    {
+      "id": "se_step_stone_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "石段。硬い打面と短い反射"
+    },
+    {
+      "id": "se_step_stone_4",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "石段。硬い打面と短い反射"
+    },
+    {
+      "id": "se_step_stone_5",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "石段。硬い打面と短い反射"
+    },
+    {
+      "id": "se_step_stone_sneak_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。石段。硬い打面と短い反射"
+    },
+    {
+      "id": "se_step_stone_sneak_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。石段。硬い打面と短い反射"
+    },
+    {
+      "id": "se_step_stone_sneak_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。石段。硬い打面と短い反射"
+    },
+    {
+      "id": "se_step_tatami_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "畳。最も柔らかい"
+    },
+    {
+      "id": "se_step_tatami_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "畳。最も柔らかい"
+    },
+    {
+      "id": "se_step_tatami_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "畳。最も柔らかい"
+    },
+    {
+      "id": "se_step_tatami_4",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "畳。最も柔らかい"
+    },
+    {
+      "id": "se_step_tatami_5",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "畳。最も柔らかい"
+    },
+    {
+      "id": "se_step_tatami_sneak_1",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。畳。最も柔らかい"
+    },
+    {
+      "id": "se_step_tatami_sneak_2",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。畳。最も柔らかい"
+    },
+    {
+      "id": "se_step_tatami_sneak_3",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "忍び足。畳。最も柔らかい"
+    },
+    {
+      "id": "se_text_tick",
+      "kind": "se",
+      "loop": false,
+      "base_volume_db": 0.0,
+      "note": "文字送り。12 ms、極めて控えめ"
     }
   ]
 }

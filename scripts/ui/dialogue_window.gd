@@ -27,6 +27,10 @@ var is_choosing: bool = false
 var _pages: PackedStringArray = PackedStringArray()
 var _page_index: int = 0
 var _visible_chars: float = 0.0
+## 文字送りの音：TICK_EVERY 文字ごとに 1 回。話者がナツなら低く柔らかい方
+const TICK_EVERY: int = 3
+var _speaker_id: String = ""
+var _tick_at: int = 0
 var _cps: float = BASE_CHARS_PER_SECOND
 var _font: Font = null
 var _using_fallback_font: bool = false
@@ -53,11 +57,13 @@ func _ready() -> void:
 
 ## 旧 API。話者名と本文を直接渡す（既定の色・速度）
 func show_message(title: String, text: String) -> void:
+	_speaker_id = ""
 	_open(title, text, Palette.UI_TEXT, 1.0)
 
 
 ## 解決済みメッセージを話者の色・速度で表示する
 func show_entry(entry: MessageEntry) -> void:
+	_speaker_id = entry.speaker
 	_open(entry.speaker_name, entry.text, entry.color_index, entry.speed)
 
 
@@ -111,6 +117,7 @@ func _open(speaker_name: String, text: String, color_index: int, speed: float) -
 func _show_page() -> void:
 	_body.text = _pages[_page_index]
 	_visible_chars = 0.0
+	_tick_at = 0
 	if bool(SaveManager.get_setting("instant_text")):
 		_reveal_all()
 	else:
@@ -129,6 +136,9 @@ func _process(delta: float) -> void:
 		return
 	_visible_chars += _cps * delta
 	_body.visible_characters = mini(int(_visible_chars), _body.text.length())
+	if _body.visible_characters - _tick_at >= TICK_EVERY:
+		_tick_at = _body.visible_characters
+		AudioManager.play_se("se_natsu_text_tick" if _speaker_id == AttachedEntity.SPEAKER else "se_text_tick")
 	if _body.visible_characters >= _body.text.length():
 		_reveal_all()
 
