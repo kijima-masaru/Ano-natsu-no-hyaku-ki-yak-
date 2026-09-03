@@ -12,8 +12,9 @@
 | `truth_revealed` | 真相到達。**全テキストの二層分岐を切り替える唯一のフラグ** | 8/30 夜、F12 自宅前の対決（`ev_d30_confront`）で提示画面が終わった直後。周回の「裏面」モード開始時（ステップ5 タスク6） | `MessageResolver.resolve()`（単一の解決関数）、8/30 の `advance_condition`、以後の全テキスト |
 | `truth_partial_walk` | 澪が「7/31 に隣を歩いたのは悠」と確定した | `ev_d30_confront` の `branch`：接近度 ≥ 50 かつ `ev_timetable_pass` または `ev_shoe_mud`（ノートに載った＝目撃されたか証拠として得た） | ED 判定、対決で澪が「定期券。靴の泥」と言う |
 | `truth_partial_entity` | 澪がナツの存在に至った | `ev_d30_confront` の `branch`：接近度 ≥ 75 かつ `baba_told_seal` | ED 判定（ED-A）、対決で澪が「あなたの隣にいる、それのこと」と言う |
-| `ending_reached` | エンディング到達 | 8/31 御渡橋イベント終端 | タイトル復帰、システム保存 |
-| `ending_a` / `ending_b` / `ending_c` | 到達した ED（排他） | §7 の条件で `ev_d31_bridge` が判定 | システム保存（周回）、タイトルの面の数 |
+| `ending_reached` | エンディング到達 | 8/31 `ev_d31_bridge` の暗転後（事後の場面の前）。`end_game` でも立つ | 8/31 の `advance_condition`、橋の悠の非表示、タイトル復帰 |
+| `ending_a` / `ending_b` / `ending_c` | 到達した ED（排他） | `ev_d31_bridge` の `branch`：A＝`truth_partial_entity` かつ隠蔽失敗 1 件以上（`hid_fail_*`）／B＝それ以外で接近度 ≥ 50 または `truth_partial_walk`／C＝それ以外 | 事後の場面の分岐、`end_game`（クリア記録） |
+| `pov_mio` | 視点切替。プレイヤーの絵が澪になる（`GameConstants.POV_HEROINE_FLAG`） | 8/31 `ev_d31_open` | `Player.sprite_kind`。新規開始で消える |
 
 ## 進行系（固定日）
 

@@ -35,6 +35,8 @@ var facing: Vector2i = Vector2i.DOWN:
 		_update_flashlight()
 		facing_changed.emit(facing)
 var is_sneaking: bool = false
+## 絵の種別（ActorSpriteGenerator）。8/31 は澪を操作するため "heroine" になる（GameConstants.POV_HEROINE_FLAG）
+var sprite_kind: String = "player"
 
 var _step_timer: float = 0.0
 var _anim_timer: float = 0.0
@@ -48,6 +50,10 @@ var _flashlight: PointLight2D = null
 func _ready() -> void:
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	_flashlight = Lighting.attach_flashlight(self)
+	GameState.flag_raised.connect(_on_pov_flag_changed)
+	GameState.flag_cleared.connect(_on_pov_flag_changed)
+	GameState.state_reset.connect(func() -> void: _on_pov_flag_changed(GameConstants.POV_HEROINE_FLAG))
+	_refresh_persona()
 	_update_probe()
 	_update_sprite()
 	_update_flashlight()
@@ -117,10 +123,20 @@ func _tick_animation(delta: float) -> void:
 		_update_sprite()
 
 
+func _on_pov_flag_changed(flag: String) -> void:
+	if flag == GameConstants.POV_HEROINE_FLAG:
+		_refresh_persona()
+
+
+func _refresh_persona() -> void:
+	sprite_kind = "heroine" if GameState.has_flag(GameConstants.POV_HEROINE_FLAG) else "player"
+	_update_sprite()
+
+
 func _update_sprite() -> void:
 	if _sprite == null:
 		return
-	_sprite.texture = ActorSpriteGenerator.get_texture("player", facing, _anim_frame)
+	_sprite.texture = ActorSpriteGenerator.get_texture(sprite_kind, facing, _anim_frame)
 
 
 func _update_probe() -> void:
