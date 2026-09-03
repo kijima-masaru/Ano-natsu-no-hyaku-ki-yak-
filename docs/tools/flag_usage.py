@@ -59,8 +59,13 @@ def walk_conditions(conds, getter):
 def main():
     defined = set()
     flags_md = os.path.join(ROOT, "docs", "FLAGS.md")
-    for m in re.finditer(r"^\| `([A-Za-z0-9_<>]+)`", open(flags_md, encoding="utf-8").read(), re.M):
-        defined.add(m.group(1))
+    for line in open(flags_md, encoding="utf-8"):
+        if not line.startswith("| `"):
+            continue
+        # 1 列目に `a` / `b` / `c` と並ぶ行はすべて定義とみなす
+        first = line.split("|")[1]
+        for m in re.finditer(r"`([A-Za-z0-9_<>]+)`", first):
+            defined.add(m.group(1))
     setters, getters = {}, {}
     for fld in load("fields")["fields"]:
         if fld.get("unlock_flag"):

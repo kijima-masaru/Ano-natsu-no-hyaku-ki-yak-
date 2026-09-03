@@ -29,6 +29,20 @@ func _ready() -> void:
 		notice.call("_unhandled_input", ev)
 		await _wait(0.3)
 	await _shot("02_title")
+	# ゲームパッドの操作で案内の文言が切り替わるか（InputDevice）
+	var footer: Label = get_tree().current_scene.get_node_or_null("Footer") as Label
+	var before: String = footer.text if footer != null else ""
+	var pad: InputEventJoypadButton = InputEventJoypadButton.new(); pad.button_index = JOY_BUTTON_A; pad.pressed = true
+	Input.parse_input_event(pad)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	print("hint: keyboard='%s' -> joypad='%s' is_joypad=%s" % [before, footer.text if footer != null else "", InputDevice.is_joypad])
+	await _shot("02b_title_pad")
+	var key: InputEventKey = InputEventKey.new(); key.physical_keycode = KEY_UP; key.pressed = true
+	Input.parse_input_event(key)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	print("hint back: '%s' is_joypad=%s" % [footer.text if footer != null else "", InputDevice.is_joypad])
 	GameState.reset()
 	Calendar.set_day(1)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")

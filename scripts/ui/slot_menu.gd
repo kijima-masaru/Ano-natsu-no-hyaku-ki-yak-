@@ -28,7 +28,8 @@ func _ready() -> void:
 func open(new_mode: String) -> void:
 	mode = new_mode
 	_title.text = MessageResolver.text("ui_slot_save_title" if mode == "save" else "ui_slot_load_title")
-	_hint.text = MessageResolver.text("ui_hint_confirm_back")
+	_hint.text = InputDevice.hint("ui_hint_confirm_back")
+	InputDevice.device_changed.connect(func(_pad: bool) -> void: _hint.text = InputDevice.hint("ui_hint_confirm_back"))
 	var items: Array[Dictionary] = []
 	for slot: int in SavePaths.SLOT_COUNT:
 		if mode == "save" and slot == SavePaths.AUTOSAVE_SLOT:
