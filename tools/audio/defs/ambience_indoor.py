@@ -192,3 +192,7 @@ DEFS += [
     {"id": "amb_underpass_tunnel", "kind": "ambience", "loop": True, "stereo": True, "seconds": SEC - 0.5, "lufs_offset": -3, "render": underpass_tunnel, "field": "F03",
      "note": "隧道内。長い残響、水滴、遅れて逆から返る反響", "use": "F03 隧道の中（統合案）"},
 ]
+
+# 生成済みファイルを変えないため旧シード方式を維持（build.seed_of 参照）
+for _d in DEFS:
+    _d.setdefault("seed_scheme", 1)

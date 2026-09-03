@@ -37,3 +37,7 @@ DEFS = [
     {"id": "amb_cicada_evening", "kind": "ambience", "loop": True, "stereo": True, "seconds": SEC - 0.5, "render": evening, "layer": "cicada", "lufs_offset": -6,
      "note": "ヒグラシ。夕だけ。8 月末まで残る唯一の蝉", "use": "evening に重ねる"},
 ]
+
+# 生成済みファイルを変えないため旧シード方式を維持（build.seed_of 参照）
+for _d in DEFS:
+    _d.setdefault("seed_scheme", 1)

@@ -183,3 +183,7 @@ DEFS += [
     {"id": "amb_paddy_still", "kind": "ambience", "loop": True, "stereo": True, "seconds": SEC - 0.5, "render": paddy_still, "field": "F14", "time_of_day": "night", "lufs_offset": -8,
      "note": "蛙が止んだ夜。水路と風だけ", "use": "怪異 an_f14_frogs の後、8/30 以降の夜"},
 ]
+
+# 生成済みファイルを変えないため旧シード方式を維持（build.seed_of 参照）
+for _d in DEFS:
+    _d.setdefault("seed_scheme", 1)

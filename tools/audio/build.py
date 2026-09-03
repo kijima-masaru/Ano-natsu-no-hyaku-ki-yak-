@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import importlib
+import hashlib
 import json
 import os
 import pkgutil
@@ -42,9 +43,15 @@ def load_defs() -> list[dict]:
 
 
 def seed_of(d: dict) -> int:
+    """ID から決定論的にシードを得る。
+    scheme 1（旧）: ID の先頭 4 文字しか効かない偏りがあった（se_step_* が全て同じ乱数列になる）。
+    既に生成・コミット済みの環境音を変えないため、環境音モジュールは seed_scheme=1 を明示して旧式を維持する。
+    scheme 2（既定）: SHA-256 の先頭 4 バイト。"""
     if "seed" in d:
         return int(d["seed"])
-    return int.from_bytes(d["id"].encode("utf-8"), "little") % (2 ** 31)
+    if int(d.get("seed_scheme", 2)) == 1:
+        return int.from_bytes(d["id"].encode("utf-8"), "little") % (2 ** 31)
+    return int.from_bytes(hashlib.sha256(d["id"].encode("utf-8")).digest()[:4], "big") % (2 ** 31)
 
 
 def build_one(d: dict, check: bool) -> dict:
@@ -58,7 +65,7 @@ def build_one(d: dict, check: bool) -> dict:
     if check and d.get("loop", d["kind"] != "se"):
         master.write_wav(os.path.join(CHECK, d["id"] + "_x3.wav"), np.concatenate([y, y, y]))
     entry = {"id": d["id"], "kind": d["kind"], "path": os.path.relpath(path, ROOT), "loop": bool(d.get("loop", d["kind"] != "se")),
-             "stereo": y.ndim == 2, "seconds": round(info["seconds"], 3), "lufs": round(info["lufs"], 2), "target_lufs": round(info["target_lufs"], 2), "peak_dbfs": round(info["peak_dbfs"], 2),
+             "stereo": y.ndim == 2, "seconds": round(info["seconds"], 3), "lufs": round(info["lufs"], 2), "target_lufs": round(info["target_lufs"], 2), "peak_dbfs": round(info["peak_dbfs"], 2), "gain_reduced_db": round(info["gain_reduced_db"], 2), "soft_clip_drive": info.get("soft_clip_drive", 0.0),
              "bytes": os.path.getsize(path), "seed": seed_of(d), "module": d["module"], "note": d.get("note", ""), "use": d.get("use", ""),
              "render_sec": round(time.time() - t0, 2)}
     for k in ("allow_silence", "field", "time_of_day", "layer", "material", "status"):

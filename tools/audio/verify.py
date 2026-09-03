@@ -98,14 +98,22 @@ def check_file(path: str, manifest: dict, strict: bool) -> dict:
     target = float(meta.get("target_lufs", TARGET_LUFS[kind]))
     if np.isfinite(lufs) and abs(lufs - target) > LUFS_TOLERANCE:
         problems.append(f"ラウドネス {lufs:.1f} LUFS（目標 {target}）")
-    dc = float(np.abs(x.mean(axis=0)).max())
-    if dc > 0.01:
-        problems.append(f"DC オフセット {dc:.3f}")
+    if len(x) >= SR:
+        dc = float(np.abs(x.mean(axis=0)).max())
+        if dc > 0.01:
+            problems.append(f"DC オフセット {dc:.3f}")
+    else:
+        # 1 秒未満の単発音は全体平均が低周波成分そのものになる。クリックの原因になる先頭サンプルと末尾 2 ms だけを見る
+        edge = max(1, int(SR * 0.002))
+        dc = float(max(np.abs(x[0]).max(), np.abs(x[-edge:].mean(axis=0)).max()))
+        if dc > 0.01:
+            problems.append(f"端が非ゼロ {dc:.3f}")
     sil = silence_fraction(x)
-    if meta.get("allow_silence") is not True and sil > 0.5:
-        problems.append(f"無音が {sil * 100:.0f}%")
-    elif sil > 0.2 and meta.get("allow_silence") is not True:
-        warnings.append(f"無音 {sil * 100:.0f}%")
+    if meta.get("allow_silence") is not True and len(x) >= SR:
+        if sil > 0.5:
+            problems.append(f"無音が {sil * 100:.0f}%")
+        elif sil > 0.2:
+            warnings.append(f"無音 {sil * 100:.0f}%")
     seam = None
     if loop:
         seam = loop_seam_score(x)
