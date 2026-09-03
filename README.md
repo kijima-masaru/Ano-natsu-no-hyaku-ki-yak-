@@ -92,6 +92,17 @@ godot --headless --path . res://scenes/debug/playtest_driver.tscn -- --runner=re
 
 `godot` コマンドが無い環境では GitHub Releases の公式バイナリ（`Godot_v4.7-stable_linux.x86_64.zip`）を取得して使う（`docs/NEXT_STEPS.md`「Godot の用意」）。描画確認は `xvfb-run` で `driver_shots`。
 
+## ビルド
+
+`export_presets.cfg`（Linux / Windows、x86_64、PCK 埋め込み）を同梱している。エクスポートテンプレート 4.7.stable を入れてから：
+
+```
+godot --headless --path . --export-release "Linux" build/linux/iwato.x86_64
+godot --headless --path . --export-release "Windows" build/windows/iwato.exe
+```
+
+出力は `build/`（git 管理外）。v0.4.0 時点で Linux 76 MB、Windows 110 MB。
+
 ## 設計資料（ステップ1の成果物）
 
 | 成果物 | パス | 内容 |
