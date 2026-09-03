@@ -3483,6 +3483,175 @@
       "text": "国道に、車がいない。\n町のものは戻った。自販機の光は、いつもより強い。"
     },
     {
+      "id": "ui_reveal_count",
+      "speaker": "system",
+      "text": "%d / %d"
+    },
+    {
+      "id": "ui_choice_d30_overslept",
+      "speaker": "system",
+      "text": "寝過ごした"
+    },
+    {
+      "id": "ui_choice_d30_silent",
+      "speaker": "system",
+      "text": "……"
+    },
+    {
+      "id": "ui_choice_d30_deny",
+      "speaker": "system",
+      "text": "違う"
+    },
+    {
+      "id": "ui_choice_d30_quiet",
+      "speaker": "system",
+      "text": "黙っている"
+    },
+    {
+      "id": "msg_d30_return_1",
+      "speaker": "yu",
+      "text": "団地。\n四棟の階段室は、どれも一階だけが点いている。元に戻った。",
+      "truth_id": "msg_d30_return_1_t"
+    },
+    {
+      "id": "msg_d30_return_1_t",
+      "speaker": "yu",
+      "text": "団地。\n四棟の階段室は、どれも一階だけが点いている。六月より前と同じだ。"
+    },
+    {
+      "id": "msg_d30_return_2",
+      "speaker": "yu",
+      "text": "給水塔のモーターが、聞こえる。\n聞こえるということが、こんなに静かだとは思わなかった。"
+    },
+    {
+      "id": "msg_d30_return_3",
+      "speaker": "yu",
+      "text": "終わった。\n澪は、まだ何も言わない。",
+      "truth_id": "msg_d30_return_3_t"
+    },
+    {
+      "id": "msg_d30_return_3_t",
+      "speaker": "yu",
+      "text": "終わった。\n澪は、まだ何も言わない。言うことを、決めている顔だった。"
+    },
+    {
+      "id": "msg_d30_c_1",
+      "speaker": "yu",
+      "text": "階段室の前で、澪が立ち止まった。\n振り向かないまま、言った。"
+    },
+    {
+      "id": "msg_mio_d30_1",
+      "speaker": "mio",
+      "text": "「悠。\n七月三十一日、どこにいた？」"
+    },
+    {
+      "id": "msg_d30_c_2",
+      "speaker": "yu",
+      "text": "寝過ごした、と答えた。\n何度も言ったことだ。",
+      "truth_id": "msg_d30_c_2_t"
+    },
+    {
+      "id": "msg_d30_c_2_t",
+      "speaker": "yu",
+      "text": "寝過ごした、と答えた。\n二十三通の通知を自分で送った朝と、同じ声で。"
+    },
+    {
+      "id": "msg_mio_d30_c1a",
+      "speaker": "mio",
+      "text": "「そう」"
+    },
+    {
+      "id": "msg_mio_d30_c1b",
+      "speaker": "mio",
+      "text": "「黙るんだ」"
+    },
+    {
+      "id": "msg_mio_d30_2",
+      "speaker": "mio",
+      "text": "「トキおばさんは、あなたに毎回言う。『昨日も来たね』。\n七月三十一日の夕方、店の前を通ったのは、蓮と、あなた」"
+    },
+    {
+      "id": "msg_mio_d30_3",
+      "speaker": "mio",
+      "text": "「薬師谷で、あなたは迷わなかった。\n初めて来た場所で、堂の裏の道を知ってた」"
+    },
+    {
+      "id": "msg_mio_d30_4",
+      "speaker": "mio",
+      "text": "「日誌の六月二十八日。『石が動いた』。\n石は二人で押した。ずらすのも、一人じゃ無理。誰と行ったの」"
+    },
+    {
+      "id": "msg_mio_d30_walk",
+      "speaker": "mio",
+      "text": "「定期券。靴の泥。\n並んで歩いてたのは、あなた」"
+    },
+    {
+      "id": "msg_mio_d30_entity",
+      "speaker": "mio",
+      "text": "「シゲさんが言ってた。『連れて帰るな』。\nあなたの隣にいる、それのこと」"
+    },
+    {
+      "id": "msg_d30_c_3",
+      "speaker": "yu",
+      "text": "澪は、どこまで知っている。\nまだ、その必要はない。そう言い聞かせた。",
+      "truth_id": "msg_d30_c_3_t"
+    },
+    {
+      "id": "msg_d30_c_3_t",
+      "speaker": "yu",
+      "text": "澪は、全部知っている。\n俺は、団地の下に誰もいないことを確かめた。それから、確かめた自分に気づいた。"
+    },
+    {
+      "id": "msg_mio_d30_c2a",
+      "speaker": "mio",
+      "text": "「違わない」"
+    },
+    {
+      "id": "msg_mio_d30_c2b",
+      "speaker": "mio",
+      "text": "「……」"
+    },
+    {
+      "id": "msg_mio_d30_5",
+      "speaker": "mio",
+      "text": "「あなたが、ノートに書かなかったもの。\n私が見てないものも、あるはず。……見せて」"
+    },
+    {
+      "id": "msg_d30_c_4",
+      "speaker": "yu",
+      "text": "何を、と言おうとして、言えなかった。\n数えていたのは、俺のほうだった。"
+    },
+    {
+      "id": "msg_d30_after_1",
+      "speaker": "yu",
+      "text": "澪は階段を上らなかった。\n三階の、俺の部屋の窓を見上げて、それから背を向けた。"
+    },
+    {
+      "id": "msg_mio_d30_6",
+      "speaker": "mio",
+      "text": "「明日。御渡橋で」"
+    },
+    {
+      "id": "msg_d30_after_2",
+      "speaker": "yu",
+      "text": "澪の足音が、国道の方へ消えた。\n俺は、階段を上らなかった。"
+    },
+    {
+      "id": "msg_d30_no_sleep",
+      "speaker": "yu",
+      "text": "部屋には戻れない。\n戻る理由が、もう無い。"
+    },
+    {
+      "id": "msg_d30_end_1",
+      "speaker": "yu",
+      "text": "国道。車はまだ来ない。\n自販機の光の下に立った。"
+    },
+    {
+      "id": "msg_d30_end_2",
+      "speaker": "yu",
+      "text": "朝まで、ここにいた。\n誰も来なかった。ナツだけが、隣にいた。"
+    },
+    {
       "id": "msg_an_f16_nothing",
       "speaker": "yu",
       "text": "何も起こらない。\nそれが、続いている。"

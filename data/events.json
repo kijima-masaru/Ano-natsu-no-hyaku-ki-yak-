@@ -6910,6 +6910,321 @@
       "priority": 20
     },
     {
+      "id": "ev_f12_d30_return",
+      "field": "F12",
+      "trigger": "on_enter",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "seal_restored"
+        },
+        {
+          "flag": "truth_revealed",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "set_time",
+          "time_of_day": "night"
+        },
+        {
+          "type": "set_ambience",
+          "id": ""
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_return_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_return_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_return_3"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d30_confront",
+      "field": "F12",
+      "trigger": "on_interact",
+      "target": "home_door",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "seal_restored"
+        },
+        {
+          "flag": "truth_revealed",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d30_c_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_c_2"
+        },
+        {
+          "type": "choice",
+          "options": [
+            {
+              "text_id": "ui_choice_d30_overslept",
+              "actions": [
+                {
+                  "type": "message",
+                  "id": "msg_mio_d30_c1a"
+                }
+              ]
+            },
+            {
+              "text_id": "ui_choice_d30_silent",
+              "actions": [
+                {
+                  "type": "message",
+                  "id": "msg_mio_d30_c1b"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "wait",
+          "seconds": 0.6
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_3"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_4"
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "suspicion": {
+                "min": 50
+              }
+            },
+            {
+              "any": [
+                {
+                  "flag": "ev_timetable_pass"
+                },
+                {
+                  "flag": "ev_shoe_mud"
+                }
+              ]
+            }
+          ],
+          "then": [
+            {
+              "type": "set_flag",
+              "flag": "truth_partial_walk"
+            },
+            {
+              "type": "message",
+              "id": "msg_mio_d30_walk"
+            }
+          ],
+          "else": []
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "suspicion": {
+                "min": 75
+              }
+            },
+            {
+              "flag": "baba_told_seal"
+            }
+          ],
+          "then": [
+            {
+              "type": "set_flag",
+              "flag": "truth_partial_entity"
+            },
+            {
+              "type": "message",
+              "id": "msg_mio_d30_entity"
+            }
+          ],
+          "else": []
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_c_3"
+        },
+        {
+          "type": "choice",
+          "options": [
+            {
+              "text_id": "ui_choice_d30_deny",
+              "actions": [
+                {
+                  "type": "message",
+                  "id": "msg_mio_d30_c2a"
+                }
+              ]
+            },
+            {
+              "text_id": "ui_choice_d30_quiet",
+              "actions": [
+                {
+                  "type": "message",
+                  "id": "msg_mio_d30_c2b"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "wait",
+          "seconds": 0.6
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_5"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_c_4"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.2
+        },
+        {
+          "type": "show_concealment_reveal",
+          "hold": true
+        },
+        {
+          "type": "set_flag",
+          "flag": "truth_revealed"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.5
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_009"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "close_concealment_reveal"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_after_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_6"
+        },
+        {
+          "type": "set_companion",
+          "on": false
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_after_2"
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_f12_home_d30_after",
+      "field": "F12",
+      "trigger": "on_interact",
+      "target": "home_door",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "truth_revealed"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d30_no_sleep"
+        }
+      ],
+      "once": false,
+      "priority": 25
+    },
+    {
+      "id": "ev_f01_d30_end",
+      "field": "F01",
+      "trigger": "on_enter",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "truth_revealed"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d30_end_1"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_end_2"
+        },
+        {
+          "type": "autosave"
+        },
+        {
+          "type": "advance_day"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
       "id": "ev_d04_start",
       "field": "",
       "trigger": "on_day_start",
