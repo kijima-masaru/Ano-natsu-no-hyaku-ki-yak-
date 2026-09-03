@@ -34,6 +34,10 @@ static func validate(events: Dictionary, known_actions: PackedStringArray, item_
 					for key: String in ["id", "truth_id"]:
 						if action.has(key) and not MessageResolver.has_message(str(action[key])):
 							errors.append("%s: メッセージ '%s' が存在しません" % [id, str(action[key])])
+					if action.get("rotate", null) is Array:
+						for mid: Variant in action["rotate"] as Array:
+							if not MessageResolver.has_message(str(mid)):
+								errors.append("%s: rotate のメッセージ '%s' が存在しません" % [id, str(mid)])
 				"entity_comfort":
 					var ctx: String = str(action.get("context", ""))
 					if not MessageResolver.has_message("msg_natsu_comfort_%s" % ctx):

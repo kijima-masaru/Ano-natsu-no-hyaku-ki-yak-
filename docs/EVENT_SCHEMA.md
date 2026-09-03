@@ -51,7 +51,7 @@
 
 | type | 引数 | 意味 |
 |---|---|---|
-| `message` | `id`, `args?` | `MessageResolver.resolve(id)` で表層／真相を解決して表示し、閉じるまで待つ。**二層分岐はここ以外に置かない** |
+| `message` | `id`, `args?`, `rotate?` | `MessageResolver.resolve(id)` で表層／真相を解決して表示し、閉じるまで待つ。**二層分岐はここ以外に置かない**。`rotate`（ID の配列）があれば `rotate[day % size]` を使い、`daily` の文が毎日同じにならないようにする（検証は全 ID を見る） |
 | `set_flag` | `flag`, `value?` | フラグを立てる（`value:false` で下ろす） |
 | `clear_flag` | `flag` | 下ろす |
 | `give_item` / `remove_item` | `item` | 所持品（`items.json` に定義が必要） |

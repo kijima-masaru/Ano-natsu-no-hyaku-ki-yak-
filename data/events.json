@@ -553,7 +553,12 @@
       "actions": [
         {
           "type": "message",
-          "id": "msg_f01_bulletin"
+          "id": "msg_f01_bulletin",
+          "rotate": [
+            "msg_f01_bulletin",
+            "msg_f01_bulletin_r1",
+            "msg_f01_bulletin_r2"
+          ]
         },
         {
           "type": "add_points",
@@ -736,7 +741,12 @@
       "actions": [
         {
           "type": "message",
-          "id": "msg_f05_toki_again"
+          "id": "msg_f05_toki_again",
+          "rotate": [
+            "msg_f05_toki_again",
+            "msg_f05_toki_again_r1",
+            "msg_f05_toki_again_r2"
+          ]
         },
         {
           "type": "message",
@@ -1651,7 +1661,12 @@
       "actions": [
         {
           "type": "message",
-          "id": "msg_f12_post_later"
+          "id": "msg_f12_post_later",
+          "rotate": [
+            "msg_f12_post_later",
+            "msg_f12_post_later_r1",
+            "msg_f12_post_later_r2"
+          ]
         },
         {
           "type": "add_points",
@@ -1725,7 +1740,12 @@
       "actions": [
         {
           "type": "message",
-          "id": "msg_f12_office_repeat"
+          "id": "msg_f12_office_repeat",
+          "rotate": [
+            "msg_f12_office_repeat",
+            "msg_f12_office_repeat_r1",
+            "msg_f12_office_repeat_r2"
+          ]
         },
         {
           "type": "add_points",
@@ -1885,7 +1905,12 @@
       "actions": [
         {
           "type": "message",
-          "id": "msg_f06_library_again"
+          "id": "msg_f06_library_again",
+          "rotate": [
+            "msg_f06_library_again",
+            "msg_f06_library_again_r1",
+            "msg_f06_library_again_r2"
+          ]
         },
         {
           "type": "add_points",
@@ -2121,7 +2146,12 @@
       "actions": [
         {
           "type": "message",
-          "id": "msg_f03_vending"
+          "id": "msg_f03_vending",
+          "rotate": [
+            "msg_f03_vending",
+            "msg_f03_vending_r1",
+            "msg_f03_vending_r2"
+          ]
         },
         {
           "type": "add_points",

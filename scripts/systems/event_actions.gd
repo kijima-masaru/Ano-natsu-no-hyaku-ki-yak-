@@ -10,7 +10,7 @@ const END_FADE_SECONDS: float = 1.0
 static func register_all(es: Node) -> void:
 	es.register_action("message", func(a: Dictionary, _c: Dictionary) -> void:
 		var args: Array = a.get("args", []) if a.get("args", []) is Array else []
-		await es.show_entry(MessageResolver.resolve(str(a.get("id", "")), args)))
+		await es.show_entry(MessageResolver.resolve(_message_id(a), args)))
 	es.register_action("set_flag", func(a: Dictionary, _c: Dictionary) -> void:
 		if bool(a.get("value", true)):
 			GameState.raise_flag(str(a.get("flag", "")))
@@ -42,6 +42,14 @@ static func register_all(es: Node) -> void:
 		return field != null and (field.current_floor == str(cond.get("floor", ""))) == bool(cond.get("is", true)))
 	ConditionEvaluator.register("can_sleep", func(cond: Dictionary) -> bool:
 		return Calendar.can_sleep(SceneRouter.current_field_id) == bool(cond.get("can_sleep", true)))
+
+
+## message の id。rotate（ID の配列）があれば日付で順繰りに選ぶ（daily の文が毎日同じにならないように）
+static func _message_id(a: Dictionary) -> String:
+	var rotate: Variant = a.get("rotate", null)
+	if rotate is Array and not (rotate as Array).is_empty():
+		return str((rotate as Array)[Calendar.day % (rotate as Array).size()])
+	return str(a.get("id", ""))
 
 
 static func _unlock_field(es: Node, a: Dictionary, c: Dictionary) -> void:

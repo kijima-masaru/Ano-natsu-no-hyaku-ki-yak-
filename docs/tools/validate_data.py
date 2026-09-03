@@ -118,7 +118,11 @@ def check_action(r, eid, a, ctx, event_ids):
     if t not in KNOWN_ACTIONS:
         r.error("events", "%s: アクション種別 '%s' は未登録です" % (eid, t))
     if t in ("message", "entity_speak"):
-        need_message(r, eid, a.get("id", ""), ctx)
+        if isinstance(a.get("rotate"), list) and a["rotate"]:
+            for mid in a["rotate"]:
+                need_message(r, eid, mid, ctx)
+        else:
+            need_message(r, eid, a.get("id", ""), ctx)
     elif t == "entity_comfort":
         need_message(r, eid, "msg_natsu_comfort_%s" % a.get("context", ""), ctx)
     elif t in ("give_item", "remove_item"):
