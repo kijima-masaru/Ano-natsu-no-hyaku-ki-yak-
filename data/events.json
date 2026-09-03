@@ -195,8 +195,32 @@
       "conditions": [],
       "actions": [
         {
+          "type": "set_flag",
+          "flag": "pov_mio"
+        },
+        {
+          "type": "set_companion",
+          "on": false
+        },
+        {
+          "type": "move_player",
+          "field": "F05",
+          "tile": [
+            8,
+            20
+          ],
+          "facing": [
+            0,
+            1
+          ]
+        },
+        {
           "type": "message",
           "id": "msg_d31_open"
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_open_2"
         }
       ],
       "once": true,
@@ -7219,6 +7243,473 @@
         },
         {
           "type": "advance_day"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f05",
+      "field": "F05",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f05_toki"
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_f05"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f01",
+      "field": "F01",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f01"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f12",
+      "field": "F12",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f12"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f12_door",
+      "field": "F12",
+      "trigger": "on_interact",
+      "target": "home_door",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f12_door"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f13",
+      "field": "F13",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f13"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f15",
+      "field": "F15",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f15"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_bridge",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "yu_npc",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "ending_reached",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_b_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_yu_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d31_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d31_2"
+        },
+        {
+          "type": "wait",
+          "seconds": 0.8
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d31_3"
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "flag": "truth_partial_entity"
+            },
+            {
+              "any": [
+                {
+                  "flag": "hid_fail_shoe_mud"
+                },
+                {
+                  "flag": "hid_fail_ren_memo"
+                },
+                {
+                  "flag": "hid_fail_timetable_pass"
+                },
+                {
+                  "flag": "hid_fail_storefront_note"
+                },
+                {
+                  "flag": "hid_fail_phone_reply"
+                },
+                {
+                  "flag": "hid_fail_salt_bag"
+                },
+                {
+                  "flag": "hid_fail_journal_page"
+                },
+                {
+                  "flag": "hid_fail_library_book"
+                },
+                {
+                  "flag": "hid_fail_store_receipt"
+                },
+                {
+                  "flag": "hid_fail_flashlight_box"
+                },
+                {
+                  "flag": "hid_fail_dugout_note"
+                },
+                {
+                  "flag": "hid_fail_water_bottle"
+                },
+                {
+                  "flag": "hid_fail_ema_wish"
+                },
+                {
+                  "flag": "hid_fail_path_marker"
+                },
+                {
+                  "flag": "hid_fail_visitor_book"
+                },
+                {
+                  "flag": "hid_fail_cairn_stone"
+                },
+                {
+                  "flag": "hid_fail_capsule_letter"
+                }
+              ]
+            }
+          ],
+          "then": [
+            {
+              "type": "set_flag",
+              "flag": "ending_a"
+            },
+            {
+              "type": "message",
+              "id": "msg_mio_d31_a1"
+            },
+            {
+              "type": "wait",
+              "seconds": 1.2
+            },
+            {
+              "type": "message",
+              "id": "msg_natsu_reply_mio"
+            },
+            {
+              "type": "message",
+              "id": "msg_d31_a_narr"
+            },
+            {
+              "type": "entity_speak",
+              "id": "msg_natsu_010"
+            },
+            {
+              "type": "message",
+              "id": "msg_d31_a_narr2"
+            }
+          ],
+          "else": [
+            {
+              "type": "branch",
+              "conditions": [
+                {
+                  "any": [
+                    {
+                      "suspicion": {
+                        "min": 50
+                      }
+                    },
+                    {
+                      "flag": "truth_partial_walk"
+                    }
+                  ]
+                }
+              ],
+              "then": [
+                {
+                  "type": "set_flag",
+                  "flag": "ending_b"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_b_narr"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_natsu_blank"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_b_narr2"
+                }
+              ],
+              "else": [
+                {
+                  "type": "set_flag",
+                  "flag": "ending_c"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_yu_c1"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_yu_c2"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_c_narr"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_natsu_blank"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_b_end"
+        },
+        {
+          "type": "set_ambience",
+          "id": ""
+        },
+        {
+          "type": "fade",
+          "to": 1.0,
+          "seconds": 1.5
+        },
+        {
+          "type": "wait",
+          "seconds": 2.5
+        },
+        {
+          "type": "set_time",
+          "time_of_day": "morning"
+        },
+        {
+          "type": "set_flag",
+          "flag": "ending_reached"
+        },
+        {
+          "type": "move_player",
+          "tile": [
+            31,
+            11
+          ],
+          "facing": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "fade",
+          "to": 0.0,
+          "seconds": 1.5
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_after_1"
+        },
+        {
+          "type": "wait",
+          "seconds": 0.8
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_after_2"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "flag": "ending_a"
+            }
+          ],
+          "then": [
+            {
+              "type": "message",
+              "id": "msg_d31_after_a"
+            },
+            {
+              "type": "message",
+              "id": "msg_d31_after_a2"
+            }
+          ],
+          "else": [
+            {
+              "type": "branch",
+              "conditions": [
+                {
+                  "flag": "ending_b"
+                }
+              ],
+              "then": [
+                {
+                  "type": "message",
+                  "id": "msg_d31_after_b"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_after_b2"
+                }
+              ],
+              "else": [
+                {
+                  "type": "message",
+                  "id": "msg_d31_after_c"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_after_c2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_last"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "fade",
+          "to": 1.0,
+          "seconds": 2.0
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "flag": "ending_a"
+            }
+          ],
+          "then": [
+            {
+              "type": "end_game",
+              "ending": "ending_a"
+            }
+          ],
+          "else": [
+            {
+              "type": "branch",
+              "conditions": [
+                {
+                  "flag": "ending_b"
+                }
+              ],
+              "then": [
+                {
+                  "type": "end_game",
+                  "ending": "ending_b"
+                }
+              ],
+              "else": [
+                {
+                  "type": "end_game",
+                  "ending": "ending_c"
+                }
+              ]
+            }
+          ]
         }
       ],
       "once": true,
