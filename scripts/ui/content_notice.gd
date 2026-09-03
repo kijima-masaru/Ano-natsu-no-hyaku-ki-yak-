@@ -5,6 +5,8 @@ extends Control
 signal acknowledged()
 
 const FONT_SIZE: int = 12
+## "startup"：初回起動（既読を記録）／"after_ending"：エンディング後の相談窓口案内（記録しない）／"replay"：設定・裏面（記録しない）
+var mode: String = "startup"
 
 @onready var _bg: ColorRect = $Background
 @onready var _title: Label = $Title
@@ -19,8 +21,9 @@ func _ready() -> void:
 	_title.add_theme_color_override("font_color", Palette.get_color(Palette.UI_ACCENT))
 	_body.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT))
 	_hint.add_theme_color_override("font_color", Palette.get_color(Palette.UI_TEXT_DIM))
-	_title.text = MessageResolver.text("ui_notice_title")
-	_body.text = MessageResolver.text("ui_notice_body")
+	var suffix: String = "_after_ending" if mode == "after_ending" else ""
+	_title.text = MessageResolver.text("ui_notice_title" + suffix)
+	_body.text = MessageResolver.text("ui_notice_body" + suffix)
 	_hint.text = MessageResolver.text("ui_hint_close")
 
 
@@ -28,6 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") or event.is_action_pressed("ui_accept") \
 			or event.is_action_pressed("cancel") or event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
-		SaveManager.mark_content_notice_seen()
+		if mode == "startup":
+			SaveManager.mark_content_notice_seen()
 		acknowledged.emit()
 		queue_free()
