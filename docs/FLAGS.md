@@ -9,9 +9,9 @@
 
 | flag_id | 意味 | 立つ条件 | 参照箇所 |
 |---|---|---|---|
-| `truth_revealed` | 真相到達。**全テキストの二層分岐を切り替える唯一のフラグ** | 8/30 夜、澪との対決会話の終端（`ev_d30_confront`）。周回の「裏面」モード開始時 | `MessageResolver.resolve()`（単一の解決関数）、隠蔽リスト提示、ナツの話者色 |
-| `truth_partial_walk` | 澪が「7/31 に隣を歩いたのは悠」と確定した | 接近度 ≥ 50 かつ証拠 `ev_timetable_pass` または `ev_shoe_mud` を澪が把握 | ED 判定、澪の独自発言 |
-| `truth_partial_entity` | 澪がナツの存在に至った | 接近度 ≥ 75 かつ `baba_told_seal` | ED 判定（ED-A） |
+| `truth_revealed` | 真相到達。**全テキストの二層分岐を切り替える唯一のフラグ** | 8/30 夜、F12 自宅前の対決（`ev_d30_confront`）で提示画面が終わった直後。周回の「裏面」モード開始時（ステップ5 タスク6） | `MessageResolver.resolve()`（単一の解決関数）、8/30 の `advance_condition`、以後の全テキスト |
+| `truth_partial_walk` | 澪が「7/31 に隣を歩いたのは悠」と確定した | `ev_d30_confront` の `branch`：接近度 ≥ 50 かつ `ev_timetable_pass` または `ev_shoe_mud`（ノートに載った＝目撃されたか証拠として得た） | ED 判定、対決で澪が「定期券。靴の泥」と言う |
+| `truth_partial_entity` | 澪がナツの存在に至った | `ev_d30_confront` の `branch`：接近度 ≥ 75 かつ `baba_told_seal` | ED 判定（ED-A）、対決で澪が「あなたの隣にいる、それのこと」と言う |
 | `ending_reached` | エンディング到達 | 8/31 御渡橋イベント終端 | タイトル復帰、システム保存 |
 | `ending_a` / `ending_b` / `ending_c` | 到達した ED（排他） | §7 の条件で `ev_d31_bridge` が判定 | システム保存（周回）、タイトルの面の数 |
 

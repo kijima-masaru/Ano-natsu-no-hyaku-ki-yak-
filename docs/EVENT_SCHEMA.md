@@ -57,7 +57,8 @@
 | `give_item` / `remove_item` | `item` | 所持品（`items.json` に定義が必要） |
 | `unlock_field` | `field` | そのフィールドの `unlock_flag` を立てる |
 | `move_player` | `field?`, `tile`, `facing?` | 別フィールドなら遷移してから配置 |
-| `advance_day` | | 日送り（進行条件を満たしている必要あり） |
+| `advance_day` | | 自宅以外で日を送る（進行条件を満たしている必要あり）。`sleep` と同じくイベント終了後に日送りする（8/30 の夜、F01 で朝を待つ） |
+| `branch` | `conditions`, `then`, `else` | 条件をすべて満たせば `then` の、さもなくば `else` のアクション列をその場で実行する。`run_event` は条件を見ないので、イベントの途中で状態により分かれる箇所に使う（8/30 の `truth_partial_*`） |
 | `set_time` | `time_of_day` | 時間帯 |
 | `add_points` | `amount` | 調査ポイント |
 | `wait` | `seconds` | 待機 |
@@ -71,7 +72,8 @@
 | `raise_suspicion` | Suspicion | `amount`, `reason?` |
 | `give_evidence` | EvidenceRegistry | `evidence`（ノートに記録、`suspicion_on_gain` を加算） |
 | `conceal_evidence` | EvidenceRegistry | `evidence`（澪が近ければ失敗。表示は `shown_id` か `msg_conceal_witnessed`） |
-| `show_concealment_reveal` | EvidenceRegistry | なし（8/30 の提示画面） |
+| `show_concealment_reveal` | EvidenceRegistry | `hold?`（既定 true。8/30 の提示画面。1 件ずつ「見た文 → 実際にしたこと」を出し、件の間は暗転。hold なら最後の件の後も黒のまま残る） |
+| `close_concealment_reveal` | EvidenceRegistry | なし（hold した提示画面を消す。黒地のままナツの台詞を出してから呼ぶ） |
 | `autosave` | EventActions | なし |
 | `play_sound` | AudioManager | `id` |
 | `play_bgm` / `stop_bgm` | AudioManager | `id`／なし |
@@ -81,7 +83,7 @@
 | `entity_comfort` | AttachedEntity | `context`（after_anomaly / after_stalker / night_walk / yakushi_gate / heroine_near） |
 | `entity_pulse` | AttachedEntity | `strength`（環境の微細な変化の通知） |
 | `start_stalker` | EventActions → FieldBase | `active`, `spawn_tile?`, `retreat_to?`（現在フィールドに追跡者を出す／消す。出したら `stalker_met`） |
-| `choice` | Dialogue（タスク4） | `options` |
+| `choice` | EventActions → DialogueWindow | `prompt_id?`, `options:[{text_id, set_flag?, actions?, run_event?}]`。`actions` はその場で実行（返答）、`run_event` は待ち行列（現在のイベントの後） |
 | `sleep` | EventActions → Calendar | なし（自宅で就寝して翌日へ。眠れなければ `msg_bed_not_yet`。日送りはイベント終了後に行う） |
 | `switch_floor` | EventActions → FieldBase | `floor`, `tile`, `facing?`（屋内の階へ移る／`outside` で屋外へ。階は各フィールドの `FLOORS` 定数。切替後に `on_enter` が再発火する） |
 

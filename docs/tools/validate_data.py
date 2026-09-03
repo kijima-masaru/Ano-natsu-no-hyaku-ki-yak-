@@ -17,7 +17,7 @@ KNOWN_ACTIONS = {
     "message", "set_flag", "clear_flag", "give_item", "remove_item", "unlock_field", "move_player", "advance_day",
     "set_time", "add_points", "wait", "run_event", "end_game", "choice", "autosave", "set_companion", "start_stalker",
     "sleep", "give_evidence", "conceal_evidence", "show_concealment_reveal", "raise_suspicion", "play_sound",
-    "play_bgm", "stop_bgm", "set_ambience", "entity_speak", "entity_comfort", "entity_pulse", "switch_floor",
+    "play_bgm", "stop_bgm", "set_ambience", "branch", "close_concealment_reveal", "entity_speak", "entity_comfort", "entity_pulse", "switch_floor",
 }
 KNOWN_CONDITIONS = {"flag", "has_item", "field_visited", "day", "day_range", "time_of_day", "not", "any", "all",
                     "suspicion", "can_sleep", "floor"}
@@ -52,10 +52,26 @@ def id_set(items):
     return {str(i.get("id", "")) for i in items if isinstance(i, dict)}
 
 
+def flatten_actions(actions):
+    """branch の then / else を平らに展開する"""
+    out = []
+    for a in actions:
+        if not isinstance(a, dict):
+            continue
+        out.append(a)
+        if a.get("type") == "branch":
+            for key in ("then", "else"):
+                out.extend(flatten_actions(a.get(key, [])))
+        elif a.get("type") == "choice":
+            for o in a.get("options", []):
+                out.extend(flatten_actions(o.get("actions", [])))
+    return out
+
+
 def collect_flags(events, schedule):
     flags = set()
     for e in events:
-        for a in e.get("actions", []):
+        for a in flatten_actions(e.get("actions", [])):
             if a.get("type") in ("set_flag", "clear_flag"):
                 flags.add(a.get("flag", ""))
             if a.get("type") == "choice":
@@ -120,6 +136,12 @@ def check_action(r, eid, a, ctx, event_ids):
     elif t in ("play_sound", "play_bgm"):
         if a.get("id") not in ctx["tracks"]:
             r.error("events", "%s: 音 '%s' は audio.json にありません" % (eid, a.get("id")))
+    elif t == "branch":
+        for c in a.get("conditions", []):
+            check_condition(r, eid, c, ctx)
+        for key in ("then", "else"):
+            for sub in a.get(key, []):
+                check_action(r, eid, sub, ctx, event_ids)
     elif t == "choice":
         if "prompt_id" in a:
             need_message(r, eid, a["prompt_id"], ctx)
@@ -127,6 +149,8 @@ def check_action(r, eid, a, ctx, event_ids):
             need_message(r, eid, o.get("text_id", ""), ctx)
             if "run_event" in o and o["run_event"] not in event_ids:
                 r.error("events", "%s: 選択肢の run_event '%s' は存在しません" % (eid, o["run_event"]))
+            for sub in o.get("actions", []):
+                check_action(r, eid, sub, ctx, event_ids)
 
 
 def check_events(r, events, ctx):

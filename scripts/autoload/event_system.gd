@@ -69,6 +69,18 @@ func register_message_window(window: Node) -> void:
 	_message_window = window
 
 
+## メッセージウィンドウの親（UI の CanvasLayer）。全画面の提示画面などをウィンドウの下に差し込むために使う。
+## ウィンドウが未登録なら null
+func get_ui_root() -> Node:
+	return _message_window.get_parent() if _message_window != null else null
+
+
+## メッセージウィンドウを UI 層の最前面へ（全画面の提示画面の上に会話を出すため）
+func raise_message_window() -> void:
+	if _message_window != null and _message_window.get_parent() != null:
+		_message_window.get_parent().move_child(_message_window, _message_window.get_parent().get_child_count() - 1)
+
+
 func get_item_ids() -> PackedStringArray:
 	return _item_ids.duplicate()
 
@@ -226,6 +238,13 @@ func _drain() -> void:
 			event_finished.emit(label)
 	is_running = false
 	_set_player_input(true)
+
+
+## アクション列を待ち行列に入れず、その場で順に実行する（branch アクションの then / else 用）
+func run_actions_inline(label: String, actions: Array) -> void:
+	for action: Variant in actions:
+		if action is Dictionary:
+			await _run_action(label, action)
 
 
 func _run_action(label: String, action: Dictionary) -> void:

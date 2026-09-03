@@ -8,7 +8,7 @@ const KNOWN_ACTIONS: PackedStringArray = [
 	"message", "set_flag", "clear_flag", "give_item", "remove_item", "unlock_field", "move_player", "advance_day",
 	"set_time", "add_points", "wait", "run_event", "end_game", "choice", "autosave", "set_companion", "start_stalker",
 	"sleep", "give_evidence", "conceal_evidence", "show_concealment_reveal", "raise_suspicion", "play_sound",
-	"play_bgm", "stop_bgm", "set_ambience", "entity_speak", "entity_comfort", "entity_pulse", "switch_floor",
+	"play_bgm", "stop_bgm", "set_ambience", "branch", "close_concealment_reveal", "entity_speak", "entity_comfort", "entity_pulse", "switch_floor",
 ]
 const KNOWN_CONDITIONS: PackedStringArray = [
 	"flag", "has_item", "field_visited", "day", "day_range", "time_of_day", "not", "any", "all", "suspicion", "can_sleep", "floor",
@@ -25,7 +25,7 @@ const COMFORT_CONTEXTS: PackedStringArray = ["after_anomaly", "after_stalker", "
 static func collect_defined_flags(events: Array, schedule: Array) -> Dictionary:
 	var flags: Dictionary = {}
 	for e: Dictionary in events:
-		for a: Dictionary in e.get("actions", []):
+		for a: Dictionary in flatten_actions(e.get("actions", [])):
 			if a.get("type") == "set_flag" or a.get("type") == "clear_flag":
 				flags[str(a.get("flag", ""))] = true
 			if a.get("type") == "choice":
@@ -45,6 +45,24 @@ static func collect_defined_flags(events: Array, schedule: Array) -> Dictionary:
 			if m != null:
 				flags[m.get_string(1)] = true
 	return flags
+
+
+## branch の then / else を平らに展開する
+static func flatten_actions(actions: Array) -> Array:
+	var out: Array = []
+	for a: Variant in actions:
+		if not a is Dictionary:
+			continue
+		out.append(a)
+		if (a as Dictionary).get("type") == "branch":
+			for key: String in ["then", "else"]:
+				if (a as Dictionary).get(key, []) is Array:
+					out.append_array(flatten_actions((a as Dictionary)[key]))
+		elif (a as Dictionary).get("type") == "choice":
+			for o: Variant in (a as Dictionary).get("options", []):
+				if o is Dictionary and (o as Dictionary).get("actions", null) is Array:
+					out.append_array(flatten_actions((o as Dictionary)["actions"]))
+	return out
 
 
 static func flag_is_known(flag: String, defined: Dictionary) -> bool:
@@ -122,6 +140,14 @@ static func _check_action(report: DataReport, id: String, a: Dictionary, ctx: Di
 		"play_sound", "play_bgm":
 			if not ctx["tracks"].has(str(a.get("id", ""))):
 				report.error("events", "%s: 音 '%s' は audio.json にありません" % [id, str(a.get("id", ""))])
+		"branch":
+			for cond: Variant in a.get("conditions", []):
+				if cond is Dictionary:
+					_check_condition(report, id, cond, ctx)
+			for key: String in ["then", "else"]:
+				for sub: Variant in a.get(key, []):
+					if sub is Dictionary:
+						_check_action(report, id, sub, ctx, event_ids)
 		"choice":
 			if a.has("prompt_id"):
 				_need_message(report, id, str(a["prompt_id"]), ctx)
@@ -129,6 +155,9 @@ static func _check_action(report: DataReport, id: String, a: Dictionary, ctx: Di
 				_need_message(report, id, str(o.get("text_id", "")), ctx)
 				if o.has("run_event") and not event_ids.has(str(o["run_event"])):
 					report.error("events", "%s: 選択肢の run_event '%s' は存在しません" % [id, str(o["run_event"])])
+				for sub: Variant in o.get("actions", []):
+					if sub is Dictionary:
+						_check_action(report, id, sub, ctx, event_ids)
 
 
 static func _need_message(report: DataReport, id: String, msg_id: String, ctx: Dictionary) -> void:
