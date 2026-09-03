@@ -21,7 +21,7 @@ KNOWN_ACTIONS = {
 }
 KNOWN_CONDITIONS = {"flag", "has_item", "field_visited", "day", "day_range", "time_of_day", "not", "any", "all",
                     "suspicion", "can_sleep", "floor"}
-FLAG_PREFIXES = ("hid_", "hid_fail_", "ev_", "ev_done_", "day_", "seen_", "visited_", "luck_", "an_done_")
+FLAG_PREFIXES = ("hid_", "hid_fail_", "ev_", "ev_done_", "day_", "seen_", "visited_", "luck_", "an_done_", "ev_day_")
 ANOMALY_TRIGGERS = {"on_enter", "on_interact", "on_condition"}
 ANOMALY_MODES = {"once", "repeat", "escalate"}
 COMFORT_CONTEXTS = {"after_anomaly", "after_stalker", "night_walk", "yakushi_gate", "heroine_near"}
@@ -353,7 +353,7 @@ def check_points(r, schedule, events):
             rng = e.get("day_range")
             if rng and not (rng[0] <= day <= rng[1]):
                 continue
-            if not e.get("once", False):
+            if not e.get("once", False) and not e.get("daily", False):
                 repeatable.append(e["id"])
             supply += 1
         for rid in repeatable:

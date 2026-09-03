@@ -58,6 +58,8 @@
 | `visited_F<nn>` | フィールド初訪問 | `SceneRouter.field_entered` | ミニマップの表示、調査 P |
 | `slept_at_home` | 一度でも就寝した | 初回就寝 | チュートリアル文の抑制 |
 | `an_done_<anomaly_id>` | 一度きりの怪異 `<anomaly_id>` が起きた | `AnomalySystem`（`mode: once`） | 再発防止、`on_condition` の条件 |
+| `ev_done_<event_id>` | `once` イベントを消化した | `EventSystem` | 再発防止 |
+| `ev_day_<event_id>_<day>` | `daily` イベントをその日に消化した | `EventSystem` | 同日の再発防止（翌日は再び発生し +1 P） |
 
 ## 証拠・隠蔽系（`docs/CONCEALMENT_LIST.md` と対応）
 

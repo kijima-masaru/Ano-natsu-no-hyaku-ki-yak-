@@ -147,6 +147,8 @@ func fire(trigger: String, field_id: String, target: String = "") -> bool:
 			continue
 		if e.once and GameState.has_flag(e.done_flag()):
 			continue
+		if e.daily and GameState.has_flag(e.daily_flag(Calendar.day)):
+			continue
 		if not ConditionEvaluator.evaluate_all(e.conditions):
 			continue
 		candidates.append(e)
@@ -193,6 +195,8 @@ func _drain() -> void:
 				await _run_action(e.id, action)
 			if e.once:
 				GameState.raise_flag(e.done_flag())
+			if e.daily:
+				GameState.raise_flag(e.daily_flag(Calendar.day))
 			event_finished.emit(e.id)
 		else:
 			var label: String = str((entry as Dictionary).get("label", ""))
