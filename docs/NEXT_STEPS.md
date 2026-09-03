@@ -1,75 +1,90 @@
-# ステップ4への申し送り（v0.2.0 時点）
+# ステップ5への申し送り（v0.3.0 時点）
 
-ステップ3「探索コアループの完成とプロローグの実装」の完了時点でのまとめ（PR #9〜#24）。
-ステップ4は残り 11 フィールド、光源、怪異演出、第一幕・第二幕の日程、v0.3.0。**タスク 0（`chore/field-pipeline`）は設計を提示して確認を得てから実装する**（ステップ4の指示）。
+ステップ4「残り 11 フィールド、光源と夜、怪異演出、第一幕・第二幕の日程」の完了時点でのまとめ（PR #25〜#42）。
+ステップ5は終幕（8/30〜31：封印・提示画面・`truth_revealed`・エンディング分岐・タイトルへの帰還）と仕上げが中心になる想定。指示が来るまで着手しない。
 
 ## 現状（何が動くか）
 
 | 領域 | 状態 |
 |---|---|
-| 日程 | `Calendar` ＋ `data/schedule.json`（8/1〜8/31、固定／自由／圧縮）。自由日は 3 P で就寝可、P で時間帯が進む。自宅 F12 |
-| セーブ | `SaveManager`（セクション登録方式、`user://saves/slot_NN.json`、0 はオート、`system.json` に設定）。`SaveMigrator` schema 2 |
-| イベント | `EventSystem` ＋ `data/events.json`（99 件）。トリガ 4 種、条件（flag/has_item/field_visited/day/day_range/time_of_day/not/any/all/suspicion/can_sleep）、アクション 27 種。`EventValidator` が起動時に参照を検証 |
-| テキスト | `MessageResolver` ＋ `data/messages.json`（320 件、二層 38 対）。分岐は `resolve()` の中だけ。`DialogueWindow`（話者色・速度・選択肢） |
-| 証拠・接近度 | `EvidenceRegistry`（13 件、隠蔽 9・証拠 4）、`Suspicion`（0〜100、4 段階、目撃 +20）。ノート UI（N）、8/30 の提示画面 |
-| 音 | `AudioManager` ＋ `SoundSynth`（合成 WAV）＋ `data/audio.json`。フィールドごとの環境音、夜変奏、蝉の減衰 |
-| アクター | `Player`、`Heroine`（追従・段階で距離と視線）、`Stalker`（FSM・聴覚・視野・捕獲→押し戻し）、`AttachedEntity`（ナツ、声と気配だけ） |
-| フィールド | **F01・F02・F05・F06・F12 実装**（序盤の環状ルート完成）。残り 11 はプレースホルダ |
-| UI | タイトル、スロット、設定、コンテンツ警告、日付 HUD、ミニマップ（M / Tab / Y）、デバッグオーバーレイ |
-| 進行 | タイトル → 8/1 → 8/4（第一幕の入口）まで机上で通る（`docs/PLAYTEST_LOG.md`） |
+| フィールド | **16 フィールドすべて実装**（`docs/FIELD_IMPLEMENTATION_GUIDE.md` の手順、`FieldMapBuilder` ＋ ASCII 地図 ＋ `data/events.json`）。屋内の階は `FieldFloors`（F11 旧校舎 1 階） |
+| 日程 | `data/schedule.json` 8/1〜8/31。**8/1〜8/29 は通しで机上確認済み**（`docs/PLAYTEST_LOG.md`）。8/30〜31 は `opening_event` がプレースホルダ |
+| イベント | `data/events.json` 310 件。トリガ 4 種、`once` / `daily` / 優先度。条件 12 種、アクション 29 種。`EventValidator` ＋ `validate_data`（GDScript / Python、CI）で参照・地図・供給を検証 |
+| テキスト | `data/messages.json` 639 件、**二層 102 対**（`docs/DECEPTION_MAP.md`）。分岐は `MessageResolver.resolve()` の中だけ |
+| 証拠・隠蔽 | `data/evidence.json` 25 件（隠蔽 17・証拠 8）。**隠蔽 17 件すべてにイベントあり**（`docs/CONCEALMENT_LIST.md`）。提示画面 `ConcealmentReveal` は実装済み、8/30 への接続が未 |
+| 怪異 | `AnomalySystem` ＋ `data/anomalies.json` 27 件（once 12・repeat 6・escalate 9）。全フィールドに 1 件以上。接近度への加算とナツの労わり |
+| 光源 | `Lighting`：時間帯の色調、タイル光源（`LightCatalog` 16 種）、月光、懐中電灯（F）。追跡者の暗所ボーナスと照明下の視認距離 |
+| 追跡者 | 8/12 F03（必須）、8/19 F11 1 階（必須）、8/13〜 F03/F04、8/19〜 F10、8/20〜 F11 の夜（任意）。捕獲は押し戻し、主人公は最大 3 回 `luck_<n>` で逃れる |
+| セーブ | セクション：game_state / calendar / suspicion / anomalies / attached_entity。オートセーブ 9 箇所。位置は保存しない（ロードは屋外の既定位置） |
+| 進行 | タイトル → 8/1 → 8/29 終了まで机上で通る。実機は未確認 |
 
 ## 未検証事項（最優先）
 
-この環境には Godot 4.7 の実行ファイルが無く、**ステップ2・3 の全コードは目視レビューのみ**。ステップ4の最初に Godot エディタで以下を確認し、問題は `fix/` ブランチで直す。
+この環境には Godot 4.7 の実行ファイルが無く、**ステップ2〜4 の全コードは目視レビューのみ**。ステップ5の最初に Godot エディタで `docs/PLAYTEST_LOG.md`「実機で確認すること」の 8 項目を確認し、問題は `fix/` ブランチで直す。特に：
 
-1. プロジェクトが開き、autoload 13 個・`EventValidator`・`FieldSchemaValidator` の起動時検証が通る
-2. `docs/PLAYTEST_LOG.md`「実機で確認すること」の 7 項目
-3. `sleep` アクションの `event_finished` 遅延接続：就寝 → 翌日の開始メッセージ → `opening_event` の順に表示され、入力ロックが戻る
-4. `Heroine` の追従と `EvidenceRegistry.set_witness_check`（64px）の実距離感
-5. `Stalker` は呼び出すイベントがまだ無い。`scenes/actors/stalker.tscn` を任意のフィールドに置いて FSM を単体確認する
-6. `SoundSynth` の生成音量（`AudioManager` の各バス既定値）と `PixelMplus12` 不在時の代替フォント
-7. `untyped_declaration=2` での型注釈エラー、`Object.CONNECT_ONE_SHOT | Object.CONNECT_DEFERRED` の記法
+1. autoload 15 個の起動順と `_ready` の相互参照（`Lighting` → `AnomalySystem` → `AttachedEntity`）
+2. `FieldMapBuilder.build()` が 16 フィールドの `get_script_constant_map()` を読めること（`FLOORS` を持つ F11 を含む）
+3. `daily` イベントの翌日再発生、`switch_floor` 後の `on_enter` 再発火、`sleep` の遅延日送り
+4. `PointLight2D` の枚数（F01・F13 で街灯が多い）と GL Compatibility での描画負荷
+5. プレイ時間の実測（机上見積もり 1 時間 50 分〜2 時間 30 分）と閾値の確定
 
-## 既知の設計判断（変えるなら早めに）
+## ステップ5で作るもの（想定。指示で上書きする）
 
-- **フィールドは ASCII 地図 ＋ `data/events.json`**。共通処理は `FieldBase` / `FieldMapBuilder` / `scenes/fields/field_base.tscn`。雛形は `scripts/tools/field_scaffold.gd`、検証は `scripts/tools/validate_data.gd`（Godot 無しなら `docs/tools/validate_data.py`。CI もこれ）。手順は `docs/FIELD_IMPLEMENTATION_GUIDE.md`（タスク 0 で整備済み）。
-- **調査 P**：P を与えるイベントは `once: true`。自由日は「その日に初めて開く供給源が 3 つ以上」を保証する（8/3・8/4 は確認済み）。初訪問 +1 P は `Main` に直書き → `GameConstants` へ。
-- **就寝**：`can_sleep` 条件 ＋ `sleep` アクション。プレースホルダの仮寝床は旧方式（`Calendar.try_sleep` 直呼び）のまま残っている。
-- **隠蔽イベントの形**：`conceal_evidence` ＋ `add_points` の `once` イベントと、再表示用 `_after` イベントの 2 本。
-- **F01 の 8/1 用 `mio_npc`** は 8/3 以降の夕方にも立つ。`companion_on` のとき出さない修正を F01 側で（ステップ4）。
-- **支所の週末**：8/1・8/2 だけ「閉庁」文。曜日条件（`weekday`）を `ConditionEvaluator` に足すと 8/8・8/9 以降も揃う。
-- **200 行超**：`stalker.gd`(297) `scene_router.gd`(283) `audio_manager.gd`(282) `tile_painters_ground.gd`(257) `event_system.gd`(254) `calendar.gd`(248) `field_base.gd`(240) `tile_painters_objects.gd`(229) `save_manager.gd`(219) `tile_catalog.gd`(215) `tile_painters_built.gd`(211) `game_state.gd`(211)。理由は各 PR。`tile_catalog.gd` はステップ4で種別が増えるため分割候補。
+- 8/30：`ev_d30_open` の本実装。封印の場（F16）、`seal_restored`、`show_concealment_reveal`、`truth_revealed` → 以後の二層テキストが真相版に切り替わる
+- 8/31：`ev_d31_open`、御渡橋（F15）、`ending_reached` と分岐（`ending_a` ほか。`truth_partial_walk` `truth_partial_entity` は接近度と `baba_told_seal` で決まる。`docs/FLAGS.md`）、`end_game` アクションの本実装（クリア記録 → タイトル）
+- ナツの残り：`msg_natsu_008`（8/30 前夜）`msg_natsu_009`（提示画面の末尾、真相版）`msg_natsu_010`（8/31）を流すイベント。`entity_intro_done` を 8/1 の初台詞で立てる
+- コンテンツ警告と相談窓口案内（`docs/CONTENT_NOTICE.md`）をタイトルとエンディング後に出す
+- 素材差し替え（`docs/ASSETS_NEEDED.md` の優先順位どおり）と Steam 向けの設定（`SteamBridge` は空実装）
+
+## 隠蔽リストの実装状況
+
+17 件すべて実装済み。ID・イベント・場所・PR は `docs/CONCEALMENT_LIST.md` の「実装状況（v0.3.0）」表を正とする。
+形は「`conceal_evidence` ＋ `add_points` の `once`（優先度 5〜10）」＋「`_after`（優先度 0）」＋ 日付前の `_early`。例外：C-01 は 8/1 の選択肢から、C-02 / C-05 は 8/8 の部屋メニューから、C-09 は `once: false` 単独、C-08 は再訪が `daily` の図書室イベント。
+ステップ5で触るのは提示画面への接続のみ。**表示文と「実際にしたこと」は `data/evidence.json` の `shown_id` / `action_id`** で、`docs/CONCEALMENT_LIST.md` の文言と一致させてある。
+
+## 二層テキストの棚卸し（102 対）
+
+`docs/DECEPTION_MAP.md` を正とする。内訳（`truth_id` を持つ表層の数）：
+
+| 区分 | 対数 | 備考 |
+|---|---|---|
+| ナツ（`msg_natsu_001`〜`013`、労わり 5） | 18 | **`msg_natsu_008` `009` `010` を流すイベントが無い**（8/30〜31、ステップ5）。労わり 5 は `entity_comfort` から |
+| 悠の独白（`msg_yu_stage_1`〜`3`） | 3 | `Main` が接近度の段階上昇で出す（コード側で ID を組み立てる） |
+| 回想（7/31 3 枚、六月 2 枚） | 5 | 8/1・8/23 |
+| 澪（`msg_mio_001`〜`004`、`msg_d01_mio_4`） | 5 | 8/2・8/12・8/19・8/26 の on_day_start と 8/1 |
+| 日の導入（`msg_d20_open` `msg_d22_open` `msg_d29_night_1`） | 3 | 8/20・8/22・8/29 |
+| 怪異の地の文（`msg_an_*`） | 8 | F01 F03 F04 F06 F09 F11 F14 F15 |
+| フィールドの地の文・看板・物（`msg_fNN_*`） | 60 | F01 3、F02 5、F03 4、F04 4、F05 3、F06 2、F07 4、F08 4、F09 3、F10 2、F11 7、F12 4、F13 3、F14 4、F15 4、F16 4 |
+
+`truth_revealed` は 8/30 まで立たないので、真相版は現状どこにも表示されない。切り替わりの実機確認はステップ5の最初に `truth_revealed` を手で立てて行う。
 
 ## フラグの棚卸し
 
-`docs/FLAGS.md` に定義済みで **まだどのイベントも立てていない** もの（ステップ4で立てる）：
-`saw_first_missing`（8/5 F06 掲示板）、`stalker_met`（8/12 F03）、`baba_told_seal` `baba_rage`（8/14 F14 シゲ）、`obon_done`、`learned_seal`、`entered_yakushi`、`flag_yakushi_open`（8/28 schedule の `set_flags_on_end` で立つ）、`seal_restored`、`truth_revealed`（8/30）、`truth_partial_walk` `truth_partial_entity`、`ending_reached` `ending_a`、`entity_intro_done`、`luck_<n>`、`key_old_school`（F11）、`old_school_opened`、`bridge_steps`。
-`companion_on` `notebook_unlocked` は schedule の `set_flags_on_start` で立つ。`slept_at_home` は `sleep` アクション、`hid_*` `hid_fail_*` `ev_*` は `EvidenceRegistry`、`seen_*` は `MessageResolver`。
+- **定義済みでまだ立たない**（ステップ5で立てる）：`seal_restored`（8/30 封印）、`truth_revealed`（8/30）、`truth_partial_walk` `truth_partial_entity`、`ending_reached` `ending_a`、`baba_told_seal`（8/29 シゲが澪に封石の戻し方を教える。現状の 8/29 は F16 のみで F14 のイベントが無い）、`entity_intro_done`（8/1 の初台詞で立てる予定だったが未使用）。
+- **立つが参照されない**：`d01_told` `found_odd_house` `saw_notifications`（振り返り用に残す。消すなら `docs/FLAGS.md` も）。
+- **動的接頭辞**：`visited_ ev_done_ ev_day_ hid_ hid_fail_ seen_ day_ luck_ an_done_`。`luck_<n>` は追跡者に捕まった回数で立つ（最大 3。日付固定ではない）。
+- `investigation_points_today` は `docs/FLAGS.md` に載っているが数値（`Calendar`）であってフラグではない。
 
-## 二層テキストの棚卸し（38 対）
+## 既知の設計判断（変えるなら早めに）
 
-ナツ 17（`msg_natsu_001`〜`012`、`comfort_*` 5）、回想 3（`msg_recall_0731_a/b/c`）、F01 3（`msg_f01_vending` `msg_f01_trash` `msg_f01_bridge`）、F02 6（`msg_f02_door` `msg_f02_smell` `msg_f02_room_desk` `msg_f02_mother` `msg_f02_laundry` `msg_mio_001`）、F05 3（`msg_f05_storefront` `msg_f05_toki_testimony_3` `msg_f05_signpost`）、F06 1（`msg_f06_board`）、F12 4（`msg_f12_home` `msg_f12_shoes` `msg_f12_slide` `msg_f12_bike`）、その他 1（`msg_d01_mio_4`）。
-`docs/DECEPTION_MAP.md` の 37 対のうち未実装：`msg_mio_002`〜`005`、`msg_f04_journal`、`msg_natsu_010`〜`012` を流すイベント（台詞自体は定義済み）。
-
-## ステップ4で作るもの（指示の要約）
-
-0. `chore/field-pipeline`：済（PR #25）。`FieldMapBuilder` への共通化、`field_scaffold`、`validate_data`（GDScript ＋ Python）、ガイドの全面改訂
-1. フィールド 11（Step 4 指示の順）：F03（済 PR #28）→ F13（済 PR #29）→ F10（済 PR #30）→ F07（済 PR #31）→ F08（済 PR #32）→ F09（済 PR #33）→ F14（済 PR #34）→ F15（済 PR #35）→ F04（済 PR #36）→ F11（済 PR #37）→ F16（済 PR #38）。**11 フィールドすべて実装済み**。各 1 PR、`FIELD_IMPLEMENTATION_GUIDE.md` に従う
-2. `feat/lighting-and-night`：済（PR #26）。`Lighting` autoload（CanvasModulate の時間帯色調・明るさ設定・タイル光源・月光・懐中電灯）、Stalker の暗所ボーナスと照明下の視認距離
-3. `feat/anomaly-encounters`：済（PR #27）。`AnomalySystem` ＋ `data/anomalies.json`（once / repeat / escalate、接近度、憑いた怪異の介入）。既存 5 フィールドに各 1 件
-4. `feat/schedule-act1`：済（PR #40）。8/1〜15 の固定日・自由日・圧縮日を完成（8/5 掲示板、8/9〜 鍵、自由日の導入、接近度の段階ごとの朝の澪、段階が上がったときの独白）。`feat/schedule-act2`：済（PR #41）。8/16〜29（自由日の導入、8/23 六月の回想とナツ、8/26 橋の足音、8/29 夜の引き、独白の二層化、段階で広がる目撃半径）。8/30〜31（提示画面・`truth_revealed`・終幕）は Step 5
-5. `chore/act2-playtest`：通しの机上／実機確認、v0.3.0
+- 位置はセーブしない（ロードは常に屋外の既定位置）。屋内でのオートセーブ後にロードすると屋外に出る。位置を保存するなら `SceneRouter` にセクションを足し、`current_floor` も含める。
+- 初訪問 +1 P は `Main` に直書き（`GameConstants` へ移す候補）。
+- 支所の「閉庁」文は 8/1・8/2 のみ。曜日条件（`weekday`）は未実装。
+- シゲ（F14）はトキの絵を流用（`set_npc_present(..., "toki", ...)`）。素材が来たら種別を `shige` に。
+- 8/11・8/17・8/21〜22・8/27〜28 は `daily` だけで P を満たす日。daily 文が単調なら日ごとの一行に分ける。
+- **200 行超**：`stalker.gd`(305) `field_base.gd`(293) `scene_router.gd`(289) `audio_manager.gd`(282) `event_system.gd`(276) `tile_painters_ground.gd`(257) `calendar.gd`(248) `data_checks_fields.gd`(242) `data_checks_refs.gd`(230) `tile_painters_objects.gd`(229) `save_manager.gd`(219) `tile_catalog.gd`(215) `tile_painters_built.gd`(211) `game_state.gd`(211) `main.gd`(209) `lighting.gd`(202)。理由は各 PR。`field_base.gd` は `set_npc_present` / `add_point_of_interest` を `FieldNpcs` へ切り出す候補。
 
 ## 手作業が必要な項目（環境の制約で未実施）
 
-- タグ `v0.1.0` `v0.2.0` のプッシュ：`git push origin v0.1.0 v0.2.0`（この環境からは HTTP 403）
+- タグのプッシュ：`git push origin v0.1.0 v0.2.0 v0.3.0`（この環境からはプロキシに落とされ、リモートにタグが 0 件）
 - GitHub の既定ブランチを `main` に切り替える（現在は `claude/iwato-field-design-vfrev4`）
-- マージ済みリモートブランチの削除（`git push origin --delete <branch>`。PR #1〜#24 の各ブランチ）
+- マージ済みリモートブランチの削除（PR #1〜#42 の各ブランチ。`git push origin --delete <branch>` は 403）
+- Godot 4.7 での実機確認（上記）
 
 ## 運用
 
-- main 直接コミット禁止、`feat/` `fix/` `chore/` `docs/` ブランチ → PR → squash マージ
+- main 直接コミット禁止、`feat/` `fix/` `chore/` `docs/` ブランチ → PR → squash マージ。PR 本文は 概要／変更点／動作確認方法／未対応・既知の課題
 - コミットは Conventional Commits（本文は日本語）。`.godot/` は絶対にコミットしない
 - 200 行超は分割を検討し、理由を PR に書く
-- 日本語テキストは `data/messages.json`、ゲーム内容は `data/events.json`、GDScript はシステムだけ
-- 自死の方法・手段・場所・状態は書かない。死は常に事後。`docs/CONTENT_NOTICE.md`
+- 日本語テキストは `data/messages.json`、ゲーム内容は `data/events.json`、GDScript はシステムだけ。二層の分岐は `MessageResolver.resolve` の中だけ
+- 自死の方法・手段・場所・状態は書かない。死は常に事後。怪異の正体は説明しきらない。実在の固有名詞を使わない。`docs/CONTENT_NOTICE.md`
