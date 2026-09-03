@@ -13,7 +13,7 @@ const SYSTEM_SCHEMA_VERSION: int = 1
 ## 設定の既定値。設定画面と各 autoload はここのキー名を使う
 const DEFAULT_SETTINGS: Dictionary = {
 	"master_volume": 1.0, "bgm_volume": 0.8, "se_volume": 0.8, "ambience_volume": 0.8,
-	"text_speed": 0.7, "instant_text": false, "brightness": 1.0, "debug_overlay": false,
+	"text_speed": 0.7, "instant_text": false, "brightness": 0.5, "debug_overlay": false,
 }
 
 ## システム保存（周回・既読・設定）。スロットとは独立
