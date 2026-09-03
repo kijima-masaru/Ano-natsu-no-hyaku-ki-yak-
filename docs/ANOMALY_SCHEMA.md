@@ -29,7 +29,7 @@
 | `once_per_day` | bool | | repeat / escalate で同じ日に二度起こさない（既定 true） |
 | `actions` | [Action] | once / repeat で○ | `events.json` と同じアクション |
 | `stages` | [Stage] | escalate で○ | `{ "day_range"?: [a, b], "actions": [...] }`。**いずれかの段階に `day_range` があれば日で選ぶ**（日が進むと変化する）。無ければ発生回数で 0, 1, 2… と進み最後で止まる |
-| `suspicion_delta` | int | | 発火後に `raise_suspicion`（澪の接近度）。0 なら無し |
+| `suspicion_delta` | int | | **初回の発火だけ** `raise_suspicion`（澪の接近度）。2 回目以降の repeat / escalate では加算しない（タスク10）。0 なら無し |
 | `comfort` | String | | 発火後に憑いた怪異が差し込む労わり（`entity_comfort` の context：`after_anomaly` / `after_stalker` / `night_walk` / `yakushi_gate` / `heroine_near`）。表層では主人公を安心させ、真相版で意味が反転する二層の台詞 |
 
 `repeatable: true` は `mode: "repeat"` の旧表記として読める。

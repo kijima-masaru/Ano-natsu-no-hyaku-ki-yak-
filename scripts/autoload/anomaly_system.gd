@@ -140,7 +140,8 @@ func _can_fire(a: AnomalyData) -> bool:
 func _run(a: AnomalyData) -> void:
 	var count: int = count_of(a.id)
 	var actions: Array[Dictionary] = a.actions_for(count, Calendar.day).duplicate()
-	if a.suspicion_delta != 0:
+	# 接近度は初回の発生だけ上げる（繰り返しで積み上がると ED-B/C に届かない。docs/PLAYTEST_LOG.md「閾値の確定」）
+	if a.suspicion_delta != 0 and count == 0:
 		actions.append({"type": "raise_suspicion", "amount": a.suspicion_delta, "reason": "anomaly:%s" % a.id})
 	if not a.comfort.is_empty():
 		actions.append({"type": "entity_comfort", "context": a.comfort})
