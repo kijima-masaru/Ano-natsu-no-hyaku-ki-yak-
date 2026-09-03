@@ -26,6 +26,8 @@ var _by_trigger: Dictionary = {}
 var _handlers: Dictionary = {}
 var _item_ids: PackedStringArray = PackedStringArray()
 var _message_window: Node = null
+## 他のデータ（怪異など）が立てるフラグ。register_defined_flags() で受け取り、参照検証で既知として扱う
+var _extra_defined_flags: Dictionary = {}
 ## 待ち行列。要素はイベント ID（String）か、任意のアクション列 {label, actions}（Dictionary。AnomalySystem 等が使う）
 var _queue: Array = []
 
@@ -36,6 +38,13 @@ func _ready() -> void:
 	load_events(EVENTS_PATH)
 	# 他の autoload が register_action を終えた後（同フレーム末）に参照を検証する
 	validate.call_deferred()
+
+
+## 終了時に static の条件登録と自前のアクション登録を空にする。
+## ラムダを static 変数や autoload の辞書に残したまま終了すると、エンジン終了時にヒープ破壊で落ちる（Godot 4.7 で実機確認）
+func _exit_tree() -> void:
+	ConditionEvaluator.clear_registered()
+	_handlers.clear()
 
 
 # ── 登録 ──
@@ -58,6 +67,18 @@ func known_actions() -> PackedStringArray:
 ## メッセージ表示ノード（show_message(title, text) と signal closed を持つ）
 func register_message_window(window: Node) -> void:
 	_message_window = window
+
+
+## メッセージウィンドウの親（UI の CanvasLayer）。全画面の提示画面などをウィンドウの下に差し込むために使う。
+## ウィンドウが未登録なら null
+func get_ui_root() -> Node:
+	return _message_window.get_parent() if _message_window != null else null
+
+
+## メッセージウィンドウを UI 層の最前面へ（全画面の提示画面の上に会話を出すため）
+func raise_message_window() -> void:
+	if _message_window != null and _message_window.get_parent() != null:
+		_message_window.get_parent().move_child(_message_window, _message_window.get_parent().get_child_count() - 1)
 
 
 func get_item_ids() -> PackedStringArray:
@@ -108,9 +129,20 @@ func _load_items(path: String) -> void:
 				_item_ids.append(str((item as Dictionary).get("id", "")))
 
 
+## 他のシステムが立てるフラグを登録する（AnomalySystem が _ready で呼ぶ。validate は遅延実行なので間に合う）
+func register_defined_flags(flags: PackedStringArray) -> void:
+	for f: String in flags:
+		_extra_defined_flags[f] = true
+
+
+## events.json が立てるフラグ（AnomalySystem の検証が参照する）
+func defined_flags() -> Dictionary:
+	return EventValidator.defined_flags_of(_events)
+
+
 ## 起動時の全件検証。問題は validation_errors に残し push_error する
 func validate() -> void:
-	validation_errors = EventValidator.validate(_events, known_actions(), _item_ids)
+	validation_errors = EventValidator.validate(_events, known_actions(), _item_ids, _extra_defined_flags)
 	for msg: String in validation_errors:
 		push_error("EventSystem: " + msg)
 	if validation_errors.is_empty():
@@ -206,6 +238,13 @@ func _drain() -> void:
 			event_finished.emit(label)
 	is_running = false
 	_set_player_input(true)
+
+
+## アクション列を待ち行列に入れず、その場で順に実行する（branch アクションの then / else 用）
+func run_actions_inline(label: String, actions: Array) -> void:
+	for action: Variant in actions:
+		if action is Dictionary:
+			await _run_action(label, action)
 
 
 func _run_action(label: String, action: Dictionary) -> void:

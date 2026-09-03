@@ -7,12 +7,15 @@ const DYNAMIC_FLAG_PREFIXES: PackedStringArray = ["visited_", "ev_", "hid_", "hi
 ## コードや他システムが立てる、データに現れないフラグ
 const CODE_FLAGS: PackedStringArray = ["truth_revealed", "ending_reached", "ending_a", "ending_b", "ending_c",
 	"truth_partial_walk", "truth_partial_entity", "companion_on", "notebook_unlocked", "flag_minimap_unlocked",
-	"key_tunnel_fence", "key_old_school", "flag_yakushi_open", "entity_intro_done", "slept_at_home"]
+	"key_tunnel_fence", "key_old_school", "flag_yakushi_open", "entity_intro_done", "slept_at_home",
+	"stalker_met"]
 
 
-static func validate(events: Dictionary, known_actions: PackedStringArray, item_ids: PackedStringArray) -> PackedStringArray:
+## extra_defined は他のデータ（怪異など）が立てるフラグ。EventSystem と AnomalySystem が互いの分を渡す
+static func validate(events: Dictionary, known_actions: PackedStringArray, item_ids: PackedStringArray, extra_defined: Dictionary = {}) -> PackedStringArray:
 	var errors: PackedStringArray = PackedStringArray()
-	var defined_flags: Dictionary = _collect_defined_flags(events)
+	var defined_flags: Dictionary = defined_flags_of(events)
+	defined_flags.merge(extra_defined)
 	for id: String in events.keys():
 		var e: EventData = events[id]
 		var flags: PackedStringArray = PackedStringArray()
@@ -22,7 +25,7 @@ static func validate(events: Dictionary, known_actions: PackedStringArray, item_
 			ConditionEvaluator.collect_refs(cond, flags, items, fields)
 		if not e.field.is_empty():
 			fields.append(e.field)
-		for action: Dictionary in e.actions:
+		for action: Dictionary in _flatten_actions(e.actions, flags, items, fields):
 			var type: String = str(action.get("type", ""))
 			if not known_actions.has(type):
 				errors.append("%s: アクション種別 '%s' は未登録です" % [id, type])
@@ -68,13 +71,37 @@ static func validate(events: Dictionary, known_actions: PackedStringArray, item_
 	return errors
 
 
-static func _collect_defined_flags(events: Dictionary) -> Dictionary:
+## branch の then / else を平らに展開する。branch の条件が参照するフラグ等も集める
+static func _flatten_actions(actions: Array, flags: PackedStringArray, items: PackedStringArray, fields: PackedStringArray) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for action: Variant in actions:
+		if not action is Dictionary:
+			continue
+		var a: Dictionary = action
+		out.append(a)
+		if str(a.get("type", "")) == "branch":
+			for cond: Variant in a.get("conditions", []) as Array:
+				if cond is Dictionary:
+					ConditionEvaluator.collect_refs(cond, flags, items, fields)
+			for key: String in ["then", "else"]:
+				if a.get(key, []) is Array:
+					out.append_array(_flatten_actions(a[key], flags, items, fields))
+		elif str(a.get("type", "")) == "choice":
+			for opt: Variant in a.get("options", []) as Array:
+				if opt is Dictionary and (opt as Dictionary).get("actions", null) is Array:
+					out.append_array(_flatten_actions((opt as Dictionary)["actions"], flags, items, fields))
+	return out
+
+
+## events が立てるフラグ（set_flag / clear_flag / 選択肢の set_flag）＋ schedule ＋ 鍵 ＋ コード既知
+static func defined_flags_of(events: Dictionary) -> Dictionary:
 	var defined: Dictionary = {}
 	for f: String in CODE_FLAGS:
 		defined[f] = true
+	var scratch: PackedStringArray = PackedStringArray()
 	for id: String in events.keys():
 		var e: EventData = events[id]
-		for action: Dictionary in e.actions:
+		for action: Dictionary in _flatten_actions(e.actions, scratch, scratch, scratch):
 			if str(action.get("type", "")) in ["set_flag", "clear_flag"]:
 				defined[str(action.get("flag", ""))] = true
 			if str(action.get("type", "")) == "choice":

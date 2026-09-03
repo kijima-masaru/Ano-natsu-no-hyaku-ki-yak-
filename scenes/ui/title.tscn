@@ -20,21 +20,21 @@ mouse_filter = 2
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 48.0
+offset_top = 36.0
 offset_right = 352.0
-offset_bottom = 72.0
+offset_bottom = 60.0
 
 [node name="Subtitle" type="Label" parent="."]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 74.0
+offset_top = 62.0
 offset_right = 352.0
-offset_bottom = 88.0
+offset_bottom = 76.0
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 48.0
-offset_top = 108.0
+offset_top = 92.0
 offset_right = 336.0
 offset_bottom = 180.0
 script = ExtResource("2_menu_list")

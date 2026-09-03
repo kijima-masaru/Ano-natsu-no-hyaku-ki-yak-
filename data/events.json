@@ -195,8 +195,32 @@
       "conditions": [],
       "actions": [
         {
+          "type": "set_flag",
+          "flag": "pov_mio"
+        },
+        {
+          "type": "set_companion",
+          "on": false
+        },
+        {
+          "type": "move_player",
+          "field": "F05",
+          "tile": [
+            8,
+            20
+          ],
+          "facing": [
+            0,
+            1
+          ]
+        },
+        {
           "type": "message",
           "id": "msg_d31_open"
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_open_2"
         }
       ],
       "once": true,
@@ -4149,6 +4173,128 @@
       "priority": 0
     },
     {
+      "id": "ev_f14_shige_d29",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_npc",
+      "day_range": [
+        29,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on"
+        },
+        {
+          "flag": "baba_told_seal",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_d29_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_3"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.6
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_4"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_5"
+        },
+        {
+          "type": "message",
+          "id": "msg_f14_d29_6"
+        },
+        {
+          "type": "set_flag",
+          "flag": "baba_told_seal"
+        },
+        {
+          "type": "raise_suspicion",
+          "amount": 5,
+          "reason": "baba_told_seal"
+        },
+        {
+          "type": "add_points",
+          "amount": 1
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 20
+    },
+    {
+      "id": "ev_f14_shige_d29_alone",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_npc",
+      "day_range": [
+        29,
+        29
+      ],
+      "conditions": [
+        {
+          "flag": "companion_on",
+          "is": false
+        },
+        {
+          "flag": "baba_told_seal",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_d29_alone"
+        }
+      ],
+      "once": false,
+      "priority": 15
+    },
+    {
+      "id": "ev_f14_shige_d29_after",
+      "field": "F14",
+      "trigger": "on_interact",
+      "target": "shige_npc",
+      "day_range": [
+        29,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "baba_told_seal"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f14_shige_d29_after"
+        }
+      ],
+      "once": false,
+      "priority": 12
+    },
+    {
       "id": "ev_f14_shige_early",
       "field": "F14",
       "trigger": "on_interact",
@@ -5847,6 +5993,1729 @@
       "priority": 0
     },
     {
+      "id": "ev_d30_start_told",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "baba_told_seal"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d30_start_told"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_d30_start_untold",
+      "field": "",
+      "trigger": "on_day_start",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "baba_told_seal",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d30_start_untold"
+        }
+      ],
+      "once": true,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_d30_enter",
+      "field": "F16",
+      "trigger": "on_enter",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_d30_enter"
+        }
+      ],
+      "once": true,
+      "priority": 20
+    },
+    {
+      "id": "ev_f16_inner_gate_d30",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "inner_gate",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_d30_gate"
+        }
+      ],
+      "once": false,
+      "priority": 20
+    },
+    {
+      "id": "ev_f16_seal",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "seal_stone",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "all": [
+            {
+              "flag": "seal_placed_okina"
+            },
+            {
+              "flag": "seal_placed_uba"
+            },
+            {
+              "flag": "seal_placed_oni"
+            },
+            {
+              "flag": "seal_placed_warabe"
+            }
+          ]
+        },
+        {
+          "flag": "seal_restored",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_seal_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_seal_2"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.5
+        },
+        {
+          "type": "set_ambience",
+          "id": ""
+        },
+        {
+          "type": "set_flag",
+          "flag": "seal_restored"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_seal_3"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_seal_4"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.5
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_008"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_seal_5"
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 40
+    },
+    {
+      "id": "ev_f16_stone_after",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "seal_stone",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_restored"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_stone_after"
+        }
+      ],
+      "once": false,
+      "priority": 35
+    },
+    {
+      "id": "ev_f16_stone_first_told",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "seal_stone",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "baba_told_seal"
+        }
+      ],
+      "actions": [
+        {
+          "type": "set_ambience",
+          "id": "amb_valley_inner"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_stone_first"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_stone_told"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.5
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_stone_first_untold",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "seal_stone",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "baba_told_seal",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "set_ambience",
+          "id": "amb_valley_inner"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_stone_first"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_stone_untold"
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.5
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_stone_wait",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "seal_stone",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_stone_wait"
+        }
+      ],
+      "once": false,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_pile_done",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "masks",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "all": [
+            {
+              "flag": "seal_placed_okina"
+            },
+            {
+              "flag": "seal_placed_uba"
+            },
+            {
+              "flag": "seal_placed_oni"
+            },
+            {
+              "flag": "seal_placed_warabe"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_pile_done"
+        }
+      ],
+      "once": false,
+      "priority": 40
+    },
+    {
+      "id": "ev_f16_pile_holding",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "masks",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "any": [
+            {
+              "has_item": "mask_okina"
+            },
+            {
+              "has_item": "mask_uba"
+            },
+            {
+              "has_item": "mask_oni"
+            },
+            {
+              "has_item": "mask_warabe"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_pile_holding"
+        }
+      ],
+      "once": false,
+      "priority": 35
+    },
+    {
+      "id": "ev_f16_pile_take_okina",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "masks",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_placed_okina",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "give_item",
+          "item": "mask_okina"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_pile_take_okina"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_pile_take_uba",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "masks",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_placed_uba",
+          "is": false
+        },
+        {
+          "flag": "seal_placed_okina"
+        }
+      ],
+      "actions": [
+        {
+          "type": "give_item",
+          "item": "mask_uba"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_pile_take_uba"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_pile_take_oni",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "masks",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_placed_oni",
+          "is": false
+        },
+        {
+          "flag": "seal_placed_uba"
+        }
+      ],
+      "actions": [
+        {
+          "type": "give_item",
+          "item": "mask_oni"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_pile_take_oni"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_pile_take_warabe",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "masks",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_placed_warabe",
+          "is": false
+        },
+        {
+          "flag": "seal_placed_oni"
+        }
+      ],
+      "actions": [
+        {
+          "type": "give_item",
+          "item": "mask_warabe"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_pile_take_warabe"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_ped_e_placed",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_e",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_placed_okina"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_has"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_ped_e_place",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_e",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "has_item": "mask_okina"
+        }
+      ],
+      "actions": [
+        {
+          "type": "remove_item",
+          "item": "mask_okina"
+        },
+        {
+          "type": "set_flag",
+          "flag": "seal_placed_okina"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_ped_placed_okina"
+        }
+      ],
+      "once": false,
+      "priority": 25
+    },
+    {
+      "id": "ev_f16_ped_e_wrong",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_e",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "any": [
+            {
+              "has_item": "mask_uba"
+            },
+            {
+              "has_item": "mask_oni"
+            },
+            {
+              "has_item": "mask_warabe"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_e"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_ped_wrong"
+        }
+      ],
+      "once": false,
+      "priority": 20
+    },
+    {
+      "id": "ev_f16_ped_e_look",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_e",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_e"
+        }
+      ],
+      "once": false,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_ped_w_placed",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_w",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_placed_uba"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_has"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_ped_w_place",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_w",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "has_item": "mask_uba"
+        }
+      ],
+      "actions": [
+        {
+          "type": "remove_item",
+          "item": "mask_uba"
+        },
+        {
+          "type": "set_flag",
+          "flag": "seal_placed_uba"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_ped_placed_uba"
+        }
+      ],
+      "once": false,
+      "priority": 25
+    },
+    {
+      "id": "ev_f16_ped_w_wrong",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_w",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "any": [
+            {
+              "has_item": "mask_okina"
+            },
+            {
+              "has_item": "mask_oni"
+            },
+            {
+              "has_item": "mask_warabe"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_w"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_ped_wrong"
+        }
+      ],
+      "once": false,
+      "priority": 20
+    },
+    {
+      "id": "ev_f16_ped_w_look",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_w",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_w"
+        }
+      ],
+      "once": false,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_ped_s_placed",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_s",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_placed_oni"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_has"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_ped_s_place",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_s",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "has_item": "mask_oni"
+        }
+      ],
+      "actions": [
+        {
+          "type": "remove_item",
+          "item": "mask_oni"
+        },
+        {
+          "type": "set_flag",
+          "flag": "seal_placed_oni"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_ped_placed_oni"
+        }
+      ],
+      "once": false,
+      "priority": 25
+    },
+    {
+      "id": "ev_f16_ped_s_wrong",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_s",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "any": [
+            {
+              "has_item": "mask_okina"
+            },
+            {
+              "has_item": "mask_uba"
+            },
+            {
+              "has_item": "mask_warabe"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_s"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_ped_wrong"
+        }
+      ],
+      "once": false,
+      "priority": 20
+    },
+    {
+      "id": "ev_f16_ped_s_look",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_s",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_s"
+        }
+      ],
+      "once": false,
+      "priority": 10
+    },
+    {
+      "id": "ev_f16_ped_n_placed",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_n",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_placed_warabe"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_has"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_f16_ped_n_place",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_n",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "has_item": "mask_warabe"
+        }
+      ],
+      "actions": [
+        {
+          "type": "remove_item",
+          "item": "mask_warabe"
+        },
+        {
+          "type": "set_flag",
+          "flag": "seal_placed_warabe"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_ped_placed_warabe"
+        }
+      ],
+      "once": false,
+      "priority": 25
+    },
+    {
+      "id": "ev_f16_ped_n_wrong",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_n",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "any": [
+            {
+              "has_item": "mask_okina"
+            },
+            {
+              "has_item": "mask_uba"
+            },
+            {
+              "has_item": "mask_oni"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_n"
+        },
+        {
+          "type": "message",
+          "id": "msg_f16_ped_wrong"
+        }
+      ],
+      "once": false,
+      "priority": 20
+    },
+    {
+      "id": "ev_f16_ped_n_look",
+      "field": "F16",
+      "trigger": "on_interact",
+      "target": "pedestal_n",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f16_ped_n"
+        }
+      ],
+      "once": false,
+      "priority": 10
+    },
+    {
+      "id": "ev_f01_d30_silence",
+      "field": "F01",
+      "trigger": "on_enter",
+      "day_range": [
+        30,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "seal_restored"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_f01_d30_silence"
+        },
+        {
+          "type": "set_ambience",
+          "id": ""
+        },
+        {
+          "type": "entity_pulse",
+          "strength": 0.4
+        }
+      ],
+      "once": true,
+      "priority": 20
+    },
+    {
+      "id": "ev_f12_d30_return",
+      "field": "F12",
+      "trigger": "on_enter",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "seal_restored"
+        },
+        {
+          "flag": "truth_revealed",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "set_time",
+          "time_of_day": "night"
+        },
+        {
+          "type": "set_ambience",
+          "id": ""
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_return_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_return_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_return_3"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d30_confront",
+      "field": "F12",
+      "trigger": "on_interact",
+      "target": "home_door",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "seal_restored"
+        },
+        {
+          "flag": "truth_revealed",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d30_c_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_c_2"
+        },
+        {
+          "type": "choice",
+          "options": [
+            {
+              "text_id": "ui_choice_d30_overslept",
+              "actions": [
+                {
+                  "type": "message",
+                  "id": "msg_mio_d30_c1a"
+                }
+              ]
+            },
+            {
+              "text_id": "ui_choice_d30_silent",
+              "actions": [
+                {
+                  "type": "message",
+                  "id": "msg_mio_d30_c1b"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "wait",
+          "seconds": 0.6
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_2"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_3"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_4"
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "suspicion": {
+                "min": 50
+              }
+            },
+            {
+              "any": [
+                {
+                  "flag": "ev_timetable_pass"
+                },
+                {
+                  "flag": "ev_shoe_mud"
+                }
+              ]
+            }
+          ],
+          "then": [
+            {
+              "type": "set_flag",
+              "flag": "truth_partial_walk"
+            },
+            {
+              "type": "message",
+              "id": "msg_mio_d30_walk"
+            }
+          ],
+          "else": []
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "suspicion": {
+                "min": 75
+              }
+            },
+            {
+              "flag": "baba_told_seal"
+            }
+          ],
+          "then": [
+            {
+              "type": "set_flag",
+              "flag": "truth_partial_entity"
+            },
+            {
+              "type": "message",
+              "id": "msg_mio_d30_entity"
+            }
+          ],
+          "else": []
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_c_3"
+        },
+        {
+          "type": "choice",
+          "options": [
+            {
+              "text_id": "ui_choice_d30_deny",
+              "actions": [
+                {
+                  "type": "message",
+                  "id": "msg_mio_d30_c2a"
+                }
+              ]
+            },
+            {
+              "text_id": "ui_choice_d30_quiet",
+              "actions": [
+                {
+                  "type": "message",
+                  "id": "msg_mio_d30_c2b"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "wait",
+          "seconds": 0.6
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_5"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_c_4"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.2
+        },
+        {
+          "type": "show_concealment_reveal",
+          "hold": true
+        },
+        {
+          "type": "set_flag",
+          "flag": "truth_revealed"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.5
+        },
+        {
+          "type": "entity_speak",
+          "id": "msg_natsu_009"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "close_concealment_reveal"
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_after_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d30_6"
+        },
+        {
+          "type": "set_companion",
+          "on": false
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_after_2"
+        },
+        {
+          "type": "autosave"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_f12_home_d30_after",
+      "field": "F12",
+      "trigger": "on_interact",
+      "target": "home_door",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "truth_revealed"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d30_no_sleep"
+        }
+      ],
+      "once": false,
+      "priority": 25
+    },
+    {
+      "id": "ev_f01_d30_end",
+      "field": "F01",
+      "trigger": "on_enter",
+      "day_range": [
+        30,
+        30
+      ],
+      "conditions": [
+        {
+          "flag": "truth_revealed"
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d30_end_1"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "message",
+          "id": "msg_d30_end_2"
+        },
+        {
+          "type": "autosave"
+        },
+        {
+          "type": "advance_day"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f05",
+      "field": "F05",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f05_toki"
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_f05"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f01",
+      "field": "F01",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f01"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f12",
+      "field": "F12",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f12"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f12_door",
+      "field": "F12",
+      "trigger": "on_interact",
+      "target": "home_door",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f12_door"
+        }
+      ],
+      "once": false,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f13",
+      "field": "F13",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f13"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_f15",
+      "field": "F15",
+      "trigger": "on_enter",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_f15"
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
+      "id": "ev_d31_bridge",
+      "field": "F15",
+      "trigger": "on_interact",
+      "target": "yu_npc",
+      "day_range": [
+        31,
+        31
+      ],
+      "conditions": [
+        {
+          "flag": "ending_reached",
+          "is": false
+        }
+      ],
+      "actions": [
+        {
+          "type": "message",
+          "id": "msg_d31_b_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_yu_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d31_1"
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d31_2"
+        },
+        {
+          "type": "wait",
+          "seconds": 0.8
+        },
+        {
+          "type": "message",
+          "id": "msg_mio_d31_3"
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "flag": "truth_partial_entity"
+            },
+            {
+              "any": [
+                {
+                  "flag": "hid_fail_shoe_mud"
+                },
+                {
+                  "flag": "hid_fail_ren_memo"
+                },
+                {
+                  "flag": "hid_fail_timetable_pass"
+                },
+                {
+                  "flag": "hid_fail_storefront_note"
+                },
+                {
+                  "flag": "hid_fail_phone_reply"
+                },
+                {
+                  "flag": "hid_fail_salt_bag"
+                },
+                {
+                  "flag": "hid_fail_journal_page"
+                },
+                {
+                  "flag": "hid_fail_library_book"
+                },
+                {
+                  "flag": "hid_fail_store_receipt"
+                },
+                {
+                  "flag": "hid_fail_flashlight_box"
+                },
+                {
+                  "flag": "hid_fail_dugout_note"
+                },
+                {
+                  "flag": "hid_fail_water_bottle"
+                },
+                {
+                  "flag": "hid_fail_ema_wish"
+                },
+                {
+                  "flag": "hid_fail_path_marker"
+                },
+                {
+                  "flag": "hid_fail_visitor_book"
+                },
+                {
+                  "flag": "hid_fail_cairn_stone"
+                },
+                {
+                  "flag": "hid_fail_capsule_letter"
+                }
+              ]
+            }
+          ],
+          "then": [
+            {
+              "type": "set_flag",
+              "flag": "ending_a"
+            },
+            {
+              "type": "message",
+              "id": "msg_mio_d31_a1"
+            },
+            {
+              "type": "wait",
+              "seconds": 1.2
+            },
+            {
+              "type": "message",
+              "id": "msg_natsu_reply_mio"
+            },
+            {
+              "type": "message",
+              "id": "msg_d31_a_narr"
+            },
+            {
+              "type": "entity_speak",
+              "id": "msg_natsu_010"
+            },
+            {
+              "type": "message",
+              "id": "msg_d31_a_narr2"
+            }
+          ],
+          "else": [
+            {
+              "type": "branch",
+              "conditions": [
+                {
+                  "any": [
+                    {
+                      "suspicion": {
+                        "min": 50
+                      }
+                    },
+                    {
+                      "flag": "truth_partial_walk"
+                    }
+                  ]
+                }
+              ],
+              "then": [
+                {
+                  "type": "set_flag",
+                  "flag": "ending_b"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_b_narr"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_natsu_blank"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_b_narr2"
+                }
+              ],
+              "else": [
+                {
+                  "type": "set_flag",
+                  "flag": "ending_c"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_yu_c1"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_yu_c2"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_c_narr"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_natsu_blank"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_b_end"
+        },
+        {
+          "type": "set_ambience",
+          "id": ""
+        },
+        {
+          "type": "fade",
+          "to": 1.0,
+          "seconds": 1.5
+        },
+        {
+          "type": "wait",
+          "seconds": 2.5
+        },
+        {
+          "type": "set_time",
+          "time_of_day": "morning"
+        },
+        {
+          "type": "set_flag",
+          "flag": "ending_reached"
+        },
+        {
+          "type": "move_player",
+          "tile": [
+            31,
+            11
+          ],
+          "facing": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "fade",
+          "to": 0.0,
+          "seconds": 1.5
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_after_1"
+        },
+        {
+          "type": "wait",
+          "seconds": 0.8
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_after_2"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "flag": "ending_a"
+            }
+          ],
+          "then": [
+            {
+              "type": "message",
+              "id": "msg_d31_after_a"
+            },
+            {
+              "type": "message",
+              "id": "msg_d31_after_a2"
+            }
+          ],
+          "else": [
+            {
+              "type": "branch",
+              "conditions": [
+                {
+                  "flag": "ending_b"
+                }
+              ],
+              "then": [
+                {
+                  "type": "message",
+                  "id": "msg_d31_after_b"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_after_b2"
+                }
+              ],
+              "else": [
+                {
+                  "type": "message",
+                  "id": "msg_d31_after_c"
+                },
+                {
+                  "type": "message",
+                  "id": "msg_d31_after_c2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "id": "msg_d31_last"
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "fade",
+          "to": 1.0,
+          "seconds": 2.0
+        },
+        {
+          "type": "wait",
+          "seconds": 1.0
+        },
+        {
+          "type": "branch",
+          "conditions": [
+            {
+              "flag": "ending_a"
+            }
+          ],
+          "then": [
+            {
+              "type": "end_game",
+              "ending": "ending_a"
+            }
+          ],
+          "else": [
+            {
+              "type": "branch",
+              "conditions": [
+                {
+                  "flag": "ending_b"
+                }
+              ],
+              "then": [
+                {
+                  "type": "end_game",
+                  "ending": "ending_b"
+                }
+              ],
+              "else": [
+                {
+                  "type": "end_game",
+                  "ending": "ending_c"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "once": true,
+      "priority": 30
+    },
+    {
       "id": "ev_d04_start",
       "field": "",
       "trigger": "on_day_start",
@@ -6080,8 +7949,8 @@
           "flag": "saw_first_missing"
         },
         {
-          "type": "entity_speak",
-          "id": "msg_natsu_003"
+          "type": "entity_pulse",
+          "strength": 0.5
         },
         {
           "type": "add_points",

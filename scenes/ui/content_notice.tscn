@@ -17,23 +17,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="Title" type="Label" parent="."]
+[node name="Column" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 20.0
 offset_right = 360.0
-offset_bottom = 34.0
+offset_bottom = 208.0
+theme_override_constants/separation = 8
 
-[node name="Body" type="Label" parent="."]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 44.0
-offset_right = 360.0
-offset_bottom = 180.0
+[node name="Title" type="Label" parent="Column"]
+layout_mode = 2
 
-[node name="Hint" type="Label" parent="."]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 192.0
-offset_right = 360.0
-offset_bottom = 206.0
+[node name="Body" type="Label" parent="Column"]
+layout_mode = 2
+
+[node name="Support" type="Label" parent="Column"]
+layout_mode = 2
+
+[node name="Note" type="Label" parent="Column"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Column"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Hint" type="Label" parent="Column"]
+layout_mode = 2

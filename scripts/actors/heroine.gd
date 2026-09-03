@@ -12,10 +12,11 @@ const ACCEL: float = 360.0
 const TRAIL_STEP: float = 8.0
 const TRAIL_MAX: int = 96
 const ARRIVE_DISTANCE: float = 4.0
-## 隠蔽を目撃する半径（4 タイル）
-const WITNESS_RADIUS: float = 64.0
-## 段階（無自覚／違和感／疑念／確信）ごとの目撃半径
-const WITNESS_RADIUS_BY_STAGE: PackedFloat32Array = [64.0, 64.0, 80.0, 96.0]
+## 段階（無自覚／違和感／疑念／確信）ごとの目撃半径（px）。
+## 必ず追従距離 FOLLOW_TILES × 16px より小さくする。普通に追従している澪には見られず、
+## 遷移直後や先回りで近くにいるとき、澪が追いつく前に調べなかったときだけ目撃される。
+## （実機検証で、追従距離 ≥ 目撃半径だと同行中の隠蔽が全て失敗すると分かったため。docs/PLAYTEST_LOG.md）
+const WITNESS_RADIUS_BY_STAGE: PackedFloat32Array = [24.0, 40.0, 56.0, 72.0]
 const LOST_DISTANCE: float = 160.0
 const STUCK_SECONDS: float = 1.2
 const AHEAD_IDLE_SECONDS: float = 2.0
@@ -72,6 +73,12 @@ func snap_behind(player: Node2D, player_facing: Vector2i) -> void:
 func _physics_process(delta: float) -> void:
 	var player: CharacterBody2D = SceneRouter.player
 	if player == null or not is_active:
+		return
+	# イベント中（会話・隠蔽）は主人公と同じく足を止める。歩き続けると本文を読んでいる間に隣まで来てしまう
+	if EventSystem.is_running or not player.input_enabled:
+		velocity = velocity.move_toward(Vector2.ZERO, ACCEL * delta)
+		move_and_slide()
+		_tick_animation(delta)
 		return
 	_record_trail(player.global_position)
 	var stage: int = Suspicion.get_stage()

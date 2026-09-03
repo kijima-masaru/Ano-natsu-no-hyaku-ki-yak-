@@ -1025,6 +1025,10 @@
       "conditions": [
         {
           "flag": "entered_yakushi"
+        },
+        {
+          "flag": "seal_restored",
+          "is": false
         }
       ],
       "mode": "repeat",

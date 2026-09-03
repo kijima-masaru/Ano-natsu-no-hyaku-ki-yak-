@@ -1,7 +1,39 @@
-# ステップ5への申し送り（v0.3.0 時点）
+# ステップ5の進捗と申し送り（v0.3.0 → タスク0 実機検証まで）
 
-ステップ4「残り 11 フィールド、光源と夜、怪異演出、第一幕・第二幕の日程」の完了時点でのまとめ（PR #25〜#42）。
-ステップ5は終幕（8/30〜31：封印・提示画面・`truth_revealed`・エンディング分岐・タイトルへの帰還）と仕上げが中心になる想定。指示が来るまで着手しない。
+ステップ4「残り 11 フィールド、光源と夜、怪異演出、第一幕・第二幕の日程」の完了時点（PR #25〜#42）に、ステップ5 タスク0（実機検証）の結果を追記したもの。
+
+## ステップ5の進捗
+
+| # | ブランチ | 状態 |
+|---|---|---|
+| 0 | fix/runtime-verification | **済（PR #43）**。Godot 4.7.stable で起動〜8/29 を通し、不具合 7 件を修正（docs/PLAYTEST_LOG.md「実機検証」） |
+| 1 | feat/d29-shige | **済（PR #44）**。8/29 F14 でシゲが澪に封石の戻し方を教える（`baba_told_seal`、任意到達） |
+| 2 | feat/d30-seal | **済（PR #45）**。8/30 の封印：F16 奥の裂け目の口（落石が崩れる）、面を一枚ずつ四つの台座へ戻す配置パズル、封石を二人で押して `seal_restored`、`msg_natsu_008`、環境音の差し替え（`set_ambience`）、F01 の静まり返り |
+| 3 | feat/truth-reveal | **済（PR #46）**。8/30 夜：帰路の余韻 → F12 自宅前で澪が事実を並べる（選択肢 2 回、結末不変）→ 提示画面（1 件ずつ、暗転と無音、初回スキップ不可）→ `truth_revealed` → ナツ `msg_natsu_009` → 澪が去る → 真相版の町を歩き F01 で 8/30 が終わる |
+| 4 | feat/d31-endings | **済（PR #47）**。8/31 は澪を操作（`pov_mio`）。F05 → F01 → F12 → F13 → F15。橋の悠に「行かせない」。ED-A/B/C の分岐（FLAGS の条件）、暗転、翌朝の事後（新しいバリケード、揃えられた靴、トキの言葉）、`end_game` |
+| 5 | feat/natsu-final | **済（PR #48）**。13 台詞＋労わり 5 件の通し読み（表層は一貫して優しく、真相は一貫して最悪）、真相版の話者色、8/5 の 003 流用を気配に変更、`entity_intro_done` の確認 |
+| 6 | feat/end-game-flow | **済（PR #49）**。`end_game` の本実装：`user://system.json` にクリア記録（到達 ED 一覧・回数・初回日時・最後の ED・ED 別回数）→ 相談窓口案内 → スタッフロール → タイトル。周回「裏面から」（下記）。はじめから時に接近度と怪異回数を初期化 |
+| 7 | feat/content-notice | **PR 済・承認待ち**。起動時警告の文言確定（必須表示・決定で閉じる・0.8 秒の入力待ち）、相談窓口の読み込み口（`data/locale/ja/support.json`、案内画面の下段に最大 3 件）、`docs/STORE_PAGE.md`。**窓口の掲載は確認待ち**（`docs/CONTENT_NOTICE.md` §5） |
+| 8〜13 | chore/full-playtest 以降 | 未着手 |
+
+### 次に何をすべきか
+- タスク7 の PR をレビュー・マージ → `chore/full-playtest`（実機通しプレイ。不具合は直さず一覧化してタスク9 へ）。
+- 相談窓口：候補の一覧を提示済み。確認が取れたものだけ `data/locale/ja/support.json` に記入し、`meta.verified_at` を書く。
+- **タスク6 の判断**：
+  - 2 周目は軽い形で実装した。クリア後にタイトルへ「裏面から」が増え、8/1 から `truth_revealed` を立てて始める（二層 118 対がすべて真相版。イベント・日程・ED 条件は表と同じ）。題字の下にクリア数だけ「面」を並べる。追加テキストや新イベントは作らない（重ければ「裏面から」をメニューから外すだけで戻せる）。
+  - セーブスロット：クリア後のセーブは作らない。オートセーブ枠（スロット 0）は 8/31 朝（`ev_d31_open` 直後）のままにし、「つづきから」で終幕をやり直せる。手動スロット 1〜3 も触らない。クリア記録はセーブとは別の `system.json` に持つ。
+  - 終幕の案内とスタッフロールは `Main` の UI 層に載せる（`end_game` の直前の `fade` で黒になっているので、幕を上げてから読ませ、終わったら再び黒にしてタイトルへ）。
+- **判断済み**（ユーザー委任）：イベント中は澪を止め目撃半径を追従距離より短くした（#43）／検証ドライバと `.gd.uid` は残す。**未解決**：接近度の加算・閾値（最短経路でも 8/21 に 100。ED-B・C に届かない）と屋内の暗さはタスク10で扱う。
+- **実機で判明した不具合の一覧**：docs/PLAYTEST_LOG.md「見つかった不具合と対処」6 件（すべて修正済み）。未修正はフォント代替時の `content_notice` の行重なり、全体図の凡例の暗さ、終了時のリーク警告 2 件。
+
+## Godot の用意（この環境）
+
+`godot` コマンドは無いが、GitHub Releases から公式バイナリを取得して実行できる（プロキシ経由で 75 MB）。エクスポートテンプレート（タスク13）は同様に `Godot_v4.7-stable_export_templates.tpz` を取得する。
+```
+curl -sSL -o godot.zip https://github.com/godotengine/godot/releases/download/4.7-stable/Godot_v4.7-stable_linux.x86_64.zip
+unzip godot.zip && ./Godot_v4.7-stable_linux.x86_64 --headless --path . --import
+```
+描画確認は `xvfb-run -a -s "-screen 0 1152x648x24" ./Godot_v4.7-stable_linux.x86_64 --path . ...`（Mesa llvmpipe）。音声デバイスは無く dummy driver になる。
 
 ## 現状（何が動くか）
 
@@ -15,24 +47,19 @@
 | 怪異 | `AnomalySystem` ＋ `data/anomalies.json` 27 件（once 12・repeat 6・escalate 9）。全フィールドに 1 件以上。接近度への加算とナツの労わり |
 | 光源 | `Lighting`：時間帯の色調、タイル光源（`LightCatalog` 16 種）、月光、懐中電灯（F）。追跡者の暗所ボーナスと照明下の視認距離 |
 | 追跡者 | 8/12 F03（必須）、8/19 F11 1 階（必須）、8/13〜 F03/F04、8/19〜 F10、8/20〜 F11 の夜（任意）。捕獲は押し戻し、主人公は最大 3 回 `luck_<n>` で逃れる |
-| セーブ | セクション：game_state / calendar / suspicion / anomalies / attached_entity。オートセーブ 9 箇所。位置は保存しない（ロードは屋外の既定位置） |
-| 進行 | タイトル → 8/1 → 8/29 終了まで机上で通る。実機は未確認 |
+| セーブ | セクション：game_state / calendar / suspicion / anomalies / attached_entity。オートセーブ 9 箇所＋8/30・8/31 朝。位置は保存しない（ロードは屋外の既定位置）。クリア記録は `user://system.json`（`cleared_endings` `clear_count` `first_clear_at` `last_ending` `clears_by_ending`） |
+| 進行 | タイトル → 8/1 → 8/31 → ED-A/B/C → 案内 → スタッフロール → タイトル（「裏面から」）まで実機（ドライバ）で通る |
 
-## 未検証事項（最優先）
+## 実機検証の状況
 
-この環境には Godot 4.7 の実行ファイルが無く、**ステップ2〜4 の全コードは目視レビューのみ**。ステップ5の最初に Godot エディタで `docs/PLAYTEST_LOG.md`「実機で確認すること」の 8 項目を確認し、問題は `fix/` ブランチで直す。特に：
-
-1. autoload 15 個の起動順と `_ready` の相互参照（`Lighting` → `AnomalySystem` → `AttachedEntity`）
-2. `FieldMapBuilder.build()` が 16 フィールドの `get_script_constant_map()` を読めること（`FLOORS` を持つ F11 を含む）
-3. `daily` イベントの翌日再発生、`switch_floor` 後の `on_enter` 再発火、`sleep` の遅延日送り
-4. `PointLight2D` の枚数（F01・F13 で街灯が多い）と GL Compatibility での描画負荷
-5. プレイ時間の実測（机上見積もり 1 時間 50 分〜2 時間 30 分）と閾値の確定
+タスク0 で Godot 4.7.stable により以下を確認済み（docs/PLAYTEST_LOG.md「実機検証」）：autoload 15 個の起動、16 フィールドの組み立てと F11 の階切替、8/1 → 8/29 の通し（最短・全消費の 2 経路）、daily の再発生、switch_floor 後の on_enter、sleep の遅延日送り、追跡者の捕獲と庇護、二層 102 対の切り替え、セーブ／ロードの往復、描画（Xvfb）。
+**未実測**：人手によるプレイ時間（推定 2 時間 20 分〜3 時間 40 分）、GPU での描画負荷、ゲームパッド操作、Steam Deck。
 
 ## ステップ5で作るもの（想定。指示で上書きする）
 
 - 8/30：`ev_d30_open` の本実装。封印の場（F16）、`seal_restored`、`show_concealment_reveal`、`truth_revealed` → 以後の二層テキストが真相版に切り替わる
 - 8/31：`ev_d31_open`、御渡橋（F15）、`ending_reached` と分岐（`ending_a` ほか。`truth_partial_walk` `truth_partial_entity` は接近度と `baba_told_seal` で決まる。`docs/FLAGS.md`）、`end_game` アクションの本実装（クリア記録 → タイトル）
-- ナツの残り：`msg_natsu_008`（8/30 前夜）`msg_natsu_009`（提示画面の末尾、真相版）`msg_natsu_010`（8/31）を流すイベント。`entity_intro_done` を 8/1 の初台詞で立てる
+- ナツの残り：済（8/30 封印 008、提示画面直後 009、8/31 ED-A 010。`entity_intro_done` は 8/1 で立つ）
 - コンテンツ警告と相談窓口案内（`docs/CONTENT_NOTICE.md`）をタイトルとエンディング後に出す
 - 素材差し替え（`docs/ASSETS_NEEDED.md` の優先順位どおり）と Steam 向けの設定（`SteamBridge` は空実装）
 
@@ -60,13 +87,14 @@
 
 ## フラグの棚卸し
 
-- **定義済みでまだ立たない**（ステップ5で立てる）：`seal_restored`（8/30 封印）、`truth_revealed`（8/30）、`truth_partial_walk` `truth_partial_entity`、`ending_reached` `ending_a`、`baba_told_seal`（8/29 シゲが澪に封石の戻し方を教える。現状の 8/29 は F16 のみで F14 のイベントが無い）、`entity_intro_done`（8/1 の初台詞で立てる予定だったが未使用）。
+- **タスク1〜4 で立つようになった**：`baba_told_seal`（8/29）、`seal_restored`（8/30）、`truth_revealed` `truth_partial_walk` `truth_partial_entity`（8/30 夜）、`ending_reached` `ending_a/b/c`（8/31）、`pov_mio`（8/31）。`entity_intro_done` は 8/1 で立つ。定義済みで立たないフラグは無い。
 - **立つが参照されない**：`d01_told` `found_odd_house` `saw_notifications`（振り返り用に残す。消すなら `docs/FLAGS.md` も）。
 - **動的接頭辞**：`visited_ ev_done_ ev_day_ hid_ hid_fail_ seen_ day_ luck_ an_done_`。`luck_<n>` は追跡者に捕まった回数で立つ（最大 3。日付固定ではない）。
 - `investigation_points_today` は `docs/FLAGS.md` に載っているが数値（`Calendar`）であってフラグではない。
 
 ## 既知の設計判断（変えるなら早めに）
 
+- **タスク0 で見つかった設計上の論点**（判断待ち）：イベント中も澪が歩き続けるため同行中の隠蔽がほぼ失敗する／接近度が 8/21 までに 100 に達し ED-B・C に届かない／屋内の暗さが夜より明るい。docs/PLAYTEST_LOG.md 参照。
 - 位置はセーブしない（ロードは常に屋外の既定位置）。屋内でのオートセーブ後にロードすると屋外に出る。位置を保存するなら `SceneRouter` にセクションを足し、`current_floor` も含める。
 - 初訪問 +1 P は `Main` に直書き（`GameConstants` へ移す候補）。
 - 支所の「閉庁」文は 8/1・8/2 のみ。曜日条件（`weekday`）は未実装。

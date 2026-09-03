@@ -4,12 +4,19 @@ extends RefCounted
 ## 組み込み：flag / has_item / field_visited / day / day_range / time_of_day / not / any / all
 ## 拡張：register() で他の autoload（Suspicion 等）が条件キーを追加できる。
 
+## ※ static var に Callable（特にラムダ）を残したまま終了すると、エンジン終了時にヒープ破壊で落ちる
+## （Godot 4.7 で実機確認）。EventSystem が _exit_tree で clear_registered() を呼んで空にする
 static var _extra: Dictionary = {}
 
 
 ## 追加の条件キーを登録する。callable(cond: Dictionary) -> bool
 static func register(key: String, evaluator: Callable) -> void:
 	_extra[key] = evaluator
+
+
+## 登録を全て外す（終了時。static に Callable を残さないため）
+static func clear_registered() -> void:
+	_extra.clear()
 
 
 static func known_keys() -> PackedStringArray:

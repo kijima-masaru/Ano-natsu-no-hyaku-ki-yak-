@@ -128,6 +128,7 @@ func _on_day_advanced(_day: int, _previous: int) -> void:
 
 func load_system() -> void:
 	system = {"schema_version": SYSTEM_SCHEMA_VERSION, "content_notice_seen": false, "cleared_endings": [],
+		"clear_count": 0, "first_clear_at": "", "last_ending": "", "clears_by_ending": {},
 		"settings": DEFAULT_SETTINGS.duplicate()}
 	if not FileAccess.file_exists(SavePaths.SYSTEM_FILE):
 		return
@@ -136,7 +137,7 @@ func load_system() -> void:
 	if data.is_empty():
 		push_error("SaveManager: system.json が読めません（%s）。既定値で続行します" % ", ".join(errors))
 		return
-	for key: String in ["content_notice_seen", "cleared_endings"]:
+	for key: String in ["content_notice_seen", "cleared_endings", "clear_count", "first_clear_at", "last_ending", "clears_by_ending"]:
 		if data.has(key):
 			system[key] = data[key]
 	var saved_settings: Variant = data.get("settings", {})
@@ -174,11 +175,24 @@ func mark_content_notice_seen() -> void:
 	save_system()
 
 
+## クリア記録：到達エンディングの一覧、クリア回数、初回クリア日時（ISO 8601、ローカル時刻）、最後の ED、ED ごとの回数
 func record_cleared_ending(ending_id: String) -> void:
 	var list: Array = system["cleared_endings"]
 	if not list.has(ending_id):
 		list.append(ending_id)
-		save_system()
+	system["clear_count"] = int(system.get("clear_count", 0)) + 1
+	if str(system.get("first_clear_at", "")).is_empty():
+		system["first_clear_at"] = Time.get_datetime_string_from_system(false, true)
+	system["last_ending"] = ending_id
+	var by: Dictionary = system.get("clears_by_ending", {})
+	by[ending_id] = int(by.get(ending_id, 0)) + 1
+	system["clears_by_ending"] = by
+	save_system()
+
+
+## 一度でもクリアしたか（周回要素の解放）
+func has_cleared() -> bool:
+	return not (system.get("cleared_endings", []) as Array).is_empty()
 
 
 # ── I/O ──

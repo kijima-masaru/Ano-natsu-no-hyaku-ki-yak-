@@ -25,12 +25,16 @@ const VISION_RANGE_DARK: float = 40.0
 const LIT_TARGET_RANGE_BONUS: float = 1.4
 const VISION_HALF_ANGLE_DEG: float = 32.0
 const VISION_HALF_ANGLE_DARK_DEG: float = 18.0
-const CAPTURE_DISTANCE: float = 10.0
+## 捕獲距離。双方の当たり判定（追跡者 10×6、主人公 12×6）が横並びで接すると原点間が 11px になるため、
+## それより大きくしないと横から追いついても捕まえられない（Godot 4.7 実機で確認）
+const CAPTURE_DISTANCE: float = 14.0
 const SUSPICIOUS_SECONDS: float = 1.2
 const SEARCH_SECONDS: float = 4.0
 const LOSE_SIGHT_SECONDS: float = 3.0
 const PATROL_RADIUS_TILES: int = 5
 const PATROL_WAIT: float = 1.5
+## 退却の直後は対象を見ても追い直さない猶予（秒）。無いと庇護で見失った次のフレームに再捕獲し、幸運を一度に使い切る
+const RETREAT_GRACE_SECONDS: float = 3.0
 const ANIM_FRAME_TIME: float = 0.22
 const PUSHBACK_DEFAULT_FIELD: String = "F01"
 
@@ -178,7 +182,7 @@ func _physics_process(delta: float) -> void:
 				if _timer > SEARCH_SECONDS:
 					_set_state(State.RETREAT)
 		State.RETREAT:
-			if seen != null:
+			if seen != null and _timer > RETREAT_GRACE_SECONDS:
 				_begin_chase(seen)
 			else:
 				_move_to(home_position, WALK_SPEED, delta)
@@ -258,6 +262,7 @@ func _face_scan() -> void:
 func _capture(target: Node2D) -> void:
 	if target == SceneRouter.player and AttachedEntity.try_protect("stalker"):
 		_target = null
+		_interest_point = Vector2.INF
 		_set_state(State.RETREAT)
 		AttachedEntity.comfort("after_stalker")
 		return

@@ -27,3 +27,6 @@ static func tile_to_world(tile: Vector2i) -> Vector2:
 ## ワールド座標 → タイル座標
 static func world_to_tile(world: Vector2) -> Vector2i:
 	return Vector2i(floori(world.x / TILE_SIZE), floori(world.y / TILE_SIZE))
+
+## 視点切替：このフラグが立っている間、プレイヤーの絵はヒロイン（8/31 は澪を操作する）
+const POV_HEROINE_FLAG: String = "pov_mio"

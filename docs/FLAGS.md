@@ -9,11 +9,12 @@
 
 | flag_id | 意味 | 立つ条件 | 参照箇所 |
 |---|---|---|---|
-| `truth_revealed` | 真相到達。**全テキストの二層分岐を切り替える唯一のフラグ** | 8/30 夜、澪との対決会話の終端（`ev_d30_confront`）。周回の「裏面」モード開始時 | `MessageResolver.resolve()`（単一の解決関数）、隠蔽リスト提示、ナツの話者色 |
-| `truth_partial_walk` | 澪が「7/31 に隣を歩いたのは悠」と確定した | 接近度 ≥ 50 かつ証拠 `ev_timetable_pass` または `ev_shoe_mud` を澪が把握 | ED 判定、澪の独自発言 |
-| `truth_partial_entity` | 澪がナツの存在に至った | 接近度 ≥ 75 かつ `baba_told_seal` | ED 判定（ED-A） |
-| `ending_reached` | エンディング到達 | 8/31 御渡橋イベント終端 | タイトル復帰、システム保存 |
-| `ending_a` / `ending_b` / `ending_c` | 到達した ED（排他） | §7 の条件で `ev_d31_bridge` が判定 | システム保存（周回）、タイトルの面の数 |
+| `truth_revealed` | 真相到達。**全テキストの二層分岐を切り替える唯一のフラグ** | 8/30 夜、F12 自宅前の対決（`ev_d30_confront`）で提示画面が終わった直後。周回の「裏面」モード開始時（ステップ5 タスク6） | `MessageResolver.resolve()`（単一の解決関数）、8/30 の `advance_condition`、以後の全テキスト |
+| `truth_partial_walk` | 澪が「7/31 に隣を歩いたのは悠」と確定した | `ev_d30_confront` の `branch`：接近度 ≥ 50 かつ `ev_timetable_pass` または `ev_shoe_mud`（ノートに載った＝目撃されたか証拠として得た） | ED 判定、対決で澪が「定期券。靴の泥」と言う |
+| `truth_partial_entity` | 澪がナツの存在に至った | `ev_d30_confront` の `branch`：接近度 ≥ 75 かつ `baba_told_seal` | ED 判定（ED-A）、対決で澪が「あなたの隣にいる、それのこと」と言う |
+| `ending_reached` | エンディング到達 | 8/31 `ev_d31_bridge` の暗転後（事後の場面の前）。`end_game` でも立つ | 8/31 の `advance_condition`、橋の悠の非表示、タイトル復帰 |
+| `ending_a` / `ending_b` / `ending_c` | 到達した ED（排他） | `ev_d31_bridge` の `branch`：A＝`truth_partial_entity` かつ隠蔽失敗 1 件以上（`hid_fail_*`）／B＝それ以外で接近度 ≥ 50 または `truth_partial_walk`／C＝それ以外 | 事後の場面の分岐、`end_game`（クリア記録） |
+| `pov_mio` | 視点切替。プレイヤーの絵が澪になる（`GameConstants.POV_HEROINE_FLAG`） | 8/31 `ev_d31_open` | `Player.sprite_kind`。新規開始で消える |
 
 ## 進行系（固定日）
 
@@ -44,9 +45,10 @@
 | `learned_seal` | 封石の話を知った | 8/23 F04 日誌 | day 23 進行、F16 の目的提示 |
 | `bridge_steps` | 御渡橋の足音イベント | 8/26 F15 | day 26 進行 |
 | `flag_yakushi_open` | 薬師谷の落石が崩れた（既存） | 8/28 夕、自由日終了時に自動 | F14→F16 出口 lock |
-| `baba_told_seal` | シゲが澪に封石の戻し方を教えた | 8/29 | day 29、`truth_partial_entity` |
+| `baba_told_seal` | シゲが澪に封石の戻し方を教えた | 8/29 F14、澪と一緒にシゲを訪ねる（`ev_f14_shige_d29`）。**任意到達**。立たなくても 8/30 の封印は手探りで成立する | `truth_partial_entity`（ED-A）、8/30 の手順の分かりやすさ |
 | `entered_yakushi` | F16 に入った | 8/29 | day 29 進行 |
-| `seal_restored` | 封石を戻した | 8/30 封印パズル完了 | 町の怪異停止、F01 静まり返り演出 |
+| `seal_placed_okina` / `seal_placed_uba` / `seal_placed_oni` / `seal_placed_warabe` | 8/30 の台座に面を戻した（東・西・南・北） | F16 裂け目の口、各台座（`ev_f16_ped_*_place`） | 封石が動く条件（4 つ全部） |
+| `seal_restored` | 封石を戻した | 8/30 F16 `ev_f16_seal`（4 面を戻して澪と押す） | 霧が引き封石が元の位置へ、F16 の「何も起こらない」停止、F01 の静まり返り（`ev_f01_d30_silence`）、以後の真相開示（タスク3） |
 | `flag_minimap_unlocked` | 全体マップ解放（既存） | F06 地図看板 | ミニマップ UI |
 
 ## 日付・探索系
@@ -67,14 +69,14 @@
 |---|---|---|---|
 | `ev_<evidence_id>` | 証拠 `<evidence_id>` をノートに記録した | `give_evidence` アクション | ノート、接近度 |
 | `hid_<evidence_id>` | 証拠 `<evidence_id>` を隠蔽した（成功） | `conceal_evidence` アクション、澪が近くにいない | 隠蔽リスト提示、ED 判定 |
-| `hid_fail_<evidence_id>` | 隠蔽が澪に目撃された | `conceal_evidence`、澪が半径 `HEROINE_WITNESS_RADIUS` 内 | 接近度 +20、ED-A 条件 |
+| `hid_fail_<evidence_id>` | 隠蔽が澪に目撃された | `conceal_evidence`、澪が目撃半径（`Heroine.WITNESS_RADIUS_BY_STAGE`、段階で 24〜72px）内 | 接近度 +20、ED-A 条件 |
 | `seen_<message_id>` | 二層テキストの表層版を一度見た | `MessageResolver` | 真相到達時の「あなたが読んだ嘘」一覧 |
 
 ## 憑いた怪異（ナツ）系
 
 | flag_id | 意味 | 立つ条件 | 参照箇所 |
 |---|---|---|---|
-| `entity_intro_done` | ナツが初めて話した | 8/1 回想直後 | 話者色の初出制御 |
+| `entity_intro_done` | ナツが初めて話した | `AttachedEntity.speak` の初回（8/1 回想直後の `msg_natsu_001`）。実機で立つことを確認済み | 話者色の初出制御 |
 | `luck_<n>` | 不自然な幸運 n 回目（1: 8/12 追跡者が悠を避ける、2: 8/19 校内、3: 8/26 橋） | 各イベント | 真相到達時の振り返り一覧 |
 
 ## 接近度の閾値（`Suspicion`、数値は非表示）

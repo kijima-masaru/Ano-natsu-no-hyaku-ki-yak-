@@ -14,6 +14,8 @@ var load_errors: PackedStringArray = PackedStringArray()
 
 var _entries: Dictionary = {}
 var _witness_check: Callable = Callable()
+## 表示中の提示画面（hold のとき close まで残る）
+var _reveal: Control = null
 
 
 func _ready() -> void:
@@ -21,6 +23,7 @@ func _ready() -> void:
 	EventSystem.register_action("give_evidence", _act_give_evidence)
 	EventSystem.register_action("conceal_evidence", _act_conceal_evidence)
 	EventSystem.register_action("show_concealment_reveal", _act_show_reveal)
+	EventSystem.register_action("close_concealment_reveal", _act_close_reveal)
 
 
 func load_file(path: String) -> bool:
@@ -133,8 +136,30 @@ func _act_conceal_evidence(a: Dictionary, _c: Dictionary) -> void:
 	await EventSystem.show_entry(MessageResolver.resolve("msg_conceal_witnessed" if witnessed else e.shown_id))
 
 
-func _act_show_reveal(_a: Dictionary, _c: Dictionary) -> void:
+## show_concealment_reveal: {hold?}。hold（既定 true）なら最後の件の後も黒のまま残り、
+## close_concealment_reveal アクションで消える（黒地のままナツの台詞を出すため）
+func _act_show_reveal(a: Dictionary, _c: Dictionary) -> void:
+	if _reveal != null and is_instance_valid(_reveal):
+		push_error("EvidenceRegistry: 提示画面は既に出ています")
+		return
 	var scene: PackedScene = load("res://scenes/ui/concealment_reveal.tscn") as PackedScene
-	var reveal: Control = scene.instantiate() as Control
-	get_tree().root.add_child(reveal)
-	await Signal(reveal, "finished")
+	_reveal = scene.instantiate() as Control
+	_reveal.set("hold_after_last", bool(a.get("hold", true)))
+	# ワールドはカメラに従うので、画面固定の UI 層（メッセージウィンドウの下）に置く。会話は提示画面の上に出る
+	var ui: Node = EventSystem.get_ui_root()
+	if ui != null:
+		ui.add_child(_reveal)
+		EventSystem.raise_message_window()
+	else:
+		push_error("EvidenceRegistry: UI 層が無いため提示画面をルートに置きます（カメラの影響を受ける）")
+		get_tree().root.add_child(_reveal)
+	await Signal(_reveal, "finished")
+	if not bool(a.get("hold", true)):
+		_reveal = null
+
+
+func _act_close_reveal(_a: Dictionary, _c: Dictionary) -> void:
+	if _reveal == null or not is_instance_valid(_reveal):
+		return
+	await _reveal.call("close")
+	_reveal = null
