@@ -167,8 +167,21 @@ def ffmpeg_exe() -> str | None:
 
 
 def write_ogg(path: str, x: np.ndarray, kind: str) -> None:
+    """OGG Vorbis 書き出し。BGM（60 秒超のステレオ）は libsndfile 1.2.2 の Vorbis 書き出しがセグメンテーション違反を起こすので、
+    ffmpeg（libvorbis）で書く。環境音・SE は従来通り libsndfile（生成済みファイルとエンコーダを揃える）"""
     os.makedirs(os.path.dirname(path), exist_ok=True)
     q = OGG_QUALITY[kind]
+    if kind == "bgm":
+        exe = ffmpeg_exe()
+        if not exe:
+            raise RuntimeError("BGM の書き出しには ffmpeg（imageio-ffmpeg）が必要です")
+        tmp = path + ".tmp.wav"
+        sf.write(tmp, x, SR, subtype="FLOAT")
+        r = subprocess.run([exe, "-v", "error", "-y", "-i", tmp, "-c:a", "libvorbis", "-q:a", str(q * 10), "-ar", str(SR), path], capture_output=True, text=True)
+        os.remove(tmp)
+        if r.returncode != 0:
+            raise RuntimeError("ffmpeg: " + r.stderr.strip()[:300])
+        return
     try:
         sf.write(path, x, SR, format="OGG", subtype="VORBIS", compression_level=1.0 - q)
     except TypeError:
