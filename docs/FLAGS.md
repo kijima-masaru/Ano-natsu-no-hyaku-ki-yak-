@@ -44,7 +44,7 @@
 | `learned_seal` | 封石の話を知った | 8/23 F04 日誌 | day 23 進行、F16 の目的提示 |
 | `bridge_steps` | 御渡橋の足音イベント | 8/26 F15 | day 26 進行 |
 | `flag_yakushi_open` | 薬師谷の落石が崩れた（既存） | 8/28 夕、自由日終了時に自動 | F14→F16 出口 lock |
-| `baba_told_seal` | シゲが澪に封石の戻し方を教えた | 8/29 | day 29、`truth_partial_entity` |
+| `baba_told_seal` | シゲが澪に封石の戻し方を教えた | 8/29 F14、澪と一緒にシゲを訪ねる（`ev_f14_shige_d29`）。**任意到達**。立たなくても 8/30 の封印は手探りで成立する | `truth_partial_entity`（ED-A）、8/30 の手順の分かりやすさ |
 | `entered_yakushi` | F16 に入った | 8/29 | day 29 進行 |
 | `seal_restored` | 封石を戻した | 8/30 封印パズル完了 | 町の怪異停止、F01 静まり返り演出 |
 | `flag_minimap_unlocked` | 全体マップ解放（既存） | F06 地図看板 | ミニマップ UI |
