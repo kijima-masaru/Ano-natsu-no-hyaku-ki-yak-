@@ -62,6 +62,10 @@ DEFS = [{"id": "amb_example", "kind": "ambience", "loop": True, "stereo": True, 
 - クリック的で波高率が高い音（石段・板張りの足音など）は、ピーク制限だけでは目標ラウドネスに届かない。その場合だけ tanh で最上部を丸めて再正規化する（manifest の `soft_clip_drive`）。「アタックを鈍らせる」方針に沿った処理で、丸めていない音は 0
 - ラウドネスは 400 ms ブロックのゲート付き測定なので、それより短い音は無音で 400 ms に埋めて測る。短い音ほど同じ数値でも小さく聞こえるが、系統内で基準が揃うことを優先している
 
+### 書き出し
+
+環境音・SE は libsndfile（soundfile）で OGG Vorbis を書く。BGM（60 秒超のステレオ）は libsndfile 1.2.2 がセグメンテーション違反を起こすため、ffmpeg（imageio-ffmpeg 同梱、libvorbis）で書く。`master.write_ogg` が kind で切り替える。
+
 ## Git での扱い
 
 `*.ogg` は **通常の git で管理** する（`.gitattributes` で binary 指定）。Git LFS は、開発環境から `lfs.github.com` に到達できず push が通らないため有効化していない。LFS へ移す場合は到達できる環境で `.gitattributes` の LFS 行を有効にし、`git lfs migrate import --include="*.ogg"` で移行する（履歴の書き換えを伴うので合意の上で 1 回だけ）。
