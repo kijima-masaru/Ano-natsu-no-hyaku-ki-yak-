@@ -66,6 +66,10 @@ DEFS = [{"id": "amb_example", "kind": "ambience", "loop": True, "stereo": True, 
 
 環境音・SE は libsndfile（soundfile）で OGG Vorbis を書く。BGM（60 秒超のステレオ）は libsndfile 1.2.2 がセグメンテーション違反を起こすため、ffmpeg（imageio-ffmpeg 同梱、libvorbis）で書く。`master.write_ogg` が kind で切り替える。
 
+## ゲームへの組み込み
+
+`AudioManager`（`scripts/autoload/audio_manager.gd`）が `audio.json` の `kind` から `assets/audio/<kind>/<id>.ogg` を読む。**ループは `audio.json` の `loop` を正として読み込み時に設定する** ので、Godot の取り込み設定（`.import`。コミットしない）の loop には依存しない。新しい音を足す手順：定義を `defs/` に書く → `build.py` → `verify.py` → `python3 tools/audio/propose_audio_json.py` の出力を参考に `data/audio.json` の `tracks` に追記 → 呼び出し箇所を書く。
+
 ## Git での扱い
 
 `*.ogg` は **通常の git で管理** する（`.gitattributes` で binary 指定）。Git LFS は、開発環境から `lfs.github.com` に到達できず push が通らないため有効化していない。LFS へ移す場合は到達できる環境で `.gitattributes` の LFS 行を有効にし、`git lfs migrate import --include="*.ogg"` で移行する（履歴の書き換えを伴うので合意の上で 1 回だけ）。

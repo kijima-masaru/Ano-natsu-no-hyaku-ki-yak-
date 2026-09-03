@@ -21,7 +21,7 @@
 |---|---|---|---|
 | タイル 16×16 | `scripts/tools/tile_painters_*.gd` | `resources/tilesets/common.tres` のアトラス PNG | `iwato/tileset/source="resource"` |
 | アクター 16×24 | `scripts/tools/actor_sprite_generator.gd` | `SpriteFrames` リソース | `ActorSpriteGenerator.get_texture` の返却先を差し替え |
-| 音 | `scripts/tools/sound_synth.gd` | `resources/audio/<id>.ogg` | 同名 OGG があれば `AudioManager` が自動で優先 |
+| 音 | `scripts/tools/sound_synth.gd`（OGG が無い ID だけ） | `assets/audio/<kind>/<id>.ogg`（**配置済み** 215 件。`tools/audio/` で合成） | `audio.json` の id と同名の OGG があれば `AudioManager` が優先。ループは `audio.json` の `loop` を正とする |
 | フォント | 代替フォント | `resources/fonts/PixelMplus12-Regular.ttf` | 配置するだけ（`resources/fonts/README.md`） |
 | 光源テクスチャ | `scripts/tools/light_texture_generator.gd` | `resources/lights/radial.png` / `cone.png` | `LightTextureGenerator` の返却先を差し替え |
 
@@ -85,7 +85,7 @@
 
 すべて Python の波形合成でゼロから作成した（既存の音源・素材集は不使用。`tools/audio/README.md`）。仕様・狙い・統合案は `docs/AUDIO_SPEC.md`、検証記録は `docs/AUDIO_VERIFY.md`、一覧は `assets/audio/manifest.json`。
 
-**ただし AudioManager の読み込み経路が `resources/audio/<id>.ogg` のままなので、統合（`docs/AUDIO_SPEC.md` §12）を実装するまでゲーム内では鳴らない。** 発注は不要。人の演奏・作曲に差し替える場合は BGM から（ID・長さ・ラウドネスを守れば置き換えられる）。
+**AudioManager への統合は済んでいる**（`docs/AUDIO_SPEC.md` §12）。読み込み経路、時間帯 4 段階、蝉レイヤー、足音の材質、怪異・追跡者・ナツ・UI・BGM の呼び出しまで実装済み。発注は不要。人の演奏・作曲に差し替える場合は BGM から（ID・長さ・ラウドネスを守れば置き換えられる）。
 
 | 区分 | 件数 | 状態 | 備考 |
 |---|---|---|---|
@@ -95,7 +95,7 @@
 | 6d 未定義だった効果音 | ― | 完了 | se_stalker_*、se_heroine_step_*、ナツ（se_natsu_*）、怪異 27 件（se_an_*）、フィールド固有の物音は怪異の音に含めた |
 | 6e 終幕 | ― | 完了 | se_seal_stone、bgm_credits |
 
-統合後に残る作業：足音の材質写像（タイル種別 → 8 材質）、文字送りの再生間隔の実機調整、曲の評価。
+残る作業：実機で聴いての調整（文字送りの間隔 `DialogueWindow.TICK_EVERY`、足音の材質表 `AudioManager.MATERIAL_BY_TILE`、各 ID の `base_volume_db`）、曲の評価。
 
 ## 6f. 画面（UI 素材）
 | 用途 | 内容 | 状態 |
