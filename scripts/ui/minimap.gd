@@ -30,7 +30,9 @@ var view: int = View.LOCAL
 
 
 func _ready() -> void:
-	_bg.color = Palette.with_alpha(Palette.UI_PANEL, 0.96)
+	_bg.color = Palette.get_color(Palette.UI_PANEL)
+	# 地図は自分の _draw で描くので、子の背景は自分より後ろに描かせる（前に出ると地図が隠れる）
+	_bg.show_behind_parent = true
 	for label: Label in [_title, _hint, _caption]:
 		label.add_theme_font_size_override("font_size", FONT_SIZE)
 	_title.add_theme_color_override("font_color", Palette.get_color(Palette.UI_ACCENT))
@@ -42,7 +44,8 @@ func _ready() -> void:
 
 func _refresh_labels() -> void:
 	_title.text = MessageResolver.text("ui_map_world" if view == View.WORLD else "ui_map_local")
-	_hint.text = MessageResolver.text("ui_map_hint")
+	_hint.text = InputDevice.hint("ui_map_hint")
+	InputDevice.device_changed.connect(func(_pad: bool) -> void: _hint.text = InputDevice.hint("ui_map_hint"))
 	var f: FieldData = FieldRegistry.get_field(SceneRouter.current_field_id) if FieldRegistry.has_field(SceneRouter.current_field_id) else null
 	_caption.text = "%s %s" % [f.id, f.name] if f != null else ""
 	queue_redraw()
@@ -84,7 +87,7 @@ func _draw_world() -> void:
 		var current: bool = f.id == SceneRouter.current_field_id
 		draw_rect(r, Palette.get_color(Palette.UI_ACCENT if current else Palette.CONCRETE), false, 1.0)
 		draw_string(ThemeDB.fallback_font, r.position + Vector2(3, 11), f.id, HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE - 2,
-			Palette.get_color(Palette.BONE_WHITE if current else Palette.UI_TEXT_DIM))
+			Palette.get_color(Palette.UI_ACCENT if current else Palette.UI_TEXT))
 		if current:
 			draw_rect(Rect2(r.get_center() - Vector2(2, 2), Vector2(4, 4)), Palette.get_color(Palette.STREETLAMP_GLOW))
 	_draw_legend()
@@ -105,15 +108,15 @@ func _hatch(r: Rect2, color: Color) -> void:
 
 func _draw_legend() -> void:
 	var y: float = GRID_ORIGIN.y + CELL.y * GRID_ROWS + 6
-	var x: float = GRID_ORIGIN.x
+	var x: float = LEGEND_X
 	var font: Font = ThemeDB.fallback_font
 	draw_rect(Rect2(x, y, 8, 8), Palette.get_color(Palette.FOG_INDIGO))
-	draw_string(font, Vector2(x + 11, y + 8), MessageResolver.text("ui_map_legend_visited"), HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE - 2, Palette.get_color(Palette.UI_TEXT_DIM))
-	x += 96
+	draw_string(font, Vector2(x + 11, y + 8), MessageResolver.text("ui_map_legend_visited"), HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE - 2, Palette.get_color(Palette.UI_TEXT))
+	x += LEGEND_SPACING
 	var r: Rect2 = Rect2(x, y, 8, 8)
 	draw_rect(r, Palette.get_color(Palette.FOG_INDIGO))
 	_hatch(r, Palette.get_color(Palette.CONCRETE))
-	draw_string(font, Vector2(x + 11, y + 8), MessageResolver.text("ui_map_legend_closed"), HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE - 2, Palette.get_color(Palette.UI_TEXT_DIM))
+	draw_string(font, Vector2(x + 11, y + 8), MessageResolver.text("ui_map_legend_closed"), HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE - 2, Palette.get_color(Palette.UI_TEXT))
 
 
 ## 簡易図：現在フィールドの通行可否・出口・調べ物・自分の位置を 1 タイル = 2px で描く
