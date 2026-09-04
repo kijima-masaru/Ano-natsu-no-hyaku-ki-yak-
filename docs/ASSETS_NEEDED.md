@@ -19,13 +19,15 @@
 
 | 種別 | 生成側（暫定） | 本番の置き場所 | 切替方法 |
 |---|---|---|---|
-| タイル 16×16 | `scripts/tools/tile_painters_*.gd` | `resources/tilesets/common.tres` のアトラス PNG | `iwato/tileset/source="resource"` |
+| タイル 16×16 | `scripts/tools/tile_painters_*.gd`（フォールバック） | `resources/tilesets/common_atlas.png`（**配置済み** 164 種。`tools/tiles/paint_atlas.py` で描く）＋ `common.tres` | `iwato/tileset/source="resource"`（**切替済み**） |
 | アクター 16×24 | `scripts/tools/actor_sprite_generator.gd` | `SpriteFrames` リソース | `ActorSpriteGenerator.get_texture` の返却先を差し替え |
 | 音 | `scripts/tools/sound_synth.gd`（OGG が無い ID だけ） | `assets/audio/<kind>/<id>.ogg`（**配置済み** 215 件。`tools/audio/` で合成） | `audio.json` の id と同名の OGG があれば `AudioManager` が優先。ループは `audio.json` の `loop` を正とする |
-| フォント | 代替フォント | `resources/fonts/PixelMplus12-Regular.ttf` | 配置するだけ（`resources/fonts/README.md`） |
-| 光源テクスチャ | `scripts/tools/light_texture_generator.gd` | `resources/lights/radial.png` / `cone.png` | `LightTextureGenerator` の返却先を差し替え |
+| フォント | 代替フォント | `resources/fonts/PixelMplus12-Regular.ttf`（**配置済み**。Bold も） | `UiFont` autoload が読み込み時にアンチエイリアス無しを強制し、全 Control の既定フォントにする |
+| 光源テクスチャ | `scripts/tools/light_texture_generator.gd`（フォールバック） | `resources/lights/radial.png` / `cone.png`（**配置済み**） | `LightTextureGenerator` が PNG を優先（大きさが違えば生成に戻る） |
 
-## 2. タイル（163 種、16 フィールド）
+## 2. タイル（164 種、16 フィールド。**配置済み**）
+
+`resources/tilesets/common_atlas.png` を `tools/tiles/paint_atlas.py` で描いた（パレット 16 色、クォータービュー、物は墨の輪郭）。種別ごとの引数（色・密度）は `tools/tiles/catalog.json`（`driver_tileset_export --catalog` が `TileCatalog` から書き出す）。描き直すときは `paint_atlas.py` → `driver_tileset_export`（`.tres` を更新）→ `driver_shots` で確認。手描き PNG に差し替えるなら同じ並び（16 列、`TileCatalog.all_names()` のソート順）で上書きする。以下は発注時の仕様として残す。
 
 各フィールドの `required_tiles` をそのまま発注単位にする。括弧内はバリエーション（例「窓（消灯・点灯）」は 2 枚）。
 通行可否・調べ可否はゲーム側（`tile_catalog.gd`）が持つので、素材は見た目だけでよい。
@@ -66,7 +68,9 @@
 | 蓮の母／悠の母 | 会話は文字だけで、絵は出さない設計 | 不要 | |
 | ナツ | 声と気配のみ。**絵は作らない** | 不要 | 怪異の正体を見せない方針 |
 
-## 4. 光源テクスチャ（グレースケール、白＝明）
+## 4. 光源テクスチャ（グレースケール、白＝明。**配置済み**）
+
+`resources/lights/radial.png`（64×64）と `cone.png`（176×176）を配置した。生成式は `LightTextureGenerator` と同じ（減衰 1.6 / 1.2、扇形は半角 26° を 6° でぼかす）で、8bit 量子化の縞を微小ディザで抑えてある。
 
 | ファイル | サイズ | 用途 |
 |---|---|---|
@@ -78,8 +82,8 @@
 
 | 項目 | 状態 |
 |---|---|
-| フォント PixelMplus12 | 未配置（`resources/fonts/README.md`）。**最優先**。無いと代替フォントで文字幅が崩れる |
-| メッセージ枠・ノート・ミニマップ・タイトル | すべてコードで描画（`Palette` の色）。素材化は任意。タイトル画面の背景絵 1 枚（国道と高架、夜）は発注候補 |
+| フォント PixelMplus12 | **配置済み**（Regular / Bold、`LICENSE-PixelMplus.txt` 同梱）。`UiFont` autoload と `gui/theme/custom_font` で全 UI に適用 |
+| メッセージ枠・ノート・ミニマップ・タイトル | すべてコードで描画（`Palette` の色）。素材化は任意。タイトル画面の背景絵は **配置済み**（`resources/ui/title_bg.png`、`tools/ui/paint_title_bg.py`） |
 
 ## 6. 音（**完了**：`assets/audio/`、215 件、`tools/audio/` で全自作）
 
@@ -100,17 +104,17 @@
 ## 6f. 画面（UI 素材）
 | 用途 | 内容 | 状態 |
 |---|---|---|
-| タイトル背景 | 384×216 1 枚。国道と高架、夜。文字は入れない | 発注候補 |
+| タイトル背景 | 384×216 1 枚。国道と高架、夜。文字は入れない | **配置済み**（`tools/ui/paint_title_bg.py` で描く。`Title._setup_backdrop` が読む） |
 | 面の印（周回） | 題字の下の「面」1 文字を絵にするなら 12×12 1 枚 | 任意 |
 | ストア用スクリーンショット・トレーラー | 素材差し替え後に撮る（`docs/STORE_PAGE.md`） | 後工程 |
 
 ## 7. 発注の優先順位
 
-1. フォント（配置のみ）
+1. ~~フォント（配置のみ）~~（完了）
 2. アクター 5 種（player / heroine / stalker / toki / shige）。画面に常に映る
-3. タイル：序盤の環状ルート F12 → F01 → F06 → F02 → F05（52 種）→ F03・F13・F10（31 種）→ 残り
+3. ~~タイル~~（自作 164 種を配置済み。手描きへの差し替えは任意）
 4. ~~環境音と効果音~~（完了。§6）
-5. 光源テクスチャ 2 枚、タイトル背景 1 枚
+5. ~~光源テクスチャ 2 枚、タイトル背景 1 枚~~（完了）
 6. ~~未定義の効果音（6d・6e）~~（完了。§6）
 
 ## 8. 納品の受け入れ確認

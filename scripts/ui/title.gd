@@ -6,6 +6,7 @@ extends Control
 const GAME_SCENE: String = "res://scenes/main.tscn"
 const FONT_SIZE: int = 12
 const TITLE_FONT_SIZE: int = 20
+const BACKDROP_PATH: String = "res://resources/ui/title_bg.png"
 
 const SLOT_MENU_SCENE: PackedScene = preload("res://scenes/ui/slot_menu.tscn")
 const SETTINGS_SCENE: PackedScene = preload("res://scenes/ui/settings_menu.tscn")
@@ -20,6 +21,7 @@ const NOTICE_SCENE: PackedScene = preload("res://scenes/ui/content_notice.tscn")
 
 func _ready() -> void:
 	_bg.color = Palette.get_color(Palette.NIGHT_SKY)
+	_setup_backdrop()
 	_title.add_theme_font_size_override("font_size", TITLE_FONT_SIZE)
 	_title.add_theme_color_override("font_color", Palette.get_color(Palette.BONE_WHITE))
 	_title.text = "磐戸町奇譚"  # 題字は固有名詞として直書きを許容
@@ -35,6 +37,23 @@ func _ready() -> void:
 	AudioManager.play_bgm("bgm_title")
 	if not bool(SaveManager.system.get("content_notice_seen", false)):
 		_show_notice()
+
+
+## 背景絵（resources/ui/title_bg.png、384×216）があれば Background の上に敷く。無ければ単色のまま
+func _setup_backdrop() -> void:
+	if not ResourceLoader.exists(BACKDROP_PATH):
+		return
+	var tex: Texture2D = load(BACKDROP_PATH) as Texture2D
+	if tex == null:
+		return
+	var rect: TextureRect = TextureRect.new()
+	rect.name = "Backdrop"
+	rect.texture = tex
+	rect.stretch_mode = TextureRect.STRETCH_KEEP
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(rect)
+	move_child(rect, _bg.get_index() + 1)
 
 
 func _build_menu() -> void:

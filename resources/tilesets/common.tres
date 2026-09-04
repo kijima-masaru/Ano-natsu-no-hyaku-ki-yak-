@@ -1,0 +1,676 @@
+[gd_resource type="TileSet" format=3]
+
+[ext_resource type="Texture2D" path="res://resources/tilesets/common_atlas.png" id="1_oin5l"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_401t7"]
+resource_name = "generated_atlas"
+texture = ExtResource("1_oin5l")
+0:0/0 = 0
+0:0/0/custom_data_0 = "アスファルト"
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/custom_data_0 = "イチョウ（大木）"
+1:0/0/custom_data_1 = true
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0/custom_data_0 = "カーポート"
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0/custom_data_0 = "ガラス扉（点灯）"
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0/custom_data_0 = "ガードレール"
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:0/0/custom_data_0 = "ゴミ集積所ネット"
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:0/0/custom_data_0 = "シャッター（下・半開き）"
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:0/0/custom_data_0 = "ダッグアウト"
+7:0/0/custom_data_1 = true
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:0/0/custom_data_0 = "バックネット（金網）"
+9:0/0 = 0
+9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+9:0/0/custom_data_0 = "バリケード"
+9:0/0/custom_data_1 = true
+10:0/0 = 0
+10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:0/0/custom_data_0 = "フェンス（施錠）"
+10:0/0/custom_data_1 = true
+11:0/0 = 0
+11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:0/0/custom_data_0 = "ブランコ・砂場"
+11:0/0/custom_data_1 = true
+12:0/0 = 0
+12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:0/0/custom_data_0 = "ブロック塀"
+13:0/0 = 0
+13:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:0/0/custom_data_0 = "ベランダ"
+14:0/0 = 0
+14:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:0/0/custom_data_0 = "ベンチ"
+14:0/0/custom_data_1 = true
+15:0/0 = 0
+15:0/0/custom_data_0 = "下草"
+0:1/0 = 0
+0:1/0/custom_data_0 = "下草（丈高）"
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/custom_data_0 = "交番の赤色灯"
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0/custom_data_0 = "体育館の壁"
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/custom_data_0 = "倉庫（トタン）"
+3:1/0/custom_data_1 = true
+4:1/0 = 0
+4:1/0/custom_data_0 = "側溝"
+5:1/0 = 0
+5:1/0/custom_data_0 = "側溝・グレーチング"
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:1/0/custom_data_0 = "公共建築の壁（タイル）"
+7:1/0 = 0
+7:1/0/custom_data_0 = "公園の砂地"
+8:1/0 = 0
+8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:1/0/custom_data_0 = "公衆電話ボックス"
+8:1/0/custom_data_1 = true
+9:1/0 = 0
+9:1/0/custom_data_0 = "区画道路アスファルト"
+10:1/0 = 0
+10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:1/0/custom_data_0 = "厨子"
+10:1/0/custom_data_1 = true
+11:1/0 = 0
+11:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:1/0/custom_data_0 = "古墳（盛土・石室口）"
+11:1/0/custom_data_1 = true
+12:1/0 = 0
+12:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:1/0/custom_data_0 = "同型住宅の壁・屋根（3色差分）"
+13:1/0 = 0
+13:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:1/0/custom_data_0 = "商店の看板（褪せ）"
+14:1/0 = 0
+14:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:1/0/custom_data_0 = "団地 外壁（コンクリート・雨染み）"
+15:1/0 = 0
+15:1/0/custom_data_0 = "土のグラウンド"
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0/custom_data_0 = "土塀（漆喰・崩れ）"
+1:2/0 = 0
+1:2/0/custom_data_0 = "土塁（斜面・上面）"
+2:2/0 = 0
+2:2/0/custom_data_0 = "土橋"
+3:2/0 = 0
+3:2/0/custom_data_0 = "堤防斜面"
+4:2/0 = 0
+4:2/0/custom_data_0 = "堤防斜面（草）"
+5:2/0 = 0
+5:2/0/custom_data_0 = "堤防道路"
+6:2/0 = 0
+6:2/0/custom_data_0 = "境内の砂利"
+7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:2/0/custom_data_0 = "墓石（複数形）"
+8:2/0 = 0
+8:2/0/custom_data_0 = "売地の草"
+9:2/0 = 0
+9:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+9:2/0/custom_data_0 = "寺の山門"
+10:2/0 = 0
+10:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:2/0/custom_data_0 = "展望所の柵"
+10:2/0/custom_data_1 = true
+11:2/0 = 0
+11:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:2/0/custom_data_0 = "山の斜面（樹林）"
+12:2/0 = 0
+12:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:2/0/custom_data_0 = "山門（木・瓦）"
+13:2/0 = 0
+13:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:2/0/custom_data_0 = "崖（通行不能）"
+14:2/0 = 0
+14:2/0/custom_data_0 = "崩れた石段"
+15:2/0 = 0
+15:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+15:2/0/custom_data_0 = "常夜灯"
+0:3/0 = 0
+0:3/0/custom_data_0 = "広場の敷石（インターロッキング）"
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0/custom_data_0 = "店舗の木製戸"
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0/custom_data_0 = "店舗ガラス面（点灯）"
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0/custom_data_0 = "店舗看板（無地）"
+4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:3/0/custom_data_0 = "庵の板壁と瓦"
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:3/0/custom_data_0 = "廃寺の壁・屋根（崩落）"
+6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:3/0/custom_data_0 = "建売住宅の壁・屋根（瓦）"
+7:3/0 = 0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:3/0/custom_data_0 = "式内社の社殿・鳥居"
+7:3/0/custom_data_1 = true
+8:3/0 = 0
+8:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:3/0/custom_data_0 = "待合ベンチ"
+8:3/0/custom_data_1 = true
+9:3/0 = 0
+9:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+9:3/0/custom_data_0 = "掲示板"
+9:3/0/custom_data_1 = true
+10:3/0 = 0
+10:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:3/0/custom_data_0 = "支所の壁（タイル）"
+11:3/0 = 0
+11:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:3/0/custom_data_0 = "教室の机・椅子"
+11:3/0/custom_data_1 = true
+12:3/0 = 0
+12:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:3/0/custom_data_0 = "新校舎 外壁（タイル）"
+13:3/0 = 0
+13:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:3/0/custom_data_0 = "旧校舎 外壁（下見板）"
+14:3/0 = 0
+14:3/0/custom_data_0 = "旧校舎 廊下床（板）"
+15:3/0 = 0
+15:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+15:3/0/custom_data_0 = "旧校舎 窓（木枠）"
+15:3/0/custom_data_1 = true
+0:4/0 = 0
+0:4/0/custom_data_0 = "旧街道アスファルト（狭）"
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:4/0/custom_data_0 = "時刻表看板"
+1:4/0/custom_data_1 = true
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:4/0/custom_data_0 = "時計塔"
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:4/0/custom_data_0 = "朝礼台"
+4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:4/0/custom_data_0 = "杉林"
+5:4/0 = 0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:4/0/custom_data_0 = "杉林（暗）"
+6:4/0 = 0
+6:4/0/custom_data_0 = "林道の砂利"
+7:4/0 = 0
+7:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:4/0/custom_data_0 = "柿の木（実あり）"
+7:4/0/custom_data_1 = true
+8:4/0 = 0
+8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:4/0/custom_data_0 = "栗の木"
+9:4/0 = 0
+9:4/0/custom_data_0 = "校庭の土"
+10:4/0 = 0
+10:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:4/0/custom_data_0 = "校門（鉄）"
+11:4/0 = 0
+11:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:4/0/custom_data_0 = "案内板"
+11:4/0/custom_data_1 = true
+12:4/0 = 0
+12:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:4/0/custom_data_0 = "桜（葉・裸）"
+13:4/0 = 0
+13:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:4/0/custom_data_0 = "梅の木（開花・裸）"
+14:4/0 = 0
+14:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:4/0/custom_data_0 = "植栽"
+15:4/0 = 0
+15:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+15:4/0/custom_data_0 = "植栽（低木）"
+0:5/0 = 0
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:5/0/custom_data_0 = "樹林（暗）"
+1:5/0 = 0
+1:5/0/custom_data_0 = "橋（桁・欄干・橋灯）"
+2:5/0 = 0
+2:5/0/custom_data_0 = "歩道タイル"
+3:5/0 = 0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:5/0/custom_data_0 = "水位標"
+3:5/0/custom_data_1 = true
+4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:5/0/custom_data_0 = "水田（水面・稲）"
+5:5/0 = 0
+5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:5/0/custom_data_0 = "水面（流れ）"
+6:5/0 = 0
+6:5/0/custom_data_0 = "河原の石"
+7:5/0 = 0
+7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:5/0/custom_data_0 = "法面コンクリート（格子）"
+8:5/0 = 0
+8:5/0/custom_data_0 = "法面階段"
+9:5/0 = 0
+9:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+9:5/0/custom_data_0 = "湧水（水面・小）"
+9:5/0/custom_data_1 = true
+10:5/0 = 0
+10:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:5/0/custom_data_0 = "火の見櫓"
+10:5/0/custom_data_1 = true
+11:5/0 = 0
+11:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:5/0/custom_data_0 = "照明塔"
+11:5/0/custom_data_1 = true
+12:5/0 = 0
+12:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:5/0/custom_data_0 = "物干し"
+12:5/0/custom_data_1 = true
+13:5/0 = 0
+13:5/0/custom_data_0 = "狭い歩道（縁石）"
+14:5/0 = 0
+14:5/0/custom_data_0 = "獣道"
+15:5/0 = 0
+15:5/0/custom_data_0 = "獣道（踏み分け）"
+0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:6/0/custom_data_0 = "玉垣"
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:6/0/custom_data_0 = "瓦屋根（連続）"
+2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:6/0/custom_data_0 = "生垣"
+3:6/0 = 0
+3:6/0/custom_data_0 = "生活道路アスファルト（細）"
+4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:6/0/custom_data_0 = "用水路（水面・コンクリート）"
+5:6/0 = 0
+5:6/0/custom_data_0 = "畑の土（畝）"
+6:6/0 = 0
+6:6/0/custom_data_0 = "畦道"
+7:6/0 = 0
+7:6/0/custom_data_0 = "白線（停止線）"
+8:6/0 = 0
+8:6/0/custom_data_0 = "白線（土用）"
+9:6/0 = 0
+9:6/0/custom_data_0 = "白線（実線・破線）"
+10:6/0 = 0
+10:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:6/0/custom_data_0 = "百葉箱"
+10:6/0/custom_data_1 = true
+11:6/0 = 0
+11:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:6/0/custom_data_0 = "看板（地図）"
+11:6/0/custom_data_1 = true
+12:6/0 = 0
+12:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:6/0/custom_data_0 = "石の道標"
+12:6/0/custom_data_1 = true
+13:6/0 = 0
+13:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:6/0/custom_data_0 = "石像（牛）"
+13:6/0/custom_data_1 = true
+14:6/0 = 0
+14:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:6/0/custom_data_0 = "石柱"
+14:6/0/custom_data_1 = true
+15:6/0 = 0
+15:6/0/custom_data_0 = "石段（登り口）"
+0:7/0 = 0
+0:7/0/custom_data_0 = "石段（長・手すり）"
+1:7/0 = 0
+1:7/0/custom_data_0 = "石畳"
+2:7/0 = 0
+2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:7/0/custom_data_0 = "石碑"
+2:7/0/custom_data_1 = true
+3:7/0 = 0
+3:7/0/custom_data_0 = "礎石"
+3:7/0/custom_data_1 = true
+4:7/0 = 0
+4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:7/0/custom_data_0 = "社殿の壁・屋根（檜皮）"
+5:7/0 = 0
+5:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:7/0/custom_data_0 = "積まれた面"
+5:7/0/custom_data_1 = true
+6:7/0 = 0
+6:7/0/custom_data_0 = "空堀（底・壁）"
+7:7/0 = 0
+7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:7/0/custom_data_0 = "窓（消灯・点灯）"
+8:7/0 = 0
+8:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:7/0/custom_data_0 = "給水塔"
+8:7/0/custom_data_1 = true
+9:7/0 = 0
+9:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+9:7/0/custom_data_0 = "絵馬掛け"
+9:7/0/custom_data_1 = true
+10:7/0 = 0
+10:7/0/custom_data_0 = "縞鋼板の歩道橋"
+11:7/0 = 0
+11:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:7/0/custom_data_0 = "自販機正面"
+11:7/0/custom_data_1 = true
+12:7/0 = 0
+12:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:7/0/custom_data_0 = "自転車置き場"
+13:7/0 = 0
+13:7/0/custom_data_0 = "苔"
+14:7/0 = 0
+14:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:7/0/custom_data_0 = "苔むした石"
+15:7/0 = 0
+15:7/0/custom_data_0 = "草地（丈高・低）"
+0:8/0 = 0
+0:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:8/0/custom_data_0 = "落石（岩）"
+0:8/0/custom_data_1 = true
+1:8/0 = 0
+1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:8/0/custom_data_0 = "蛍光灯"
+2:8/0 = 0
+2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:8/0/custom_data_0 = "蛍光灯（バス停）"
+3:8/0 = 0
+3:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:8/0/custom_data_0 = "街灯（均等）"
+4:8/0 = 0
+4:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:8/0/custom_data_0 = "街灯（柱・光源）"
+5:8/0 = 0
+5:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:8/0/custom_data_0 = "裂け目（暗）"
+5:8/0/custom_data_1 = true
+6:8/0 = 0
+6:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:8/0/custom_data_0 = "観音堂の板壁・格子・屋根"
+6:8/0/custom_data_1 = true
+7:8/0 = 0
+7:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:8/0/custom_data_0 = "記念碑"
+7:8/0/custom_data_1 = true
+8:8/0 = 0
+8:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:8/0/custom_data_0 = "調整池（水面・柵）"
+9:8/0 = 0
+9:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+9:8/0/custom_data_0 = "谷の岩壁"
+10:8/0 = 0
+10:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:8/0/custom_data_0 = "谷の斜面（暗い樹林）"
+11:8/0 = 0
+11:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:8/0/custom_data_0 = "象の滑り台"
+11:8/0/custom_data_1 = true
+12:8/0 = 0
+12:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:8/0/custom_data_0 = "農家の壁・瓦"
+13:8/0 = 0
+13:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:8/0/custom_data_0 = "農機具小屋（トタン・板）"
+13:8/0/custom_data_1 = true
+14:8/0 = 0
+14:8/0/custom_data_0 = "農道の砂利"
+15:8/0 = 0
+15:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+15:8/0/custom_data_0 = "門扉"
+0:9/0 = 0
+0:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:9/0/custom_data_0 = "防音壁"
+1:9/0 = 0
+1:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:9/0/custom_data_0 = "防音壁（遠景）"
+2:9/0 = 0
+2:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:9/0/custom_data_0 = "階段室（消灯）"
+2:9/0/custom_data_1 = true
+3:9/0 = 0
+3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:9/0/custom_data_0 = "階段室（点灯・消灯）"
+3:9/0/custom_data_1 = true
+4:9/0 = 0
+4:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:9/0/custom_data_0 = "隧道アーチ"
+5:9/0 = 0
+5:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:9/0/custom_data_0 = "隧道内壁（湿）"
+6:9/0 = 0
+6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:9/0/custom_data_0 = "集合ポスト"
+6:9/0/custom_data_1 = true
+7:9/0 = 0
+7:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:9/0/custom_data_0 = "電柱・電線"
+8:9/0 = 0
+8:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:9/0/custom_data_0 = "電気柵ポール"
+8:9/0/custom_data_1 = true
+9:9/0 = 0
+9:9/0/custom_data_0 = "霧（半透明オーバーレイ）"
+10:9/0 = 0
+10:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:9/0/custom_data_0 = "非常灯"
+11:9/0 = 0
+11:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:9/0/custom_data_0 = "飼育小屋（金網）"
+11:9/0/custom_data_1 = true
+12:9/0 = 0
+12:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:9/0/custom_data_0 = "駄菓子屋の店先（点灯）"
+12:9/0/custom_data_1 = true
+13:9/0 = 0
+13:9/0/custom_data_0 = "駐車場ライン"
+14:9/0 = 0
+14:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:9/0/custom_data_0 = "駐車車両（暗）"
+14:9/0/custom_data_1 = true
+15:9/0 = 0
+15:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+15:9/0/custom_data_0 = "駐輪場の屋根"
+0:10/0 = 0
+0:10/0/custom_data_0 = "高架床版（影）"
+1:10/0 = 0
+1:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:10/0/custom_data_0 = "高架橋脚"
+2:10/0 = 0
+2:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:10/0/custom_data_0 = "鳥居"
+3:10/0 = 0
+3:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:10/0/custom_data_0 = "黒板"
+3:10/0/custom_data_1 = true
+
+[resource]
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "tile_type"
+custom_data_layer_0/type = 4
+custom_data_layer_1/name = "is_interactable"
+custom_data_layer_1/type = 1
+sources/0 = SubResource("TileSetAtlasSource_401t7")
+metadata/tile_coords = {
+"アスファルト": Vector2i(0, 0),
+"イチョウ（大木）": Vector2i(1, 0),
+"カーポート": Vector2i(2, 0),
+"ガラス扉（点灯）": Vector2i(3, 0),
+"ガードレール": Vector2i(4, 0),
+"ゴミ集積所ネット": Vector2i(5, 0),
+"シャッター（下・半開き）": Vector2i(6, 0),
+"ダッグアウト": Vector2i(7, 0),
+"バックネット（金網）": Vector2i(8, 0),
+"バリケード": Vector2i(9, 0),
+"フェンス（施錠）": Vector2i(10, 0),
+"ブランコ・砂場": Vector2i(11, 0),
+"ブロック塀": Vector2i(12, 0),
+"ベランダ": Vector2i(13, 0),
+"ベンチ": Vector2i(14, 0),
+"下草": Vector2i(15, 0),
+"下草（丈高）": Vector2i(0, 1),
+"交番の赤色灯": Vector2i(1, 1),
+"体育館の壁": Vector2i(2, 1),
+"倉庫（トタン）": Vector2i(3, 1),
+"側溝": Vector2i(4, 1),
+"側溝・グレーチング": Vector2i(5, 1),
+"公共建築の壁（タイル）": Vector2i(6, 1),
+"公園の砂地": Vector2i(7, 1),
+"公衆電話ボックス": Vector2i(8, 1),
+"区画道路アスファルト": Vector2i(9, 1),
+"厨子": Vector2i(10, 1),
+"古墳（盛土・石室口）": Vector2i(11, 1),
+"同型住宅の壁・屋根（3色差分）": Vector2i(12, 1),
+"商店の看板（褪せ）": Vector2i(13, 1),
+"団地 外壁（コンクリート・雨染み）": Vector2i(14, 1),
+"土のグラウンド": Vector2i(15, 1),
+"土塀（漆喰・崩れ）": Vector2i(0, 2),
+"土塁（斜面・上面）": Vector2i(1, 2),
+"土橋": Vector2i(2, 2),
+"堤防斜面": Vector2i(3, 2),
+"堤防斜面（草）": Vector2i(4, 2),
+"堤防道路": Vector2i(5, 2),
+"境内の砂利": Vector2i(6, 2),
+"墓石（複数形）": Vector2i(7, 2),
+"売地の草": Vector2i(8, 2),
+"寺の山門": Vector2i(9, 2),
+"展望所の柵": Vector2i(10, 2),
+"山の斜面（樹林）": Vector2i(11, 2),
+"山門（木・瓦）": Vector2i(12, 2),
+"崖（通行不能）": Vector2i(13, 2),
+"崩れた石段": Vector2i(14, 2),
+"常夜灯": Vector2i(15, 2),
+"広場の敷石（インターロッキング）": Vector2i(0, 3),
+"店舗の木製戸": Vector2i(1, 3),
+"店舗ガラス面（点灯）": Vector2i(2, 3),
+"店舗看板（無地）": Vector2i(3, 3),
+"庵の板壁と瓦": Vector2i(4, 3),
+"廃寺の壁・屋根（崩落）": Vector2i(5, 3),
+"建売住宅の壁・屋根（瓦）": Vector2i(6, 3),
+"式内社の社殿・鳥居": Vector2i(7, 3),
+"待合ベンチ": Vector2i(8, 3),
+"掲示板": Vector2i(9, 3),
+"支所の壁（タイル）": Vector2i(10, 3),
+"教室の机・椅子": Vector2i(11, 3),
+"新校舎 外壁（タイル）": Vector2i(12, 3),
+"旧校舎 外壁（下見板）": Vector2i(13, 3),
+"旧校舎 廊下床（板）": Vector2i(14, 3),
+"旧校舎 窓（木枠）": Vector2i(15, 3),
+"旧街道アスファルト（狭）": Vector2i(0, 4),
+"時刻表看板": Vector2i(1, 4),
+"時計塔": Vector2i(2, 4),
+"朝礼台": Vector2i(3, 4),
+"杉林": Vector2i(4, 4),
+"杉林（暗）": Vector2i(5, 4),
+"林道の砂利": Vector2i(6, 4),
+"柿の木（実あり）": Vector2i(7, 4),
+"栗の木": Vector2i(8, 4),
+"校庭の土": Vector2i(9, 4),
+"校門（鉄）": Vector2i(10, 4),
+"案内板": Vector2i(11, 4),
+"桜（葉・裸）": Vector2i(12, 4),
+"梅の木（開花・裸）": Vector2i(13, 4),
+"植栽": Vector2i(14, 4),
+"植栽（低木）": Vector2i(15, 4),
+"樹林（暗）": Vector2i(0, 5),
+"橋（桁・欄干・橋灯）": Vector2i(1, 5),
+"歩道タイル": Vector2i(2, 5),
+"水位標": Vector2i(3, 5),
+"水田（水面・稲）": Vector2i(4, 5),
+"水面（流れ）": Vector2i(5, 5),
+"河原の石": Vector2i(6, 5),
+"法面コンクリート（格子）": Vector2i(7, 5),
+"法面階段": Vector2i(8, 5),
+"湧水（水面・小）": Vector2i(9, 5),
+"火の見櫓": Vector2i(10, 5),
+"照明塔": Vector2i(11, 5),
+"物干し": Vector2i(12, 5),
+"狭い歩道（縁石）": Vector2i(13, 5),
+"獣道": Vector2i(14, 5),
+"獣道（踏み分け）": Vector2i(15, 5),
+"玉垣": Vector2i(0, 6),
+"瓦屋根（連続）": Vector2i(1, 6),
+"生垣": Vector2i(2, 6),
+"生活道路アスファルト（細）": Vector2i(3, 6),
+"用水路（水面・コンクリート）": Vector2i(4, 6),
+"畑の土（畝）": Vector2i(5, 6),
+"畦道": Vector2i(6, 6),
+"白線（停止線）": Vector2i(7, 6),
+"白線（土用）": Vector2i(8, 6),
+"白線（実線・破線）": Vector2i(9, 6),
+"百葉箱": Vector2i(10, 6),
+"看板（地図）": Vector2i(11, 6),
+"石の道標": Vector2i(12, 6),
+"石像（牛）": Vector2i(13, 6),
+"石柱": Vector2i(14, 6),
+"石段（登り口）": Vector2i(15, 6),
+"石段（長・手すり）": Vector2i(0, 7),
+"石畳": Vector2i(1, 7),
+"石碑": Vector2i(2, 7),
+"礎石": Vector2i(3, 7),
+"社殿の壁・屋根（檜皮）": Vector2i(4, 7),
+"積まれた面": Vector2i(5, 7),
+"空堀（底・壁）": Vector2i(6, 7),
+"窓（消灯・点灯）": Vector2i(7, 7),
+"給水塔": Vector2i(8, 7),
+"絵馬掛け": Vector2i(9, 7),
+"縞鋼板の歩道橋": Vector2i(10, 7),
+"自販機正面": Vector2i(11, 7),
+"自転車置き場": Vector2i(12, 7),
+"苔": Vector2i(13, 7),
+"苔むした石": Vector2i(14, 7),
+"草地（丈高・低）": Vector2i(15, 7),
+"落石（岩）": Vector2i(0, 8),
+"蛍光灯": Vector2i(1, 8),
+"蛍光灯（バス停）": Vector2i(2, 8),
+"街灯（均等）": Vector2i(3, 8),
+"街灯（柱・光源）": Vector2i(4, 8),
+"裂け目（暗）": Vector2i(5, 8),
+"観音堂の板壁・格子・屋根": Vector2i(6, 8),
+"記念碑": Vector2i(7, 8),
+"調整池（水面・柵）": Vector2i(8, 8),
+"谷の岩壁": Vector2i(9, 8),
+"谷の斜面（暗い樹林）": Vector2i(10, 8),
+"象の滑り台": Vector2i(11, 8),
+"農家の壁・瓦": Vector2i(12, 8),
+"農機具小屋（トタン・板）": Vector2i(13, 8),
+"農道の砂利": Vector2i(14, 8),
+"門扉": Vector2i(15, 8),
+"防音壁": Vector2i(0, 9),
+"防音壁（遠景）": Vector2i(1, 9),
+"階段室（消灯）": Vector2i(2, 9),
+"階段室（点灯・消灯）": Vector2i(3, 9),
+"隧道アーチ": Vector2i(4, 9),
+"隧道内壁（湿）": Vector2i(5, 9),
+"集合ポスト": Vector2i(6, 9),
+"電柱・電線": Vector2i(7, 9),
+"電気柵ポール": Vector2i(8, 9),
+"霧（半透明オーバーレイ）": Vector2i(9, 9),
+"非常灯": Vector2i(10, 9),
+"飼育小屋（金網）": Vector2i(11, 9),
+"駄菓子屋の店先（点灯）": Vector2i(12, 9),
+"駐車場ライン": Vector2i(13, 9),
+"駐車車両（暗）": Vector2i(14, 9),
+"駐輪場の屋根": Vector2i(15, 9),
+"高架床版（影）": Vector2i(0, 10),
+"高架橋脚": Vector2i(1, 10),
+"鳥居": Vector2i(2, 10),
+"黒板": Vector2i(3, 10)
+}

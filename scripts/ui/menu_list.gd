@@ -66,7 +66,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		cancelled.emit()
 	else:
 		return
-	get_viewport().set_input_as_handled()
+	# 決定でシーンが切り替わると自分ごと木から外れ、viewport が無くなることがある（タイトル → ゲーム開始）
+	var viewport: Viewport = get_viewport()
+	if viewport != null:
+		viewport.set_input_as_handled()
 
 
 func _move(delta: int) -> void:
