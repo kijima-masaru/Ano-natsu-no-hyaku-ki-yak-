@@ -12,22 +12,22 @@ signal captured(target: Node2D)
 enum State { IDLE, PATROL, SUSPICIOUS, CHASE, SEARCH, RETREAT }
 const STATE_NAMES: PackedStringArray = ["idle", "patrol", "suspicious", "chase", "search", "retreat"]
 
-const WALK_SPEED: float = 34.0
-const CHASE_SPEED: float = 62.0
-const ACCEL: float = 300.0
+const WALK_SPEED: float = 2.125 * GameConstants.TILE_SIZE
+const CHASE_SPEED: float = 3.875 * GameConstants.TILE_SIZE
+const ACCEL: float = 18.75 * GameConstants.TILE_SIZE
 ## 聴覚：音源の半径 × この倍率以内なら聞こえる。暗いほど鋭くなる
 const HEARING_BASE: float = 1.0
 const HEARING_DARK_BONUS: float = 0.8
 ## 視界：扇形の半径と半角（度）。暗いほど狭い
-const VISION_RANGE: float = 80.0
-const VISION_RANGE_DARK: float = 40.0
+const VISION_RANGE: float = 5.0 * GameConstants.TILE_SIZE
+const VISION_RANGE_DARK: float = 2.5 * GameConstants.TILE_SIZE
 ## 照らされている対象は昼の視認距離のこの倍率まで見える
 const LIT_TARGET_RANGE_BONUS: float = 1.4
 const VISION_HALF_ANGLE_DEG: float = 32.0
 const VISION_HALF_ANGLE_DARK_DEG: float = 18.0
 ## 捕獲距離。双方の当たり判定（追跡者 10×6、主人公 12×6）が横並びで接すると原点間が 11px になるため、
 ## それより大きくしないと横から追いついても捕まえられない（Godot 4.7 実機で確認）
-const CAPTURE_DISTANCE: float = 14.0
+const CAPTURE_DISTANCE: float = 0.875 * GameConstants.TILE_SIZE
 const SUSPICIOUS_SECONDS: float = 1.2
 const SEARCH_SECONDS: float = 4.0
 const LOSE_SIGHT_SECONDS: float = 3.0
@@ -128,7 +128,7 @@ func _pick_target() -> Node2D:
 	var best: int = 0
 	var best_score: float = -INF
 	for i: int in candidates.size():
-		var score: float = weights[i] / maxf(8.0, global_position.distance_to(candidates[i].global_position))
+		var score: float = weights[i] / maxf(0.5 * GameConstants.TILE_SIZE, global_position.distance_to(candidates[i].global_position))
 		if score > best_score:
 			best_score = score
 			best = i
@@ -238,7 +238,7 @@ func _do_patrol() -> void:
 
 ## 足音。動いている間だけ、速さに応じた間隔で材質別の音を鳴らす
 func _tick_footsteps(delta: float) -> void:
-	if velocity.length() < 4.0:
+	if velocity.length() < 0.25 * GameConstants.TILE_SIZE:
 		_step_timer = 0.0
 		return
 	_step_timer += delta
@@ -252,7 +252,7 @@ func _move_to(point: Vector2, speed: float, delta: float) -> void:
 	if point == Vector2.INF:
 		return
 	var to: Vector2 = point - global_position
-	if to.length() <= 2.0:
+	if to.length() <= 0.125 * GameConstants.TILE_SIZE:
 		velocity = velocity.move_toward(Vector2.ZERO, ACCEL * delta)
 		return
 	velocity = velocity.move_toward(to.normalized() * speed, ACCEL * delta)

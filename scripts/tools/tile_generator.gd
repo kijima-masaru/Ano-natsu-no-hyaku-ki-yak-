@@ -60,8 +60,12 @@ static func get_tile_image(type_name: String) -> Image:
 		if not _dispatch(painter, brush, args):
 			push_error("TileGenerator: ペインタ '%s' が見つかりません（種別 '%s'）" % [painter, type_name])
 			TilePaintersObjects.paint(FALLBACK_PAINTER, brush, {"name": type_name})
-	_image_cache[type_name] = brush.image
-	return brush.image
+	var image: Image = brush.image
+	if GameConstants.ART_SCALE > 1:
+		image = image.duplicate()
+		image.resize(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE, Image.INTERPOLATE_NEAREST)
+	_image_cache[type_name] = image
+	return image
 
 
 static func _dispatch(painter: String, brush: TileBrush, args: Dictionary) -> bool:

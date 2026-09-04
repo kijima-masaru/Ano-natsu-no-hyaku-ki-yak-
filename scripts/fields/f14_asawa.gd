@@ -127,7 +127,7 @@ func _on_flag_raised(flag: String) -> void:
 
 
 func _update_shige(daytime: bool) -> void:
-	set_npc_present("shige_npc", daytime and Calendar.day >= SHIGE_FIRST_DAY, SHIGE_TILE, "toki", Vector2i.DOWN)
+	set_npc_present("shige_npc", daytime and Calendar.day >= SHIGE_FIRST_DAY, SHIGE_TILE, "shige", Vector2i.DOWN)
 
 
 ## 落石が崩れたら林道が通れる

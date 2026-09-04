@@ -14,6 +14,7 @@ const ITEMS: Array[Dictionary] = [
 	{"id": "text_speed", "kind": "slider"},
 	{"id": "instant_text", "kind": "toggle"},
 	{"id": "brightness", "kind": "slider"},
+	{"id": "screen_fx", "kind": "toggle"},
 	{"id": "debug_overlay", "kind": "toggle"},
 	{"id": "content_notice", "kind": "action"},
 	{"id": "back", "kind": "action"},

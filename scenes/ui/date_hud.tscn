@@ -12,11 +12,11 @@ script = ExtResource("1_date_hud")
 
 [node name="Panel" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 100.0
-offset_bottom = 16.0
+offset_right = 167.0
+offset_bottom = 27.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 0
-offset_right = 100.0
-offset_bottom = 16.0
+offset_right = 167.0
+offset_bottom = 27.0

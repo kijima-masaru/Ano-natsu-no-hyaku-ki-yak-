@@ -59,18 +59,32 @@ layer.set_cell(Vector2i(3, 4), TileGenerator.SOURCE_ID, coords)
 
 ## 現在の構成（`source="resource"`）
 
-`resources/tilesets/common_atlas.png` は **`tools/tiles/paint_atlas.py`（Python、Pillow）が描く**。種別名 → ペインタ名・引数・通行可否は `tools/tiles/catalog.json` に書き出してあり（`driver_tileset_export --catalog`）、Python 側はそれを読んで同じ引数（色インデックス・密度）で描く。`common.tres` は `driver_tileset_export` が生成し、アトラスの texture としてこの PNG を参照する。
+`resources/tilesets/common_atlas.png` は **`tools/tiles/paint32.py`（Python、Pillow）が 32 px・自由な色数で描く**。種別名 → ペインタ名・引数・通行可否は `tools/tiles/catalog.json` に書き出してあり（`driver_tileset_export --catalog`）、Python 側はそれを読んで種別ごとに描く。並び（種別名 → アトラス座標、オートタイルの変種、背の高い部品の上半分）は `resources/tilesets/atlas_layout.json` に書き、`common.tres` は `driver_tileset_export` がこの layout と PNG から組む（物理・カスタムデータは `TileCatalog` から）。
 
 ```
-python3 tools/tiles/paint_atlas.py --preview build/atlas_x4.png     # PNG を描く（決定的）
+python3 tools/tiles/paint32.py --preview build/atlas_x3.png          # PNG と layout を描く（決定的）
 $G --headless --path . --import                                       # PNG を取り込む
-$G --headless --path . $D -- --runner=$R/driver_tileset_export.gd     # common.tres を更新（PNG を参照）
+$G --headless --path . $D -- --runner=$R/driver_tileset_export.gd     # layout から common.tres を組む
 xvfb-run ... --runner=$R/driver_shots.gd --out=DIR                    # 画面で確認
 ```
 
-`paint_atlas.py` は汎用ペインタ（地面・壁・木など。`PAINTERS`）と、種別名ごとの専用描画（`tools/tiles/special.py` の `SPECIAL`。自販機・街灯・時計塔・墓石など 90 種）の 2 段で、専用描画があればそちらを使う。物は 1 種ずつ描くのが基本で、汎用ペインタは引数だけ違う地面・壁の類に限る。
+ペインタの置き場：
 
-`TileCatalog` に種別を足したら `--catalog` で catalog.json を更新し、`special.py` に専用描画を書く（地面・壁なら `PAINTERS` の該当ペインタで足りる）。生成ペインタ（`tile_painters_*.gd`）はフォールバックとして残す。
+| ファイル | 内容 |
+|---|---|
+| `tools/tiles/px32.py` | 32 px キャンバス、色（`C`）、ノイズ・勾配・ディザ・輪郭・影のプリミティブ。光は左上、物は暗い輪郭で地面から切り離す |
+| `tools/tiles/paint32.py` | 地面・水・斜面・階段（`FLAT`）、壁・屋根・柵・生け垣のオートタイル（`AUTOTILE`）、木・街灯・電柱（`TALL`）。`load_extra()` で下の 2 つを遅延で取り込む |
+| `tools/tiles/props32a.py` | 道路の線・側溝・ガードレール・看板・灯り・自販機・電話ボックス・校庭の設備など（`FLAT2`） |
+| `tools/tiles/props32b.py` | 石碑・墓石・鳥居・門・窓・階段室・店先・塔（`FLAT3` / `TALL3`） |
+
+- **オートタイル**：`AUTOTILE` の種別は 4 近傍（N=1 E=2 S=4 W=8）の 15 通りを `<種別>#m<mask>` としてアトラスに並べる。地図を組んだ後に `TileVariants.apply()` が隣接を見て差し替える（`FieldMapBuilder.build_from` の最後）。地図の外は「同じ」とみなし端で切れ目を出さない。
+- **背の高い部品**：`TALL` の種別は幅 w × 高さ h マスで描く（`(描画関数, w, h)`）。底辺の中央のマスが本体（種別名・通行判定）、それ以外のマスは `<種別>#part`（相対位置 dx/dy 付き）として `overhead` 層に載る（アクターより前に描かれ、梢が人物を隠す）。底辺の行は中央のマス以外に描かない（隣の地面にはみ出さない）。大きさは縮尺 1 マス ≈ 1.7 m に合わせる（`docs/ASSETS_NEEDED.md` §0）。`TileSet` の meta `tile_variants` / `tile_tall` に座標表がある。
+- **建物（15 種。`paint32.FACADE`）**：壁・屋根の種別は「下端から F 行が正面（窓の並ぶ壁面）、その上が屋根」として描く。変種の鍵は `mask + 16 × d`（d は同じ種別の連なりの下端からの行数。F 以上は屋根）。`TileVariants` が列ごとに連なりを数えて d を決める。列の高さが足りなければ屋根を 1 行（`min_roof`）残して残りを正面にする。F は階数に合わせる（住宅 3、団地 3、校舎・公共建築 5、体育館 6、小屋 1〜2）。地図の建物ブロックの行数は変えていない
+- **林（杉林など 5 種）**：オートタイルと背の高い部品を併用する。上に同じ林が続く内側のマスは梢を上から見た繁み（変種 `m` で N ビットあり）、林の上端のマスだけ幹のある木として梢が 2 マス立ち上がる（`TileVariants` は上が同じ種別なら部品を置かない）。下端は幹の影で落とす
+- **光の遮蔽**：通行不可の種別のうち壁・建物・崖・木の幹などは遮蔽ポリゴン（TileSet の occlusion 層）を持ち、`Lighting` の光源（街灯・懐中電灯）が影を落とす。どのペインタが遮るかは `driver_tileset_export` の `OCCLUDE_FULL` / `OCCLUDE_TRUNK`。光源になる種別（`LightCatalog`）と柵・金網・水・看板は遮らない。判定（`Lighting.light_level_at`）は影を見ない
+- 旧 16 px・16 色のペインタ（`paint_atlas.py` / `special.py`）は残してあるが、現在は使っていない（すべての種別が 32 px 直描き）。
+
+`TileCatalog` に種別を足したら `--catalog` で catalog.json を更新し、`paint32.py`（地面・壁）か `props32*.py`（物）に描画を書いて `paint32.py` を実行する。生成ペインタ（`tile_painters_*.gd`）は layout が無いときのフォールバックとして残す。
 
 ## 手描き PNG への差し替え手順
 

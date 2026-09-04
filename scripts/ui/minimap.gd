@@ -8,15 +8,17 @@ extends Control
 signal closed()
 
 const FONT_SIZE: int = 12
-const CELL: Vector2i = Vector2i(40, 26)
-const GRID_ORIGIN: Vector2i = Vector2i(72, 26)
+const CELL: Vector2i = Vector2i(66, 43)
+const GRID_ORIGIN: Vector2i = Vector2i(120, 43)
 const GRID_COLS: int = 6
 const GRID_ROWS: int = 6
 ## 凡例は下段右側（左側は現在地の名前）
-const LEGEND_X: float = 220.0
-const LEGEND_SPACING: float = 76.0
-const LOCAL_SCALE: int = 2
-const LOCAL_ORIGIN: Vector2i = Vector2i(64, 30)
+const LEGEND_X: float = 367.0
+const LEGEND_SPACING: float = 127.0
+const LOCAL_SCALE: int = 3
+const LOCAL_ORIGIN: Vector2i = Vector2i(107, 50)
+## 局所地図の描画領域（LOCAL_ORIGIN からの幅・高さ）
+const LOCAL_AREA: Vector2i = Vector2i(427, 233)
 ## 標高 0〜5 → 塗り（西＝低く明るい、東＝高く暗い）
 const ELEVATION_FILL: PackedInt32Array = [Palette.CONCRETE, Palette.FOG_INDIGO, Palette.DUSK_INDIGO, Palette.DEEP_INDIGO, Palette.NIGHT_SKY, Palette.SUMI]
 
@@ -125,7 +127,7 @@ func _draw_local() -> void:
 	if field == null:
 		return
 	var size: Vector2i = field.get_size_tiles()
-	var origin: Vector2 = Vector2(LOCAL_ORIGIN) + Vector2((256 - size.x * LOCAL_SCALE) / 2.0, (140 - size.y * LOCAL_SCALE) / 2.0).floor()
+	var origin: Vector2 = Vector2(LOCAL_ORIGIN) + Vector2((LOCAL_AREA.x - size.x * LOCAL_SCALE) / 2.0, (LOCAL_AREA.y - size.y * LOCAL_SCALE) / 2.0).floor()
 	draw_rect(Rect2(origin - Vector2.ONE, Vector2(size * LOCAL_SCALE) + Vector2(2, 2)), Palette.get_color(Palette.CONCRETE), false, 1.0)
 	for y: int in size.y:
 		for x: int in size.x:

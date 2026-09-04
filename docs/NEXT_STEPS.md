@@ -15,7 +15,7 @@
 
 | # | 作業 | 参照 | 備考 |
 |---|---|---|---|
-| 1 | **素材の差し替え**：残りは **アクター 5 種** だけ（フォント・タイル 164 種・光源・タイトル背景・音 215 件は配置済み） | `docs/ASSETS_NEEDED.md` §3、音は `docs/AUDIO_SPEC.md` | 差し替え境界は §1。納品ごとに `driver_shots` で描画確認 |
+| 1 | **素材の差し替え**：フォント・タイル 164 種・光源・タイトル背景・アクター 5 種・音 215 件をすべて配置済み。残るのは手描きへの置き換え（任意） | `docs/ASSETS_NEEDED.md` §3、音は `docs/AUDIO_SPEC.md` | 差し替え境界は §1。納品ごとに `driver_shots` で描画確認 |
 | 2 | **GodotSteam** の組み込み（`SteamBridge` は空実装） | `scripts/autoload/steam_bridge.gd` | 起動時の初期化、オーバーレイ、クラウドセーブ（`user://saves/` と `system.json`）。Steam 未接続でも今どおり動くこと |
 | 3 | **実績**（候補：8 月 1 日、各 ED、裏面クリア、隠蔽 17 件全提示、目撃 0、全フィールド訪問、面 4 枚を一度も間違えない） | `docs/FLAGS.md`「記録用」、`system.json` の `clears_by_ending` | フラグは全部残してある。`SteamBridge.unlock(id)` の口を足す |
 | 4 | **Steam Deck**（1280×800、整数 3 倍で 1152×648 ＋ 余白、ゲームパッド専用、Proton）| `docs/PLAYTEST_LOG.md`「操作系」 | 操作案内は `InputDevice` で A/B 表記に切り替わる。文字サイズ 12px の読みやすさを実機で見る |
@@ -24,6 +24,10 @@
 | 7 | **人手による通しプレイ**（時間の実測、ED の分布、追跡者の難度） | `docs/PLAYTEST_LOG.md` | 目標 2〜3.5 時間。ずれたら `Suspicion` の加算と `schedule.json` の必要 P で再調整 |
 | 8 | **エクスポート**（Windows / Linux のプリセット、ビルド、サイズ計測、`v0.4.0` タグ） | タスク13（本ステップ最終） | エクスポートテンプレートは GitHub Releases の `Godot_v4.7-stable_export_templates.tpz` |
 | 9 | ローカライズ（英語）は任意。`messages.json` の英語版と `support.json` の英語版を用意すれば `MessageResolver` の読み込み先を切り替えるだけ | `docs/CONVENTIONS.md` §10 | 二層テキストの対も英語で揃える必要がある（118 対） |
+
+## 2b. 高精細化（完了）
+
+画面 640×360（1080p で整数 3 倍）、タイル 32×32、アクター 32×48 に引き上げた（`GameConstants`。距離・速度はタイル単位で定義）。段階：(1) 解像度と UI の再配置【完了】 → (2) 32 px・自由な色数のタイル描き直し（164 種すべて）、壁・屋根・柵のオートタイル 28 種、木・柱・塔の背の高い部品 22 種【完了。`docs/TILESET_PIPELINE.md`】 → (3) にじみ（ブルーム）・上下端のぼかし・周辺減光（`ScreenFx` + `post_fx.gdshader`）、舞う葉・埃・蛍の粒子、光源の影（TileSet の遮蔽ポリゴン）【完了】 → (4) アクター 5 種（`resources/actors/`、シゲを新設）とタイトル背景 640×360 の描き直し【完了】。 縮尺は 1 マス ≈ 1.7 m（人の身長）で統一し、木・電柱・塔・車の大きさを現実の比率に合わせ、建物は下端から階数分の行を正面（窓）として描く（`docs/ASSETS_NEEDED.md` §0）。
 
 ## 3. 決定事項（変えるなら理由を PR に）
 

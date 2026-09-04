@@ -6,7 +6,7 @@ extends Control
 signal closed()
 
 const FONT_SIZE: int = 12
-const DETAIL_CHARS: int = 26
+const DETAIL_CHARS: int = 44
 
 @onready var _panel: ColorRect = $Panel
 @onready var _title: Label = $Panel/Title
