@@ -19,10 +19,10 @@ mouse_filter = 2
 
 [node name="Column" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 20.0
-offset_right = 360.0
-offset_bottom = 208.0
+offset_left = 40.0
+offset_top = 33.0
+offset_right = 600.0
+offset_bottom = 347.0
 theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="Column"]

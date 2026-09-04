@@ -8,20 +8,20 @@ signal noise_emitted(radius: float)
 signal interaction_requested(target: Node)
 signal facing_changed(facing: Vector2i)
 
-const WALK_SPEED: float = 64.0
-const SNEAK_SPEED: float = 26.0
-const ACCELERATION: float = 320.0
-const DECELERATION: float = 480.0
-const WALK_NOISE_RADIUS: float = 64.0
-const SNEAK_NOISE_RADIUS: float = 16.0
+const WALK_SPEED: float = 4.0 * GameConstants.TILE_SIZE
+const SNEAK_SPEED: float = 1.625 * GameConstants.TILE_SIZE
+const ACCELERATION: float = 20.0 * GameConstants.TILE_SIZE
+const DECELERATION: float = 30.0 * GameConstants.TILE_SIZE
+const WALK_NOISE_RADIUS: float = 4.0 * GameConstants.TILE_SIZE
+const SNEAK_NOISE_RADIUS: float = 1.0 * GameConstants.TILE_SIZE
 const WALK_STEP_INTERVAL: float = 0.34
 const SNEAK_STEP_INTERVAL: float = 0.62
 const ANIM_FRAME_TIME: float = 0.17
 ## 前方判定の中心を体の原点からどれだけ離すか（px）
-const PROBE_DISTANCE: float = 10.0
-const MOVING_THRESHOLD: float = 4.0
+const PROBE_DISTANCE: float = 0.625 * GameConstants.TILE_SIZE
+const MOVING_THRESHOLD: float = 0.25 * GameConstants.TILE_SIZE
 ## 懐中電灯の光源位置（足元より少し上、胸の高さ）
-const FLASHLIGHT_HEIGHT_OFFSET: float = -8.0
+const FLASHLIGHT_HEIGHT_OFFSET: float = -0.5 * GameConstants.TILE_SIZE
 
 ## 遷移中などに入力を止める
 var input_enabled: bool = true

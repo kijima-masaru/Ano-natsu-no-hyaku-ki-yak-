@@ -77,6 +77,7 @@ func find_exit(to_id):
 | `EvidenceRegistry` | 証拠と隠蔽（`data/evidence.json`）、8/30 の提示画面 |
 | `AudioManager` | BGM・環境音・SE と直近の音源（配線は `AudioMixer`、合成音は `SoundSynth`） |
 | `Lighting` | 時間帯の色調・タイル光源・月光・懐中電灯 |
+| `ScreenFx` | 画面効果（にじみ・上下端のぼかし・周辺減光のシェーダ、舞う葉・埃・蛍の粒子）。設定 `screen_fx` で切れる。判定には関わらない |
 | `AttachedEntity` | ナツ（憑いた怪異）。労わり・幸運・気配 |
 | `AnomalySystem` | 怪異（`data/anomalies.json`） |
 | `SteamBridge` | GodotSteam への空実装インターフェース（実績・クラウドセーブのフック） |
@@ -99,6 +100,7 @@ func find_exit(to_id):
 - 発光・加算合成に使えるのは `Palette.LIGHT_SOURCES`（骨白・街灯の黄・自販機の赤・蛍光灯の青白）だけ。
 - 光源は `PointLight2D` で表現し、色は `LightCatalog`（`scripts/tools/light_catalog.gd`）に種別名ごとに登録する。全体色調は `Lighting.tint_for()` がパレット色と `Color.WHITE` の補間で作る。フィールドや UI で `CanvasModulate` / `Light2D` を個別に置かない。
 - 見え方は `scenes/debug/palette_preview.tscn` で確認する。パレットを変更する場合は `data/fields.json` の `meta.palette` も同時に更新する。
+- 例外は描き込んだ PNG 素材（タイル・アクター・タイトル背景・光源テクスチャ）。これらは `tools/` の Python が自由な色数で描く。GDScript 側の色（UI・ライト・色調）は引き続き `Palette` から取る。
 
 ## 7. ピクセル・座標
 
@@ -134,5 +136,5 @@ func find_exit(to_id):
 4. `scripts/tools/` からゲームロジックへの依存
 5. 兄弟ノードの直接参照
 6. 型注釈の省略
-7. 画像ファイル（PNG / SVG / base64）の生成やコミット（手描き素材が用意されるまで）
+7. 画像ファイル（PNG / SVG / base64）のゲーム内での実行時生成（`tools/` の Python が描いた PNG を `resources/` に置くのは可。PNG 素材は `Palette` の 16 色に縛られない）
 8. GDScript への日本語テキスト直書き、`MessageResolver` を通さないテキスト取得

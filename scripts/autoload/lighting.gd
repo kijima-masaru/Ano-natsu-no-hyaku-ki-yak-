@@ -22,16 +22,18 @@ const BRIGHTNESS_LIFT_MAX: float = 0.5
 const BRIGHTNESS_DEFAULT: float = 0.5
 ## タイル光源：真昼でも僅かに残す
 const LIGHT_ENERGY_DAY_FLOOR: float = 0.15
-const LIGHT_TEXTURE_PX: int = 64
+const LIGHT_TEXTURE_PX: int = 128
 ## 月光（夜のみ）
 const MOON_ENERGY_MAX: float = 0.18
 ## 懐中電灯
 const FLASHLIGHT_RANGE_TILES: float = 5.0
 const FLASHLIGHT_HALF_ANGLE_DEG: float = 26.0
 const FLASHLIGHT_ENERGY: float = 1.0
-const FLASHLIGHT_TEXTURE_PX: int = 176
+const FLASHLIGHT_TEXTURE_PX: int = 352
 ## この明るさ以上なら「照らされている」（Stalker の視認距離が伸びる）
 const LIT_THRESHOLD: float = 0.35
+## 光源の影（TileSet の遮蔽ポリゴン：壁・建物・崖・木の幹）。影は真っ暗にせず、周囲の暗さに沈める程度
+const SHADOW_ALPHA: float = 0.55
 
 var darkness: float = 0.0
 var flashlight_on: bool = false
@@ -116,7 +118,7 @@ func sync_tile_light(parent: Node2D, tile: Vector2i, type_name: String) -> void:
 		existing = PointLight2D.new()
 		existing.name = name
 		existing.position = GameConstants.tile_to_world(tile)
-		existing.shadow_enabled = false
+		_setup_shadow(existing)
 		existing.blend_mode = Light2D.BLEND_MODE_ADD
 		parent.add_child(existing)
 		_lights.append(existing)
@@ -125,6 +127,15 @@ func sync_tile_light(parent: Node2D, tile: Vector2i, type_name: String) -> void:
 	existing.color = Palette.get_color(int(spec["color"]))
 	existing.set_meta("base_energy", float(spec["energy"]))
 	_apply_energy(existing)
+
+
+## 光源に影を付ける。遮蔽は driver_tileset_export が TileSet に書いた遮蔽ポリゴン（壁・建物・崖・木の幹）。
+## 判定（light_level_at）は影を見ないので、見た目だけの効果
+func _setup_shadow(light: PointLight2D) -> void:
+	light.shadow_enabled = true
+	light.shadow_filter = Light2D.SHADOW_FILTER_PCF5
+	light.shadow_filter_smooth = 2.0
+	light.shadow_color = Palette.with_alpha(Palette.SUMI, SHADOW_ALPHA)
 
 
 func _apply_energy(light: PointLight2D) -> void:
@@ -168,7 +179,7 @@ func attach_flashlight(owner: Node2D) -> PointLight2D:
 	_flashlight.texture_scale = FLASHLIGHT_RANGE_TILES * GameConstants.TILE_SIZE * 2.0 / float(FLASHLIGHT_TEXTURE_PX)
 	_flashlight.color = Palette.get_color(Palette.BONE_WHITE)
 	_flashlight.energy = FLASHLIGHT_ENERGY
-	_flashlight.shadow_enabled = false
+	_setup_shadow(_flashlight)
 	_flashlight.blend_mode = Light2D.BLEND_MODE_ADD
 	_flashlight.visible = flashlight_on
 	owner.add_child(_flashlight)

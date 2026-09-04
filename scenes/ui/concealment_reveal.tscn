@@ -19,38 +19,38 @@ mouse_filter = 2
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 16.0
-offset_right = 360.0
-offset_bottom = 30.0
+offset_left = 40.0
+offset_top = 27.0
+offset_right = 600.0
+offset_bottom = 50.0
 
 [node name="Shown" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 56.0
-offset_right = 360.0
-offset_bottom = 100.0
+offset_left = 40.0
+offset_top = 93.0
+offset_right = 600.0
+offset_bottom = 167.0
 
 [node name="Action" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 116.0
-offset_right = 360.0
-offset_bottom = 176.0
+offset_left = 40.0
+offset_top = 193.0
+offset_right = 600.0
+offset_bottom = 293.0
 
 [node name="Counter" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 192.0
-offset_right = 120.0
-offset_bottom = 206.0
+offset_left = 40.0
+offset_top = 320.0
+offset_right = 200.0
+offset_bottom = 343.0
 
 [node name="Hint" type="Label" parent="."]
 layout_mode = 0
-offset_left = 300.0
-offset_top = 192.0
-offset_right = 360.0
-offset_bottom = 206.0
+offset_left = 500.0
+offset_top = 320.0
+offset_right = 600.0
+offset_bottom = 343.0
 
 [node name="Veil" type="ColorRect" parent="."]
 layout_mode = 1

@@ -9,21 +9,24 @@
 
 | 項目 | 指定 |
 |---|---|
-| 解像度 | 基準 384×216、タイル 16×16、アクター 16×24。整数倍拡大のみ（フィルタ無し） |
-| 色 | `docs/CONVENTIONS.md` §6 のパレット（`scripts/autoload/palette.gd`）。夜は `Lighting` が全体を青く落とすので、**素材側で夜差分は作らない**。光源色は 4 色（街灯・蛍光灯・自販機の赤・月）のみ |
+| 解像度 | 基準 640×360（1080p で 3 倍）、タイル 32×32、アクター 32×48。整数倍拡大のみ（フィルタ無し） |
+| 縮尺 | **1 マス（32 px）≈ 1.7 m ＝ 人の身長**。人物は 32×48 の枠の下 32 px に収める（追跡者だけ 36 px）。物の大きさは現実の比率に合わせる：木 3〜4 マス高（幅 3）、街灯 3、電柱 5、塔 5〜6、鳥居・山門 3（幅 3）、駐車車両 1×2、自販機・電話ボックス・扉・塀は 1 マス。建物は地図のブロックの下端から F 行（住宅 3、団地 3、校舎 5 など。`paint32.FACADE`）を正面として窓を並べ、その上を屋根にする |
+| 色 | PNG 素材は色数自由（`tools/tiles/px32.py` の色域を基準にする）。UI・ライトは `docs/CONVENTIONS.md` §6 のパレット（`scripts/autoload/palette.gd`）。夜は `Lighting` が全体を青く落とすので、**素材側で夜差分は作らない**。光源色は 4 色（街灯・蛍光灯・自販機の赤・月）のみ |
 | 表記 | 実在の地名・人名・団体名・宗教施設名を看板・掲示物に入れない。文字はダミー（架空の町名「磐戸」は可） |
 | 描かないもの | 流血・遺体・自死の方法や手段を連想させる器具・場所・状態（`docs/CONTENT_NOTICE.md`） |
-| 納品 | PNG（アルファ付き）。タイルはアトラス 1 枚（`resources/tilesets/common.tres`、`docs/TILESET_PIPELINE.md`）、アクターは種別ごとにシート 1 枚、音は OGG Vorbis 44.1kHz |
+| 納品 | PNG（アルファ付き）。タイルは **32×32**（アトラス 1 枚、`resources/tilesets/common.tres`、`docs/TILESET_PIPELINE.md`）、アクターは **32×48**、画面は **640×360**（1080p で整数 3 倍）、音は OGG Vorbis 44.1kHz |
 
 ## 1. 差し替えの境界（どこを差し替えれば切り替わるか）
 
 | 種別 | 生成側（暫定） | 本番の置き場所 | 切替方法 |
 |---|---|---|---|
-| タイル 16×16 | `scripts/tools/tile_painters_*.gd`（フォールバック） | `resources/tilesets/common_atlas.png`（**配置済み** 164 種。`tools/tiles/paint_atlas.py` で描く）＋ `common.tres` | `iwato/tileset/source="resource"`（**切替済み**） |
-| アクター 16×24 | `scripts/tools/actor_sprite_generator.gd` | `SpriteFrames` リソース | `ActorSpriteGenerator.get_texture` の返却先を差し替え |
+| タイル 32×32 | `scripts/tools/tile_painters_*.gd`（フォールバック） | `resources/tilesets/common_atlas.png`（**配置済み** 164 種すべて 32 px 直描き。オートタイル 28 種・背の高い部品 22 種。`tools/tiles/paint32.py` で描く）＋ `common.tres` ＋ `atlas_layout.json` | `iwato/tileset/source="resource"`（**切替済み**） |
+| アクター 32×48 | `scripts/tools/actor_sprite_generator.gd`（フォールバック） | `resources/actors/<kind>.png`（**配置済み** 5 種。`tools/actors/paint_actors.py` で描く） | `ActorSpriteGenerator` が PNG を優先（寸法が違えば生成に戻る） |
 | 音 | `scripts/tools/sound_synth.gd`（OGG が無い ID だけ） | `assets/audio/<kind>/<id>.ogg`（**配置済み** 215 件。`tools/audio/` で合成） | `audio.json` の id と同名の OGG があれば `AudioManager` が優先。ループは `audio.json` の `loop` を正とする |
 | フォント | 代替フォント | `resources/fonts/PixelMplus12-Regular.ttf`（**配置済み**。Bold も） | `UiFont` autoload が読み込み時にアンチエイリアス無しを強制し、全 Control の既定フォントにする |
 | 光源テクスチャ | `scripts/tools/light_texture_generator.gd`（フォールバック） | `resources/lights/radial.png` / `cone.png`（**配置済み**） | `LightTextureGenerator` が PNG を優先（大きさが違えば生成に戻る） |
+| 粒子テクスチャ | なし | `resources/fx/leaf.png` / `leaf_dry.png` / `dust.png` / `firefly.png`（**配置済み**。`tools/fx/paint_particles.py` で描く） | `ScreenFx` が読む |
+| 画面効果シェーダ | なし | `resources/shaders/post_fx.gdshader`（にじみ・上下端のぼかし・周辺減光） | `ScreenFx` が最前面の矩形に付ける |
 
 ## 2. タイル（164 種、16 フィールド。**配置済み**）
 
@@ -56,15 +59,17 @@
 
 旧校舎の 1 階は屋外と別の地図（`FieldFloors`）で、上表の「旧校舎 廊下床（板）」「旧校舎 窓（木枠）」「教室の机・椅子」「黒板」「非常灯」「蛍光灯」を使う。図工室の作品棚（C-17）は「教室の机・椅子」の流用。屋内専用に追加するなら：廊下の壁（腰板）、階段（上り口・立入禁止のロープ）、図工室の棚。屋内はこの 1 階だけで確定（F16 の裂け目の口は屋外扱い）。
 
-## 3. アクター（16×24、4 方向 × 2 フレーム）
+## 3. アクター（32×48、4 方向 × 2 フレーム。**配置済み**：`resources/actors/<kind>.png`、`tools/actors/paint_actors.py` で描く）
+
+シートは 64×192（列＝フレーム 0/1、行＝下・上・左・右）。`ActorSpriteGenerator` が PNG を優先し、無い・寸法が違う種別は 16×24 の生成に戻る。
 
 | 種別 | 用途 | 状態 | 備考 |
 |---|---|---|---|
-| `player` 篝悠 | 主人公。歩行・忍び足（速度差のみ、絵は共通） | 生成 | 懐中電灯は光源で表現するので絵に持たせない |
-| `heroine` 澪 | 同行者。段階で距離と視線が変わるが絵は共通 | 生成 | 8/1 の店先の立ち姿（`mio_npc`）も同じ絵 |
-| `stalker` 追跡者 | 高架下・谷戸・校舎 1 階・河川敷 | 生成 | 顔を描かない。輪郭が暗所に溶ける配色 |
-| `toki` トキ | F05 駄菓子屋の老婆。立ち姿のみ（1 フレーム可） | 生成 | |
-| `shige` シゲ | F14 朝和の老婆。立ち姿のみ（4 方向、1 フレーム可）。8/14 の激昂と 8/29 の「入りな」で澪と並ぶ | **未生成（`toki` を流用中）** | トキ（駄菓子屋）と見分けがつく色（濃い野良着・手拭い）。`f14_asawa.gd` の `set_npc_present` の種別を `shige` に差し替える |
+| `player` 篝悠 | 主人公。歩行・忍び足（速度差のみ、絵は共通） | **配置済み** | 暗いコート、肩掛けの鞄。懐中電灯は光源で表現するので絵に持たせない |
+| `heroine` 澪 | 同行者。段階で距離と視線が変わるが絵は共通 | **配置済み** | 枯れ黄土のカーディガン、赤茶の長い髪、ノート。8/1 の店先の立ち姿（`mio_npc`）も同じ絵 |
+| `stalker` 追跡者 | 高架下・谷戸・校舎 1 階・河川敷 | **配置済み** | 顔を描かない。輪郭が本体より僅かに明るいだけで暗所に溶ける。血や傷は描かない |
+| `toki` トキ | F05 駄菓子屋の老婆。立ち姿のみ | **配置済み** | 白髪をまとめ、藍の着物に白い前掛け |
+| `shige` シゲ | F14 朝和の老婆。立ち姿のみ。8/14 の激昂と 8/29 の「入りな」で澪と並ぶ | **配置済み** | 濃い野良着（絣）ともんぺ、手拭いを被る。トキと色で見分ける。`f14_asawa.gd` の `set_npc_present` を `shige` に切替済み |
 | 蓮の母／悠の母 | 会話は文字だけで、絵は出さない設計 | 不要 | |
 | ナツ | 声と気配のみ。**絵は作らない** | 不要 | 怪異の正体を見せない方針 |
 
@@ -104,7 +109,7 @@
 ## 6f. 画面（UI 素材）
 | 用途 | 内容 | 状態 |
 |---|---|---|
-| タイトル背景 | 384×216 1 枚。国道と高架、夜。文字は入れない | **配置済み**（`tools/ui/paint_title_bg.py` で描く。`Title._setup_backdrop` が読む） |
+| タイトル背景 | 640×360 1 枚。国道と高架、夜。文字は入れない | **配置済み**（`tools/ui/paint_title_bg.py` で描く。`Title._setup_backdrop` が読む） |
 | 面の印（周回） | 題字の下の「面」1 文字を絵にするなら 12×12 1 枚 | 任意 |
 | ストア用スクリーンショット・トレーラー | 素材差し替え後に撮る（`docs/STORE_PAGE.md`） | 後工程 |
 

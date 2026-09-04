@@ -1,10 +1,11 @@
-"""タイトル背景（resources/ui/title_bg.png、384×216）をパレット 16 色で描く。
+"""タイトル背景（resources/ui/title_bg.png、640×360）を自由な色数で描く。
 
 題材：国道 281 号と高架、夜（docs/ASSETS_NEEDED.md §6f）。文字は入れない。
-構図：画面の右下へ抜ける国道、上を横切る高速の高架、左に自販機の灯り、街灯が奥へ並ぶ。
-左上〜中央左（題字とメニューが載る。x<250）には橋脚も自販機も置かず暗く保つ。決定論的。
+構図：画面の右下へ抜ける国道、上を横切る高速の高架、右手前に自販機の灯り、街灯が奥へ並ぶ。
+左上〜中央左（題字とメニューが載る。x<420）には橋脚も自販機も置かず暗く保つ。
+色は tools/tiles/px32.py の色域（夜の町）。光のにじみは実行時の ScreenFx が足すので、絵の中では控えめ。決定論的。
 
-使い方: python3 tools/ui/paint_title_bg.py [--out resources/ui/title_bg.png] [--preview build/title_x3.png]
+使い方: python3 tools/ui/paint_title_bg.py [--out resources/ui/title_bg.png] [--preview build/title_x2.png]
 """
 import argparse
 import math
@@ -15,253 +16,246 @@ from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
-W, H = 384, 216
+sys.path.insert(0, os.path.join(ROOT, "tools", "tiles"))
+from px32 import C, Canvas, mix, rgb, shade  # noqa: E402
 
-PALETTE = [
-    (0x0B, 0x0D, 0x14), (0x14, 0x1A, 0x2B), (0x1F, 0x2A, 0x44), (0x2F, 0x3F, 0x5F), (0x4A, 0x5A, 0x78), (0x85, 0x90, 0xA3),
-    (0x1B, 0x2A, 0x24), (0x37, 0x53, 0x3F), (0x6B, 0x8A, 0x5E), (0x3A, 0x2A, 0x22), (0x7A, 0x4A, 0x2E), (0xB0, 0x8A, 0x5C),
-    (0xD9, 0xD2, 0xC0), (0xF2, 0xE9, 0xA8), (0xD8, 0x4A, 0x3A), (0x5F, 0xD0, 0xC8),
-]
-SUMI, NIGHT, DEEP, DUSK, FOG, CONC, MOSS, GREEN, GREEN_L, RUST_D, RUST, OCHRE, BONE, GLOW, RED, FLUO = range(16)
+W, H = 640, 360
+SUMI, NIGHT, DEEP, DUSK, FOG, CONC = C["sumi"], C["night"], C["deep"], C["dusk"], C["fog"], C["conc"]
+BONE, GLOW, RED, FLUO, OCHRE = C["bone"], C["glow"], C["red"], C["fluo"], C["ochre"]
+SKY_TOP = rgb("#0a0c16")
+SKY_LOW = rgb("#1b2540")
+SODIUM = rgb("#e9b86a")
 
 
-class Canvas:
-    def __init__(self):
-        self.p = [[NIGHT] * W for _ in range(H)]
-
-    def rand(self, x, y, k=0):
-        h = (x * 374761393 + y * 668265263 + (k + 1) * 1442695041) & 0x7FFFFFFF
-        h = ((h ^ (h >> 13)) * 1274126177) & 0x7FFFFFFF
-        return ((h ^ (h >> 16)) & 0xFFFF) / 65535.0
-
-    def px(self, x, y, c):
-        if 0 <= x < W and 0 <= y < H:
-            self.p[int(y)][int(x)] = c
-
-    def get(self, x, y):
-        if 0 <= x < W and 0 <= y < H:
-            return self.p[int(y)][int(x)]
-        return None
-
-    def rect(self, x, y, w, h, c):
-        for yy in range(max(0, y), min(H, y + h)):
-            for xx in range(max(0, x), min(W, x + w)):
-                self.p[yy][xx] = c
-
-    def hline(self, y, x0, x1, c):
-        for x in range(min(x0, x1), max(x0, x1) + 1):
-            self.px(x, y, c)
-
-    def vline(self, x, y0, y1, c):
-        for y in range(min(y0, y1), max(y0, y1) + 1):
-            self.px(x, y, c)
-
-    def line(self, x0, y0, x1, y1, c):
-        n = max(abs(x1 - x0), abs(y1 - y0), 1)
-        for i in range(n + 1):
-            self.px(round(x0 + (x1 - x0) * i / n), round(y0 + (y1 - y0) * i / n), c)
-
-    def poly(self, pts, c):
-        """凸多角形の塗り（走査線）"""
-        ys = [p[1] for p in pts]
-        for y in range(max(0, int(min(ys))), min(H, int(max(ys)) + 1)):
-            xs = []
-            n = len(pts)
-            for i in range(n):
-                (x0, y0), (x1, y1) = pts[i], pts[(i + 1) % n]
-                if (y0 <= y < y1) or (y1 <= y < y0):
-                    xs.append(x0 + (y - y0) * (x1 - x0) / (y1 - y0))
-            xs.sort()
-            for i in range(0, len(xs) - 1, 2):
-                self.hline(y, int(math.ceil(xs[i])), int(math.floor(xs[i + 1])), c)
-
-    def disc(self, cx, cy, r, c):
-        for y in range(int(cy - r) - 1, int(cy + r) + 2):
-            for x in range(int(cx - r) - 1, int(cx + r) + 2):
-                if (x - cx) ** 2 + (y - cy) ** 2 <= r * r:
-                    self.px(x, y, c)
-
-    def glow(self, cx, cy, r, colors=None, k=0):
-        """光のにじみ：周囲の画素を一段明るくする（中心ほど確率が高い）。芯だけ街灯の色。茶色の円にしない"""
-        lighter = {SUMI: NIGHT, NIGHT: DEEP, DEEP: DUSK, DUSK: FOG, FOG: CONC, MOSS: GREEN, GREEN: GREEN_L, RUST_D: RUST, RUST: OCHRE}
-        for y in range(int(cy - r) - 1, int(cy + r) + 2):
-            for x in range(int(cx - r) - 1, int(cx + r) + 2):
-                d = math.hypot(x - cx, (y - cy) * 1.5) / r
-                if d >= 1.0:
-                    continue
-                v = (1.0 - d) ** 1.6
-                cur = self.get(x, y)
-                if cur is None:
-                    continue
-                if v > 0.72 and self.rand(x, y, k) < (v - 0.72) / 0.28 * 0.9:
-                    self.px(x, y, OCHRE if cur in (NIGHT, DEEP, DUSK, FOG, SUMI) else cur)
-                elif cur in lighter and self.rand(x, y, k + 1) < v * 0.75:
-                    self.px(x, y, lighter[cur])
-
-    def to_image(self):
-        img = Image.new("RGB", (W, H))
-        px = img.load()
-        for y in range(H):
-            for x in range(W):
-                px[x, y] = PALETTE[self.p[y][x]]
-        return img
+def glow(c: Canvas, cx, cy, r, col, strength=0.5, squash=1.5, k=0):
+    """光のにじみ。中心ほど強く色を混ぜる。少しだけ粒を散らして均一にしない"""
+    for y in range(int(cy - r) - 1, int(cy + r) + 2):
+        for x in range(int(cx - r) - 1, int(cx + r) + 2):
+            d = math.hypot(x - cx, (y - cy) * squash) / r
+            if d >= 1.0:
+                continue
+            v = (1.0 - d) ** 1.7 * strength
+            v *= 0.85 + 0.3 * c.rand(x, y, k)
+            c.blend(x, y, col, min(1.0, v))
 
 
 def paint() -> Canvas:
-    c = Canvas()
-    # ── 空：上が深く、地平線へ向けてわずかに明るく。星は少なく ──
-    c.rect(0, 0, W, H, NIGHT)
-    for y in range(0, 110):
+    c = Canvas(W, H)
+    c.fill(NIGHT)
+    # ── 空 ──
+    c.gradient_v(0, 0, W, 190, SKY_TOP, SKY_LOW)
+    for y in range(0, 190):
         for x in range(W):
-            if y > 70 and c.rand(x, y, 1) < (y - 70) / 60.0 * 0.5:
-                c.px(x, y, DEEP)
-    for i in range(70):
+            if c.rand(x, y, 1) < 0.02:
+                c.blend(x, y, DEEP, 0.4)
+    for i in range(110):
         x = int(c.rand(i, 3, 2) * W)
-        y = int(c.rand(i, 5, 2) * 60)
-        if x > 170 or y < 20:
-            c.px(x, y, FOG if c.rand(i, 7, 2) < 0.7 else CONC)
-    # 月：右上、雲に半分隠れる
-    c.disc(318, 30, 9, BONE)
-    c.disc(315, 29, 7, BONE)
-    c.disc(320, 27, 2, CONC)
-    for y in range(18, 44):
-        for x in range(300, 340):
-            if (x - 318) ** 2 + (y - 30) ** 2 <= 81 and c.rand(x, y, 9) < 0.15:
-                c.px(x, y, CONC)
-    # 雲（低い、細長い）
-    for (cx, cy, w, h) in [(330, 40, 90, 6), (250, 52, 60, 4), (120, 60, 70, 4)]:
-        for y in range(cy - h, cy + h):
-            for x in range(cx - w, cx + w):
+        y = int(c.rand(i, 5, 2) * 95)
+        if x > 300 or y < 30:
+            c.px(x, y, mix(FOG, BONE, c.rand(i, 7, 2) * 0.6))
+            if c.rand(i, 8, 2) < 0.25:
+                c.px(x + 1, y, FOG)
+    # 月：右上、薄い雲がかかる
+    mx, my = 530, 50
+    glow(c, mx, my, 60, mix(FOG, BONE, 0.3), 0.35, 1.0, 9)
+    c.disc(mx, my, 15, mix(BONE, GLOW, 0.3))
+    c.disc(mx - 2, my - 2, 12, mix(BONE, GLOW, 0.15))
+    for y in range(my - 16, my + 17):
+        for x in range(mx - 16, mx + 17):
+            if (x - mx) ** 2 + (y - my) ** 2 <= 225 and c.rand(x, y, 9) < 0.12:
+                c.blend(x, y, CONC, 0.5)
+    # 雲（細長い、月の前を横切る）
+    for (cx, cy, w, h, k) in [(540, 62, 150, 9, 4), (420, 86, 110, 6, 5), (200, 100, 120, 6, 6), (60, 70, 90, 5, 7)]:
+        for y in range(cy - h, cy + h + 1):
+            for x in range(cx - w, cx + w + 1):
                 d = ((x - cx) / w) ** 2 + ((y - cy) / h) ** 2
-                if d <= 1.0 and c.rand(x, y, 4) < 0.85 - d * 0.6:
-                    c.px(x, y, DEEP if y > cy else DUSK)
+                n = c.noise2(x, y, 14.0, k)
+                if d <= 1.0 and n > 0.35 + d * 0.4:
+                    c.blend(x, y, DUSK if y > cy else mix(DUSK, FOG, 0.4), 0.7)
 
     # ── 遠景：山と町の稜線（左が高い） ──
     for x in range(W):
-        ridge = 96 + int(10 * math.sin(x / 41.0) + 6 * math.sin(x / 17.0 + 1.0) + x * 0.06)
-        for y in range(ridge, 125):
-            c.px(x, y, NIGHT if y > ridge + 2 else DEEP)
-        if c.rand(x, 0, 5) < 0.1 and x > 40:
-            c.px(x, ridge + 6 + int(c.rand(x, 1, 5) * 14), GLOW if c.rand(x, 2, 5) < 0.6 else FLUO)  # 町の窓明かり
-    # 防音壁（遠い高速の壁）：地平線に沿う灰藍の帯
-    c.rect(0, 118, W, 6, DUSK)
-    c.hline(118, 0, W - 1, FOG)
-    for x in range(0, W, 24):
-        c.vline(x, 118, 123, DEEP)
+        ridge = 160 + int(16 * math.sin(x / 68.0) + 9 * math.sin(x / 29.0 + 1.0) + x * 0.06)
+        for y in range(ridge, 208):
+            t = (y - ridge) / 48.0
+            c.px(x, y, mix(DEEP, NIGHT, min(1.0, 0.3 + t)))
+        c.px(x, ridge, mix(DEEP, DUSK, 0.5))
+        # 町の窓明かり（右寄りに多い）
+        if x > 120 and c.rand(x, 0, 5) < 0.07 * (0.4 + x / W):
+            wy = ridge + 8 + int(c.rand(x, 1, 5) * 26)
+            col = GLOW if c.rand(x, 2, 5) < 0.65 else FLUO
+            c.px(x, wy, col)
+            c.px(x + 1, wy, mix(col, DEEP, 0.5))
+    # 遠い防音壁：地平線に沿う灰藍の帯
+    c.gradient_v(0, 196, W, 10, DUSK, DEEP)
+    c.hline(196, 0, W - 1, FOG)
+    for x in range(0, W, 40):
+        c.vline(x, 196, 205, DEEP)
 
-    # ── 国道：右下へ向かって消失点（x=250, y=124）へ収束する台形 ──
-    vx, vy = 250, 124
-    left_bottom, right_bottom = -40, 330
-    road = [(vx - 8, vy), (vx + 8, vy), (right_bottom, H), (left_bottom, H)]
-    c.poly(road, DUSK)
-    # アスファルトの質感
-    for y in range(vy, H):
+    # ── 地面：道路の外は暗い草地・法面 ──
+    for y in range(206, H):
         for x in range(W):
-            if c.get(x, y) == DUSK and c.rand(x, y, 6) < 0.06:
-                c.px(x, y, FOG if c.rand(x, y, 7) < 0.5 else DEEP)
-    # 中央線（破線）と外側線
+            n = c.noise2(x, y, 7.0, 40)
+            col = mix(C["grass_dd"], C["grass_d"], n * 0.5)
+            col = mix(col, NIGHT, 0.55)
+            if c.rand(x, y, 41) < 0.05:
+                col = shade(col, 0.12)
+            c.px(x, y, col)
+
+    # ── 国道：右下へ向かって消失点へ収束する台形 ──
+    vx, vy = 416, 206
+    left_bottom, right_bottom = -70, 550
+
     def road_x(t, y):
-        # t: 0=左端 1=右端 の位置を y で補間
         f = (y - vy) / (H - vy)
-        lx = (vx - 8) + (left_bottom - (vx - 8)) * f
-        rx = (vx + 8) + (right_bottom - (vx + 8)) * f
+        lx = (vx - 12) + (left_bottom - (vx - 12)) * f
+        rx = (vx + 12) + (right_bottom - (vx + 12)) * f
         return lx + (rx - lx) * t
-    for y in range(vy + 4, H):
+
+    c.poly([(vx - 12, vy), (vx + 12, vy), (right_bottom, H), (left_bottom, H)], DUSK)
+    for y in range(vy, H):
         f = (y - vy) / (H - vy)
-        if int(y / max(1.0, 3 + f * 9)) % 2 == 0:
-            xm = road_x(0.5, y)
-            c.hline(y, int(xm), int(xm + f * 3), BONE)
-        c.px(int(road_x(0.04, y)), y, CONC)
-        c.px(int(road_x(0.96, y)), y, CONC)
-    # 歩道（左）と縁石
+        for x in range(int(road_x(0.0, y)) - 1, int(road_x(1.0, y)) + 2):
+            if c.get(x, y) == DUSK:
+                n = c.noise2(x, y, 9.0, 6)
+                col = mix(C["asphalt_d"], C["asphalt_l"], n * 0.7)
+                col = mix(col, DEEP, 0.35 * (1 - f))     # 奥は暗い
+                if c.rand(x, y, 7) < 0.05:
+                    col = shade(col, 0.18)
+                c.px(x, y, col)
+    # 中央線（破線）と外側線
     for y in range(vy + 6, H):
+        f = (y - vy) / (H - vy)
+        period = 4 + f * 18
+        if int(y / period) % 2 == 0:
+            xm = road_x(0.5, y)
+            c.hline(y, int(xm), int(xm + 1 + f * 4), mix(BONE, DUSK, 0.25 + 0.4 * (1 - f)))
+        c.px(int(road_x(0.03, y)), y, mix(CONC, DUSK, 0.4))
+        c.px(int(road_x(0.97, y)), y, mix(CONC, DUSK, 0.4))
+    # 歩道（左）と縁石
+    for y in range(vy + 8, H):
         lx = int(road_x(0.0, y))
-        c.hline(y, max(0, lx - 40), lx - 1, FOG if y % 3 else DUSK)
+        f = (y - vy) / (H - vy)
+        for x in range(max(0, lx - int(30 + f * 60)), lx):
+            n = c.noise2(x, y, 6.0, 8)
+            c.px(x, y, mix(mix(FOG, DUSK, 0.5), CONC, n * 0.4))
         c.px(lx - 1, y, CONC)
+        c.px(lx - 2, y, mix(CONC, FOG, 0.5))
+        if int(y / (3 + f * 10)) % 2 == 0:
+            c.px(lx - int(6 + f * 24), y, mix(FOG, CONC, 0.3))   # 歩道の目地
     # ガードレール（右）
-    for y in range(vy + 8, H, 1):
+    for y in range(vy + 10, H):
         rx = int(road_x(1.0, y))
         f = (y - vy) / (H - vy)
-        c.px(rx + 2, y - int(2 + f * 6), CONC)
-        c.px(rx + 3, y - int(2 + f * 6), FOG)
-        if y % max(2, int(4 + f * 10)) == 0:
-            c.vline(rx + 2, y - int(2 + f * 6), y, FOG)
+        top = y - int(3 + f * 10)
+        c.px(rx + 3, top, CONC); c.px(rx + 4, top, mix(CONC, BONE, 0.3)); c.px(rx + 3, top + 1, FOG)
+        if y % max(3, int(6 + f * 16)) == 0:
+            c.vline(rx + 3, top, y, FOG)
 
-    # ── 高架：画面上部を横切る。橋脚が道路の脇に ──
-    c.rect(0, 62, W, 3, FOG)     # 床版の上縁
-    c.rect(0, 65, W, 14, DUSK)   # 床版
-    c.rect(0, 79, W, 3, DEEP)    # 影
-    c.hline(62, 0, W - 1, CONC)
-    for x in range(0, W, 48):
-        c.rect(x + 20, 65, 2, 14, DEEP)  # 桁の継ぎ目
-    for x in range(0, W, 6):     # 防音壁のパネル
-        c.rect(x, 50, 5, 12, DUSK)
-        c.vline(x + 5, 50, 61, DEEP)
-    c.hline(50, 0, W - 1, FOG)
-    # 橋脚
-    for (px0, w) in [(262, 20), (346, 22)]:
-        c.rect(px0, 82, w, 60, FOG)
-        c.vline(px0, 82, 141, CONC)
-        c.vline(px0 + w - 1, 82, 141, DEEP)
-        for y in range(82, 142):
-            if c.rand(px0, y, 8) < 0.5:
-                c.px(px0 + 3 + int(c.rand(y, px0, 8) * (w - 6)), y, DUSK)
-        c.rect(px0 - 2, 138, w + 4, 4, FOG)
-    # 高架の照明（オレンジのナトリウム灯）を等間隔に
-    for x in range(30, W, 96):
-        c.rect(x, 44, 2, 6, FOG)
-        c.rect(x - 2, 42, 6, 3, GLOW)
-        c.glow(x + 1, 46, 11, k=3)
+    # ── 高架：画面上部を横切る。橋脚は右側の道路脇 ──
+    c.gradient_v(0, 82, W, 22, mix(FOG, CONC, 0.3), DUSK)   # 床版
+    c.hline(82, 0, W - 1, mix(CONC, BONE, 0.2))
+    c.rect(0, 104, W, 5, DEEP)                                # 影
+    for x in range(0, W, 80):
+        c.rect(x + 32, 84, 3, 22, DEEP)                       # 桁の継ぎ目
+    for x in range(0, W, 10):                                 # 防音壁のパネル
+        c.rect(x, 62, 9, 20, mix(DUSK, FOG, 0.35))
+        c.vline(x + 9, 62, 81, DEEP)
+        c.hline(62, x, x + 8, FOG)
+    c.hline(61, 0, W - 1, mix(FOG, CONC, 0.5))
+    for (px0, w) in [(436, 34), (576, 36)]:                   # 橋脚
+        c.gradient_h(px0, 108, w, 100, mix(FOG, CONC, 0.4), DEEP)
+        c.vline(px0, 108, 207, CONC)
+        c.vline(px0 + w - 1, 108, 207, NIGHT)
+        for y in range(108, 208):
+            if c.rand(px0, y, 8) < 0.6:
+                c.px(px0 + 4 + int(c.rand(y, px0, 8) * (w - 8)), y, DUSK)
+        c.rect(px0 - 3, 200, w + 6, 8, mix(FOG, CONC, 0.3))
+        c.hline(200, px0 - 3, px0 + w + 2, CONC)
+    # 高架の照明（ナトリウム灯）
+    for x in range(50, W, 160):
+        c.rect(x, 52, 3, 10, FOG)
+        c.rect(x - 4, 49, 11, 4, SODIUM)
+        c.hline(48, x - 3, x + 6, mix(SODIUM, BONE, 0.4))
+        glow(c, x + 1, 56, 26, SODIUM, 0.45, 1.3, 3)
 
     # ── 街灯：手前から奥へ、道路の左側 ──
-    for i, y in enumerate([206, 182, 162, 148, 138]):
+    for i, y in enumerate([344, 302, 270, 246, 230]):
         f = (y - vy) / (H - vy)
-        x = int(road_x(0.0, y)) - 6
-        h = int(12 + f * 42)
+        x = int(road_x(0.0, y)) - 10
+        h = int(20 + f * 72)
         top = y - h
-        c.glow(x, top + 2, int(8 + f * 22), k=10 + i)
-        c.vline(x, top, y, FOG)
+        glow(c, x + 2, top + 4, int(14 + f * 40), GLOW, 0.42, 1.4, 10 + i)
+        c.vline(x, top, y, mix(CONC, FOG, 0.3))
         c.vline(x + 1, top, y, DUSK)
-        c.rect(x - 2, top - 1, 6, 2, GLOW)
-        c.px(x - 3, top, OCHRE)
-        c.px(x + 4, top, OCHRE)
-        c.rect(x - 1, y, 4, 2, SUMI)
+        c.rect(x - 3, top - 2, 9, 3, GLOW)
+        c.hline(top - 3, x - 2, x + 4, mix(GLOW, BONE, 0.5))
+        c.px(x - 4, top - 1, OCHRE); c.px(x + 6, top - 1, OCHRE)
+        c.rect(x - 2, y, 6, 3, SUMI)
+        # 街灯の光が歩道に落ちる
+        for yy in range(y - 4, y + 10):
+            for xx in range(x - 16, x + 18):
+                d = math.hypot((xx - x) / 1.8, yy - y - 2) / 12.0
+                if d < 1.0 and 0 <= yy < H:
+                    c.blend(xx, yy, OCHRE, (1 - d) * 0.35)
 
-    # ── 自販機：左下、歩道の上。唯一の「安全な明かり」 ──
-    vxm, vym = 296, 128
-    c.glow(vxm + 12, vym + 22, 34, k=20)
-    c.rect(vxm, vym, 24, 44, FOG)
-    c.vline(vxm, vym, vym + 43, CONC)
-    c.vline(vxm + 23, vym, vym + 43, DEEP)
-    c.rect(vxm + 3, vym + 3, 13, 18, GLOW)
-    c.rect(vxm + 4, vym + 4, 11, 16, BONE)
-    for row in range(3):
+    # ── 自販機：右手前、歩道の上。唯一の「安全な明かり」 ──
+    vxm, vym = 492, 214
+    glow(c, vxm + 20, vym + 40, 64, mix(GLOW, BONE, 0.3), 0.4, 1.4, 20)
+    c.gradient_h(vxm, vym, 40, 74, mix(CONC, BONE, 0.2), FOG)
+    c.vline(vxm, vym, vym + 73, mix(CONC, BONE, 0.3))
+    c.vline(vxm + 39, vym, vym + 73, DEEP)
+    c.rect(vxm + 4, vym + 5, 22, 30, GLOW)
+    c.rect(vxm + 6, vym + 7, 18, 26, mix(BONE, GLOW, 0.3))
+    for row in range(4):
         for col in range(4):
-            c.rect(vxm + 5 + col * 3, vym + 5 + row * 5, 2, 3, [RED, FLUO, OCHRE, RED][(row + col) % 4])
-    c.rect(vxm + 17, vym + 3, 4, 34, RED)
-    c.vline(vxm + 17, vym + 3, vym + 36, GLOW)
-    c.rect(vxm + 3, vym + 24, 13, 10, DUSK)
-    c.rect(vxm + 4, vym + 26, 11, 6, SUMI)
-    c.rect(vxm + 3, vym + 38, 18, 4, SUMI)
-    c.rect(vxm - 2, vym + 44, 28, 2, SUMI)
+            colr = [RED, FLUO, OCHRE, C["water_ll"], C["leaf_l"], RED][(row * 4 + col) % 6]
+            c.rect(vxm + 7 + col * 4, vym + 8 + row * 6, 3, 4, colr)
+            c.px(vxm + 7 + col * 4, vym + 8 + row * 6, shade(colr, 0.4))
+            c.hline(vym + 12 + row * 6, vxm + 7 + col * 4, vxm + 9 + col * 4, mix(BONE, DUSK, 0.5))
+    c.rect(vxm + 28, vym + 5, 8, 54, RED)
+    c.gradient_h(vxm + 28, vym + 5, 8, 54, shade(RED, 0.25), shade(RED, -0.3))
+    for y in range(vym + 10, vym + 30, 6):
+        c.rect(vxm + 31, y, 3, 3, BONE)
+    c.rect(vxm + 30, vym + 40, 5, 7, NIGHT); c.px(vxm + 32, vym + 42, FLUO)
+    c.rect(vxm + 4, vym + 38, 22, 3, DUSK)
+    c.rect(vxm + 4, vym + 41, 22, 12, SUMI)
+    c.hline(vym + 42, vxm + 5, vxm + 24, NIGHT)
+    c.rect(vxm + 3, vym + 62, 34, 6, DUSK); c.hline(vym + 68, vxm + 3, vxm + 36, SUMI)
+    c.rect(vxm - 3, vym + 74, 46, 3, SUMI)
     # 自販機の光が歩道と道路に落ちる
     for y in range(vym + 30, H):
-        for x in range(vxm - 20, vxm + 60):
-            d = math.hypot((x - vxm - 12) / 1.6, y - vym - 40) / 34.0
-            if d < 1.0 and c.get(x, y) in (FOG, DUSK, DEEP) and c.rand(x, y, 21) < (1.0 - d) * 0.9:
-                c.px(x, y, OCHRE if d < 0.45 else (FOG if c.get(x, y) == DUSK else CONC))
+        for x in range(vxm - 40, vxm + 110):
+            d = math.hypot((x - vxm - 20) / 1.7, y - vym - 70) / 60.0
+            fade_in = min(1.0, max(0.0, (y - vym - 30) / 40.0))      # 自販機の足元から徐々に
+            if d < 1.0 and 0 <= x < W and not (vxm <= x < vxm + 40 and y < vym + 74):
+                c.blend(x, y, mix(GLOW, OCHRE, 0.4), (1 - d) ** 1.4 * 0.45 * fade_in)
 
-    # ── 手前の人影は置かない。代わりに道路に長い影を一本 ──
-    for y in range(170, H):
-        x0 = int(road_x(0.25, y))
-        c.hline(y, x0, x0 + int(2 + (y - 170) * 0.15), DEEP)
+    # ── 手前の人影は置かない。道路に長い影を一本 ──
+    for y in range(282, H):
+        x0 = int(road_x(0.28, y))
+        for x in range(x0, x0 + int(3 + (y - 282) * 0.2)):
+            c.blend(x, y, DEEP, 0.55)
+
+    # ── 霧：地平線近くを薄く白ませる ──
+    for y in range(150, 240):
+        for x in range(W):
+            n = c.noise2(x, y, 40.0, 31)
+            t = (1 - abs(y - 200) / 50.0) * 0.28 * (0.5 + n)
+            if t > 0:
+                c.blend(x, y, FOG, t)
 
     # ── 左上をさらに落とす（題字の可読性） ──
-    for y in range(0, 125):
-        for x in range(0, 200):
-            f = max(0.0, 1.0 - (x / 200.0)) * max(0.0, 1.0 - y / 125.0)
-            if c.get(x, y) in (DEEP, DUSK) and c.rand(x, y, 30) < f * 0.9:
-                c.px(x, y, NIGHT if c.get(x, y) == DEEP else DEEP)
+    for y in range(0, 230):
+        for x in range(0, 420):
+            f = max(0.0, 1.0 - x / 420.0) * max(0.0, 1.0 - y / 230.0)
+            c.blend(x, y, SUMI, f * 0.7)
+    # 周辺減光は実行時（ScreenFx）が足すので、ここでは軽く
+    for y in range(H):
+        for x in range(W):
+            v = ((x - W / 2) / (W / 2)) ** 2 + ((y - H / 2) / (H / 2)) ** 2
+            if v > 0.5:
+                c.blend(x, y, SUMI, (v - 0.5) * 0.35)
     return c
 
 
@@ -270,12 +264,12 @@ def main() -> int:
     ap.add_argument("--out", default=os.path.join(ROOT, "resources", "ui", "title_bg.png"))
     ap.add_argument("--preview", default="")
     a = ap.parse_args()
-    img = paint().to_image()
+    img = paint().to_image().convert("RGB")
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     img.save(a.out)
     print(a.out, img.size)
     if a.preview:
-        img.resize((W * 3, H * 3), Image.NEAREST).save(a.preview)
+        img.resize((W * 2, H * 2), Image.NEAREST).save(a.preview)
     return 0
 
 

@@ -1339,6 +1339,7 @@ def main() -> int:
     ap.add_argument("--out", default=os.path.join(ROOT, "resources", "tilesets", "common_atlas.png"))
     ap.add_argument("--preview", default="")
     ap.add_argument("--scale", type=int, default=4)
+    ap.add_argument("--tile-scale", type=int, default=2, help="出力タイルの拡大率（16 px の元絵 × n。GameConstants.ART_SCALE と合わせる）")
     a = ap.parse_args()
     catalog = json.load(open(a.catalog, encoding="utf-8"))
     names = list(catalog.keys())
@@ -1349,6 +1350,8 @@ def main() -> int:
         tile = paint_tile(name, catalog[name])
         atlas.paste(tile.to_rgba(), ((i % COLUMNS) * S, (i // COLUMNS) * S))
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
+    if a.tile_scale > 1:
+        atlas = atlas.resize((atlas.width * a.tile_scale, atlas.height * a.tile_scale), Image.NEAREST)
     atlas.save(a.out)
     print(f"{a.out}: {len(names)} tiles, {atlas.width}x{atlas.height}")
     if a.preview:

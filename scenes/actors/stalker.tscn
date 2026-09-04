@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/actors/stalker.gd" id="1_stalker"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(10, 6)
+size = Vector2(20, 12)
 
 [node name="Stalker" type="CharacterBody2D" groups=["stalker"]]
 collision_layer = 8
@@ -13,8 +13,8 @@ script = ExtResource("1_stalker")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 centered = false
-offset = Vector2(-8, -22)
+offset = Vector2(-16, -44)
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_body")

@@ -4,7 +4,7 @@ extends RefCounted
 ## 色は常にパレットのインデックスで受け取る。tile_painters_*.gd からのみ使うこと。
 ## 乱数は座標ハッシュで決定的に生成し、同じ種別は常に同じ絵になる。
 
-const SIZE: int = GameConstants.TILE_SIZE
+const SIZE: int = GameConstants.ART_TILE
 
 var image: Image
 var _seed: int
